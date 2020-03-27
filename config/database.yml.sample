@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: industry_fusion_development
+  username: postgres
+  password: postgres
+
+test:
+  <<: *default
+  database: industry_fusion_test
+  username: postgres
+  password: postgres
+
+production:
+  <<: *default
+  database: industry_fusion_production
+  username: industry_fusion
+  password: <%= ENV['INDUSTRY_FUSION_DATABASE_PASSWORD'] %>
