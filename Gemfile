@@ -5,6 +5,7 @@ ruby "2.7.0"
 
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
 gem "jbuilder", "~> 2.10"
+gem "papertrail", "~> 0.11.0"
 gem "pg", "~> 1.2", ">= 1.2.3"
 gem "puma", "~> 4.3", ">= 4.3.3"
 gem "rails", "~> 6.0", ">= 6.0.2.2"
