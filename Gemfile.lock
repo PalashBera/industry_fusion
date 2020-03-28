@@ -69,6 +69,8 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    discard (1.2.0)
+      activerecord (>= 4.2, < 7)
     erubi (1.9.0)
     faker (2.11.0)
       i18n (>= 1.6, < 2)
@@ -238,6 +240,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (~> 1.4, >= 1.4.6)
+  discard (~> 1.2)
   faker (~> 2.11)
   jbuilder (~> 2.10)
   listen (~> 3.2, >= 3.2.1)
