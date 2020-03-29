@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalCenterTitle">Add Brand</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<%= form_for @brand, remote: true do |f| %>
+  <div class="modal-body">
+    <%= render partial: "shared/form_errors", locals: { model: @brand } %>
+
+    <div class="form-group required">
+      <%= f.label :name, "Brand Name", class: "control-label" %>
+      <%= f.text_field :name, required: true, class: "form-control", placeholder: " Enter Brand Name", autocomplete: :off, maxlength: 255 %>
+    </div>
+
+    <div class="form-check">
+      <%= f.check_box :active, class: "form-check-input" %>
+      <%= f.label :active, class: "form-check-label ml-2" %>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Close">Close</button>
+    <%= f.submit yield(:button_label), class: "btn btn-primary", disabled_with: "Saving..." , title: yield(:button_title) %>
+  </div>
+<% end %>
