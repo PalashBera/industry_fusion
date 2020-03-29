@@ -1,4 +1,3 @@
-<% provide(:button_label, "Create Brand") %>
-<% provide(:button_title, "Create Brand") %>
-
-<%= render "form" %>
+<%= render layout: "shared/modal_form", locals: { resource: @brand, modal_header: "New Brand" } do |f| %>
+  <%= render "form", f: f %>
+<% end %>

@@ -34,7 +34,7 @@ PreCommit:
     enabled: true
 
   RailsSchemaUpToDate:
-    enabled: true
+    enabled: false
 
 PreRebase:
   MergedCommits:

@@ -10,20 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_113805) do
+ActiveRecord::Schema.define(version: 2020_03_28_143745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
-    t.boolean "active", default: true, null: false
+    t.boolean "archive", default: false, null: false
     t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_brands_on_created_by_id"
     t.index ["discarded_at"], name: "index_brands_on_discarded_at"
+    t.index ["updated_by_id"], name: "index_brands_on_updated_by_id"
   end
 
   create_table "users", force: :cascade do |t|

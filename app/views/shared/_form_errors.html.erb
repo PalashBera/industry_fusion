@@ -1,7 +1,7 @@
-<% if model.errors.any? %>
+<% if resource.errors.any? %>
   <div class="alert alert-danger" id="error_explaination">
-    <% model.errors.full_messages.each.with_index(1) do |msg, index| %>
-      <p class="text-danger">
+    <% resource.errors.full_messages.each.with_index(1) do |msg, index| %>
+      <p class="text-danger mb-0">
         <%= index %>. <%= msg %>.
       </p>
     <% end %>
