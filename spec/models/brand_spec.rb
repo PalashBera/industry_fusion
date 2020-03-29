@@ -4,6 +4,7 @@ RSpec.describe Brand, type: :model do
   let!(:brand) { create(:brand, name: "Industry Fusion") }
 
   it_behaves_like "archivable"
+  it_behaves_like "modal_formable"
 
   describe "active record columns" do
     it { should have_db_column(:name) }
