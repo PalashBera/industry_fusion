@@ -13,11 +13,11 @@ module ApplicationHelper
 
   def flash_message_prefix(message_type)
     if message_type == "success"
-      "<b>Well done!</b>"
+      "Well done!"
     elsif message_type == "info"
-      "<b>Heads up!</b>"
+      "Heads up!"
     elsif message_type == "danger"
-      "<b>Oh snap!</b>"
+      "Oh snap!"
     else
       ""
     end
@@ -51,18 +51,17 @@ module ApplicationHelper
   end
 
   def edit_link_using_modal(controller_name, resource)
-    link_to "Edit",
+    link_to '<i class="fas fa-edit text-primary"></i>'.html_safe,
             url_for(controller: controller_name, action: "edit", id: resource.id),
             data: { remote: true },
-            class: "btn btn-sm btn-info",
             title: "Edit #{controller_name.singularize.humanize.titleize}"
   end
 
   def delete_link(controller_name, resource)
-    link_to "Delete",
+    link_to '<i class="fas fa-trash-alt text-danger"></i>'.html_safe,
             url_for(controller: controller_name, action: "destroy", id: resource.id),
+            method: :delete,
             data: { confirm: "Are you sure?" },
-            class: "btn btn-sm btn-danger",
             title: "Delete #{controller_name.singularize.humanize.titleize}"
   end
 end
