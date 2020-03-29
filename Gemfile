@@ -5,6 +5,7 @@ ruby "2.7.0"
 
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
 gem "discard", "~> 1.2"
+gem "font-awesome-sass", "~> 5.12"
 gem "jbuilder", "~> 2.10"
 gem "pagy", "~> 3.7", ">= 3.7.4"
 gem "paper_trail", "~> 10.3", ">= 10.3.1"
