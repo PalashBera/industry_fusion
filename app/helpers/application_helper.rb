@@ -11,6 +11,29 @@ module ApplicationHelper
     end
   end
 
+  def flash_message_prefix(message_type)
+    if message_type == "success"
+      "<b>Well done!</b>"
+    elsif message_type == "info"
+      "<b>Heads up!</b>"
+    elsif message_type == "danger"
+      "<b>Oh snap!</b>"
+    else
+      ""
+    end
+  end
+
+  def message_type(message_type)
+    case message_type
+    when "notice"
+      "info"
+    when "alert"
+      "danger"
+    else
+      message_type
+    end
+  end
+
   def new_link_using_modal(controller_name)
     link_to "Add New",
             url_for(controller: controller_name, action: "new"),
