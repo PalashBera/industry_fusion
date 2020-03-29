@@ -34,6 +34,14 @@ module ApplicationHelper
     end
   end
 
+  def archive_status(value)
+    if value
+      '<span class="badge badge-danger" title="Archived">Archived</span>'
+    else
+      '<span class="badge badge-success" title="Active">Active</span>'
+    end
+  end
+
   def new_link_using_modal(controller_name)
     link_to "Add New",
             url_for(controller: controller_name, action: "new"),
