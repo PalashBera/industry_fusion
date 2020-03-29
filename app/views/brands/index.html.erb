@@ -1,0 +1,33 @@
+<h1>Brands</h1>
+<br>
+<%= link_to '<i class="fas fa-plus"></i> Add new brand'.html_safe, new_brand_path, data: { remote: true, toggle: "modal", target: "#form_modal" }, class: "btn btn-primary", title: "Add new brand" %>
+
+<div class="table-responsive master-list">
+  <table class="table table-hover text-center">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Active</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @brands.each.with_index(1) do |brand, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= brand.name %></td>
+          <td><%= brand.active %></td>
+          <td class="d-flex justify-content-center">
+            <%= link_to 'Edit'.html_safe, edit_brand_path(brand), data: { remote: true, toggle: "modal", target: "#form_modal" }, class: "mr-2", title: "Edit" %><pre>| </pre>
+            <%= delete_link brand_path(brand), class_name: "mx-2" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" if @pagy.pages > 1 %>
+<%= render "shared/form_modal" %>
