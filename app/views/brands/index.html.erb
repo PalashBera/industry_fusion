@@ -11,7 +11,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
-        <th scope="col">Archive</th>
+        <th scope="col">Status</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -21,7 +21,7 @@
         <tr>
           <td scope="row"><%= index %></td>
           <td><%= brand.name %></td>
-          <td><%= brand.archive %></td>
+          <td><%= archive_status(brand.archive).html_safe %></td>
           <td>
             <%= edit_link_using_modal(controller_name, brand) %> |
             <%= delete_link(controller_name, brand) %>
