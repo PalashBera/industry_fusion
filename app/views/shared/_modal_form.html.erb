@@ -1,0 +1,25 @@
+<div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= resource.modal_header %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= form_for resource, remote: true do |f| %>
+        <div class="modal-body">
+          <%= render partial: "shared/form_errors", locals: { resource: resource } %>
+
+          <%= yield f %>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Close">Close</button>
+          <%= f.submit resource.button_name, class: "btn btn-primary", disabled_with: "Saving..." , title: "Save #{resource.class_title}" %>
+        <div>
+      <% end %>
+    </div>
+  </div>
+</div>

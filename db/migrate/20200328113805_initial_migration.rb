@@ -43,4 +43,14 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
   end
+
+  create_table :brands do |t|
+    t.string   :name,    null: false
+    t.boolean  :archive, null: false, default: false
+    t.datetime :discarded_at,  index: true
+    t.bigint   :created_by_id, index: true
+    t.bigint   :updated_by_id, index: true
+
+    t.timestamps
+  end
 end
