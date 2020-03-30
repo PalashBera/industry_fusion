@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.0"
 
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
+gem "delayed_job_active_record", "~> 4.1", ">= 4.1.4"
 gem "devise", "~> 4.7", ">= 4.7.1"
 gem "discard", "~> 1.2"
 gem "font-awesome-sass", "~> 5.12"
