@@ -1,4 +1,6 @@
 class BrandsController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @pagy, @brands = pagy(Brand.kept.order_by_name, items: 20)
   end

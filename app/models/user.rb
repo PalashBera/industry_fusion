@@ -1,4 +1,10 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :async, :confirmable
+
   before_validation { self.first_name = first_name.to_s.squish.titleize }
   before_validation { self.last_name = last_name.to_s.squish.titleize }
   before_validation { self.email = email.to_s.squish.downcase }

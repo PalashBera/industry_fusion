@@ -442,7 +442,7 @@ Layout/LineLength:
   StyleGuide: '#80-character-limits'
   Enabled: true
   AutoCorrect: false
-  Max: 120
+  Max: 180
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
   AllowHeredoc: true

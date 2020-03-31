@@ -4,6 +4,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "2.7.0"
 
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
+gem "delayed_job_active_record", "~> 4.1", ">= 4.1.4"
+gem "devise", "~> 4.7", ">= 4.7.1"
+gem "devise-async", "~> 1.0"
 gem "discard", "~> 1.2"
 gem "font-awesome-sass", "~> 5.12"
 gem "jbuilder", "~> 2.10"
@@ -23,6 +26,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "letter_opener", "~> 1.7"
+  gem "letter_opener_web", "~> 1.4"
   gem "listen", "~> 3.2", ">= 3.2.1"
   gem "overcommit", "~> 0.52.1"
   gem "rack-mini-profiler", "~> 2.0", ">= 2.0.1"
