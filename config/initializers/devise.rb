@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '60de8a2d9d1037231c086f5e9605a7743f8489c5a65706352448f830018e4362ed5ee585074acf5896ff367cb0d9239404d1e5b5a821c0bdfe17cede2bdd60e3'
+  config.secret_key = Rails.application.credentials.devise_key_base
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -16,13 +16,13 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
+  config.mailer_sender = "support@industryfusion.com"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
+  config.parent_mailer = "ActionMailer::Base"
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -115,10 +115,10 @@ Devise.setup do |config|
   # config.pepper = '5f3435d4a72454b49eec26eb1fc4dcc13cffac9ac896bcc293224552e98d63069cd6c608192ab80865ca66882cf22886d2e0a553da8491295b43d320ee4568a5'
 
   # Send a notification to the original email when the user's email is changed.
-  # config.send_email_changed_notification = false
+  config.send_email_changed_notification = true
 
   # Send a notification email when the user's password is changed.
-  # config.send_password_change_notification = false
+  config.send_password_change_notification = true
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -150,7 +150,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 3.months
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -169,7 +169,7 @@ Devise.setup do |config|
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
   # to give user feedback and not to assert the e-mail validity.
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.email_regexp = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
 
   # ==> Configuration for :timeoutable
   # The time you want to timeout the user session without activity. After this
