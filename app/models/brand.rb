@@ -2,7 +2,7 @@ class Brand < ApplicationRecord
   include Archivable
   include ModalFormable
 
-  has_paper_trail on: [:update]
+  has_paper_trail ignore: %i[created_at updated_at]
 
   before_validation { self.name = name.to_s.squish }
 

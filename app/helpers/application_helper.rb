@@ -64,4 +64,11 @@ module ApplicationHelper
             data: { confirm: "Are you sure?" },
             title: "Delete #{controller_name.singularize.humanize.titleize}"
   end
+
+  def change_logs_link_using_modal(controller_name, resource)
+    link_to '<i class="fas fa-history text-info"></i>'.html_safe,
+            url_for(controller: controller_name, action: "change_logs", id: resource.id),
+            data: { remote: true },
+            title: "Show Change Logs"
+  end
 end

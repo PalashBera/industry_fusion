@@ -1,4 +1,6 @@
 class BrandsController < ApplicationController
+  include ChangeLogable
+
   before_action :authenticate_user!
 
   def index

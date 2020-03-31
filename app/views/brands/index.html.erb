@@ -24,7 +24,8 @@
           <td><%= archive_status(brand.archive).html_safe %></td>
           <td>
             <%= edit_link_using_modal(controller_name, brand) %> |
-            <%= delete_link(controller_name, brand) %>
+            <%= delete_link(controller_name, brand) %> |
+            <%= change_logs_link_using_modal(controller_name, brand) %>
           </td>
         </tr>
       <% end %>
