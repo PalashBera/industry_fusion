@@ -20,16 +20,4 @@ class User < ApplicationRecord
   def initial
     "#{first_name[0]}#{last_name[0]}"
   end
-
-  # def send_on_create_confirmation_instructions
-  #   Devise::Mailer.send_confirmation_instructions.perform_later
-  # end
-
-  # def send_reset_password_instructions
-  #   Devise::Mailer.delay.reset_password_instructions(self)
-  # end
-
-  # def send_confirmation_instructions
-  #   Devise::Mailer.delay.confirmation_instructions(self)
-  # end
 end
