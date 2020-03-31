@@ -2,7 +2,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :async, :confirmable
 
   before_validation { self.first_name = first_name.to_s.squish.titleize }
   before_validation { self.last_name = last_name.to_s.squish.titleize }
@@ -19,4 +20,16 @@ class User < ApplicationRecord
   def initial
     "#{first_name[0]}#{last_name[0]}"
   end
+
+  # def send_on_create_confirmation_instructions
+  #   Devise::Mailer.send_confirmation_instructions.perform_later
+  # end
+
+  # def send_reset_password_instructions
+  #   Devise::Mailer.delay.reset_password_instructions(self)
+  # end
+
+  # def send_confirmation_instructions
+  #   Devise::Mailer.delay.confirmation_instructions(self)
+  # end
 end
