@@ -1,7 +1,7 @@
 <%= render layout: "shared/modal_change_logs", locals: { resource: @resource, attr: "name" } do %>
   <% @versions.each_with_index do |version, index| %>
     <hr>
-    <h6 class="mb-2 text-muted">Change Log <%= @versions.size - index %> – Done by <strong>Palash Bera</strong> at <%= I18n.l(version.created_at) %>.</h6>
+    <h6 class="mb-2 text-muted">Change Log <%= @versions.size - index %> – Done by <strong><%= version.whodunnit %></strong> at <%= I18n.l(version.created_at) %>.</h6>
 
     <% changeset = version.changeset %>
 
