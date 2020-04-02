@@ -2,12 +2,133 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <script src="//code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <style>
       /* Email styles need to be inline */
+      @import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
+
+      body {
+        max-width: 800px;
+      }
+
+      header {
+        margin-bottom: 50px;
+      }
+
+      main {
+        background-color: #F8F9Fa;
+        padding: 60px !important;
+      }
+
+      footer {
+        margin-top: 50px;
+      }
+
+      .navbar-brand {
+        font-family: Spicy Rice, cursive;
+      }
+
+      .social-links tbody {
+        display: inline-block;
+      }
+
+      .social-links td {
+        border: 0px !important;
+        padding: 6px;
+      }
+
+      .contact-info tbody {
+        display: inline-block;
+      }
+
+      .contact-info td {
+        border: 0px !important;
+        padding: 6px;
+      }
+
+      .contact-info {
+        margin-top: 35px;
+      }
     </style>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="container-fluid">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <%= link_to "Industry Fusion", "http://localhost:3000", class: "navbar-brand" %>
+      </nav>
+    </header>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <table class="table table-responsive text-center social-links">
+        <tbody class="align-middle">
+          <tr>
+            <td>
+              <a href="https://www.facebook.com" target="_blank">
+                <img src="https://ci5.googleusercontent.com/proxy/Pzm9BPjhl1Vz5or83MU4FdapDaI8BDm5xcyaFq7LDybxoK8X4oW3a-HMNj75yiwNSo_GwV7MP8TBm4KX01prYBIo04oYs9MLuLPzCRqsTSZXZXYsJTtXEmJwcTeiUpdZvAo5yB2NywMlt10OfDN9xp8nA4vNuWrMODL15IY4-j_Mxhli0UsHtIMEHeJj=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_facebook.png">
+              </a>
+            </td>
+
+            <td>
+              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
+            </td>
+
+            <td>
+              <a href="https://www.twitter.com" target="_blank">
+                <img src="https://ci4.googleusercontent.com/proxy/fmY3lYx2QOF1Zg6rex8Ff6YeL_TzTFGa4jbb-OHHa0lCptx0V0X9-GW-xcDZI4f7P3eZy3hJsxrgenw4MnyI-xSeucWKaLYY2ig9G1Xm-GTPD_tOpC8awQCn9TtkR2caw1EcaC8O9urODLP6bdVD8cdA_Y0p1P0ID310Mlnl0v-N9bj8msFYeSwAiGk=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_twitter.png">
+              </a>
+            </td>
+
+            <td>
+              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
+            </td>
+
+            <td>
+              <a href="https://www.youtube.com" target="_blank">
+                <img src="https://ci4.googleusercontent.com/proxy/BN7rwIqSFDXol2l3MOvFxPqKzWaoKzm8pHyoE61sv2B7Mabhobke9YtjnEDY9w-OVb-Bh16L0hZGVdwETtJauuO90ATcXhrkEcRW13urHC4b0aHdipQ59R-q3tYjFU7iUz-zvmSelPwAv3W-hj9pSkpl8MQ4cpNmkrv8kMoqyBZalMW7rJ0S1jIcNX0=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_youtube.png">
+              </a>
+            </td>
+
+            <td>
+              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
+            </td>
+
+            <td>
+              <a href="https://www.linkedin.com" target="_blank">
+                <img src="https://ci5.googleusercontent.com/proxy/IJFyNuRdSZ6qc9BiZY6PQykS6w2zmbzMTVqB9webEZAPZegoaSy7sm8FrdkooQ76PYLgA6BOfiEh6g3rAl-IKcOpomUUsfNhnSwS_mgXISsdMTjBuqNWb_-TJfKNPxi2eF0lCl3WZUd4vq8rIvmENOWpCIFGb0G7KBaybA3uXPlpRup0qV52N5BQxxro=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_linkedin.png">
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-responsive text-center contact-info">
+        <tbody class="align-middle">
+          <tr>
+            <td>
+              <img src="https://img.icons8.com/ios-glyphs/40/000000/cell-phone.png"/>
+              <span>00 0000 0000 00</span>
+            </td>
+
+            <td>
+              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
+            </td>
+
+            <td>
+              <img src="https://img.icons8.com/ios-filled/40/000000/email-open.png"/>
+              <span>contact@industry_fusion.com</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </footer>
   </body>
 </html>
