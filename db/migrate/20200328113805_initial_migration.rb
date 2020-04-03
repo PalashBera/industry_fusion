@@ -53,4 +53,21 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :organizations do |t|
+    t.string   :name,          null: false
+    t.string   :address1,      null: false
+    t.string   :address2,      default: ""
+    t.string   :city,          null: false
+    t.string   :state,         null: false
+    t.string   :country,       null: false
+    t.string   :pin_code,      null: false, limit: 6
+    t.text     :description,   default: ""
+    t.boolean  :archive,       null: false, default: false
+    t.datetime :discarded_at,  index: true
+    t.bigint   :created_by_id, index: true
+    t.bigint   :updated_by_id, index: true
+
+    t.timestamps
+  end
 end
