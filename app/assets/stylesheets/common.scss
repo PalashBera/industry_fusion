@@ -1,3 +1,13 @@
+.field_with_errors {
+  label {
+    color: #dc3545 !important
+  }
+
+  input {
+    border-color: #dc3545 !important;
+  }
+}
+
 @media (max-width: 575px) {
   .btn-xs-block {
     display: block;
