@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Organization, type: :model do
-  let!(:organization) { create(:organization) }
+  let!(:organization) { create(:organization, name: "Industry Fusion") }
 
   describe "active record columns" do
     it { should have_db_column(:name) }
@@ -115,8 +115,8 @@ RSpec.describe Organization, type: :model do
 
   describe "scopes" do
     context "order_by_name" do
-      let!(:organization_1) { create(:organization, name: "ZARA") }
-      let!(:organization_2) { create(:organization, name: "KFC") }
+      let!(:organization_1) { create(:organization, name: "ZARA Private Limited") }
+      let!(:organization_2) { create(:organization, name: "KFC Private Limited") }
       it "should return records order by name" do
         expect(Organization.order_by_name).to eq([organization, organization_2, organization_1])
       end
