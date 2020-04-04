@@ -9,7 +9,7 @@
     <div class="card">
       <div class="card-body">
         <%= form_for @organization do |f| %>
-          <%= render partial: "shared/form_errors", locals: { resource: @organization } %>
+          <%= render partial: "shared/error_messages", locals: { resource: @organization } %>
 
           <div class="form-group">
             <%= f.label :name %>

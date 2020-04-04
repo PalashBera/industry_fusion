@@ -10,7 +10,7 @@
 
       <%= form_for resource, remote: true do |f| %>
         <div class="modal-body">
-          <%= render partial: "shared/form_errors", locals: { resource: resource } %>
+          <%= render partial: "shared/error_messages", locals: { resource: resource } %>
 
           <%= yield f %>
         </div>
