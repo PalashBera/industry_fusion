@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_paper_trail_whodunnit
+  before_action :set_current_user
 
   protected
 
@@ -24,5 +25,9 @@ class ApplicationController < ActionController::Base
     else
       new_organization_path
     end
+  end
+
+  def set_current_user
+    User.current_user = current_user
   end
 end
