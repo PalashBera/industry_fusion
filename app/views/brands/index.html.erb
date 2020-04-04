@@ -10,8 +10,8 @@
     <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Name</th>
-        <th scope="col">Status</th>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
