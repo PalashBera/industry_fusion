@@ -9,6 +9,7 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new(organization_params)
 
     if @organization.save
+      current_user.add_organization(@organization)
       redirect_to root_path, flash: { success: "Organization has been successfully created." }
     else
       render "new"
