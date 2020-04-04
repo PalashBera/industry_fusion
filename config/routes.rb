@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     get :change_logs, on: :member
   end
 
+  resources :organizations, only: [:new, :create]
+
   root "home#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

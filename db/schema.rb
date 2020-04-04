@@ -43,6 +43,26 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address1", null: false
+    t.string "address2", default: ""
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "country", null: false
+    t.string "pin_code", limit: 6, null: false
+    t.text "description", default: ""
+    t.boolean "archive", default: false, null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_organizations_on_created_by_id"
+    t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
+    t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
