@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     if current_organization
       stored_location_for(resource) || root_path
     else
+      flash[:danger] = "You don't have any organization information. Please create your organization."
       new_organization_path
     end
   end
