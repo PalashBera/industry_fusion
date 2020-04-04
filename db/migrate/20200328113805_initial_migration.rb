@@ -6,9 +6,10 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string :encrypted_password, null: false, default: ""
 
       ## User information
-      t.string :first_name,         null: false, default: ""
-      t.string :last_name,          null: false, default: ""
-      t.string :mobile_number,      null: false, default: ""
+      t.string  :first_name,         null: false, default: ""
+      t.string  :last_name,          null: false, default: ""
+      t.string  :mobile_number,      null: false, default: ""
+      t.boolean :admin,              null: false, default: false
 
       ## Organization references
       t.references :organization, foreign_key: true
