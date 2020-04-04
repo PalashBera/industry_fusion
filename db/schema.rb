@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "mobile_number", default: "", null: false
+    t.bigint "organization_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -85,6 +86,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -98,4 +100,5 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "users", "organizations"
 end

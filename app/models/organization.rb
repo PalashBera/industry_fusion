@@ -12,6 +12,8 @@ class Organization < ApplicationRecord
   before_validation { self.pin_code = pin_code.to_s.squish }
   before_validation { self.description = description.to_s.squish }
 
+  has_many :users
+
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }
   validates :address2, length: { maximum: 255 }

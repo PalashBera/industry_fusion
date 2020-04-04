@@ -10,6 +10,9 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string :last_name,          null: false, default: ""
       t.string :mobile_number,      null: false, default: ""
 
+      ## Organization references
+      t.references :organization, foreign_key: true
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
