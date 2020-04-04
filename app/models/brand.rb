@@ -1,6 +1,7 @@
 class Brand < ApplicationRecord
   include Archivable
   include ModalFormable
+  include UserTrackable
 
   has_paper_trail ignore: %i[created_at updated_at]
 
