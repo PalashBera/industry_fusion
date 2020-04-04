@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
     it { should have_db_column(:first_name) }
     it { should have_db_column(:last_name) }
     it { should have_db_column(:mobile_number) }
+    it { should have_db_column(:organization_id) }
     it { should have_db_column(:reset_password_token) }
     it { should have_db_column(:reset_password_sent_at) }
     it { should have_db_column(:remember_created_at) }
@@ -28,6 +29,7 @@ RSpec.describe User, type: :model do
   describe "active record index" do
     it { should have_db_index(:email) }
     it { should have_db_index(:reset_password_token) }
+    it { should have_db_index(:organization_id) }
     it { should have_db_index(:confirmation_token) }
   end
 
@@ -63,6 +65,10 @@ RSpec.describe User, type: :model do
         expect(user.mobile_number).to eq ("8441005506")
       end
     end
+  end
+
+  describe "validations" do
+    it { should belong_to(:organization).optional }
   end
 
   describe "validations" do
