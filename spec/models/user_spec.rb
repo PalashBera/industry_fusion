@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
     it { should have_db_column(:first_name) }
     it { should have_db_column(:last_name) }
     it { should have_db_column(:mobile_number) }
+    it { should have_db_column(:admin) }
     it { should have_db_column(:organization_id) }
     it { should have_db_column(:reset_password_token) }
     it { should have_db_column(:reset_password_sent_at) }
@@ -93,6 +94,38 @@ RSpec.describe User, type: :model do
   describe "#initial" do
     it "should return initial of user" do
       expect(user.initial).to eq ("PB")
+    end
+  end
+
+  describe "#admin?" do
+    let(:admin_user) { create(:admin_user) }
+
+    context "when user is admin" do
+      it "should return true" do
+        expect(admin_user.admin?).to eq (true)
+      end
+    end
+
+    context "when user is not admin" do
+      it "should return false" do
+        expect(user.admin?).to eq (false)
+      end
+    end
+  end
+
+  describe "#non_admin?" do
+    let(:admin_user) { create(:admin_user) }
+
+    context "when user is admin" do
+      it "should return false" do
+        expect(admin_user.non_admin?).to eq (false)
+      end
+    end
+
+    context "when user is not admin" do
+      it "should return true" do
+        expect(user.non_admin?).to eq (true)
+      end
     end
   end
 end

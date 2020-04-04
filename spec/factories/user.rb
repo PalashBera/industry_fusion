@@ -7,4 +7,8 @@ FactoryBot.define do
     password      { Faker::Internet.password(min_length: 6, max_length: 128) }
     organization
   end
+
+  factory :admin_user, parent: :user do
+    admin { true }
+  end
 end
