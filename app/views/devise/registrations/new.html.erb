@@ -14,34 +14,34 @@
           <div class="form-row">
             <div class="form-group col-sm-12 col-md-6">
               <%= f.label :first_name, "First Name" %>
-              <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true, placeholder: "First Name", autocomplete: "first_name", maxlength: 255 %>
+              <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true, placeholder: "First Name", maxlength: 255 %>
             </div>
 
             <div class="form-group col-sm-12 col-md-6">
               <%= f.label :last_name, "Last Name" %>
-              <%= f.text_field :last_name, class: "form-control", required: true, placeholder: "Last Name", autocomplete: "last_name", maxlength: 255 %>
+              <%= f.text_field :last_name, class: "form-control", required: true, placeholder: "Last Name", maxlength: 255 %>
             </div>
           </div>
 
           <div class="form-group">
             <%= f.label :email, "Email Address" %>
-            <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255 %>
+            <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", maxlength: 255 %>
           </div>
 
           <div class="form-group">
             <%= f.label :mobile_number, "Mobile Number" %>
-            <%= f.text_field :mobile_number, class: "form-control", required: true, placeholder: "Mobile Number", autocomplete: "mobile_number", minlength: 10, maxlength: 10 %>
+            <%= f.text_field :mobile_number, class: "form-control", required: true, placeholder: "Mobile Number", minlength: 10, maxlength: 10 %>
           </div>
 
           <div class="form-group">
             <%= f.label :password %>
-            <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
+            <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password", minlength: 6, maxlength: 128 %>
             <small id="passwordHelp" class="form-text text-muted">Password should be minimum <%= @minimum_password_length %> characters.</small>
           </div>
 
           <div class="form-group">
             <%= f.label :password_confirmation, "Password Confirmation" %>
-            <%= f.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Password Confirmation", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
+            <%= f.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Password Confirmation", minlength: 6, maxlength: 128 %>
           </div>
 
           <%= f.submit "Sign up", class: "btn btn-primary btn-xs-block", data: { disable_with: "Signing up..." } %>
