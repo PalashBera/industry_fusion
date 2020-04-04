@@ -14,6 +14,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, on: :create
   validates :mobile_number, presence: true, length: { is: 10 }
+  validates :admin, inclusion: { in: [true, false] }
 
   def full_name
     "#{first_name} #{last_name}"
@@ -21,5 +22,13 @@ class User < ApplicationRecord
 
   def initial
     "#{first_name[0]}#{last_name[0]}"
+  end
+
+  def admin?
+    admin
+  end
+
+  def non_admin?
+    !admin?
   end
 end
