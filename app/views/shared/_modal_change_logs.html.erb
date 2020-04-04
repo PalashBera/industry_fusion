@@ -9,7 +9,7 @@
       </div>
 
       <div class="modal-body">
-        <p>This <%= resource.class_title.downcase %> has been created by <strong>Palash Bera</strong> on <%= I18n.l(resource.created_at) %>.</p>
+        <p>This <%= resource.class_title.downcase %> has been created by <strong><%= resource.created_by.full_name %></strong> on <%= I18n.l(resource.created_at) %>.</p>
 
         <%= yield %>
       </div>
