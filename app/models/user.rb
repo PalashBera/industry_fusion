@@ -9,6 +9,8 @@ class User < ApplicationRecord
   before_validation { self.email = email.to_s.squish.downcase }
   before_validation { self.mobile_number = mobile_number.to_s.squish }
 
+  belongs_to :organization, optional: true
+
   validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }
   validates :password, presence: true, length: { minimum: 6, maximum: 128 }, on: :create
   validates :mobile_number, presence: true, length: { is: 10 }
