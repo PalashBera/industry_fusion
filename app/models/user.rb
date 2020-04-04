@@ -30,4 +30,8 @@ class User < ApplicationRecord
   def non_admin?
     !admin?
   end
+
+  def add_organization(organization)
+    update(admin: true, organization_id: organization.id)
+  end
 end
