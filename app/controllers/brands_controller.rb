@@ -4,7 +4,8 @@ class BrandsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @pagy, @brands = pagy(Brand.kept.order_by_name, items: 20)
+    @search = Brand.kept.ransack(params[:q])
+    @pagy, @brands = pagy(@search.result, items: 20)
   end
 
   def new
