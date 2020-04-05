@@ -1,5 +1,5 @@
-<% partial = "#{controller_name}/change_logs" %>
+<% partial = "master/#{controller_name}/change_logs" %>
 
-$('body').find('#modal_change_logs').remove();
+$('body').find('#change_logs_modal').remove();
 $('body').append('<%= j (render partial) %>');
-$('#modal_change_logs').modal();
+$('#change_logs_modal').modal();

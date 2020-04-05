@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :brands, except: [:show] do
-    get :change_logs, on: :member
-  end
-
   resources :organizations, only: [:new, :create]
+
+  namespace :master do
+    resources :brands, except: [:show] do
+      get :change_logs, on: :member
+    end
+  end
 
   root "home#index"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

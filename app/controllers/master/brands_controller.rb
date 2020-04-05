@@ -1,7 +1,5 @@
-class BrandsController < ApplicationController
+class Master::BrandsController < Master::MasterController
   include ChangeLogable
-
-  before_action :authenticate_user!
 
   def index
     @search = Brand.kept.ransack(params[:q])
@@ -16,7 +14,7 @@ class BrandsController < ApplicationController
     @brand = Brand.new(brand_params)
 
     if @brand.save
-      redirect_to brands_path, flash: { success: "Brand has been successfully created." }
+      redirect_to master_brands_path, flash: { success: "Brand has been successfully created." }
     else
       render "new"
     end
@@ -28,7 +26,7 @@ class BrandsController < ApplicationController
 
   def update
     if brand.update(brand_params)
-      redirect_to brands_path, flash: { success: "Brand has been successfully updated." }
+      redirect_to master_brands_path, flash: { success: "Brand has been successfully updated." }
     else
       render "edit"
     end
@@ -36,7 +34,7 @@ class BrandsController < ApplicationController
 
   def destroy
     brand.discard
-    redirect_to brands_path, flash: { danger: "Brand has been successfully deleted." }
+    redirect_to master_brands_path, flash: { danger: "Brand has been successfully deleted." }
   end
 
   private
