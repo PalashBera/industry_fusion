@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+<div class="modal fade" id="master_form_modal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,7 +8,7 @@
         </button>
       </div>
 
-      <%= form_for resource, remote: true do |f| %>
+      <%= form_for [:master, resource], remote: true do |f| %>
         <div class="modal-body">
           <%= render partial: "shared/error_messages", locals: { resource: resource } %>
 
