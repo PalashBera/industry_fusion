@@ -5,6 +5,8 @@ class BrandsController < ApplicationController
 
   def index
     @search = Brand.kept.ransack(params[:q])
+    @filter_active = true if params[:q].present?
+    @search.sorts = "name asc" if @search.sorts.empty?
     @pagy, @brands = pagy(@search.result, items: 20)
   end
 

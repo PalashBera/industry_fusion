@@ -20,4 +20,11 @@ document.addEventListener('turbolinks:load', function() {
   $('.flash-alert').delay(4000).slideUp(200, function() {
     $(this).alert('close');
   });
+
+  $('*:not(.bootstrap-select) > .selectpicker').selectpicker('refresh');
+});
+
+$(document).on('click', '.remove-selectpicker-selections', function (e) {
+  e.preventDefault();
+  $('.selectpicker').selectpicker('deselectAll');
 });
