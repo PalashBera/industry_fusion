@@ -68,7 +68,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "validations" do
+  describe "associations" do
     it { should belong_to(:organization).optional }
   end
 

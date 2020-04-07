@@ -92,7 +92,7 @@ RSpec.describe Organization, type: :model do
     end
   end
 
-  describe "validations" do
+  describe "associations" do
     it { should have_many(:users) }
   end
 
