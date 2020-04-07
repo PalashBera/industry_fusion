@@ -1,7 +1,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:user) { create(:user, first_name: "Palash", last_name: "Bera") }
+  let(:user)         { create(:user, first_name: "Palash", last_name: "Bera") }
+  let(:organization) { create(:organization) }
 
   describe "active record columns" do
     it { should have_db_column(:email) }
@@ -126,6 +127,14 @@ RSpec.describe User, type: :model do
       it "should return true" do
         expect(user.non_admin?).to eq (true)
       end
+    end
+  end
+
+  describe "#add_organization" do
+    it "should add organization to user and update user as admin" do
+      user.add_organization(organization)
+      expect(user.organization).to eq (organization)
+      expect(user.admin?).to eq (true)
     end
   end
 end
