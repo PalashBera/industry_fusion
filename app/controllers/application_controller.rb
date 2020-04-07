@@ -13,10 +13,17 @@ class ApplicationController < ActionController::Base
   end
 
   def check_organization_presence
-    return if current_user && current_organization
+    return if current_organization
 
     flash[:danger] = "You don't have any organization information. Please create your organization."
     redirect_to new_organization_path
+  end
+
+  def authenticate_admin
+    return if admin_user?
+
+    flash[:danger] = "You don't have access for this."
+    redirect_to root_path
   end
 
   private
