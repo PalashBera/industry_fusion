@@ -35,10 +35,18 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if current_organization
-      stored_location_for(resource) || root_path
+      stored_location_for(resource) || after_sign_in_redirection
     else
       flash[:danger] = "You don't have any organization information. Please create your organization."
       new_organization_path
+    end
+  end
+
+  def after_sign_in_redirection
+    if admin_user?
+      admin_root_path
+    else
+      root_path
     end
   end
 
