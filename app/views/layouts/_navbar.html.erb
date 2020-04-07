@@ -8,6 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
       <% if current_user %>
+        <% if admin_user? %>
+          <li class="nav-item">
+            <%= link_to "Admin", admin_root_path, class: "nav-link" %>
+          </li>
+        <% end %>
+
         <% if current_organization %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Master</a>
