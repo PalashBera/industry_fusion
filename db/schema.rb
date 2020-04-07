@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_brands_on_created_by_id"
     t.index ["discarded_at"], name: "index_brands_on_discarded_at"
+    t.index ["organization_id"], name: "index_brands_on_organization_id"
     t.index ["updated_by_id"], name: "index_brands_on_updated_by_id"
   end
 
@@ -101,5 +103,6 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  add_foreign_key "brands", "organizations"
   add_foreign_key "users", "organizations"
 end

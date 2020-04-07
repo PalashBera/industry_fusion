@@ -14,6 +14,7 @@ class Organization < ApplicationRecord
   before_validation { self.description = description.to_s.squish }
 
   has_many :users
+  has_many :brands
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }
