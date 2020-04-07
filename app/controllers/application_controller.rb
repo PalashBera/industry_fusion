@@ -12,6 +12,13 @@ class ApplicationController < ActionController::Base
     current_user&.full_name || "Public User"
   end
 
+  def check_organization_presence
+    return if current_user && current_organization
+
+    flash[:danger] = "You don't have any organization information. Please create your organization."
+    redirect_to new_organization_path
+  end
+
   private
 
   def configure_permitted_parameters
