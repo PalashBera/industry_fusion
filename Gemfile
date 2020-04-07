@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.7.0"
 
+gem "acts_as_tenant", "~> 0.4.4"
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
 gem "delayed_job_active_record", "~> 4.1", ">= 4.1.4"
 gem "devise", "~> 4.7", ">= 4.7.1"

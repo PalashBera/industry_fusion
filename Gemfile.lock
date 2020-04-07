@@ -56,6 +56,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    acts_as_tenant (0.4.4)
+      rails (>= 4.0)
+      request_store (>= 1.0.5)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.0)
@@ -326,6 +329,7 @@ PLATFORMS
   x86-mswin32
 
 DEPENDENCIES
+  acts_as_tenant (~> 0.4.4)
   bootsnap (~> 1.4, >= 1.4.6)
   database_cleaner (~> 1.8, >= 1.8.3)
   delayed_job_active_record (~> 4.1, >= 4.1.4)
