@@ -4,14 +4,16 @@ class Organization < ApplicationRecord
 
   has_paper_trail ignore: %i[created_at updated_at]
 
-  before_validation { self.name = name.to_s.squish }
-  before_validation { self.address1 = address1.to_s.squish }
-  before_validation { self.address2 = address2.to_s.squish }
-  before_validation { self.city = city.to_s.squish.titleize }
-  before_validation { self.state = state.to_s.squish.titleize }
-  before_validation { self.country = country.to_s.squish.titleize }
-  before_validation { self.pin_code = pin_code.to_s.squish }
-  before_validation { self.description = description.to_s.squish }
+  before_validation do
+    self.name = name.to_s.squish
+    self.address1 = address1.to_s.squish
+    self.address2 = address2.to_s.squish
+    self.city = city.to_s.squish.titleize
+    self.state = state.to_s.squish.titleize
+    self.country = country.to_s.squish.titleize
+    self.pin_code = pin_code.to_s.squish
+    self.description = description.to_s.squish
+  end
 
   has_many :users
   has_many :brands

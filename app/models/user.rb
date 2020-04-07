@@ -3,10 +3,12 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :async, :confirmable, :trackable
 
-  before_validation { self.first_name = first_name.to_s.squish.titleize }
-  before_validation { self.last_name = last_name.to_s.squish.titleize }
-  before_validation { self.email = email.to_s.squish.downcase }
-  before_validation { self.mobile_number = mobile_number.to_s.squish }
+  before_validation do
+    self.first_name = first_name.to_s.squish.titleize
+    self.last_name = last_name.to_s.squish.titleize
+    self.email = email.to_s.squish.downcase
+    self.mobile_number = mobile_number.to_s.squish
+  end
 
   belongs_to :organization, optional: true
 
