@@ -2,11 +2,18 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   include SessionsHelper
 
+  set_current_tenant_through_filter
+
+  before_action :find_and_set_current_tenant
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_paper_trail_whodunnit
   before_action :set_current_user
 
   protected
+
+  def find_and_set_current_tenant
+    set_current_tenant(current_organization)
+  end
 
   def user_for_paper_trail
     current_user&.full_name || "Public User"
