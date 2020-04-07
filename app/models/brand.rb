@@ -3,6 +3,7 @@ class Brand < ApplicationRecord
   include ModalFormable
   include UserTrackable
 
+  acts_as_tenant(:organization)
   has_paper_trail ignore: %i[created_at updated_at]
 
   before_validation { self.name = name.to_s.squish }
