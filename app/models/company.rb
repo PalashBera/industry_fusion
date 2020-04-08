@@ -1,4 +1,5 @@
 class Company < ApplicationRecord
+  include ModalFormable
   include Archivable
   include UserTrackable
 
