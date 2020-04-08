@@ -49,15 +49,15 @@ class InitialMigration < ActiveRecord::Migration[6.0]
   end
 
   create_table :organizations do |t|
-    t.string   :name,          null: false
-    t.string   :address1,      null: false
+    t.string   :name,                          null: false
+    t.string   :address1,                      null: false
     t.string   :address2,      default: ""
-    t.string   :city,          null: false
-    t.string   :state,         null: false
-    t.string   :country,       null: false
-    t.string   :pin_code,      null: false, limit: 6
+    t.string   :city,                          null: false
+    t.string   :state,                         null: false
+    t.string   :country,                       null: false
+    t.string   :pin_code,      limit: 6,       null: false
     t.text     :description,   default: ""
-    t.boolean  :archive,       null: false, default: false
+    t.boolean  :archive,       default: false, null: false
     t.datetime :discarded_at,  index: true
     t.bigint   :created_by_id, index: true
     t.bigint   :updated_by_id, index: true
@@ -67,6 +67,24 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
   create_table :brands do |t|
     t.string     :name,                             null: false
+    t.boolean    :archive,       default: false,    null: false
+    t.datetime   :discarded_at,  index: true
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
+    t.references :organization,  foreign_key: true, null: false
+
+    t.timestamps
+  end
+
+  create_table :companies do |t|
+    t.string     :name,                             null: false
+    t.string     :address1,                         null: false
+    t.string     :address2,      default: ""
+    t.string     :city,                             null: false
+    t.string     :state,                            null: false
+    t.string     :country,                          null: false
+    t.string     :pin_code,      limit: 6,          null: false
+    t.string     :phone_number,  default: ""
     t.boolean    :archive,       default: false,    null: false
     t.datetime   :discarded_at,  index: true
     t.bigint     :created_by_id, index: true

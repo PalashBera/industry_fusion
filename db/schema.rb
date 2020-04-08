@@ -30,6 +30,28 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_brands_on_updated_by_id"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address1", null: false
+    t.string "address2", default: ""
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "country", null: false
+    t.string "pin_code", limit: 6, null: false
+    t.string "phone_number", default: ""
+    t.boolean "archive", default: false, null: false
+    t.datetime "discarded_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_companies_on_created_by_id"
+    t.index ["discarded_at"], name: "index_companies_on_discarded_at"
+    t.index ["organization_id"], name: "index_companies_on_organization_id"
+    t.index ["updated_by_id"], name: "index_companies_on_updated_by_id"
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -104,5 +126,6 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   end
 
   add_foreign_key "brands", "organizations"
+  add_foreign_key "companies", "organizations"
   add_foreign_key "users", "organizations"
 end
