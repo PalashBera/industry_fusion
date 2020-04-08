@@ -19,7 +19,7 @@ class Company < ApplicationRecord
 
   belongs_to :organization
 
-  validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false, scope: :organization_id }
   validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }
   validates :address2, :phone_number, length: { maximum: 255 }
   validates :pin_code, presence: true, length: { is: 6 }

@@ -2,7 +2,7 @@ class Master::BrandsController < Master::MasterController
   include ChangeLogable
 
   def index
-    @search = Brand.kept.ransack(params[:q])
+    @search = Brand.ransack(params[:q])
     @pagy, @brands = pagy(@search.result, items: 20)
   end
 
@@ -30,11 +30,6 @@ class Master::BrandsController < Master::MasterController
     else
       render "edit"
     end
-  end
-
-  def destroy
-    brand.discard
-    redirect_to master_brands_path, flash: { danger: "Brand has been successfully deleted." }
   end
 
   private

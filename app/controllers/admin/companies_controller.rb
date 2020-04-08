@@ -2,7 +2,7 @@ class Admin::CompaniesController < Admin::AdminController
   include ChangeLogable
 
   def index
-    @search = Company.kept.ransack(params[:q])
+    @search = Company.ransack(params[:q])
     @pagy, @companies = pagy(@search.result, items: 20)
   end
 
@@ -30,11 +30,6 @@ class Admin::CompaniesController < Admin::AdminController
     else
       render "edit"
     end
-  end
-
-  def destroy
-    company.discard
-    redirect_to admin_companies_path, flash: { danger: "Company has been successfully deleted." }
   end
 
   private
