@@ -18,14 +18,12 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "archive", default: false, null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_brands_on_created_by_id"
-    t.index ["discarded_at"], name: "index_brands_on_discarded_at"
     t.index ["organization_id"], name: "index_brands_on_organization_id"
     t.index ["updated_by_id"], name: "index_brands_on_updated_by_id"
   end
@@ -40,14 +38,12 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "pin_code", limit: 6, null: false
     t.string "phone_number", default: ""
     t.boolean "archive", default: false, null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_companies_on_created_by_id"
-    t.index ["discarded_at"], name: "index_companies_on_discarded_at"
     t.index ["organization_id"], name: "index_companies_on_organization_id"
     t.index ["updated_by_id"], name: "index_companies_on_updated_by_id"
   end
@@ -77,13 +73,11 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "pin_code", limit: 6, null: false
     t.text "description", default: ""
     t.boolean "archive", default: false, null: false
-    t.datetime "discarded_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_organizations_on_created_by_id"
-    t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
     t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
   end
 
