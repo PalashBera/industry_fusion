@@ -57,14 +57,6 @@ module ApplicationHelper
             title: "Edit #{controller_name.singularize.humanize.titleize}"
   end
 
-  def delete_link(controller_name, resource)
-    link_to '<i class="fas fa-trash-alt text-danger"></i>'.html_safe,
-            url_for(controller: controller_name, action: "destroy", id: resource.id),
-            method: :delete,
-            data: { confirm: "Are you sure?" },
-            title: "Delete #{controller_name.singularize.humanize.titleize}"
-  end
-
   def change_logs_link_using_modal(controller_name, resource)
     link_to '<i class="fas fa-history text-info"></i>'.html_safe,
             url_for(controller: controller_name, action: "change_logs", id: resource.id),

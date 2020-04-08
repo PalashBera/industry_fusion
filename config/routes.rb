@@ -6,13 +6,13 @@ Rails.application.routes.draw do
   resources :organizations, only: [:new, :create]
 
   namespace :master do
-    resources :brands, except: [:show] do
+    resources :brands, except: [:show, :destroy] do
       get :change_logs, on: :member
     end
   end
 
   namespace :admin do
-    resources :companies, except: [:show] do
+    resources :companies, except: [:show, :destroy] do
       get :change_logs, on: :member
     end
 
