@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :companies, except: [:show] do
+      get :change_logs, on: :member
+    end
+
     root "admin#index"
   end
 
