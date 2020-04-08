@@ -1,4 +1,4 @@
-<% partial = "master/#{controller_name}/change_logs" %>
+<% partial = "#{params[:controller]}/change_logs" %>
 
 $('body').find('#change_logs_modal').remove();
 $('body').append('<%= j (render partial) %>');
