@@ -2,6 +2,7 @@
 
 <section class="mb-4 d-flex justify-content-between">
   <h3 class="mb-0">Brands</h3>
+  <button type="button" class="filter-btn btn btn-<%= @filter_active ? "warning" : "secondary" %>" data-toggle="modal" data-target="#filter_modal" title="<%= @filter_active ? "Filter Applied" : "Filter" %>"><i class="fas fa-filter"></i> Filter</button>
   <%= new_link_using_modal(controller_name) %>
 </section>
 
@@ -34,3 +35,7 @@
 
 <%= render "shared/pagy" %>
 <div id="form_modal"></div>
+
+<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Brands" } do |f| %>
+  <%= render "filter_form", f: f %>
+<% end %>

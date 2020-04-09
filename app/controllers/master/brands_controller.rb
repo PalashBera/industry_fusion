@@ -3,8 +3,9 @@ class Master::BrandsController < Master::MasterController
 
   def index
     @search = Brand.ransack(params[:q])
+    @filter_active = true if params[:q].present?
     @search.sorts = "name asc" if @search.sorts.empty?
-    @pagy, @brands = pagy(@search.result, items: 20)
+    @pagy, @brands = pagy(@search.result(distinct: true), items: 20)
   end
 
   def new
