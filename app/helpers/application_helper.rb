@@ -64,9 +64,9 @@ module ApplicationHelper
             title: "Show Change Logs"
   end
 
-  def export_excel_link(controller_name)
-    link_to "Excel",
+  def excel_export_btn(controller_name)
+    link_to "Export",
             url_for(controller: controller_name, action: "export", format: "xlsx"),
-            class: "dropdown-item"
+            class: "btn btn-secondary"
   end
 end
