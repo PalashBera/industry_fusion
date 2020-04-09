@@ -63,4 +63,10 @@ module ApplicationHelper
             data: { remote: true },
             title: "Show Change Logs"
   end
+
+  def export_excel_link(controller_name)
+    link_to "Excel",
+            url_for(controller: controller_name, action: "export", format: "xlsx"),
+            class: "dropdown-item"
+  end
 end

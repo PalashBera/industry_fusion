@@ -1,5 +1,6 @@
 class Admin::CompaniesController < Admin::AdminController
   include ChangeLogable
+  include Exportable
 
   def index
     @search = Company.ransack(params[:q])

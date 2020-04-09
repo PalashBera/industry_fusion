@@ -2,7 +2,11 @@
 
 <section class="mb-4 d-flex justify-content-between">
   <h3 class="mb-0">Companies</h3>
-  <%= new_link_using_modal(controller_name) %>
+
+  <section>
+    <%= render "shared/export_button_dropdown" %>
+    <%= new_link_using_modal(controller_name) %>
+  </section>
 </section>
 
 <div class="table-responsive">
