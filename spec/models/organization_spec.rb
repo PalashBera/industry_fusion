@@ -13,7 +13,6 @@ RSpec.describe Organization, type: :model do
     it { should have_db_column(:pin_code) }
     it { should have_db_column(:description) }
     it { should have_db_column(:archive) }
-    it { should have_db_column(:discarded_at) }
     it { should have_db_column(:created_by_id) }
     it { should have_db_column(:updated_by_id) }
     it { should have_db_column(:created_at) }
@@ -22,7 +21,6 @@ RSpec.describe Organization, type: :model do
 
   describe "active record index" do
     it { should have_db_index(:created_by_id) }
-    it { should have_db_index(:discarded_at) }
     it { should have_db_index(:updated_by_id) }
   end
 
