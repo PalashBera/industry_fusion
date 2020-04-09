@@ -17,7 +17,7 @@ wb.styles do |style|
         resource.country,
         resource.pin_code,
         resource.phone_number,
-        resource.archive
+        resource.archived_status
       ], style: row_style
     end
   end
