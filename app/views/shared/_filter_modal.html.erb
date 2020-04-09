@@ -1,0 +1,23 @@
+<div class="modal fade" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel"><%= modal_header %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= search_form_for [namespace.to_sym, resource] do |f|  %>
+        <div class="modal-body">
+          <%= yield f %>
+        </div>
+
+        <div class="modal-footer">
+          <%= link_to "Remove Filter", { controller: params[:controller], action: :index }, class: "btn btn-secondary" %>
+          <%= f.submit "Filter", "data-disable-with": "Please Wait", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_paper_trail_whodunnit
   before_action :set_current_user
+  before_action :remove_empty_parameters, only: :index
 
   protected
 
@@ -59,5 +60,15 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     User.current_user = current_user
+  end
+
+  def remove_empty_parameters
+    p = proc do |*args|
+      value = args.last
+      value.delete_if(&p) if value.respond_to? :delete_if
+      value.nil? || value.respond_to?(:"blank?") && value.blank?
+    end
+
+    params.delete_if(&p)
   end
 end

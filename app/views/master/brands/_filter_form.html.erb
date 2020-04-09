@@ -1,0 +1,13 @@
+<div class="form-row">
+  <div class="form-group col-md-6 col-sm-12">
+    <%= f.label :name, "Name" %>
+    <%= f.select :name_cont_any, Brand.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
+    <a href="#" class="remove-selectpicker-selections"><i class="fas fa-minus-circle"></i></a>
+  </div>
+
+  <div class="form-group col-md-6 col-sm-12">
+    <%= f.label :archive, "Status" %>
+    <%= f.select :archive_eq, [["Active", "false"], ["Archived", "true"]], { include_blank: true }, { class: "selectpicker", "data-live-search": "true" } %>
+    <a href="#" class="remove-selectpicker-selections"><i class="fas fa-minus-circle"></i></a>
+  </div>
+</div>
