@@ -41,32 +41,4 @@ module ApplicationHelper
       '<span class="badge badge-success" title="Active">Active</span>'
     end
   end
-
-  def new_link_using_modal(controller_name)
-    link_to "Add New",
-            url_for(controller: controller_name, action: "new"),
-            data: { remote: true },
-            class: "btn btn-primary",
-            title: "Add New #{controller_name.singularize.humanize.titleize}"
-  end
-
-  def edit_link_using_modal(controller_name, resource)
-    link_to '<i class="fas fa-edit text-primary"></i>'.html_safe,
-            url_for(controller: controller_name, action: "edit", id: resource.id),
-            data: { remote: true },
-            title: "Edit #{controller_name.singularize.humanize.titleize}"
-  end
-
-  def change_logs_link_using_modal(controller_name, resource)
-    link_to '<i class="fas fa-history text-info"></i>'.html_safe,
-            url_for(controller: controller_name, action: "change_logs", id: resource.id),
-            data: { remote: true },
-            title: "Show Change Logs"
-  end
-
-  def excel_export_btn(controller_name)
-    link_to "Export",
-            url_for(controller: controller_name, action: "export", format: "xlsx"),
-            class: "btn btn-secondary"
-  end
 end

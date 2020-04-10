@@ -14,8 +14,8 @@
         </div>
 
         <div class="modal-footer">
-          <%= link_to "Remove Filter", { controller: params[:controller], action: :index }, class: "btn btn-secondary" %>
-          <%= f.submit "Filter", "data-disable-with": "Please Wait", class: "btn btn-primary" %>
+          <%= remove_filter_btn(controller_name) %>
+          <%= f.submit "Filter", data: { disable_with: "Please wait..." }, class: "btn btn-primary" %>
         </div>
       <% end %>
     </div>
