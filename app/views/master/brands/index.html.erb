@@ -4,8 +4,9 @@
   <h3 class="mb-0">Brands</h3>
 
   <section>
-    <%= filter_button(params[:q]) %>
     <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+    <%= excel_export_btn(controller_name) %>
   </section>
 </section>
 
