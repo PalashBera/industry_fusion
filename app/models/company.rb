@@ -23,4 +23,6 @@ class Company < ApplicationRecord
   validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }
   validates :address2, :phone_number, length: { maximum: 255 }
   validates :pin_code, presence: true, length: { is: 6 }
+
+  scope :order_by_name, -> { order(:name) }
 end

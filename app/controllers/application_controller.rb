@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
     p = proc do |*args|
       value = args.last
       value.delete_if(&p) if value.respond_to? :delete_if
-      value.nil? || value.respond_to?(:"blank?") && value.blank?
+      value.blank?
     end
 
     params.delete_if(&p)
