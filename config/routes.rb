@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   namespace :master do
     resources :brands, except: [:show, :destroy] do
       get :change_logs, on: :member
+      get :export, on: :collection
     end
   end
 
