@@ -81,6 +81,20 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
   end
 
+  create_table "uoms", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "short_name", limit: 4, null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_uoms_on_created_by_id"
+    t.index ["organization_id"], name: "index_uoms_on_organization_id"
+    t.index ["updated_by_id"], name: "index_uoms_on_updated_by_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -143,6 +157,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
 
   add_foreign_key "brands", "organizations"
   add_foreign_key "companies", "organizations"
+  add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "warehouses", "companies"
   add_foreign_key "warehouses", "organizations"
