@@ -14,6 +14,11 @@ Rails.application.routes.draw do
         post :import
       end
     end
+
+    resources :uoms, except: [:show, :destroy] do
+      get :change_logs, on: :member
+      get :export, on: :collection
+    end
   end
 
   namespace :admin do
