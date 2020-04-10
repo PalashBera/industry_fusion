@@ -7,6 +7,7 @@
     <%= new_link_using_modal(controller_name) %>
     <%= filter_button(params[:q]) %>
     <%= excel_export_btn(controller_name) %>
+    <%= import_modal_btn(controller_name) %>
   </section>
 </section>
 
@@ -39,4 +40,5 @@
 
 <%= render "shared/pagy" %>
 <%= render "filter_form" %>
+<%= render "shared/import_modal" %>
 <div id="form_modal"></div>

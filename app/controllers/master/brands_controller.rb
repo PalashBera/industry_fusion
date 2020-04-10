@@ -1,6 +1,7 @@
 class Master::BrandsController < Master::MasterController
   include ChangeLogable
   include Exportable
+  include Importable
 
   def index
     @search = Brand.ransack(params[:q])
