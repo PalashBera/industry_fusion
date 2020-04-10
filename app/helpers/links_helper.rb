@@ -1,6 +1,6 @@
 module LinksHelper
   def new_link_using_modal(controller_name)
-    link_to "Add New",
+    link_to '<i class="fas fa-plus-circle"></i> Add New'.html_safe,
             url_for(controller: controller_name, action: "new"),
             data: { remote: true },
             class: "btn btn-primary",
@@ -22,9 +22,10 @@ module LinksHelper
   end
 
   def excel_export_btn(controller_name)
-    link_to "Export",
+    link_to '<i class="fas fa-file-export"></i> Export'.html_safe,
             url_for(controller: controller_name, action: "export", format: "xlsx"),
-            class: "btn btn-secondary"
+            class: "btn btn-dark",
+            title: "Export #{controller_name.humanize.titleize}"
   end
 
   def filter_button(params)
