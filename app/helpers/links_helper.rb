@@ -47,4 +47,12 @@ module LinksHelper
             "#",
             class: "remove-selectpicker-selections"
   end
+
+  def import_modal_btn(controller_name)
+    link_to '<i class="fas fa-file-import"></i> Import'.html_safe,
+            "#",
+            class: "btn btn-info",
+            data: { toggle: "modal", target: "#import_modal" },
+            title: "Import #{controller_name.humanize.titleize}"
+  end
 end
