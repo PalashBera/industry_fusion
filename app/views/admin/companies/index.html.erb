@@ -4,8 +4,9 @@
   <h3 class="mb-0">Companies</h3>
 
   <section>
-    <%= excel_export_btn(controller_name) %>
     <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+    <%= excel_export_btn(controller_name) %>
   </section>
 </section>
 
@@ -49,4 +50,5 @@
 </div>
 
 <%= render "shared/pagy" %>
+<%= render "filter_form" %>
 <div id="form_modal"></div>

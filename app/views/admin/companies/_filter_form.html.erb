@@ -1,8 +1,8 @@
-<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Brands" } do |f| %>
+<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "admin", modal_header: "Search Companies" } do |f| %>
   <div class="form-row">
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :name_cont_any, "Brand" %>
-      <%= f.select :name_cont_any, Brand.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
+      <%= f.label :name_cont_any, "Company" %>
+      <%= f.select :name_cont_any, Company.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
       <%= remove_selection_link %>
     </div>
 

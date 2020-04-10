@@ -38,8 +38,5 @@
 </div>
 
 <%= render "shared/pagy" %>
+<%= render "filter_form" %>
 <div id="form_modal"></div>
-
-<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Brands" } do |f| %>
-  <%= render "filter_form", f: f %>
-<% end %>
