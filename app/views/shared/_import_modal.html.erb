@@ -11,8 +11,8 @@
       <%= form_tag url_for(controller: controller_name, action: "import"), multipart: true do %>
         <div class="modal-body">
           <div class="form-group">
-            <%= file_field_tag :file, required: true, accept: ".xlsx, .xls, .csv" %>
-            <small class="form-text text-muted">Data import supports only .csv, .xls and .xlsx  format.</small>
+            <%= file_field_tag :file, required: true, accept: ".csv" %>
+            <small class="form-text text-muted">Data import supports only .csv formated file.</small>
           </div>
         </div>
 
