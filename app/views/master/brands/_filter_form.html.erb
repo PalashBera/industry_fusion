@@ -2,14 +2,20 @@
   <div class="form-row">
     <div class="form-group col-md-6 col-sm-12">
       <%= f.label :name_cont_any, "Brand" %>
-      <%= f.select :name_cont_any, Brand.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
-      <%= remove_selection_link %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :name_cont_any, Brand.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
+        <%= remove_selection_link %>
+      </div>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
       <%= f.label :archive, "Status" %>
-      <%= f.select :archive_eq, [["Active", "false"], ["Archived", "true"]], { include_blank: true }, { class: "selectpicker", "data-live-search": "true" } %>
-      <%= remove_selection_link %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :archive_eq, [["Active", "false"], ["Archived", "true"]], { include_blank: true }, { class: "selectpicker", "data-live-search": "true" } %>
+        <%= remove_selection_link %>
+      </div>
     </div>
   </div>
 <% end %>

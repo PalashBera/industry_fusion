@@ -18,9 +18,47 @@
   background: url(/preloader.gif) center no-repeat #FFFFFF;
 }
 
+.page-header {
+  display: block;
+  font-weight: 500;
+  font-size: 28px;
+}
+
+.selectpicker-filter-dropdown {
+  display: flex;
+  align-items: center;
+
+  .dropdown {
+    flex: 1 1 auto;
+  }
+
+  .remove-selectpicker-selections {
+    display: inline-block;
+    margin-left: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .remove-selectpicker-selections {
+    margin-left: 10px !important;
+    font-size: 20px;
+  }
+}
+
 @media (max-width: 575px) {
   .btn-xs-block {
     display: block;
     width: 100%;
+  }
+
+  .btn-small {
+    padding: .25rem .5rem;
+    font-size: .875rem;
+    line-height: 1.5;
+    border-radius: .2rem;
+  }
+
+  .page-header {
+    font-size: 21px;
   }
 }
