@@ -1,9 +1,9 @@
 module LinksHelper
   def new_link_using_modal(controller_name)
-    link_to '<i class="fas fa-plus-circle"></i> Add New'.html_safe,
+    link_to '<i class="fas fa-plus-circle"></i><span class="d-none d-md-inline-block ml-1">Add New</span>'.html_safe,
             url_for(controller: controller_name, action: "new"),
             data: { remote: true },
-            class: "btn btn-primary",
+            class: "btn btn-primary btn-small",
             title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
 
@@ -22,16 +22,16 @@ module LinksHelper
   end
 
   def excel_export_btn(controller_name)
-    link_to '<i class="fas fa-file-export"></i> Export'.html_safe,
+    link_to '<i class="fas fa-file-export"></i><span class="d-none d-md-inline-block ml-1">Export</span>'.html_safe,
             url_for(controller: controller_name, action: "export", format: "xlsx"),
-            class: "btn btn-dark",
+            class: "btn btn-dark btn-small",
             title: "Export #{controller_name.humanize.titleize}"
   end
 
   def filter_button(params)
-    link_to '<i class="fas fa-filter"></i> Filter'.html_safe,
+    link_to '<i class="fas fa-filter"></i><span class="d-none d-md-inline-block ml-1">Filter</span>'.html_safe,
             "#",
-            class: "btn btn-#{params.present? ? "warning" : "secondary"}",
+            class: "btn btn-#{params.present? ? "warning" : "secondary"} btn-small",
             data: { toggle: "modal", target: "#filter_modal" },
             title: params.present? ? "Filter Applied" : "Filter"
   end
@@ -39,7 +39,7 @@ module LinksHelper
   def remove_filter_btn(controller_name)
     link_to "Remove Filter",
             url_for(controller: controller_name, action: "index"),
-            class: "btn btn-secondary"
+            class: "btn btn-secondary btn-xs-block order-2 order-sm-1"
   end
 
   def remove_selection_link
@@ -49,9 +49,9 @@ module LinksHelper
   end
 
   def import_modal_btn(controller_name)
-    link_to '<i class="fas fa-file-import"></i> Import'.html_safe,
+    link_to '<i class="fas fa-file-import"></i><span class="d-none d-md-inline-block ml-1">Import</span>'.html_safe,
             "#",
-            class: "btn btn-info",
+            class: "btn btn-info btn-small",
             data: { toggle: "modal", target: "#import_modal" },
             title: "Import #{controller_name.humanize.titleize}"
   end
