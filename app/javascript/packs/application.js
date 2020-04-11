@@ -21,6 +21,14 @@ document.addEventListener('turbolinks:load', function() {
     $(this).alert('close');
   });
 
+  $(".selectpicker").selectpicker({
+    size: '7'
+  });
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $('.selectpicker').selectpicker('mobile');
+  }
+
   $('.selectpicker').selectpicker('refresh');
   $('.se-pre-con').fadeOut('slow');
 });
