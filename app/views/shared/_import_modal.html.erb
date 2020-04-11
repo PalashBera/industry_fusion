@@ -14,6 +14,8 @@
             <%= file_field_tag :file, required: true, accept: ".csv" %>
             <small class="form-text text-muted">Data import supports only .csv formated file.</small>
           </div>
+
+          <%= link_to "Download Sample File", "/csv_files/brands.csv" %>
         </div>
 
         <div class="modal-footer">
