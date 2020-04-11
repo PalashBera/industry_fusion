@@ -1,10 +1,11 @@
 class Admin::WarehousesController < Admin::AdminController
   include ChangeLogable
+  include Exportable
 
   def index
     @search = Warehouse.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
-    @pagy, @warehouses = pagy(@search.result.includes(:company), items: 20)
+    @pagy, @warehouses = pagy(@search.result.included_resources, items: 20)
   end
 
   def new

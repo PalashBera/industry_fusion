@@ -1,0 +1,27 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  header_style = style.add_style(bg_color: "EFC376", border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
+  bg_red = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "FF0000", alignment: { horizontal: :center })
+  bg_green = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "00FF00", alignment: { horizontal: :center })
+
+  wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
+    sheet.add_row ["Company", "Name", "Address 1", "Address 2", "City", "State", "County", "PIN Code", "Phone Number", "Status"], style: header_style
+
+    @resources.each do |resource|
+      sheet.add_row [
+        resource.company.name,
+        resource.name,
+        resource.address1,
+        resource.address2,
+        resource.city,
+        resource.state,
+        resource.country,
+        resource.pin_code,
+        resource.phone_number,
+        resource.archived_status
+      ], style: [row_style, row_style, row_style, row_style, row_style, row_style, row_style, row_style, resource.archived? ? bg_red : bg_green]
+    end
+  end
+end

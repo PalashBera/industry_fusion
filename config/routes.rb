@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     resources :warehouses, except: [:show, :destroy] do
       get :change_logs, on: :member
+      get :export, on: :collection
     end
 
     root "admin#index"
