@@ -22,6 +22,7 @@ document.addEventListener('turbolinks:load', function() {
   });
 
   $('.selectpicker').selectpicker('refresh');
+  $('.se-pre-con').fadeOut('slow');
 });
 
 $(document).on('click', '.remove-selectpicker-selections', function (e) {
