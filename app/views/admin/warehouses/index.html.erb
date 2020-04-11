@@ -41,7 +41,8 @@
           <td><%= warehouse.phone_number %></td>
           <td><%= archive_status(warehouse.archive).html_safe %></td>
           <td>
-            <%= edit_link_using_modal(controller_name, warehouse) %>
+            <%= edit_link_using_modal(controller_name, warehouse) %> |
+            <%= change_logs_link_using_modal(controller_name, warehouse) %>
           </td>
         </tr>
       <% end %>

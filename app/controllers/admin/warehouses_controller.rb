@@ -1,4 +1,6 @@
 class Admin::WarehousesController < Admin::AdminController
+  include ChangeLogable
+
   def index
     @search = Warehouse.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
