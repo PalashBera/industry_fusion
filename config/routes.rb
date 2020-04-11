@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
+    resources :warehouses, except: [:show, :destroy]
+
     root "admin#index"
   end
 
