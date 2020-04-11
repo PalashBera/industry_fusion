@@ -1,4 +1,4 @@
-<%= render layout: "shared/form_modal", locals: { resource: @company, namespace: "admin" } do |f| %>
+<%= render layout: "shared/form_modal_layout", locals: { resource: @company, namespace: "admin" } do |f| %>
   <div class="form-group required">
     <%= f.label :name %>
     <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
