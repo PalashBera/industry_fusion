@@ -90,4 +90,22 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :warehouses do |t|
+    t.references :company,       foreign_key: true, null: false
+    t.string     :name,                             null: false
+    t.string     :address1,                         null: false
+    t.string     :address2,      default: ""
+    t.string     :city,                             null: false
+    t.string     :state,                            null: false
+    t.string     :country,                          null: false
+    t.string     :pin_code,      limit: 6,          null: false
+    t.string     :phone_number,  default: ""
+    t.boolean    :archive,       default: false,    null: false
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
+    t.references :organization,  foreign_key: true, null: false
+
+    t.timestamps
+  end
 end
