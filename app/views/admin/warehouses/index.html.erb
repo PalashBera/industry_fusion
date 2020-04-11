@@ -1,0 +1,54 @@
+<% provide(:title, "Warehouses") %>
+
+<section class="mb-4 d-flex justify-content-between">
+  <span class="page-header">Warehouses</span>
+
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+  </section>
+</section>
+
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :company_name, "Company" %></th>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :address1, "Address 1" %></th>
+        <th scope="col"><%= sort_link @search, :address2, "Address 2" %></th>
+        <th scope="col"><%= sort_link @search, :city, "City" %></th>
+        <th scope="col"><%= sort_link @search, :state, "State" %></th>
+        <th scope="col"><%= sort_link @search, :country, "Country" %></th>
+        <th scope="col"><%= sort_link @search, :phone_number, "Phone Number" %></th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @warehouses.each.with_index(1) do |warehouse, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= warehouse.company.name %></td>
+          <td><%= warehouse.name %></td>
+          <td><%= warehouse.address1 %></td>
+          <td><%= warehouse.address2 %></td>
+          <td><%= warehouse.city %></td>
+          <td><%= warehouse.state %></td>
+          <td><%= warehouse.country %></td>
+          <td><%= warehouse.phone_number %></td>
+          <td><%= archive_status(warehouse.archive).html_safe %></td>
+          <td>
+            <%= edit_link_using_modal(controller_name, warehouse) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
+<%= render "filter_form" %>
+<%= render "shared/form_modal_container" %>

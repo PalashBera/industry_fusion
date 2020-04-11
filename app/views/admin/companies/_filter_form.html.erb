@@ -4,7 +4,7 @@
       <%= f.label :name_cont_any, "Company" %>
 
       <div class="selectpicker-filter-dropdown">
-        <%= f.select :name_cont_any, Company.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
+        <%= f.select :name_cont_any, current_organization.companies.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
         <%= remove_selection_link %>
       </div>
     </div>
