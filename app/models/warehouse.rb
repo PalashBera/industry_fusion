@@ -26,4 +26,8 @@ class Warehouse < ApplicationRecord
   validates :pin_code, presence: true, length: { is: 6 }
 
   scope :order_by_name, -> { order(:name) }
+
+  def self.included_resources
+    includes(:company)
+  end
 end
