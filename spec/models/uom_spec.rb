@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Uom, type: :model do
   let(:organization) { create(:organization) }
-  let!(:uom)         { create(:uom, name: "Kilo Grams", short_name: "Kg",organization: organization) }
+  let!(:uom)         { create(:uom, name: "Kilograms", short_name: "KG", organization: organization) }
 
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
@@ -53,5 +53,23 @@ RSpec.describe Uom, type: :model do
     it { should validate_length_of(:short_name).is_at_most(4) }
     it { should validate_uniqueness_of(:name).case_insensitive.scoped_to(:organization_id) }
     it { should validate_uniqueness_of(:short_name).case_insensitive.scoped_to(:organization_id) }
+  end
+
+  describe "scopes" do
+    context "order_by_name" do
+      let!(:uom_1) { create(:uom, name: "Dozen", organization: organization) }
+      let!(:uom_2) { create(:uom, name: "Milimeter", organization: organization) }
+      it "should return records order by name" do
+        expect(organization.uoms.order_by_name).to eq([uom_1, uom, uom_2])
+      end
+    end
+
+    context "order_by_short_name" do
+      let!(:uom_1) { create(:uom, short_name: "Dzn", organization: organization) }
+      let!(:uom_2) { create(:uom, short_name: "mm", organization: organization) }
+      it "should return records order by short name" do
+        expect(organization.uoms.order_by_short_name).to eq([uom_1, uom, uom_2])
+      end
+    end
   end
 end

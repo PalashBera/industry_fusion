@@ -5,7 +5,6 @@ class Master::UomsController < Master::MasterController
 
   def index
     @search = Uom.ransack(params[:q])
-    @filter_active = true if params[:q].present?
     @search.sorts = "name asc" if @search.sorts.empty?
     @pagy, @uoms = pagy(@search.result(distinct: true), items: 20)
   end
@@ -18,7 +17,7 @@ class Master::UomsController < Master::MasterController
     @uom = Uom.new(uom_params)
 
     if @uom.save
-      redirect_to master_uoms_path, flash: { success: "Uom has been successfully created." }
+      redirect_to master_uoms_path, flash: { success: "UOM has been successfully created." }
     else
       render "new"
     end
@@ -30,7 +29,7 @@ class Master::UomsController < Master::MasterController
 
   def update
     if uom.update(uom_params)
-      redirect_to master_uoms_path, flash: { success: "Uom has been successfully updated." }
+      redirect_to master_uoms_path, flash: { success: "UOM has been successfully updated." }
     else
       render "edit"
     end
