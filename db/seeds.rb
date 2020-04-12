@@ -91,3 +91,17 @@ end
 
   brand2.update_attributes(created_by_id: 2)
 end
+
+[1, 2].each do |org_id|
+  Uom.create(name: "dozen",      short_name: "doz", archive: Faker::Boolean.boolean, organization_id: org_id)
+  Uom.create(name: "inch",       short_name: "in",  archive: Faker::Boolean.boolean, organization_id: org_id)
+  Uom.create(name: "gallon",     short_name: "gal", archive: Faker::Boolean.boolean, organization_id: org_id)
+  Uom.create(name: "yard",       short_name: "yd",  archive: Faker::Boolean.boolean, organization_id: org_id)
+  Uom.create(name: "milliliter", short_name: "ml",  archive: Faker::Boolean.boolean, organization_id: org_id)
+
+  if org_id == 1
+    Uom.update_all(created_by_id: 1)
+  else
+    Uom.where(created_by_id: nil).update_all(created_by_id: 2)
+  end
+end
