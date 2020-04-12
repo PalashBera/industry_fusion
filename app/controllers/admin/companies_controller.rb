@@ -5,7 +5,7 @@ class Admin::CompaniesController < Admin::AdminController
   def index
     @search = Company.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
-    @pagy, @companies = pagy(@search.result, items: 20)
+    @pagy, @companies = pagy(@search.result(distinct: true), items: 20)
   end
 
   def new

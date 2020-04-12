@@ -5,7 +5,7 @@ class Admin::WarehousesController < Admin::AdminController
   def index
     @search = Warehouse.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
-    @pagy, @warehouses = pagy(@search.result.included_resources, items: 20)
+    @pagy, @warehouses = pagy(@search.result(distinct: true).included_resources, items: 20)
   end
 
   def new
