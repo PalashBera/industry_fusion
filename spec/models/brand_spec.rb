@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Brand, type: :model do
   let(:organization) { create(:organization) }
-  let!(:brand)        { create(:brand, name: "Industry Fusion", organization: organization) }
+  let!(:brand)       { create(:brand, name: "Industry Fusion", organization: organization) }
 
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
@@ -48,7 +48,7 @@ RSpec.describe Brand, type: :model do
       let!(:brand_1) { create(:brand, name: "ZARA", organization: organization) }
       let!(:brand_2) { create(:brand, name: "KFC", organization: organization) }
       it "should return records order by name" do
-        expect(Brand.order_by_name).to eq([brand, brand_2, brand_1])
+        expect(organization.brands.order_by_name).to eq([brand, brand_2, brand_1])
       end
     end
   end

@@ -17,8 +17,9 @@ class Organization < ApplicationRecord
 
   has_many :users
   has_many :companies
-  has_many :brands
   has_many :warehouses
+  has_many :brands
+  has_many :uoms
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }

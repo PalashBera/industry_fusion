@@ -11,6 +11,11 @@ class Uom < ApplicationRecord
     self.short_name = short_name.to_s.squish
   end
 
+  belongs_to :organization
+
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false, scope: :organization_id }
   validates :short_name, presence: true, length: { maximum: 4 }, uniqueness: { case_sensitive: false, scope: :organization_id }
+
+  scope :order_by_name, -> { order(:name) }
+  scope :order_by_short_name, -> { order(:short_name) }
 end

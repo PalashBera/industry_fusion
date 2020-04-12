@@ -8,6 +8,6 @@ FactoryBot.define do
     country     { Faker::Address.country }
     pin_code    { Faker::Number.number(digits: 6) }
     description { Faker::Lorem.paragraph }
-    archive     { true }
+    archive     { false }
   end
 end

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       get :change_logs, on: :member
 
       collection do
-        get :export
+        get  :export
         post :import
       end
     end
