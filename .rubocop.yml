@@ -1229,6 +1229,7 @@ Metrics/BlockLength:
     - refine
   Exclude:
     - '**/*.gemspec'
+    - 'db/seeds.rb'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting.'
