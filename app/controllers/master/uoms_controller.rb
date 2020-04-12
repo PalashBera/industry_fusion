@@ -1,6 +1,7 @@
 class Master::UomsController < Master::MasterController
   include ChangeLogable
   include Exportable
+  include Importable
 
   def index
     @search = Uom.ransack(params[:q])
