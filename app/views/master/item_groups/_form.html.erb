@@ -1,0 +1,16 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @item_group, namespace: "master" } do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 3, class: "form-control", autocomplete: :off %>
+  </div>
+
+  <div class="form-check">
+    <%= f.check_box :archive, class: "form-check-input" %>
+    <%= f.label :archive, class: "form-check-label" %>
+  </div>
+<% end %>

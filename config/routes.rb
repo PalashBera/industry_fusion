@@ -23,6 +23,15 @@ Rails.application.routes.draw do
         post :import
       end
     end
+
+    resources :item_groups, except: [:show, :destroy] do
+      get :change_logs, on: :member
+
+      collection do
+        get  :export
+        post :import
+      end
+    end
   end
 
   namespace :admin do
