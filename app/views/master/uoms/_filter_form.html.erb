@@ -1,0 +1,30 @@
+<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Units Of Measurements" } do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :name_cont_any, "Units Of Measurement" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :name_cont_any, Uom.all.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :short_name_cont_any, "Short Names" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :short_name_cont_any, Uom.all.pluck(:short_name, :short_name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :archive, "Status" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :archive_eq, [["Active", "false"], ["Archived", "true"]], { include_blank: true }, { class: "selectpicker", "data-live-search": "true" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+  </div>
+<% end %>

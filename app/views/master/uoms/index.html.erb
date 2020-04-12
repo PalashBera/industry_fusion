@@ -1,0 +1,43 @@
+<% provide(:title, "Uoms") %>
+
+<section class="mb-4 d-flex justify-content-between">
+  <span class="page-header">Units of Measurement</span>
+
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+  </section>
+</section>
+
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :short_name, "Short Name" %></th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @uoms.each.with_index(1) do |uom, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= uom.name %></td>
+          <td><%= uom.short_name %></td>
+          <td><%= archive_status(uom.archive).html_safe %></td>
+          <td>
+            <%= edit_link_using_modal(controller_name, uom) %> |
+            <%= change_logs_link_using_modal(controller_name, uom) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
+<%= render "filter_form" %>
+<%= render "shared/form_modal_container" %>

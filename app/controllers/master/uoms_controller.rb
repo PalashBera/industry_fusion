@@ -38,7 +38,7 @@ class Master::UomsController < Master::MasterController
   private
 
   def uom_params
-    params.require(:uom).permit(:name, :archive)
+    params.require(:uom).permit(:name, :short_name, :archive)
   end
 
   def uom
