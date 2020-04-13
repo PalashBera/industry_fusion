@@ -122,7 +122,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
   create_table :item_groups do |t|
     t.string     :name,                             null: false
-    t.text       :description
+    t.text       :description,   default: ""
     t.boolean    :archive,       default: false,    null: false
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
@@ -133,7 +133,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
   create_table :cost_centers do |t|
     t.string     :name,                             null: false
-    t.text       :description
+    t.text       :description,   default: ""
     t.boolean    :archive,       default: false,    null: false
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true

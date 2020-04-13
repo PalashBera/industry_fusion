@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
 
   create_table "cost_centers", force: :cascade do |t|
     t.string "name", null: false
-    t.text "description"
+    t.text "description", default: ""
     t.boolean "archive", default: false, null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
 
   create_table "item_groups", force: :cascade do |t|
     t.string "name", null: false
-    t.text "description"
+    t.text "description", default: ""
     t.boolean "archive", default: false, null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
