@@ -1,0 +1,46 @@
+<% provide(:title, "Cost Centers") %>
+
+<section class="mb-4 d-flex justify-content-between">
+  <span class="page-header">Cost Centers</span>
+
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+    <%= excel_export_btn(controller_name) %>
+    <%= import_modal_btn(controller_name) %>
+  </section>
+</section>
+
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col">Description</th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @cost_centers.each.with_index(1) do |cost_center, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= cost_center.name %></td>
+          <td><%= cost_center.description %></td>
+          <td><%= archive_status(cost_center.archive).html_safe %></td>
+          <td>
+            <%= edit_link_using_modal(controller_name, cost_center) %> |
+            <%= change_logs_link_using_modal(controller_name, cost_center) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
+<%= render "filter_form" %>
+<%= render "shared/import_modal" %>
+<%= render "shared/form_modal_container" %>

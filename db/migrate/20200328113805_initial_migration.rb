@@ -130,4 +130,15 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :cost_centers do |t|
+    t.string     :name,                             null: false
+    t.text       :description
+    t.boolean    :archive,       default: false,    null: false
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
+    t.references :organization,  foreign_key: true, null: false
+
+    t.timestamps
+  end
 end

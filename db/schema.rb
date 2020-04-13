@@ -48,6 +48,20 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_companies_on_updated_by_id"
   end
 
+  create_table "cost_centers", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "description"
+    t.boolean "archive", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_cost_centers_on_created_by_id"
+    t.index ["organization_id"], name: "index_cost_centers_on_organization_id"
+    t.index ["updated_by_id"], name: "index_cost_centers_on_updated_by_id"
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -171,6 +185,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
 
   add_foreign_key "brands", "organizations"
   add_foreign_key "companies", "organizations"
+  add_foreign_key "cost_centers", "organizations"
   add_foreign_key "item_groups", "organizations"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
