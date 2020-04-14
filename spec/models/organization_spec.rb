@@ -3,11 +3,11 @@ require "rails_helper"
 RSpec.describe Organization, type: :model do
   let!(:organization) { create(:organization, name: "Industry Fusion") }
 
+  it_behaves_like "archivable"
   it_behaves_like "addressable"
 
   describe "active record columns" do
     it { should have_db_column(:name) }
-    it { should have_db_column(:archive) }
     it { should have_db_column(:created_by_id) }
     it { should have_db_column(:updated_by_id) }
     it { should have_db_column(:created_at) }

@@ -10,7 +10,6 @@ RSpec.describe Uom, type: :model do
 
   describe "active record columns" do
     it { should have_db_column(:short_name) }
-    it { should have_db_column(:archive) }
     it { should have_db_column(:organization_id) }
     it { should have_db_column(:created_by_id) }
     it { should have_db_column(:updated_by_id) }
