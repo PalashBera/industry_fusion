@@ -31,8 +31,12 @@ RSpec.describe Organization, type: :model do
 
   describe "associations" do
     it { should have_many(:users) }
+    it { should have_many(:companies) }
+    it { should have_many(:warehouses) }
     it { should have_many(:brands) }
     it { should have_many(:uoms) }
+    it { should have_many(:item_groups) }
+    it { should have_many(:cost_centers) }
   end
 
   describe "validations" do
