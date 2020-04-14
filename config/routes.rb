@@ -32,6 +32,15 @@ Rails.application.routes.draw do
         post :import
       end
     end
+
+    resources :cost_centers, except: [:show, :destroy] do
+      get :change_logs, on: :member
+
+      collection do
+        get  :export
+        post :import
+      end
+    end
   end
 
   namespace :admin do

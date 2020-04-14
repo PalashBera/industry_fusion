@@ -90,17 +90,28 @@ User.create!(
     )
   end
 
+  150.times do
+    CostCenter.create!(
+      name: Faker::Lorem.word + " #" + rand(99).to_s + "-" + Faker::Lorem.word,
+      description: Faker::Lorem.sentence(word_count: 6, supplemental: true, random_words_to_add: 3),
+      archive: Faker::Boolean.boolean,
+      organization_id: org_id
+    )
+  end
+
   if org_id == 1
     Company.update_all(created_by_id: 1)
     Brand.update_all(created_by_id: 1)
     Uom.update_all(created_by_id: 1)
     Warehouse.update_all(created_by_id: 1)
     ItemGroup.update_all(created_by_id: 1)
+    CostCenter.update_all(created_by_id: 1)
   else
     Company.where(created_by_id: nil).update_all(created_by_id: 2)
     Brand.where(created_by_id: nil).update_all(created_by_id: 2)
     Uom.where(created_by_id: nil).update_all(created_by_id: 2)
     Warehouse.where(created_by_id: nil).update_all(created_by_id: 2)
     ItemGroup.where(created_by_id: nil).update_all(created_by_id: 2)
+    CostCenter.where(created_by_id: nil).update_all(created_by_id: 2)
   end
 end
