@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "state", null: false
     t.string "country", null: false
     t.string "pin_code", limit: 6, null: false
-    t.text "description", default: ""
+    t.string "phone_number", default: ""
     t.boolean "archive", default: false, null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"

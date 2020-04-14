@@ -12,7 +12,7 @@ class Organization < ApplicationRecord
     self.state = state.to_s.squish.titleize
     self.country = country.to_s.squish.titleize
     self.pin_code = pin_code.to_s.squish
-    self.description = description.to_s.squish
+    self.phone_number = phone_number.to_s.squish
   end
 
   has_many :users
@@ -25,7 +25,7 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }
-  validates :address2, length: { maximum: 255 }
+  validates :address2, :phone_number, length: { maximum: 255 }
   validates :pin_code, presence: true, length: { is: 6 }
 
   scope :order_by_name, -> { order(:name) }

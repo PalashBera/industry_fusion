@@ -51,8 +51,8 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :description %>
-            <%= f.text_area :description, class: "form-control", placeholder: "Please write here..." %>
+            <%= f.label :phone_number, "Phone Number" %>
+            <%= f.text_field :phone_number, class: "form-control", placeholder: "Phone Number", maxlength: 255 %>
           </div>
 
           <%= f.submit "Create", class: "btn btn-primary btn-xs-block", data: { disable_with: "Saving..." } %>
