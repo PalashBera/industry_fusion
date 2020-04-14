@@ -6,9 +6,9 @@ RSpec.describe Uom, type: :model do
 
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
+  it_behaves_like "nameable"
 
   describe "active record columns" do
-    it { should have_db_column(:name) }
     it { should have_db_column(:short_name) }
     it { should have_db_column(:archive) }
     it { should have_db_column(:organization_id) }
@@ -25,14 +25,6 @@ RSpec.describe Uom, type: :model do
   end
 
   describe "callbacks" do
-    context "when name contains extra space" do
-      it "should remove extra space" do
-        uom = build(:uom, name: " Kilo  ")
-        uom.valid?
-        expect(uom.name).to eq ("Kilo")
-      end
-    end
-
     context "when short_name contains extra space" do
       it "should remove extra space" do
         uom = build(:uom, short_name: " Kg  ")
@@ -47,23 +39,12 @@ RSpec.describe Uom, type: :model do
   end
 
   describe "validations" do
-    it { should validate_presence_of(:name) }
     it { should validate_presence_of(:short_name) }
-    it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_length_of(:short_name).is_at_most(4) }
-    it { should validate_uniqueness_of(:name).case_insensitive.scoped_to(:organization_id) }
     it { should validate_uniqueness_of(:short_name).case_insensitive.scoped_to(:organization_id) }
   end
 
   describe "scopes" do
-    context "order_by_name" do
-      let!(:uom_1) { create(:uom, name: "Dozen", organization: organization) }
-      let!(:uom_2) { create(:uom, name: "Milimeter", organization: organization) }
-      it "should return records order by name" do
-        expect(organization.uoms.order_by_name).to eq([uom_1, uom, uom_2])
-      end
-    end
-
     context "order_by_short_name" do
       let!(:uom_1) { create(:uom, short_name: "Dzn", organization: organization) }
       let!(:uom_2) { create(:uom, short_name: "mm", organization: organization) }
