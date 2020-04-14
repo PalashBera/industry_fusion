@@ -1,4 +1,9 @@
 require "csv"
+require "addressable"
+require "archivable"
+require "modal_formable"
+require "nameable"
+require "user_trackable"
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
