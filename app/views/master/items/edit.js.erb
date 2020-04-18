@@ -1,40 +1,22 @@
 $('#form_modal').find('.modal-content').html('<%= j (render "form") %>');
 $('#form_modal').modal();
+$(".selectpicker").selectpicker({ size: '7' });
 
 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    $('.selectpicker').selectpicker('mobile');
+  $('.selectpicker').selectpicker('mobile');
 }
 
-$('.selectpicker').selectpicker('refresh');
+$('#item_uom_id, #item_secondary_uom_id').change(function() {
+  var primaryUOM = $('#item_uom_id').find(":selected").text();
+  var secondaryUOM = $('#item_secondary_uom_id').find(":selected").text();
 
-$(document).ready(function () {
-  var alphaNumericRegex = new RegExp("^[a-zA-Z0-9]+$")
-	var selectpickerItemValue = $('.secondary-uom-dropdown .selectpicker').val()
-
-	if (alphaNumericRegex.test(selectpickerItemValue)) {
-		$('#item_primary_quantity').attr('required', 'true');
-		$('#item_secondary_quantity').attr('required', 'true');
-	} else {
-		$('#item_primary_quantity').removeAttr('required');
-		$('#item_secondary_quantity').removeAttr('required');
-		$('#item_primary_quantity').attr('disabled', 'true');
-		$('#item_secondary_quantity').attr('disabled', 'true');
-	}
-
-  $('.secondary-uom-dropdown .selectpicker').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-    var selectedItemValue = $(this).find('option').eq(clickedIndex).text();
-    if (alphaNumericRegex.test(selectedItemValue)) {
-      $('#item_primary_quantity').removeAttr('disabled');
-      $('#item_secondary_quantity').removeAttr('disabled');
-      $('#item_primary_quantity').attr('required', 'true');
-      $('#item_secondary_quantity').attr('required', 'true');
-    } else {
-      $('#item_primary_quantity').removeAttr('required');
-      $('#item_secondary_quantity').removeAttr('required');
-      $('#item_primary_quantity').attr('disabled', 'true');
-			$('#item_secondary_quantity').attr('disabled', 'true');
-			$('#item_primary_quantity').val('');
-			$('#item_secondary_quantity').val('');
-    }
-  });
-});
+  if (primaryUOM.length && secondaryUOM.length) {
+    $('.convertion-block').removeClass('hide');
+    $('#item_primary_quantity').attr('required', 'true');
+    $('#item_secondary_quantity').attr('required', 'true');
+  } else {
+    $('.convertion-block').addClass('hide');
+    $('#item_primary_quantity').removeAttr('required').val("");
+    $('#item_secondary_quantity').removeAttr('required').val("");
+  }
+})
