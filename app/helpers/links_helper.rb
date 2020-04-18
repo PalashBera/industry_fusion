@@ -24,14 +24,14 @@ module LinksHelper
   def excel_export_btn(controller_name)
     link_to '<i class="fas fa-file-export"></i><span class="d-none d-md-inline-block ml-1">Export</span>'.html_safe,
             url_for(controller: controller_name, action: "export", format: "xlsx"),
-            class: "btn btn-dark btn-small",
+            class: "btn btn-dark btn-small no-preloader",
             title: "Export #{controller_name.humanize.titleize}"
   end
 
   def filter_button(params)
     link_to '<i class="fas fa-filter"></i><span class="d-none d-md-inline-block ml-1">Filter</span>'.html_safe,
             "#",
-            class: "btn btn-#{params.present? ? "warning" : "secondary"} btn-small",
+            class: "btn btn-#{params.present? ? "warning" : "secondary"} btn-small no-preloader",
             data: { toggle: "modal", target: "#filter_modal" },
             title: params.present? ? "Filter Applied" : "Filter"
   end
@@ -45,13 +45,13 @@ module LinksHelper
   def remove_selection_link
     link_to '<i class="fas fa-minus-circle"></i>'.html_safe,
             "#",
-            class: "remove-selectpicker-selections"
+            class: "remove-selectpicker-selections no-preloader"
   end
 
   def import_modal_btn(controller_name)
     link_to '<i class="fas fa-file-import"></i><span class="d-none d-md-inline-block ml-1">Import</span>'.html_safe,
             "#",
-            class: "btn btn-info btn-small",
+            class: "btn btn-info btn-small no-preloader",
             data: { toggle: "modal", target: "#import_modal" },
             title: "Import #{controller_name.humanize.titleize}"
   end
