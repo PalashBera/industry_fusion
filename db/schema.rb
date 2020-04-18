@@ -91,6 +91,27 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_item_groups_on_updated_by_id"
   end
 
+  create_table "items", force: :cascade do |t|
+    t.bigint "item_group_id", null: false
+    t.bigint "uom_id", null: false
+    t.bigint "secondary_uom_id"
+    t.string "name", null: false
+    t.decimal "primary_quantity", precision: 10, scale: 2
+    t.decimal "secondary_quantity", precision: 10, scale: 2
+    t.boolean "archive", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_items_on_created_by_id"
+    t.index ["item_group_id"], name: "index_items_on_item_group_id"
+    t.index ["organization_id"], name: "index_items_on_organization_id"
+    t.index ["secondary_uom_id"], name: "index_items_on_secondary_uom_id"
+    t.index ["uom_id"], name: "index_items_on_uom_id"
+    t.index ["updated_by_id"], name: "index_items_on_updated_by_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.string "address1", null: false
@@ -187,6 +208,10 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "companies", "organizations"
   add_foreign_key "cost_centers", "organizations"
   add_foreign_key "item_groups", "organizations"
+  add_foreign_key "items", "item_groups"
+  add_foreign_key "items", "organizations"
+  add_foreign_key "items", "uoms"
+  add_foreign_key "items", "uoms", column: "secondary_uom_id"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "warehouses", "companies"

@@ -1,0 +1,55 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @item, namespace: "master" } do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :item_group %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :item_group_id, current_organization.item_groups.order_by_name.pluck(:name, :id), {}, { required: true, class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :uom, "UOM" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :uom_id, current_organization.uoms.order_by_name.pluck(:short_name, :id), {}, { required: true, class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :secondary_uom, "Secondary UOM" %>
+
+      <div class="selectpicker-filter-dropdown secondary-uom-dropdown">
+        <%= f.select :secondary_uom_id, current_organization.uoms.order_by_name.pluck(:short_name, :id), { include_blank: true }, { class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :primary_quantity %>
+      <%= f.number_field :primary_quantity, min: 0, step: 0.01, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :secondary_quantity %>
+      <%= f.number_field :secondary_quantity, min: 0, step: 0.01, class: "form-control" %>
+    </div>
+  </div>
+
+
+  <div class="form-check">
+    <%= f.check_box :archive, class: "form-check-input" %>
+    <%= f.label :archive, class: "form-check-label" %>
+  </div>
+<% end %>

@@ -14,6 +14,7 @@ class Organization < ApplicationRecord
   has_many :uoms
   has_many :item_groups
   has_many :cost_centers
+  has_many :items
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
 

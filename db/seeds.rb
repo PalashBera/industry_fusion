@@ -6,8 +6,7 @@
     city: Faker::Address.city,
     state: Faker::Address.state,
     country: Faker::Address.country,
-    pin_code: Faker::Number.number(digits: 6).to_s,
-    description: Faker::Company.catch_phrase
+    pin_code: Faker::Number.number(digits: 6).to_s
   )
 end
 
@@ -38,6 +37,8 @@ User.create!(
 )
 
 [1, 2].each do |org_id|
+  organization = Organization.find(org_id)
+
   5.times do
     Company.create!(
       name: Faker::Company.industry + " #" + rand(99_999).to_s,
@@ -99,6 +100,16 @@ User.create!(
     )
   end
 
+  200.times do
+    Item.create!(
+      name: Faker::Vehicle.make_and_model + " ## #{rand(999_999)} ",
+      archive: Faker::Boolean.boolean,
+      uom_id: organization.uoms.sample.id,
+      item_group_id: organization.item_groups.sample.id,
+      organization_id: org_id
+    )
+  end
+
   if org_id == 1
     Company.update_all(created_by_id: 1)
     Brand.update_all(created_by_id: 1)
@@ -106,6 +117,7 @@ User.create!(
     Warehouse.update_all(created_by_id: 1)
     ItemGroup.update_all(created_by_id: 1)
     CostCenter.update_all(created_by_id: 1)
+    Item.update_all(created_by_id: 1)
   else
     Company.where(created_by_id: nil).update_all(created_by_id: 2)
     Brand.where(created_by_id: nil).update_all(created_by_id: 2)
@@ -113,5 +125,6 @@ User.create!(
     Warehouse.where(created_by_id: nil).update_all(created_by_id: 2)
     ItemGroup.where(created_by_id: nil).update_all(created_by_id: 2)
     CostCenter.where(created_by_id: nil).update_all(created_by_id: 2)
+    Item.where(created_by_id: nil).update_all(created_by_id: 2)
   end
 end

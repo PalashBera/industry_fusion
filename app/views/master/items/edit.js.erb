@@ -1,0 +1,40 @@
+$('#form_modal').find('.modal-content').html('<%= j (render "form") %>');
+$('#form_modal').modal();
+
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $('.selectpicker').selectpicker('mobile');
+}
+
+$('.selectpicker').selectpicker('refresh');
+
+$(document).ready(function () {
+  var alphaNumericRegex = new RegExp("^[a-zA-Z0-9]+$")
+	var selectpickerItemValue = $('.secondary-uom-dropdown .selectpicker').val()
+
+	if (alphaNumericRegex.test(selectpickerItemValue)) {
+		$('#item_primary_quantity').attr('required', 'true');
+		$('#item_secondary_quantity').attr('required', 'true');
+	} else {
+		$('#item_primary_quantity').removeAttr('required');
+		$('#item_secondary_quantity').removeAttr('required');
+		$('#item_primary_quantity').attr('disabled', 'true');
+		$('#item_secondary_quantity').attr('disabled', 'true');
+	}
+
+  $('.secondary-uom-dropdown .selectpicker').on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
+    var selectedItemValue = $(this).find('option').eq(clickedIndex).text();
+    if (alphaNumericRegex.test(selectedItemValue)) {
+      $('#item_primary_quantity').removeAttr('disabled');
+      $('#item_secondary_quantity').removeAttr('disabled');
+      $('#item_primary_quantity').attr('required', 'true');
+      $('#item_secondary_quantity').attr('required', 'true');
+    } else {
+      $('#item_primary_quantity').removeAttr('required');
+      $('#item_secondary_quantity').removeAttr('required');
+      $('#item_primary_quantity').attr('disabled', 'true');
+			$('#item_secondary_quantity').attr('disabled', 'true');
+			$('#item_primary_quantity').val('');
+			$('#item_secondary_quantity').val('');
+    }
+  });
+});

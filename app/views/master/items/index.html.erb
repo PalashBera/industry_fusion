@@ -1,0 +1,52 @@
+<% provide(:title, "Items") %>
+
+<section class="mb-4 d-flex justify-content-between">
+  <span class="page-header">Items</span>
+
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+    <%= excel_export_btn(controller_name) %>
+  </section>
+</section>
+
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :item_group_name, "Item Group" %></th>
+        <th scope="col">UOM</th>
+        <th scope="col">Secondary UOM</th>
+        <th scope="col">Primary Qty</th>
+        <th scope="col">Secondary Qty</th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @items.each.with_index(1) do |item, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= item.name %></td>
+          <td><%= item.item_group.name %></td>
+          <td><%= item.uom.short_name %></td>
+          <td><%= item.secondary_uom&.short_name %></td>
+          <td><%= item.primary_quantity %></td>
+          <td><%= item.secondary_quantity %></td>
+          <td><%= archive_status(item.archive).html_safe %></td>
+          <td>
+            <%= edit_link_using_modal(controller_name, item) %> |
+            <%= change_logs_link_using_modal(controller_name, item) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
+<%= render "filter_form" %>
+<%= render "shared/form_modal_container" %>

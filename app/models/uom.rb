@@ -11,6 +11,8 @@ class Uom < ApplicationRecord
 
   belongs_to :organization
 
+  has_many :items
+
   validates :short_name, presence: true, length: { maximum: 4 }, uniqueness: { case_sensitive: false, scope: :organization_id }
 
   scope :order_by_short_name, -> { order(:short_name) }

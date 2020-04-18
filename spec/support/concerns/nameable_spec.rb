@@ -10,9 +10,9 @@ shared_examples_for "nameable" do
   describe "callbacks" do
     context "when name contains extra space" do
       it "should remove extra space" do
-        brand = build(:brand, name: " KFC  ")
-        brand.valid?
-        expect(brand.name).to eq ("KFC")
+        record_1 = build(described_class.to_s.underscore.to_sym, name: " KFC  ")
+        record_1.valid?
+        expect(record_1.name).to eq ("KFC")
       end
     end
   end

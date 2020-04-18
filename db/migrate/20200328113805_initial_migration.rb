@@ -141,4 +141,19 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :items do |t|
+    t.references :item_group,    foreign_key: true,            null: false
+    t.references :uom,           foreign_key: true,            null: false
+    t.references :secondary_uom, foreign_key: { to_table: :uoms }
+    t.string     :name,                                        null: false
+    t.decimal    :primary_quantity,   precision: 10, scale: 2
+    t.decimal    :secondary_quantity, precision: 10, scale: 2
+    t.boolean    :archive,       default: false,               null: false
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
+    t.references :organization,  foreign_key: true,            null: false
+
+    t.timestamps
+  end
 end
