@@ -1,0 +1,41 @@
+<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Items" } do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :name_cont_any, "Name" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :name_cont_any, current_organization.items.order_by_name.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :item_group_name_cont_any, "Item Group" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :item_group_name_cont_any, current_organization.item_groups.order_by_name.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :uom_short_name_cont_any, "UOM" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :uom_short_name_cont_any, current_organization.uoms.order_by_name.pluck(:short_name, :short_name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :archive, "Status" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :archive_eq, [["Active", "false"], ["Archived", "true"]], { include_blank: true }, { class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
+        <%= remove_selection_link %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,53 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @item, namespace: "master" } do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :item_group, "Item Group" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :item_group_id, current_organization.item_groups.order_by_name.pluck(:name, :id), {}, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :uom, "UOM" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :uom_id, current_organization.uoms.order_by_name.pluck(:short_name, :id), {}, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :secondary_uom, "Secondary UOM" %>
+
+      <div class="selectpicker-filter-dropdown">
+        <%= f.select :secondary_uom_id, current_organization.uoms.order_by_name.pluck(:short_name, :id), { include_blank: true }, { class: "selectpicker", "data-live-search": "true" } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row convertion-block <%= "hide" unless f.object.secondary_uom_id %>">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :primary_quantity, "Primary Quantity" %>
+      <%= f.number_field :primary_quantity, min: 0, step: 0.01, class: "form-control" %>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :secondary_quantity, "Secondary Quantity" %>
+      <%= f.number_field :secondary_quantity, min: 0, step: 0.01, class: "form-control" %>
+    </div>
+
+    <small id="uomlHelp" class="form-text text-muted">If <b>UOM</b> is <b>piece</b> and <b>Secondary UOM</b> is <b>dozen</b>, then <b>Primary Quantity</b> will be <b>12</b> and <b>Secondary Quantity</b> will be <b>1</b>.</small>
+  </div>
+
+  <div class="form-check">
+    <%= f.check_box :archive, class: "form-check-input" %>
+    <%= f.label :archive, class: "form-check-label" %>
+  </div>
+<% end %>

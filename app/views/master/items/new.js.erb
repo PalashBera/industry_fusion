@@ -1,0 +1,22 @@
+$('#form_modal').find('.modal-content').html('<%= j (render "form") %>');
+$('#form_modal').modal();
+$(".selectpicker").selectpicker({ size: '7' });
+
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+  $('.selectpicker').selectpicker('mobile');
+}
+
+$('#item_uom_id, #item_secondary_uom_id').change(function() {
+  var primaryUOM = $('#item_uom_id').find(":selected").text();
+  var secondaryUOM = $('#item_secondary_uom_id').find(":selected").text();
+
+  if (primaryUOM.length && secondaryUOM.length) {
+    $('.convertion-block').removeClass('hide');
+    $('#item_primary_quantity').attr('required', 'true');
+    $('#item_secondary_quantity').attr('required', 'true');
+  } else {
+    $('.convertion-block').addClass('hide');
+    $('#item_primary_quantity').removeAttr('required').val("");
+    $('#item_secondary_quantity').removeAttr('required').val("");
+  }
+})
