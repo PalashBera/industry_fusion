@@ -35,6 +35,7 @@ RSpec.describe Uom, type: :model do
 
   describe "associations" do
     it { should belong_to(:organization) }
+    it { should have_many(:items) }
   end
 
   describe "validations" do

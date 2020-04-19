@@ -22,6 +22,6 @@ class Item < ApplicationRecord
   private
 
   def check_secondary_uom_equality
-    errors.add(:secondary_uom, "can't be same as UOM") if uom == secondary_uom
+    errors.add(:secondary_uom, "can't be same as UOM") if secondary_uom.present? && uom == secondary_uom
   end
 end
