@@ -20,16 +20,8 @@ document.addEventListener('turbolinks:load', function() {
     $(this).alert('close');
   });
 
-  $(".selectpicker").selectpicker({
-    size: '7'
-  });
-
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    $('.selectpicker').selectpicker('mobile');
-  }
-
-  $('.selectpicker').selectpicker('refresh');
   $('.se-pre-con').fadeOut('slow');
+  SelectpickerHandler();
 });
 
 $(document).on('click', '.remove-selectpicker-selections', function (e) {
@@ -50,7 +42,10 @@ $(document).on('click', '.add_fields', function (event) {
   time = new Date().getTime();
   regexp = new RegExp($(this).data('id'), 'g');
   $(this).before($(this).data("fields").replace(regexp, time));
+  SelectpickerHandler();
+});
 
+const SelectpickerHandler = function () {
   $(".selectpicker").selectpicker({
     size: '7'
   });
@@ -60,4 +55,4 @@ $(document).on('click', '.add_fields', function (event) {
   }
 
   $('.selectpicker').selectpicker('refresh');
-});
+ }
