@@ -113,4 +113,13 @@ end
   )
 end
 
+250.times do |t|
+  Make.create!(
+    brand_id: organization.brands.sample.id,
+    item_id: organization.items.sample.id,
+    cat_no: Faker::Code.isbn + t.to_s,
+    organization_id: organization.id
+  )
+end
+
 Organization.update_all(created_by_id: [user1, user2].sample.id)

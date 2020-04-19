@@ -37,5 +37,26 @@ RSpec.describe Item, type: :model do
     it { should belong_to(:uom) }
     it { should belong_to(:secondary_uom).class_name("Uom").optional }
     it { should belong_to(:item_group) }
+
+    it { should have_many(:makes) }
+  end
+
+  describe "validations" do
+    context "if secondary uom is present" do
+      let(:secondary_uom) { create(:uom) }
+      let(:item1)         { build(:item, secondary_uom_id: secondary_uom.id) }
+
+      before { Item.any_instance.stub(:secondary_uom).and_return(true)  }
+      it { should validate_presence_of(:primary_quantity) }
+      it { should validate_presence_of(:secondary_quantity) }
+      it { should validate_numericality_of(:secondary_quantity).is_greater_than(0) }
+    end
+
+    context "if secondary uom is absent" do
+      before { Item.any_instance.stub(:secondary_uom).and_return(false)  }
+      it { should_not validate_presence_of(:primary_quantity) }
+      it { should_not validate_presence_of(:secondary_quantity) }
+      it { should_not validate_numericality_of(:secondary_quantity).is_greater_than(0) }
+    end
   end
 end

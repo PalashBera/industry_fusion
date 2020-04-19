@@ -10,6 +10,7 @@ class Master::ItemsController < Master::MasterController
 
   def new
     @item = Item.new
+    @makes = @item.makes.build
   end
 
   def create
@@ -37,7 +38,9 @@ class Master::ItemsController < Master::MasterController
   private
 
   def item_params
-    params.require(:item).permit(:name, :archive, :uom_id, :item_group_id, :secondary_uom_id, :primary_quantity, :secondary_quantity)
+    params.require(:item).permit(:name, :archive, :uom_id, :item_group_id, :secondary_uom_id,
+                                 :primary_quantity, :secondary_quantity,
+                                 makes_attributes: %i[id brand_id cat_no _destroy])
   end
 
   def item

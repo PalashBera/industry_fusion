@@ -8,4 +8,6 @@ class Brand < ApplicationRecord
   has_paper_trail ignore: %i[created_at updated_at]
 
   belongs_to :organization
+
+  has_many :makes
 end

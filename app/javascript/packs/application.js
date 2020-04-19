@@ -36,3 +36,28 @@ $(document).on('click', '.remove-selectpicker-selections', function (e) {
   e.preventDefault();
   $(this).parent().find('.selectpicker').selectpicker('val', '');
 });
+
+$(document).on('click', '.remove_fields', function (event) {
+  event.preventDefault();
+  $(this).prev('input[type=hidden]').val('1');
+  $(this).closest('section').find(':input').removeAttr('required');
+  $(this).closest('section').hide();
+});
+
+$(document).on('click', '.add_fields', function (event) {
+  event.preventDefault();
+  var regexp, time;
+  time = new Date().getTime();
+  regexp = new RegExp($(this).data('id'), 'g');
+  $(this).before($(this).data("fields").replace(regexp, time));
+
+  $(".selectpicker").selectpicker({
+    size: '7'
+  });
+
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $('.selectpicker').selectpicker('mobile');
+  }
+
+  $('.selectpicker').selectpicker('refresh');
+});
