@@ -112,6 +112,22 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_items_on_updated_by_id"
   end
 
+  create_table "makes", force: :cascade do |t|
+    t.bigint "brand_id", null: false
+    t.bigint "item_id", null: false
+    t.string "cat_no", default: ""
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_makes_on_brand_id"
+    t.index ["created_by_id"], name: "index_makes_on_created_by_id"
+    t.index ["item_id"], name: "index_makes_on_item_id"
+    t.index ["organization_id"], name: "index_makes_on_organization_id"
+    t.index ["updated_by_id"], name: "index_makes_on_updated_by_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.string "address1", null: false
@@ -212,6 +228,9 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "items", "organizations"
   add_foreign_key "items", "uoms"
   add_foreign_key "items", "uoms", column: "secondary_uom_id"
+  add_foreign_key "makes", "brands"
+  add_foreign_key "makes", "items"
+  add_foreign_key "makes", "organizations"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "warehouses", "companies"

@@ -1,0 +1,21 @@
+<section class="mt-1 mb-2 p-1 bg-light rounded-lg">
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :brand %>
+
+      <div class="selectpicker-filter-dropdown border rounded">
+        <%= f.select :brand_id, current_organization.brands.order_by_name.pluck(:name, :id), { include_blank: true }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :cat_no, "Catlog Number" %>
+      <%= f.text_field :cat_no, class: "form-control", placeholder: "Catalog Number", autocomplete: :off, maxlength: 255 %>
+    </div>
+
+    <div class="col-12 text-right">
+      <%= f.hidden_field :_destroy %>
+      <%= link_to_remove_fields %>
+    </div>
+  </div>
+</section>

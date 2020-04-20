@@ -12,6 +12,10 @@ class Item < ApplicationRecord
   belongs_to :uom
   belongs_to :secondary_uom, class_name: "Uom", optional: true
 
+  has_many :makes
+
+  accepts_nested_attributes_for :makes, reject_if: :all_blank, allow_destroy: true
+
   validates :primary_quantity, :secondary_quantity, presence: true, numericality: { greater_than: 0 }, if: :secondary_uom
   validate :check_secondary_uom_equality
 

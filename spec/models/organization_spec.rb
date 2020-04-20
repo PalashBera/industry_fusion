@@ -38,6 +38,7 @@ RSpec.describe Organization, type: :model do
     it { should have_many(:item_groups) }
     it { should have_many(:cost_centers) }
     it { should have_many(:items) }
+    it { should have_many(:makes) }
   end
 
   describe "validations" do

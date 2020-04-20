@@ -55,4 +55,23 @@ module LinksHelper
             data: { toggle: "modal", target: "#import_modal" },
             title: "Import #{controller_name.humanize.titleize}"
   end
+
+  def link_to_add_fields(form, association)
+    new_object = form.object.public_send(association).klass.new
+    id = new_object.object_id
+
+    fields = form.fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + "_fields", f: builder)
+    end
+
+    link_to '<i class="fa fa-plus "></i> Add'.html_safe, "#",
+            class: "add_fields",
+            data: { id: id, fields: fields.gsub("/n", "") }
+  end
+
+  def link_to_remove_fields
+    link_to "remove",
+            "#",
+            class: "remove_fields"
+  end
 end
