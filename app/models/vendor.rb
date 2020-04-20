@@ -2,10 +2,15 @@ class Vendor < ApplicationRecord
   include UserTrackable
   include ModalFormable
 
-  before_validation { self.email = email.to_s.squish.downcase }
+  acts_as_tenant(:organization)
 
-  validates :name, :email, presence: true, length: { maximum: 255 }
-  validates :email, uniqueness: { case_sensitive: false }
+  before_validation do
+    self.name = name.to_s.squish
+    self.email = email.to_s.squish.downcase
+  end
+
+  validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false, scope: %i[email organization_id] }
+  validates :email, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false, scope: :organization_id }
 
   scope :order_by_name, -> { order(:name) }
 end

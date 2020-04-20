@@ -129,7 +129,8 @@ end
 
   Vendor.create!(
     name: Faker::Name.unique.name,
-    email: Faker::Internet.unique.email
+    email: Faker::Internet.unique.email,
+    organization_id: organization.id
   )
 end
 
