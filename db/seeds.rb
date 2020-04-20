@@ -114,6 +114,8 @@ end
 end
 
 250.times do |t|
+  User.current_user = [user1, user2].sample
+
   Make.create!(
     brand_id: organization.brands.sample.id,
     item_id: organization.items.sample.id,

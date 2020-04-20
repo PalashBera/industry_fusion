@@ -160,7 +160,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
   create_table :makes do |t|
     t.references :brand,         foreign_key: true, null: false
     t.references :item,          foreign_key: true, null: false
-    t.string     :cat_no, default: ""
+    t.string     :cat_no,        default: ""
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
     t.references :organization,  foreign_key: true, null: false

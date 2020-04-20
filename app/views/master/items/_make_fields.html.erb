@@ -12,10 +12,8 @@
       <%= f.label :cat_no, "Catlog Number" %>
       <%= f.text_field :cat_no, class: "form-control", placeholder: "Catalog Number", autocomplete: :off, maxlength: 255 %>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="offset-5 col-sm-7">
+    <div class="col-12 text-right">
       <%= f.hidden_field :_destroy %>
       <%= link_to_remove_fields %>
     </div>

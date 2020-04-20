@@ -70,7 +70,7 @@ module LinksHelper
   end
 
   def link_to_remove_fields
-    link_to '<i class="fa fa-trash"></i>'.html_safe,
+    link_to "remove",
             "#",
             class: "remove_fields"
   end
