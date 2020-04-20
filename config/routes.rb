@@ -46,6 +46,8 @@ Rails.application.routes.draw do
       get :change_logs, on: :member
       get :export, on: :collection
     end
+
+    resources :vendors, except: [:show, :destroy]
   end
 
   namespace :admin do
