@@ -171,10 +171,10 @@ class InitialMigration < ActiveRecord::Migration[6.0]
   end
 
   create_table :vendors do |t|
-    t.string :name,                                null: false
-    t.string :email,         index: true,          null: false
-    t.bigint :created_by_id, index: true
-    t.bigint :updated_by_id, index: true
+    t.string     :name,                            null: false
+    t.string     :email,         index: true,      null: false
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
     t.references :organization, foreign_key: true, null: false
 
     t.timestamps
@@ -189,5 +189,19 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.references :organization, foreign_key: true, null: false
 
     t.timestamps
+  end
+
+
+  create_table :indent_items do |t|
+    t.references :item,         foreign_key: true,   null: false
+    t.references :make,         foreign_key: true,   null: false
+    t.references :uom,          foreign_key: true,   null: false
+    t.references :cost_center,  foreign_key: true,   null: false
+    t.decimal    :quantity, precision: 12, scale: 2, null: false
+    t.string     :priority, default: "default"
+    t.text       :note,     default: ""
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
+    t.references :organization, foreign_key: true,   null: false
   end
 end
