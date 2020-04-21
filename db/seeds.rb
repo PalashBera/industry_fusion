@@ -124,4 +124,14 @@ end
   )
 end
 
+10.times do
+  User.current_user = [user1, user2].sample
+
+  Vendor.create!(
+    name: Faker::Name.unique.name,
+    email: Faker::Internet.unique.email,
+    organization_id: organization.id
+  )
+end
+
 Organization.update_all(created_by_id: [user1, user2].sample.id)

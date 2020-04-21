@@ -1,0 +1,40 @@
+<% provide(:title, "Vendors") %>
+
+<section class="mb-4 d-flex justify-content-between">
+  <span class="page-header">Vendors</span>
+
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_button(params[:q]) %>
+  </section>
+</section>
+
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :email, "Email" %></th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @vendors.each.with_index(1) do |vendor, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= vendor.name %></td>
+          <td><%= vendor.email %></td>
+          <td>
+            <%= edit_link_using_modal(controller_name, vendor) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
+<%= render "filter_form" %>
+<%= render "shared/form_modal_container" %>
