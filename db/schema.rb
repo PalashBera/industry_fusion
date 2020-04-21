@@ -77,6 +77,22 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
+  create_table "indents", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.date "requirement_date", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_indents_on_company_id"
+    t.index ["created_by_id"], name: "index_indents_on_created_by_id"
+    t.index ["organization_id"], name: "index_indents_on_organization_id"
+    t.index ["updated_by_id"], name: "index_indents_on_updated_by_id"
+    t.index ["warehouse_id"], name: "index_indents_on_warehouse_id"
+  end
+
   create_table "item_groups", force: :cascade do |t|
     t.string "name", null: false
     t.text "description", default: ""
@@ -237,6 +253,9 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "brands", "organizations"
   add_foreign_key "companies", "organizations"
   add_foreign_key "cost_centers", "organizations"
+  add_foreign_key "indents", "companies"
+  add_foreign_key "indents", "organizations"
+  add_foreign_key "indents", "warehouses"
   add_foreign_key "item_groups", "organizations"
   add_foreign_key "items", "item_groups"
   add_foreign_key "items", "organizations"
