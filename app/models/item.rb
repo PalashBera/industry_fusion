@@ -13,6 +13,7 @@ class Item < ApplicationRecord
   belongs_to :secondary_uom, class_name: "Uom", optional: true
 
   has_many :makes
+  has_many :indent_items
 
   accepts_nested_attributes_for :makes, reject_if: :all_blank, allow_destroy: true
 

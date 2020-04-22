@@ -11,4 +11,5 @@ class Company < ApplicationRecord
   belongs_to :organization
 
   has_many :warehouses
+  has_many :indents
 end

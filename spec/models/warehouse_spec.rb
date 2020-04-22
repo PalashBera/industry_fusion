@@ -29,5 +29,7 @@ RSpec.describe Warehouse, type: :model do
   describe "associations" do
     it { should belong_to(:organization) }
     it { should belong_to(:company) }
+
+    it { should have_many(:indents) }
   end
 end

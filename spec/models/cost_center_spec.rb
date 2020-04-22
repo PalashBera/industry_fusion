@@ -25,5 +25,6 @@ RSpec.describe CostCenter, type: :model do
 
   describe "associations" do
     it { should belong_to(:organization) }
+    it { should have_many(:indent_items) }
   end
 end
