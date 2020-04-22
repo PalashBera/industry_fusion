@@ -39,6 +39,8 @@ RSpec.describe Organization, type: :model do
     it { should have_many(:cost_centers) }
     it { should have_many(:items) }
     it { should have_many(:makes) }
+    it { should have_many(:indents) }
+    it { should have_many(:indent_items) }
   end
 
   describe "validations" do

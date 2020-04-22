@@ -39,6 +39,7 @@ RSpec.describe Item, type: :model do
     it { should belong_to(:item_group) }
 
     it { should have_many(:makes) }
+    it { should have_many(:indent_items) }
   end
 
   describe "validations" do

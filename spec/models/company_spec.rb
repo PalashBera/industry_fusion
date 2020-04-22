@@ -26,7 +26,9 @@ RSpec.describe Company, type: :model do
 
   describe "associations" do
     it { should belong_to(:organization) }
+
     it { should have_many(:warehouses) }
+    it { should have_many(:indents) }
   end
 
   describe "validations" do

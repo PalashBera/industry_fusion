@@ -12,6 +12,7 @@ class Uom < ApplicationRecord
   belongs_to :organization
 
   has_many :items
+  has_many :indent_items
 
   validates :short_name, presence: true, length: { maximum: 4 }, uniqueness: { case_sensitive: false, scope: :organization_id }
 
