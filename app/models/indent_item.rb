@@ -1,5 +1,5 @@
 class IndentItem < ApplicationRecord
-  act_as_tenant(:organization)
+  acts_as_tenant(:organization)
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
 
@@ -15,4 +15,5 @@ class IndentItem < ApplicationRecord
   enum priority: { default: "default", high: "high", medium: "medium", low: "low" }, _suffix: true
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
+  validates :priority, presence: true
 end
