@@ -1,5 +1,5 @@
 class Indent < ApplicationRecord
-  act_as_tenant(:organization)
+  acts_as_tenant(:organization)
 
   belongs_to :organization
   belongs_to :company
