@@ -86,12 +86,16 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.decimal "quantity", precision: 12, scale: 2, null: false
     t.string "priority", default: "default"
     t.text "note", default: ""
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.bigint "organization_id", null: false
     t.index ["cost_center_id"], name: "index_indent_items_on_cost_center_id"
+    t.index ["created_by_id"], name: "index_indent_items_on_created_by_id"
     t.index ["item_id"], name: "index_indent_items_on_item_id"
     t.index ["make_id"], name: "index_indent_items_on_make_id"
     t.index ["organization_id"], name: "index_indent_items_on_organization_id"
     t.index ["uom_id"], name: "index_indent_items_on_uom_id"
+    t.index ["updated_by_id"], name: "index_indent_items_on_updated_by_id"
   end
 
   create_table "indents", force: :cascade do |t|
