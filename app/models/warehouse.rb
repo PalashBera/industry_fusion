@@ -11,6 +11,8 @@ class Warehouse < ApplicationRecord
   belongs_to :organization
   belongs_to :company
 
+  has_many :indents
+
   def self.included_resources
     includes(:company)
   end

@@ -78,18 +78,22 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   end
 
   create_table "indent_items", force: :cascade do |t|
+    t.bigint "indent_id", null: false
     t.bigint "item_id", null: false
     t.bigint "make_id", null: false
     t.bigint "uom_id", null: false
     t.bigint "cost_center_id", null: false
     t.decimal "quantity", precision: 12, scale: 2, null: false
-    t.string "priority", default: "default"
+    t.string "priority", default: "default", null: false
     t.text "note", default: ""
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["cost_center_id"], name: "index_indent_items_on_cost_center_id"
     t.index ["created_by_id"], name: "index_indent_items_on_created_by_id"
+    t.index ["indent_id"], name: "index_indent_items_on_indent_id"
     t.index ["item_id"], name: "index_indent_items_on_item_id"
     t.index ["make_id"], name: "index_indent_items_on_make_id"
     t.index ["organization_id"], name: "index_indent_items_on_organization_id"
@@ -274,6 +278,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "companies", "organizations"
   add_foreign_key "cost_centers", "organizations"
   add_foreign_key "indent_items", "cost_centers"
+  add_foreign_key "indent_items", "indents"
   add_foreign_key "indent_items", "items"
   add_foreign_key "indent_items", "makes"
   add_foreign_key "indent_items", "organizations"
