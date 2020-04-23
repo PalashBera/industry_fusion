@@ -1,4 +1,6 @@
 class IndentItem < ApplicationRecord
+  include UserTrackable
+
   acts_as_tenant(:organization)
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze

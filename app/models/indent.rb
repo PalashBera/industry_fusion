@@ -1,4 +1,6 @@
 class Indent < ApplicationRecord
+  include UserTrackable
+
   acts_as_tenant(:organization)
 
   belongs_to :organization

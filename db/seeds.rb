@@ -104,24 +104,22 @@ end
 50.times do |t|
   User.current_user = [user1, user2].sample
 
-  Item.create!(
+  item = Item.create!(
     name: Faker::Appliance.equipment + "+" + t.to_s,
     archive: Faker::Boolean.boolean,
     uom_id: organization.uoms.sample.id,
     item_group_id: organization.item_groups.sample.id,
     organization_id: organization.id
   )
-end
 
-250.times do |t|
-  User.current_user = [user1, user2].sample
-
-  Make.create!(
-    brand_id: organization.brands.sample.id,
-    item_id: organization.items.sample.id,
-    cat_no: Faker::Code.isbn + t.to_s,
-    organization_id: organization.id
-  )
+  3.times do |tt|
+    Make.create!(
+      brand_id: organization.brands.sample.id,
+      item_id: item.id,
+      cat_no: Faker::Code.isbn + tt.to_s,
+      organization_id: organization.id
+    )
+  end
 end
 
 10.times do
@@ -132,6 +130,36 @@ end
     email: Faker::Internet.unique.email,
     organization_id: organization.id
   )
+end
+
+10.times do |t|
+  User.current_user = [user1, user2].sample
+  company = organization.companies.sample
+  warehouse = company.warehouses.sample
+
+  indent = Indent.create!(
+    requirement_date: Date.today + t.days,
+    organization_id: organization.id,
+    company_id: company.id,
+    warehouse_id: warehouse.id
+  )
+
+  3.times do
+    item = organization.items.sample
+    make = item.makes.sample
+    uom = item.uom
+
+    IndentItem.create!(
+      indent_id: indent.id,
+      item_id: item.id,
+      make_id: make.id,
+      uom_id: uom.id,
+      cost_center_id: organization.cost_centers.sample.id,
+      quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
+      priority: %w[default high medium low].sample,
+      organization_id: organization.id
+    )
+  end
 end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)
