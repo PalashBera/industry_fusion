@@ -1,7 +1,12 @@
 <%= render layout: "shared/form_modal_layout", locals: { resource: @company, namespace: "admin" } do |f| %>
   <div class="form-group">
     <%= f.label :name %>
-    <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
+    <%= f.text_field :name, required: true, class: "form-control", placeholder: "Short Name", autocomplete: :off, maxlength: 255 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :short_name %>
+    <%= f.text_field :short_name, required: true, class: "form-control", placeholder: "Short Name", autocomplete: :off, maxlength: 8 %>
   </div>
 
   <div class="form-group">

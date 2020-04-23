@@ -36,9 +36,11 @@ user2 = User.create!(
 
 5.times do |t|
   User.current_user = [user1, user2].sample
+  company_name = Faker::Company.name + "+" + t.to_s
 
   company = Company.create!(
-    name: Faker::Company.name + "+" + t.to_s,
+    name: company_name,
+    short_name: company_name.split(" ").map(&:first).join + " #{t}",
     address1: Faker::Address.building_number + ", " + Faker::Address.street_name,
     address2: Faker::Address.secondary_address + ", " + Faker::Address.street_address,
     city: Faker::Address.city,
@@ -50,8 +52,11 @@ user2 = User.create!(
   )
 
   [2, 3, 4].sample.times do |tt|
+    warehouse_name = Faker::Commerce.department + "+" + t.to_s + tt.to_s
+
     Warehouse.create!(
-      name: Faker::Commerce.department + "+" + t.to_s + tt.to_s,
+      name: warehouse_name,
+      short_name: warehouse_name.split(" ").map(&:first).join + " #{t}#{tt}",
       address1: Faker::Address.building_number + ", " + Faker::Address.street_name,
       address2: Faker::Address.secondary_address + ", " + Faker::Address.street_address,
       city: Faker::Address.city,

@@ -37,7 +37,7 @@ class Admin::WarehousesController < Admin::AdminController
   private
 
   def warehouse_params
-    params.require(:warehouse).permit(:company_id, :name, :address1, :address2, :city, :state, :country, :pin_code, :phone_number, :archive)
+    params.require(:warehouse).permit(:company_id, :name, :short_name, :address1, :address2, :city, :state, :country, :pin_code, :phone_number, :archive)
   end
 
   def warehouse

@@ -11,6 +11,8 @@ class Warehouse < ApplicationRecord
   belongs_to :organization
   belongs_to :company
 
+  validates :short_name, presence: true, length: { maximum: 8 }, uniqueness: { case_sensitive: false, scope: :organization_id }
+
   def self.included_resources
     includes(:company)
   end
