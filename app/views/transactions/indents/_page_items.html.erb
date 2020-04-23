@@ -1,0 +1,14 @@
+<% @indent_items.each  do |indent_item, index| %>
+  <tr>
+    <td><%= indent_item.indent.company.name %></td>
+    <td><%= indent_item.indent.warehouse.name %></td>
+    <td><%= indent_item.item.name %></td>
+    <td><%= indent_item.make.display %></td>
+    <td><%= indent_item.quantity %></td>
+    <td><%= indent_item.uom.short_name %></td>
+    <td><%= indent_item.indent.requirement_date.strftime("%d-%b") %></td>
+    <td><%= indent_item.priority %></td>
+    <td><%= indent_item.cost_center.name %></td>
+    <td>Edit</td>
+  </tr>
+<% end %>

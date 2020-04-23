@@ -74,4 +74,11 @@ module LinksHelper
             "#",
             class: "remove_fields"
   end
+
+  def new_link(controller_name)
+    link_to '<i class="fas fa-plus-circle"></i><span class="d-none d-md-inline-block ml-1">Add New</span>'.html_safe,
+            url_for(controller: controller_name, action: "new"),
+            class: "btn btn-primary btn-small",
+            title: "Add New #{controller_name.singularize.humanize.titleize}"
+  end
 end

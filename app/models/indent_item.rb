@@ -18,4 +18,8 @@ class IndentItem < ApplicationRecord
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
   validates :priority, presence: true
+
+  def self.included_resources
+    includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)
+  end
 end
