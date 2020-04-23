@@ -17,6 +17,7 @@
         <th scope="col">#</th>
         <th scope="col"><%= sort_link @search, :company_name, "Company" %></th>
         <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :short_name, "Short Name" %></th>
         <th scope="col"><%= sort_link @search, :address1, "Address 1" %></th>
         <th scope="col"><%= sort_link @search, :address2, "Address 2" %></th>
         <th scope="col"><%= sort_link @search, :city, "City" %></th>
@@ -34,6 +35,7 @@
           <td scope="row"><%= index %></td>
           <td><%= warehouse.company.name %></td>
           <td><%= warehouse.name %></td>
+          <td><%= warehouse.short_name %></td>
           <td><%= warehouse.address1 %></td>
           <td><%= warehouse.address2 %></td>
           <td><%= warehouse.city %></td>

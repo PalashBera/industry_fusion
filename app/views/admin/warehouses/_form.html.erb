@@ -10,6 +10,11 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :short_name %>
+    <%= f.text_field :short_name, required: true, class: "form-control", placeholder: "Short Name", autocomplete: :off, maxlength: 8 %>
+  </div>
+
+  <div class="form-group">
     <%= f.label :address1, "Address 1" %>
     <%= f.text_field :address1, class: "form-control", required: true, placeholder: "Address 1", maxlength: 255 %>
   </div>

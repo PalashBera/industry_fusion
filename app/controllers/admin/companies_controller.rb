@@ -37,7 +37,7 @@ class Admin::CompaniesController < Admin::AdminController
   private
 
   def company_params
-    params.require(:company).permit(:name, :address1, :address2, :city, :state, :country, :pin_code, :phone_number, :archive)
+    params.require(:company).permit(:name, :short_name, :address1, :address2, :city, :state, :country, :pin_code, :phone_number, :archive)
   end
 
   def company

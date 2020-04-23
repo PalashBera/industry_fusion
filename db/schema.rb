@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
+    t.string "short_name", null: false
     t.string "address1", null: false
     t.string "address2", default: ""
     t.string "city", null: false
@@ -231,6 +232,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   create_table "warehouses", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.string "name", null: false
+    t.string "short_name", null: false
     t.string "address1", null: false
     t.string "address2", default: ""
     t.string "city", null: false

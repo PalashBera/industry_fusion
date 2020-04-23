@@ -15,6 +15,7 @@ RSpec.describe Company, type: :model do
     it { should have_db_column(:updated_by_id) }
     it { should have_db_column(:created_at) }
     it { should have_db_column(:updated_at) }
+    it { should have_db_column(:short_name) }
   end
 
   describe "active record index" do
@@ -26,5 +27,11 @@ RSpec.describe Company, type: :model do
   describe "associations" do
     it { should belong_to(:organization) }
     it { should have_many(:warehouses) }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of(:short_name) }
+    it { should validate_length_of(:short_name).is_at_most(8) }
+    it { should validate_uniqueness_of(:short_name).case_insensitive.scoped_to(:organization_id) }
   end
 end
