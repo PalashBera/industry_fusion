@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include ModalFormable
+
   cattr_accessor :current_user
 
   devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :async, :confirmable, :trackable

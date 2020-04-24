@@ -1,0 +1,6 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @user, namespace: "admin" } do |f| %>
+  <div class="form-group">
+    <%= f.label :email, "Email Address" %>
+    <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255 %>
+  </div>
+<% end %>

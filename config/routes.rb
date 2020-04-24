@@ -61,7 +61,7 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
-    resources :users, only: :index do
+    resources :users, only: [:index, :new, :create] do
       get :export, on: :collection
     end
 
