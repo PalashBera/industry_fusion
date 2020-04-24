@@ -36,4 +36,10 @@ class User < ApplicationRecord
   def add_organization(organization)
     update(admin: true, organization_id: organization.id)
   end
+
+  protected
+
+  def send_confirmation_instructions
+    invitation_token.present? ? skip_confirmation_notification! : super
+  end
 end

@@ -45,7 +45,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.datetime   :invitation_sent_at
       t.datetime   :invitation_accepted_at
       t.integer    :invitation_limit
-      t.references :invited_by_id, polymorphic: true
+      t.references :invited_by, polymorphic: true
       t.integer    :invitations_count, index: true
 
       t.timestamps
