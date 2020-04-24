@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   cattr_accessor :current_user
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :async, :confirmable, :trackable
+  devise :invitable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :async, :confirmable, :trackable
 
   before_validation do
     self.first_name = first_name.to_s.squish.titleize
