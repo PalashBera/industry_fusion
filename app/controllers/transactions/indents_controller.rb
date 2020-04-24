@@ -1,5 +1,9 @@
 class Transactions::IndentsController < Transactions::TransactionsController
-  def index; end
+  def index
+    @search = IndentItem.joins(:indent).ransack(params[:q])
+    # @search.sorts = "requiremet_date desc" if @search.sorts.empty?
+    @pagy, @indent_items = pagy_countless(@search.result.included_resources, link_extra: 'data-remote="true"')
+  end
 
   def new; end
 
