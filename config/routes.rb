@@ -61,6 +61,10 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
+    resources :users, only: :index do
+      get :export, on: :collection
+    end
+
     root "admin#index"
   end
 
