@@ -10,4 +10,8 @@ class Make < ApplicationRecord
   has_many :indent_items
 
   validates :cat_no, length: { maximum: 255 }, uniqueness: { allow_blank: true, case_sensitive: false, scope: %i[item_id brand_id] }
+
+  def display
+    brand.name + " - " + cat_no
+  end
 end
