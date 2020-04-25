@@ -5,16 +5,16 @@ wb.styles do |style|
   row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
 
   wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
-    sheet.add_row ["Email", "First Name", "Last Name", "Mobile Number", "admin"], style: header_style
+    sheet.add_row ["First Name", "Last Name", "Email", "Mobile Number", "Admin"], style: header_style
 
     @resources.each do |resource|
       sheet.add_row [
-        resource.email,
         resource.first_name,
         resource.last_name,
+        resource.email,
         resource.mobile_number,
         resource.admin
-      ], style: [row_style, row_style, row_style, row_style, row_style]
+      ], style: row_style
     end
   end
 end

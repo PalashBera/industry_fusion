@@ -26,7 +26,7 @@
 
           <div class="form-group">
             <%= f.label :email, "Email Address" %>
-            <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255 %>
+            <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255, disabled: true %>
           </div>
 
           <div class="form-group">
@@ -44,7 +44,7 @@
             <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
           </div>
 
-          <%= f.submit "Register Profile", class: "btn btn-primary btn-xs-block", data: { disable_with: "Registering..." } %>
+          <%= f.submit "Register", class: "btn btn-primary btn-xs-block", data: { disable_with: "Saving..." } %>
         <% end %>
       </div>
     </div>

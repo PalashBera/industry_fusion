@@ -14,10 +14,10 @@
     <thead class="thead-light">
       <tr>
         <th scope="col">#</th>
-        <th scope="col"><%= sort_link @search, :email, "Email" %></th>
         <th scope="col"><%= sort_link @search, :first_name, "First Name" %></th>
-        <th scope="col"><%= sort_link @search, :last_name, "last Name" %></th>
-        <th scope="col"><%= sort_link @search, :mobile_number, "Mobile No." %></th>
+        <th scope="col"><%= sort_link @search, :last_name, "Last Name" %></th>
+        <th scope="col"><%= sort_link @search, :email, "Email" %></th>
+        <th scope="col"><%= sort_link @search, :mobile_number, "Mobile Number" %></th>
         <th scope="col"><%= sort_link @search, :admin, "Admin" %></th>
       </tr>
     </thead>
@@ -26,11 +26,11 @@
       <% @users.each.with_index(1) do |user, index| %>
         <tr>
           <td scope="row"><%= index %></td>
-          <td><%= user.email %></td>
           <td><%= user&.first_name %></td>
           <td><%= user&.last_name %></td>
+          <td><%= user.email %></td>
           <td><%= user.mobile_number %></td>
-          <td><%= user.admin %></td>
+          <td><%= '<span class="badge badge-danger" title="Admin">Admin</span>'.html_safe if user.admin %></td>
         </tr>
       <% end %>
     </tbody>
