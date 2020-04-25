@@ -24,6 +24,10 @@ class Item < ApplicationRecord
     includes(:item_group, :uom, :secondary_uom)
   end
 
+  def uoms_list
+    [uom, secondary_uom].compact
+  end
+
   private
 
   def check_secondary_uom_equality

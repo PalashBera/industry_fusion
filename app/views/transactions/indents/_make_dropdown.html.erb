@@ -1,0 +1,1 @@
+<%= select_tag "indent[indent_items_attributes][#{ @unique_id }][make_id]", options_for_select(@makes.map{ |make| [make.display, make.id] }), required: true, class: "selectpicker make-selector", "data-live-search": "true" %>

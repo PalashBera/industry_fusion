@@ -70,7 +70,12 @@ Rails.application.routes.draw do
   end
 
   namespace :transactions do
-    resources :indents, except: [:show, :destroy]
+    resources :indents, except: [:show, :destroy] do
+      collection do
+        get :fetch_warehouses
+        get :fetch_makes_and_uoms
+      end
+    end
   end
 
   root "home#index"
