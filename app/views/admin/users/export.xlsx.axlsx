@@ -1,0 +1,20 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  header_style = style.add_style(bg_color: "EFC376", border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
+
+  wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
+    sheet.add_row ["First Name", "Last Name", "Email", "Mobile Number", "Admin"], style: header_style
+
+    @resources.each do |resource|
+      sheet.add_row [
+        resource.first_name,
+        resource.last_name,
+        resource.email,
+        resource.mobile_number,
+        resource.admin
+      ], style: row_style
+    end
+  end
+end

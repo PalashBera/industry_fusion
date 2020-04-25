@@ -1,0 +1,52 @@
+<% provide(:title, "Register #{resource_name.to_s.humanize}") %>
+
+<div class="row justify-content-center">
+  <div class="col-sm-12 mb-4">
+    <h3 class="text-center">Register Your Details</h3>
+  </div>
+
+  <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4">
+    <div class="card">
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "shared/error_messages", resource: resource %>
+          <%= f.hidden_field :invitation_token, readonly: true %>
+
+          <div class="form-row">
+            <div class="form-group col-sm-12 col-md-6">
+              <%= f.label :first_name, "First Name" %>
+              <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true, placeholder: "First Name", autocomplete: "first_name", maxlength: 255 %>
+            </div>
+
+            <div class="form-group col-sm-12 col-md-6">
+              <%= f.label :last_name, "Last Name" %>
+              <%= f.text_field :last_name, class: "form-control", required: true, placeholder: "Last Name", autocomplete: "last_name", maxlength: 255 %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :email, "Email Address" %>
+            <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255, disabled: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :mobile_number, "Mobile Number" %>
+            <%= f.text_field :mobile_number, class: "form-control", required: true, placeholder: "Mobile Number", autocomplete: "mobile_number", minlength: 10, maxlength: 10 %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, class: "form-control", placeholder: "Password", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation, "Password Confirmation" %>
+            <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation", minlength: 6, maxlength: 128, autocomplete: "new-password" %>
+          </div>
+
+          <%= f.submit "Register", class: "btn btn-primary btn-xs-block", data: { disable_with: "Saving..." } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
