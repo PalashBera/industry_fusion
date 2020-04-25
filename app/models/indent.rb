@@ -12,4 +12,6 @@ class Indent < ApplicationRecord
   has_paper_trail ignore: %i[created_at]
 
   accepts_nested_attributes_for :indent_items, reject_if: :all_blank, allow_destroy: true
+
+  validates :indent_items, presence: true
 end
