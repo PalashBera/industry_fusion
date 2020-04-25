@@ -11,6 +11,10 @@ class Make < ApplicationRecord
 
   validates :cat_no, length: { maximum: 255 }, uniqueness: { allow_blank: true, case_sensitive: false, scope: %i[item_id brand_id] }
 
+  def self.included_resources
+    includes(:brand)
+  end
+
   def display
     brand.name + " - " + cat_no
   end

@@ -1,0 +1,1 @@
+<%= select_tag "indent[indent_items_attributes][#{ @unique_id }][uom_id]", options_for_select(@uoms.map{ |uom| [uom.short_name, uom.id] }), required: true, class: "selectpicker uom-selector", "data-live-search": "true" %>
