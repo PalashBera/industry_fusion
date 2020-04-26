@@ -10,7 +10,6 @@ class Master::ItemsController < Master::MasterController
 
   def new
     @item = Item.new
-    @makes = @item.makes.build
   end
 
   def create

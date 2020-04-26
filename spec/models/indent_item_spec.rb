@@ -35,7 +35,7 @@ RSpec.describe IndentItem, type: :model do
     it { should belong_to(:indent) }
     it { should belong_to(:cost_center) }
     it { should belong_to(:item) }
-    it { should belong_to(:make) }
+    it { should belong_to(:make).optional }
     it { should belong_to(:uom) }
   end
 

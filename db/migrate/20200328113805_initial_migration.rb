@@ -201,19 +201,18 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.timestamps
   end
 
-
   create_table :indent_items do |t|
-    t.references :indent,       foreign_key: true,   null: false
-    t.references :item,         foreign_key: true,   null: false
-    t.references :make,         foreign_key: true,   null: false
-    t.references :uom,          foreign_key: true,   null: false
-    t.references :cost_center,  foreign_key: true,   null: false
-    t.decimal    :quantity, precision: 12, scale: 2, null: false
-    t.string     :priority, default: "default",      null: false
-    t.text       :note,     default: ""
+    t.references :indent,        foreign_key: true,  null: false
+    t.references :item,          foreign_key: true,  null: false
+    t.references :uom,           foreign_key: true,  null: false
+    t.references :cost_center,   foreign_key: true,  null: false
+    t.decimal    :quantity,                          null: false, precision: 12, scale: 2
+    t.string     :priority,      default: "default", null: false
+    t.references :make,          foreign_key: true
+    t.string     :note,          default: ""
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
-    t.references :organization, foreign_key: true,   null: false
+    t.references :organization,  foreign_key: true,  null: false
 
     t.timestamps
   end

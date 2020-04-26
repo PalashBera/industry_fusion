@@ -15,7 +15,7 @@ class Make < ApplicationRecord
     includes(:brand)
   end
 
-  def display
-    brand.name + " - " + cat_no
+  def brand_name
+    [brand.name, cat_no].reject(&:blank?).join(" - ")
   end
 end

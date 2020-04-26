@@ -8,9 +8,9 @@ class IndentItem < ApplicationRecord
   belongs_to :organization
   belongs_to :indent
   belongs_to :item
-  belongs_to :make
   belongs_to :uom
   belongs_to :cost_center
+  belongs_to :make, optional: true
 
   has_paper_trail ignore: %i[created_at updated_at]
 
