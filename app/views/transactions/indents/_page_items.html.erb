@@ -9,6 +9,6 @@
     <td><%= indent_item.indent.requirement_date.strftime("%d-%b") %></td>
     <td><%= indent_item.priority %></td>
     <td><%= indent_item.cost_center.name %></td>
-    <td>Edit</td>
+    <td><%= edit_link(controller_name, indent_item.indent) %></td>
   </tr>
 <% end %>

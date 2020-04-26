@@ -17,7 +17,7 @@
             <%= f.label :warehouse_id, "Warehouse" %>
 
             <div class="selectpicker-filter-dropdown">
-              <%= f.select :warehouse_id, warehouse_options(f), {}, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+              <%= f.select :warehouse_id, warehouse_options(f.object), {}, { required: true, class: "selectpicker", "data-live-search": "true" } %>
             </div>
           </div>
 

@@ -81,4 +81,10 @@ module LinksHelper
             class: "btn btn-primary btn-small",
             title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
+
+  def edit_link(controller_name, resource)
+    link_to '<i class="fas fa-edit text-primary"></i>'.html_safe,
+            url_for(controller: controller_name, action: "edit", id: resource.id),
+            title: "Edit #{controller_name.singularize.humanize.titleize}"
+  end
 end
