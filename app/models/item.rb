@@ -24,7 +24,7 @@ class Item < ApplicationRecord
     includes(:item_group, :uom, :secondary_uom)
   end
 
-  def uoms_list
+  def uoms
     [uom, secondary_uom].compact
   end
 

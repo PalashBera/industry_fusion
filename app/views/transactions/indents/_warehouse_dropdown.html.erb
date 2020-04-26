@@ -1,1 +1,0 @@
-<%= select_tag "indent[warehouse_id]", options_for_select(@company.warehouses.order_by_name.pluck(:name, :id)), required: true, class: "selectpicker", "data-live-search": "true" %>

@@ -7,7 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-require("indents.js")
+require("indents")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -48,16 +48,14 @@ $(document).on('click', '.add_fields', function (event) {
 });
 
 const SelectpickerHandler = function () {
-  $(".selectpicker").selectpicker({
-    size: '7'
-  });
+  $(".selectpicker").selectpicker({ size: '7' });
 
   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
     $('.selectpicker').selectpicker('mobile');
   }
 
   $('.selectpicker').selectpicker('refresh');
- }
+}
 
 const DatepickerHandler = function () {
   $('#datepicker').datepicker({

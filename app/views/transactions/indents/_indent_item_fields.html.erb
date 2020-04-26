@@ -4,7 +4,7 @@
       <%= f.label :item_id %>
 
       <div class="selectpicker-filter-dropdown border rounded">
-        <%= f.select :item_id, current_organization.items.order_by_name.pluck(:name, :id), { include_blank: true }, { required: true, class: "selectpicker item-selector", "data-live-search": "true" } %>
+        <%= f.select :item_id, current_organization.items.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "selectpicker item-selector", "data-live-search": "true" } %>
       </div>
     </div>
 
@@ -12,15 +12,7 @@
       <%= f.label :make_id %>
 
       <div class="selectpicker-filter-dropdown border rounded">
-        <%= f.select :make_id, make_options(f.object), { include_blank: true }, { required: true, class: "selectpicker make-selector", "data-live-search": "true" } %>
-      </div>
-    </div>
-
-    <div class="form-group col-sm-12 col-lg-2">
-      <%= f.label :cost_center_id %>
-
-      <div class="selectpicker-filter-dropdown border rounded">
-        <%= f.select :cost_center_id, current_organization.cost_centers.order_by_name.pluck(:name, :id), { include_blank: true }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+        <%= f.select :make_id, make_options(f.object), { prompt: "-- Select Make --" }, { required: true, class: "selectpicker make-selector", "data-live-search": "true" } %>
       </div>
     </div>
 
@@ -29,11 +21,19 @@
       <%= f.number_field :quantity, required: true, min: 0, step: 0.01, class: "form-control" %>
     </div>
 
-    <div class="form-group col-sm-12 col-lg-1">
+    <div class="form-group col-sm-12 col-lg-2">
       <%= f.label :uom_id, "UOM" %>
 
       <div class="selectpicker-filter-dropdown border rounded">
-        <%= f.select :uom_id, uom_options(f.object), { include_blank: true }, { required: true, class: "selectpicker uom-selector", "data-live-search": "true" } %>
+        <%= f.select :uom_id, uom_options(f.object), { prompt: "-- Select UOM --" }, { required: true, class: "selectpicker uom-selector", "data-live-search": "true" } %>
+      </div>
+    </div>
+
+    <div class="form-group col-sm-12 col-lg-2">
+      <%= f.label :cost_center_id %>
+
+      <div class="selectpicker-filter-dropdown border rounded">
+        <%= f.select :cost_center_id, current_organization.cost_centers.order_by_name.pluck(:name, :id), { prompt: "-- Select Cost Center --" }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
       </div>
     </div>
 
@@ -45,12 +45,12 @@
       </div>
     </div>
 
-    <div class=" form-group col-12 col-lg-2">
+    <div class="form-group col-sm-12 col-lg-1">
       <%= f.label :note %>
-      <%= f.text_area :note, rows: 1, class: "form-control", autocomplete: :off %>
+      <%= f.text_field :note, class: "form-control", autocomplete: :off %>
     </div>
 
-    <div class="col-12 col-lg-1 text-right">
+    <div class="form-group col-sm-12 col-lg-1 d-flex justify-content-center align-items-center">
       <%= f.hidden_field :_destroy %>
       <%= link_to_remove_fields %>
     </div>

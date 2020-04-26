@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.bigint "cost_center_id", null: false
     t.decimal "quantity", precision: 12, scale: 2, null: false
     t.string "priority", default: "default", null: false
-    t.text "note", default: ""
+    t.string "note", default: ""
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.bigint "organization_id", null: false
