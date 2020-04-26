@@ -23,6 +23,12 @@ class Admin::UsersController < Admin::AdminController
     end
   end
 
+  def resend_invitation
+    user = User.find(params[:id])
+    User.invite!({ email: user.email, organization_id: current_organization.id }, current_user).deliver_invitation
+    redirect_to admin_users_path, flash: { success: "User will receive invitation mail shortly." }
+  end
+
   private
 
   def user_params

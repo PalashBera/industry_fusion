@@ -63,6 +63,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :new, :create] do
       get :export, on: :collection
+      put :resend_invitation, on: :member
     end
 
     root "admin#index"

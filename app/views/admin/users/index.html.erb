@@ -18,7 +18,7 @@
         <th scope="col"><%= sort_link @search, :last_name, "Last Name" %></th>
         <th scope="col"><%= sort_link @search, :email, "Email" %></th>
         <th scope="col"><%= sort_link @search, :mobile_number, "Mobile Number" %></th>
-        <th scope="col"><%= sort_link @search, :admin, "Admin" %></th>
+        <th scope="col">Status</th>
       </tr>
     </thead>
 
@@ -30,7 +30,7 @@
           <td><%= user&.last_name %></td>
           <td><%= user.email %></td>
           <td><%= user.mobile_number %></td>
-          <td><%= '<span class="badge badge-danger" title="Admin">Admin</span>'.html_safe if user.admin %></td>
+          <td><%= user_status(user) %><%= resend_invitation_link(user) if user.pending_acception? %></td>
         </tr>
       <% end %>
     </tbody>
