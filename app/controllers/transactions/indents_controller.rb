@@ -1,7 +1,6 @@
 class Transactions::IndentsController < Transactions::TransactionsController
   def index
     @search = IndentItem.joins(:indent).ransack(params[:q])
-    # @search.sorts = "requiremet_date desc" if @search.sorts.empty?
     @pagy, @indent_items = pagy_countless(@search.result.included_resources, link_extra: 'data-remote="true"')
   end
 
@@ -20,9 +19,17 @@ class Transactions::IndentsController < Transactions::TransactionsController
     end
   end
 
-  def edit; end
+  def edit
+    indent
+  end
 
-  def update; end
+  def update
+    if indent.update(indent_params)
+      redirect_to transactions_indents_path, flash: { success: "Indent has been successfully updated." }
+    else
+      render "edit"
+    end
+  end
 
   def fetch_warehouses
     @company = Company.find(params[:company_id])
