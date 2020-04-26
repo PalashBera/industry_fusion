@@ -31,17 +31,6 @@ class Transactions::IndentsController < Transactions::TransactionsController
     end
   end
 
-  def fetch_warehouses
-    @company = Company.find(params[:company_id])
-  end
-
-  def fetch_makes_and_uoms
-    item = Item.find(params[:item_id])
-    @unique_id = params[:unique_id]
-    @makes = item.makes.included_resources
-    @uoms = item.uoms_list
-  end
-
   private
 
   def indent

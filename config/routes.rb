@@ -69,10 +69,16 @@ Rails.application.routes.draw do
   end
 
   namespace :transactions do
-    resources :indents, except: [:show, :destroy] do
-      collection do
-        get :fetch_warehouses
-        get :fetch_makes_and_uoms
+    resources :indents, except: [:show, :destroy]
+
+    resources :companies, only: [] do
+      get :warehouses, on: :member
+    end
+
+    resources :items, only: [] do
+      member do
+        get :makes
+        get :uoms
       end
     end
   end

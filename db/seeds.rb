@@ -142,7 +142,7 @@ end
   company = organization.companies.sample
   warehouse = company.warehouses.sample
 
-  Indent.new(
+  indent = Indent.new(
     requirement_date: Date.today + t.days,
     organization_id: organization.id,
     company_id: company.id,
@@ -155,7 +155,7 @@ end
     uom = item.uom
 
     IndentItem.create!(
-      indent_id: Indent.last.id,
+      indent_id: indent.id,
       item_id: item.id,
       make_id: make.id,
       uom_id: uom.id,

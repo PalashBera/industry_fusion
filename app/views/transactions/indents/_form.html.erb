@@ -5,23 +5,23 @@
         <%= render "shared/error_messages", resource: @indent %>
 
         <div class="form-row">
-          <div class="form-group col-sm-12 col-lg-4">
-            <%= f.label :company_id, "Company" %>
+          <div class="form-group col-sm-12 col-lg-3">
+            <%= f.label :company_id %>
 
             <div class="selectpicker-filter-dropdown">
-              <%= f.select :company_id, current_organization.companies.order_by_name.pluck(:name, :id), {}, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+              <%= f.select :company_id, current_organization.companies.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
             </div>
           </div>
 
-          <div class="form-group col-sm-12 col-lg-4">
-            <%= f.label :warehouse_id, "Warehouse" %>
+          <div class="form-group col-sm-12 col-lg-3">
+            <%= f.label :warehouse_id %>
 
             <div class="selectpicker-filter-dropdown">
-              <%= f.select :warehouse_id, warehouse_options(f.object), {}, { required: true, class: "selectpicker", "data-live-search": "true" } %>
+              <%= f.select :warehouse_id, warehouse_options(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
             </div>
           </div>
 
-          <div class="form-group col-sm-12 col-lg-2">
+          <div class="form-group col-sm-12 col-lg-3">
             <%= f.label :requirement_date %>
 
             <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
@@ -33,7 +33,7 @@
 
         <hr>
 
-        <h5 class="m-2">Add Indent Items</h5>
+        <h5 class="m-2">Indent Items</h5>
 
         <%= f.fields_for :indent_items do |builder| %>
           <%= render "indent_item_fields", f: builder %>
@@ -41,9 +41,9 @@
 
         <%= link_to_add_fields f, :indent_items %>
 
-        <hr>
-
-        <%= f.submit "Save", class: "btn btn-primary btn-xs-block", data: { disable_with: "Saving..." } %>
+        <div class="form-group mt-3">
+          <%= f.submit yield(:button_title), class: "btn btn-primary btn-xs-block", data: { disable_with: "Saving..." } %>
+        </div>
       <% end %>
     </div>
   </div>
