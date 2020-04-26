@@ -12,7 +12,7 @@
       <%= f.label :make_id %>
 
       <div class="selectpicker-filter-dropdown border rounded">
-        <%= f.select :make_id, make_options(f), { include_blank: true }, { required: true, class: "selectpicker make-selector", "data-live-search": "true" } %>
+        <%= f.select :make_id, make_options(f.object), { include_blank: true }, { required: true, class: "selectpicker make-selector", "data-live-search": "true" } %>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
       <%= f.label :uom_id, "UOM" %>
 
       <div class="selectpicker-filter-dropdown border rounded">
-        <%= f.select :uom_id, uom_options(f), { include_blank: true }, { required: true, class: "selectpicker uom-selector", "data-live-search": "true" } %>
+        <%= f.select :uom_id, uom_options(f.object), { include_blank: true }, { required: true, class: "selectpicker uom-selector", "data-live-search": "true" } %>
       </div>
     </div>
 
