@@ -74,4 +74,12 @@ module LinksHelper
             "#",
             class: "remove_fields"
   end
+
+  def resend_invitation_link(user)
+    link_to '<i class="far fa-paper-plane"></i>'.html_safe,
+            resend_invitation_admin_user_path(user),
+            method: :put,
+            class: "ml-1",
+            title: "Resend Invitation"
+  end
 end
