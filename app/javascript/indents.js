@@ -26,7 +26,6 @@ $(document).on('change', 'select.item-selector', function (e) {
   $.ajax({
     method: 'GET',
     url: `/transactions/items/${itemId}/makes`,
-    data: { unique_id: uniqueId },
     dataType: 'json',
     success: function(data, status, xhr) {
       options = '<option value>-- Select Make --</option>';
@@ -35,7 +34,7 @@ $(document).on('change', 'select.item-selector', function (e) {
         options += `<option value='${make.id}'>${make.brand_name}</option>`;
       });
 
-      $(`#indent_indent_items_attributes_${data['unique_id']}_make_id`).html(options);
+      $(`#indent_indent_items_attributes_${uniqueId}_make_id`).html(options);
       SelectpickerHandler();
     }
   });
@@ -43,7 +42,6 @@ $(document).on('change', 'select.item-selector', function (e) {
   $.ajax({
     method: 'GET',
     url: `/transactions/items/${itemId}/uoms`,
-    data: { unique_id: uniqueId },
     dataType: 'json',
     success: function(data, status, xhr) {
       options = '<option value>-- Select UOM --</option>';
@@ -52,7 +50,7 @@ $(document).on('change', 'select.item-selector', function (e) {
         options += `<option value='${uom.id}'>${uom.short_name}</option>`;
       });
 
-      $(`#indent_indent_items_attributes_${data['unique_id']}_uom_id`).html(options);
+      $(`#indent_indent_items_attributes_${uniqueId}_uom_id`).html(options);
       SelectpickerHandler();
     }
   });
