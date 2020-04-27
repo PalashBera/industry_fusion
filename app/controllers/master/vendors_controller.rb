@@ -1,4 +1,4 @@
-class Master::VendorsController < Master::MasterController
+class Master::VendorsController < Master::HomeController
   def index
     @search = Vendor.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?

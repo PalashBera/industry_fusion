@@ -1,4 +1,4 @@
-class Master::ItemGroupsController < Master::MasterController
+class Master::ItemGroupsController < Master::HomeController
   include ChangeLogable
   include Exportable
   include Importable

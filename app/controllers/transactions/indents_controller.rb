@@ -1,4 +1,4 @@
-class Transactions::IndentsController < Transactions::TransactionsController
+class Transactions::IndentsController < Transactions::HomeController
   def index
     @search = IndentItem.joins(:indent).ransack(params[:q])
     @pagy, @indent_items = pagy_countless(@search.result.included_resources, link_extra: 'data-remote="true"')

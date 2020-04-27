@@ -1,4 +1,4 @@
-class Transactions::CompaniesController < Transactions::TransactionsController
+class Transactions::CompaniesController < Transactions::HomeController
   def warehouses
     warehouses = company.warehouses.order_by_name
     render json: { warehouses: warehouses.as_json(only: %i[id name]) }

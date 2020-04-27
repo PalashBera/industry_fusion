@@ -1,4 +1,4 @@
-class Master::BrandsController < Master::MasterController
+class Master::BrandsController < Master::HomeController
   include ChangeLogable
   include Exportable
   include Importable

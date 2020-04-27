@@ -1,4 +1,4 @@
-class Master::CostCentersController < Master::MasterController
+class Master::CostCentersController < Master::HomeController
   include ChangeLogable
   include Exportable
   include Importable
