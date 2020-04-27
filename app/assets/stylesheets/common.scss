@@ -44,6 +44,15 @@ $error-color: #dc3545;
   }
 }
 
+.datepicker {
+  font-size: 0.875em;
+
+  td, th {
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+
 .hide {
   display: none;
 }

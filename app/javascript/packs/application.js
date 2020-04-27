@@ -60,7 +60,6 @@ const SelectpickerHandler = function () {
 const DatepickerHandler = function () {
   $('#datepicker').datepicker({
     format: 'd-M-yyyy',
-    startDate: '-0d',
     autoclose: true,
     todayHighlight: true
   });
