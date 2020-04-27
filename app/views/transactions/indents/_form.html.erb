@@ -24,8 +24,8 @@
           <div class="form-group col-sm-12 col-lg-3">
             <%= f.label :requirement_date %>
 
-            <div id="datepicker" class="input-group date" data-date-format="dd-mm-yyyy">
-              <%= f.text_field :requirement_date, required: true, readonly: true, class: "form-control" %>
+            <div id="datepicker" class="input-group date" data-date-format="d-M-yyyy">
+              <%= f.text_field :requirement_date, value: format_requirement_date(f.object), required: true, readonly: true, class: "form-control" %>
               <span class="input-group-addon ml-1"><i class="far fa-calendar-alt fa-2x"></i></span>
             </div>
           </div>
