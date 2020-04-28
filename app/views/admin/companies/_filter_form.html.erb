@@ -2,11 +2,7 @@
   <div class="form-row">
     <div class="form-group col-md-6 col-sm-12">
       <%= f.label :name_cont_any, "Name" %>
-
-      <div class="selectpicker-filter-dropdown">
-        <%= f.select :name_cont_any, current_organization.companies.order_by_name.pluck(:name, :name), {}, { multiple: true, class: "selectpicker", "data-live-search": "true" } %>
-        <%= remove_selection_link %>
-      </div>
+      <%= f.search_field :name_cont_any, placeholder: "Name", title: "Type company name", class: "form-control", autocomplete: :off %>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
