@@ -1,4 +1,4 @@
-class Admin::CompaniesController < Admin::AdminController
+class Admin::CompaniesController < Admin::HomeController
   include ChangeLogable
   include Exportable
 

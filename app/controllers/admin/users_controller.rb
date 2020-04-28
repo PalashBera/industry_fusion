@@ -1,4 +1,4 @@
-class Admin::UsersController < Admin::AdminController
+class Admin::UsersController < Admin::HomeController
   include Exportable
 
   def index

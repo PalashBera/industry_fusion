@@ -1,4 +1,4 @@
-class Master::UomsController < Master::MasterController
+class Master::UomsController < Master::HomeController
   include ChangeLogable
   include Exportable
   include Importable

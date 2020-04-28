@@ -1,4 +1,4 @@
-class Transactions::ItemsController < Transactions::TransactionsController
+class Transactions::ItemsController < Transactions::HomeController
   def makes
     makes = item.makes.included_resources
     render json: { makes: makes.as_json(only: :id, methods: :brand_name) }

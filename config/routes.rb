@@ -66,7 +66,7 @@ Rails.application.routes.draw do
       put :resend_invitation, on: :member
     end
 
-    root "admin#index"
+    root "home#index"
   end
 
   namespace :transactions do
