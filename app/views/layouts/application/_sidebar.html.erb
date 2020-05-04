@@ -1,0 +1,48 @@
+<aside class="left-sidebar sidebar-dark" id="left-sidebar">
+  <div id="sidebar" class="sidebar">
+    <div class="app-brand">
+      <%= link_to root_path do %>
+        <%= image_tag "logo.png", alt: "School Management" %>
+        <span class="brand-name">Industry Fusion</span>
+      <% end %>
+    </div>
+
+    <div class="sidebar-left" data-simplebar style="height: 100%;">
+      <ul class="nav sidebar-inner" id="sidebar-menu">
+        <li>
+          <%= link_to root_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-briefcase-account-outline"></i>
+            <span class="nav-text">Business Dashboard</span>
+          <% end %>
+        </li>
+
+        <li class="section-title">
+          UI Elements
+        </li>
+
+        <li class="has-sub active expand">
+          <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements" aria-expanded="false" aria-controls="ui-elements">
+            <i class="mdi mdi-folder-outline"></i>
+            <span class="nav-text">UI Components</span> <b class="caret"></b>
+          </a>
+
+          <ul class="collapse show" id="ui-elements" data-parent="#sidebar-menu">
+            <div class="sub-menu">
+              <li>
+                <%= link_to root_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Card</span>
+                <% end %>
+              </li>
+
+              <li class="active">
+                <%= link_to root_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Home</span>
+                <% end %>
+              </li>
+            </div>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>
