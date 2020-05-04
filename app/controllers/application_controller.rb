@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   include SessionsHelper
 
+  layout :resolve_layout
+
   set_current_tenant_through_filter
 
   before_action :find_and_set_current_tenant
@@ -71,5 +73,13 @@ class ApplicationController < ActionController::Base
     end
 
     params.delete_if(&p)
+  end
+
+  def resolve_layout
+    if user_signed_in?
+      "application"
+    else
+      "basic"
+    end
   end
 end
