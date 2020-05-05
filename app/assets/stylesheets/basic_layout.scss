@@ -1,0 +1,26 @@
+.basic-layout {
+  .page-wrapper {
+    padding-top: 0 !important;
+  }
+
+  .navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .navbar-brand {
+    color: #9e6de0 !important;
+    font-size: 1.625rem;
+  }
+
+  .nav-link {
+    color: #31343d !important;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    &:hover {
+      color: #868686 !important;
+    }
+  }
+}
