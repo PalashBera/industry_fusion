@@ -633,9 +633,6 @@ $(document).ready(function() {
     });
   }
 
-  /*======== PROGRESS BAR ========*/
-  NProgress.done();
-
   /*======== DATA TABLE ========*/
   var productsTable = $('#productsTable');
   if (productsTable.length != 0){
@@ -784,4 +781,9 @@ $(document).ready(function() {
       emptyFill: [gray]
     })
   };
+});
+
+$(document).on('turbolinks:load', function() {
+  /*======== PROGRESS BAR ========*/
+  NProgress.done();
 });
