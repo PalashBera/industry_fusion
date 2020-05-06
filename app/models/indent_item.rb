@@ -22,4 +22,8 @@ class IndentItem < ApplicationRecord
   def self.included_resources
     includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)
   end
+
+  def quantity_with_uom
+    "#{quantity} #{uom.short_name}"
+  end
 end

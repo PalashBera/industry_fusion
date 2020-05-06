@@ -4,11 +4,11 @@
 <section class="mb-4 d-flex justify-content-between">
   <section>
     <%= new_link_using_modal(controller_name) %>
-    <%= import_modal_btn(controller_name) %>
+    <%= filter_button(params[:q]) %>
   </section>
 
   <section>
-    <%= filter_button(params[:q]) %>
+    <%= import_modal_btn(controller_name) %>
     <%= excel_export_btn(controller_name) %>
   </section>
 </section>
