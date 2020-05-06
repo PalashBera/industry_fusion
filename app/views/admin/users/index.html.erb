@@ -1,40 +1,44 @@
 <% provide(:title, "Users") %>
+<% provide(:page_title, "Users") %>
 
 <section class="mb-4 d-flex justify-content-between">
-  <span class="page-header">Users</span>
-
   <section>
     <%= new_link_using_modal(controller_name) %>
+  </section>
+
+  <section>
     <%= excel_export_btn(controller_name) %>
   </section>
 </section>
 
-<div class="table-responsive">
-  <table class="table table-hover" width="100%">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col"><%= sort_link @search, :first_name, "First Name" %></th>
-        <th scope="col"><%= sort_link @search, :last_name, "Last Name" %></th>
-        <th scope="col"><%= sort_link @search, :email, "Email" %></th>
-        <th scope="col"><%= sort_link @search, :mobile_number, "Mobile Number" %></th>
-        <th scope="col">Status</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @users.each.with_index(1) do |user, index| %>
+<div class="card card-default">
+  <div class="table-responsive">
+    <table class="table table-hover" width="100%">
+      <thead class="thead">
         <tr>
-          <td scope="row"><%= index %></td>
-          <td><%= user&.first_name %></td>
-          <td><%= user&.last_name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.mobile_number %></td>
-          <td><%= user_status(user) %><%= resend_invitation_link(user) if user.pending_acception? %></td>
+          <th scope="col">#</th>
+          <th scope="col"><%= sort_link @search, :first_name, "First Name" %></th>
+          <th scope="col"><%= sort_link @search, :last_name, "Last Name" %></th>
+          <th scope="col"><%= sort_link @search, :email, "Email" %></th>
+          <th scope="col"><%= sort_link @search, :mobile_number, "Mobile Number" %></th>
+          <th scope="col">Status</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @users.each.with_index(1) do |user, index| %>
+          <tr>
+            <td scope="row"><%= index %></td>
+            <td><%= user&.first_name %></td>
+            <td><%= user&.last_name %></td>
+            <td><%= user.email %></td>
+            <td><%= user.mobile_number %></td>
+            <td><%= user_status(user) %><%= resend_invitation_link(user) if user.pending_acception? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <%= render "shared/pagy" %>
