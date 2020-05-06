@@ -1,41 +1,45 @@
 <% provide(:title, "Brands") %>
+<% provide(:page_title, "Brands") %>
 
 <section class="mb-4 d-flex justify-content-between">
-  <span class="page-header">Brands</span>
-
   <section>
     <%= new_link_using_modal(controller_name) %>
+    <%= import_modal_btn(controller_name) %>
+  </section>
+
+  <section>
     <%= filter_button(params[:q]) %>
     <%= excel_export_btn(controller_name) %>
-    <%= import_modal_btn(controller_name) %>
   </section>
 </section>
 
-<div class="table-responsive">
-  <table class="table table-hover" width="100%">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
-        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
-        <th scope="col">Actions</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @brands.each.with_index(1) do |brand, index| %>
+<div class="card card-default">
+  <div class="table-responsive">
+    <table class="table table-hover" width="100%">
+      <thead>
         <tr>
-          <td scope="row"><%= index %></td>
-          <td><%= brand.name %></td>
-          <td><%= archive_status(brand.archive).html_safe %></td>
-          <td>
-            <%= edit_link_using_modal(controller_name, brand) %> |
-            <%= change_logs_link_using_modal(controller_name, brand) %>
-          </td>
+          <th scope="col">#</th>
+          <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+          <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+          <th scope="col">Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+
+      <tbody>
+        <% @brands.each.with_index(1) do |brand, index| %>
+          <tr>
+            <td scope="row"><%= index %></td>
+            <td><%= brand.name %></td>
+            <td><%= archive_status(brand.archive).html_safe %></td>
+            <td>
+              <%= edit_link_using_modal(controller_name, brand) %> |
+              <%= change_logs_link_using_modal(controller_name, brand) %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <%= render "shared/pagy" %>

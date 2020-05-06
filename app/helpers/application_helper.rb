@@ -41,4 +41,8 @@ module ApplicationHelper
       '<span class="badge badge-success" title="Active">Active</span>'
     end
   end
+
+  def active_class(controller)
+    current_page?(controller: controller) ? "active" : ""
+  end
 end
