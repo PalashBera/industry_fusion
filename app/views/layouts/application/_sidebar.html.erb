@@ -16,51 +16,6 @@
           <% end %>
         </li>
 
-        <li class="section-title">
-          Master
-        </li>
-
-        <li class="<%= active_class("master/brands") %>">
-          <a class="sidenav-item-link" href="<%= master_brands_path %>">
-            <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">Brands</span>
-          </a>
-        </li>
-
-        <li class="<%= active_class("master/cost_centers") %>">
-          <a class="sidenav-item-link" href="<%= master_cost_centers_path %>">
-            <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">Cost Centers</span>
-          </a>
-        </li>
-
-        <li class="<%= active_class("master/item_groups") %>">
-          <a class="sidenav-item-link" href="<%= master_item_groups_path %>">
-            <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">Item Groups</span>
-          </a>
-        </li>
-
-        <li class="<%= active_class("master/uoms") %>">
-          <a class="sidenav-item-link" href="<%= master_uoms_path %>">
-            <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">Unit Of Measurement</span>
-          </a>
-        </li>
-
-        <li class="<%= active_class("master/vendors") %>">
-          <a class="sidenav-item-link" href="<%= master_vendors_path %>">
-            <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">Vendors</span>
-          </a>
-        </li>
-
-        <li class="<%= active_class("master/items") %>">
-          <a class="sidenav-item-link" href="<%= master_items_path %>">
-            <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">Items</span>
-          </a>
-        </li>
 
         <li class="section-title">
           Transactions
@@ -68,10 +23,83 @@
 
         <li class="<%= active_class("transactions/indents") %>">
           <a class="sidenav-item-link" href="<%= transactions_indents_path %>">
-            <i class="mdi mdi-folder-outline"></i>
+            <i class="mdi mdi-notebook"></i>
             <span class="nav-text">Indents</span>
           </a>
         </li>
+
+        <li class="section-title">
+          Master
+        </li>
+
+        <li class="<%= active_class("master/brands") %>">
+          <a class="sidenav-item-link" href="<%= master_brands_path %>">
+            <i class="mdi mdi-registered-trademark"></i>
+            <span class="nav-text">Brands</span>
+          </a>
+        </li>
+
+        <li class="<%= active_class("master/cost_centers") %>">
+          <a class="sidenav-item-link" href="<%= master_cost_centers_path %>">
+            <i class="mdi mdi-steam"></i>
+            <span class="nav-text">Cost Centers</span>
+          </a>
+        </li>
+
+        <li class="<%= active_class("master/item_groups") %>">
+          <a class="sidenav-item-link" href="<%= master_item_groups_path %>">
+            <i class="mdi mdi-cart"></i>
+            <span class="nav-text">Item Groups</span>
+          </a>
+        </li>
+
+        <li class="<%= active_class("master/uoms") %>">
+          <a class="sidenav-item-link" href="<%= master_uoms_path %>">
+            <i class="mdi mdi-scale-balance"></i>
+            <span class="nav-text">Unit Of Measurement</span>
+          </a>
+        </li>
+
+        <li class="<%= active_class("master/vendors") %>">
+          <a class="sidenav-item-link" href="<%= master_vendors_path %>">
+            <i class="mdi mdi-alien"></i>
+            <span class="nav-text">Vendors</span>
+          </a>
+        </li>
+
+        <li class="<%= active_class("master/items") %>">
+          <a class="sidenav-item-link" href="<%= master_items_path %>">
+            <i class="mdi mdi-hammer"></i>
+            <span class="nav-text">Items</span>
+          </a>
+        </li>
+
+        <% if current_user.admin? %>
+          <li class="section-title">
+            Admin
+          </li>
+
+          <li class="<%= active_class("admin/companies") %>">
+            <a class="sidenav-item-link" href="<%= admin_companies_path %>">
+              <i class="mdi mdi-factory"></i>
+              <span class="nav-text">Companies</span>
+            </a>
+          </li>
+
+          <li class="<%= active_class("admin/users") %>">
+            <a class="sidenav-item-link" href="<%= admin_users_path %>">
+              <i class="mdi mdi-account-group"></i>
+              <span class="nav-text">Users</span>
+            </a>
+          </li>
+
+          <li class="<%= active_class("admin/warehouses") %>">
+            <a class="sidenav-item-link" href="<%= admin_warehouses_path %>">
+              <i class="mdi mdi-store"></i>
+              <span class="nav-text">Warehouses</span>
+            </a>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
