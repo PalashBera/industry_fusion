@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).on('ready turbolinks:load', function() {
   "use strict";
 
   /*======== MOBILE OVERLAY ========*/
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
   /*======== SIDEBAR TOGGLE FOR MOBILE ========*/
   if ($(window).width() < 768) {
-    $(document).on("click", ".sidebar-toggle", function(e) {
+    $(".sidebar-toggle").click(function(e) {
       e.preventDefault();
       var min = "sidebar-mobile-in",
         min_out = "sidebar-mobile-out",
@@ -562,76 +562,76 @@ $(document).ready(function() {
   }
 
   /*======== TOASTER ========*/
-  var toaster = $('#toaster')
-  function callToaster(positionClass) {
-    toastr.options = {
-      closeButton: true,
-      debug: false,
-      newestOnTop: false,
-      progressBar: true,
-      positionClass: positionClass,
-      preventDuplicates: false,
-      onclick: null,
-      showDuration: "300",
-      hideDuration: "1000",
-      timeOut: "5000",
-      extendedTimeOut: "1000",
-      showEasing: "swing",
-      hideEasing: "linear",
-      showMethod: "fadeIn",
-      hideMethod: "fadeOut"
-    };
-    toastr.success("Welcome to Mono Dashboard", "Howdy!");
-  }
+  // var toaster = $('#toaster')
+  // function callToaster(positionClass) {
+  //   toastr.options = {
+  //     closeButton: true,
+  //     debug: false,
+  //     newestOnTop: false,
+  //     progressBar: true,
+  //     positionClass: positionClass,
+  //     preventDuplicates: false,
+  //     onclick: null,
+  //     showDuration: "300",
+  //     hideDuration: "1000",
+  //     timeOut: "5000",
+  //     extendedTimeOut: "1000",
+  //     showEasing: "swing",
+  //     hideEasing: "linear",
+  //     showMethod: "fadeIn",
+  //     hideMethod: "fadeOut"
+  //   };
+  //   toastr.success("Welcome to Mono Dashboard", "Howdy!");
+  // }
 
-  if (toaster.length != 0) {
+  // if (toaster.length != 0) {
 
-    if (document.dir != "rtl") {
-      callToaster("toast-top-right");
-    } else {
-      callToaster("toast-top-left");
-    }
+  //   if (document.dir != "rtl") {
+  //     callToaster("toast-top-right");
+  //   } else {
+  //     callToaster("toast-top-left");
+  //   }
 
-  }
+  // }
 
-  /*======== INFO BAR ========*/
-  var infoTeoaset = $('#toaster-info, #toaster-success, #toaster-warning, #toaster-danger');
-  if (infoTeoaset !== null){
-    infoTeoaset.on('click', function () {
-      console.log("asas");
-      toastr.options = {
-        closeButton: true,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "3000",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-      }
-      var thisId = $(this).attr('id');
-      if ( thisId === 'toaster-info') {
-        toastr.info("Welcome to Mono", " Info message");
+  // /*======== INFO BAR ========*/
+  // var infoTeoaset = $('#toaster-info, #toaster-success, #toaster-warning, #toaster-danger');
+  // if (infoTeoaset !== null){
+  //   infoTeoaset.on('click', function () {
+  //     console.log("asas");
+  //     toastr.options = {
+  //       closeButton: true,
+  //       "debug": false,
+  //       "newestOnTop": false,
+  //       "progressBar": false,
+  //       "positionClass": "toast-top-right",
+  //       "preventDuplicates": false,
+  //       "onclick": null,
+  //       "showDuration": "3000",
+  //       "hideDuration": "1000",
+  //       "timeOut": "5000",
+  //       "extendedTimeOut": "1000",
+  //       "showEasing": "swing",
+  //       "hideEasing": "linear",
+  //       "showMethod": "fadeIn",
+  //       "hideMethod": "fadeOut"
+  //     }
+  //     var thisId = $(this).attr('id');
+  //     if ( thisId === 'toaster-info') {
+  //       toastr.info("Welcome to Mono", " Info message");
 
-      } else if ( thisId === 'toaster-success') {
-        toastr.success("Welcome to Mono", "Success message");
+  //     } else if ( thisId === 'toaster-success') {
+  //       toastr.success("Welcome to Mono", "Success message");
 
-      } else if ( thisId === 'toaster-warning') {
-        toastr.warning("Welcome to Mono", "Warning message");
+  //     } else if ( thisId === 'toaster-warning') {
+  //       toastr.warning("Welcome to Mono", "Warning message");
 
-      } else if ( thisId === 'toaster-danger') {
-        toastr.error("Welcome to Mono", "Danger message");
-      }
+  //     } else if ( thisId === 'toaster-danger') {
+  //       toastr.error("Welcome to Mono", "Danger message");
+  //     }
 
-    });
-  }
+  //   });
+  // }
 
   /*======== DATA TABLE ========*/
   var productsTable = $('#productsTable');

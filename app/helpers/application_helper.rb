@@ -16,7 +16,7 @@ module ApplicationHelper
       "Well done!"
     elsif message_type == "info"
       "Heads up!"
-    elsif message_type == "danger"
+    elsif message_type == "error"
       "Oh snap!"
     else
       ""
@@ -28,7 +28,7 @@ module ApplicationHelper
     when "notice"
       "info"
     when "alert"
-      "danger"
+      "error"
     else
       message_type
     end

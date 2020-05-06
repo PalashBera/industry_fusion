@@ -11,14 +11,14 @@
         <li class="dropdown user-menu">
           <button class="dropdown-toggle nav-link" data-toggle="dropdown">
             <%= image_tag "user-xs-01.jpg", class: "user-image rounded-circle", alt: "User Image" %>
-            <span class="d-none d-lg-inline-block">Jhumur Chatterjee</span>
+            <span class="d-none d-lg-inline-block"><%= current_user.full_name %></span>
           </button>
 
           <ul class="dropdown-menu dropdown-menu-right">
             <li>
-              <a class="dropdown-link-item" href="user-profile.html">
+              <a class="dropdown-link-item" href="<%= edit_user_registration_path %>">
                 <i class="mdi mdi-account-outline"></i>
-                <span class="nav-text">My Profile</span>
+                <span class="nav-text">My Account</span>
               </a>
             </li>
 
@@ -45,7 +45,7 @@
             </li>
 
             <li class="dropdown-footer">
-              <a class="dropdown-link-item" href="sign-in.html">
+              <a class="dropdown-link-item" href="<%= destroy_user_session_path %>" data-method="delete">
                 <i class="mdi mdi-logout"></i>
                 <span class="nav-text">Log Out</span>
               </a>
