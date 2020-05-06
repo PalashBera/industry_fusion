@@ -16,12 +16,8 @@
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :archive, "Status" %>
-
-      <div class="selectpicker-filter-dropdown">
-        <%= f.select :archive_eq, [["Active", "false"], ["Archived", "true"]], { include_blank: true }, { class: "selectpicker", "data-live-search": "true", "data-size": "7" } %>
-        <%= remove_selection_link %>
-      </div>
+      <%= f.label :archive_eq, "Status" %>
+      <%= f.select :archive_eq, status_filter_items, { include_blank: true }, { class: "form-control" } %>
     </div>
   </div>
 <% end %>

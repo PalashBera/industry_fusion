@@ -4,11 +4,11 @@
 <section class="mb-4 d-flex justify-content-between">
   <section>
     <%= new_link_using_modal(controller_name) %>
-    <%= import_modal_btn(controller_name) %>
+    <%= filter_button(params[:q]) %>
   </section>
 
   <section>
-    <%= filter_button(params[:q]) %>
+    <%= import_modal_btn(controller_name) %>
     <%= excel_export_btn(controller_name) %>
   </section>
 </section>
@@ -21,7 +21,7 @@
           <th scope="col">#</th>
           <th scope="col"><%= sort_link @search, :name, "Name" %></th>
           <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
-          <th scope="col">Actions</th>
+          <th scope="col" class="text-center">Actions</th>
         </tr>
       </thead>
 
@@ -31,9 +31,15 @@
             <td scope="row"><%= index %></td>
             <td><%= brand.name %></td>
             <td><%= archive_status(brand.archive).html_safe %></td>
-            <td>
-              <%= edit_link_using_modal(controller_name, brand) %> |
-              <%= change_logs_link_using_modal(controller_name, brand) %>
+            <td class="text-center">
+              <div class="dropdown">
+                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                  <%= edit_link_using_modal(controller_name, brand) %>
+                  <%= change_logs_link_using_modal(controller_name, brand) %>
+                </div>
+              </div>
             </td>
           </tr>
         <% end %>

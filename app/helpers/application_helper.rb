@@ -34,6 +34,10 @@ module ApplicationHelper
     end
   end
 
+  def status_filter_items
+    [%w[Active false], %w[Archived true]]
+  end
+
   def archive_status(value)
     if value
       '<span class="badge badge-danger" title="Archived">Archived</span>'
