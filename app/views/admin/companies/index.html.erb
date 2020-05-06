@@ -24,7 +24,7 @@
         <th scope="col"><%= sort_link @search, :country, "Country" %></th>
         <th scope="col"><%= sort_link @search, :phone_number, "Phone Number" %></th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
-        <th scope="col">Actions</th>
+        <th scope="col" class="text-center">Actions</th>
       </tr>
     </thead>
 
@@ -41,9 +41,15 @@
           <td><%= company.country %></td>
           <td><%= company.phone_number %></td>
           <td><%= archive_status(company.archive).html_safe %></td>
-          <td>
-            <%= edit_link_using_modal(controller_name, company) %> |
-            <%= change_logs_link_using_modal(controller_name, company) %>
+          <td class="text-center">
+            <div class="dropdown">
+              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <%= edit_link_using_modal(controller_name, company) %>
+                <%= change_logs_link_using_modal(controller_name, company) %>
+              </div>
+            </div>
           </td>
         </tr>
       <% end %>

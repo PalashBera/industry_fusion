@@ -22,7 +22,7 @@
           <th scope="col"><%= sort_link @search, :name, "Name" %></th>
           <th scope="col">Description</th>
           <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
-          <th scope="col">Actions</th>
+          <th scope="col" class="text-center">Actions</th>
         </tr>
       </thead>
 
@@ -33,9 +33,15 @@
             <td><%= item_group.name %></td>
             <td><%= item_group.description %></td>
             <td><%= archive_status(item_group.archive).html_safe %></td>
-            <td>
-              <%= edit_link_using_modal(controller_name, item_group) %> |
-              <%= change_logs_link_using_modal(controller_name, item_group) %>
+            <td class="text-center">
+              <div class="dropdown">
+                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                  <%= edit_link_using_modal(controller_name, item_group) %>
+                  <%= change_logs_link_using_modal(controller_name, item_group) %>
+                </div>
+              </div>
             </td>
           </tr>
         <% end %>
