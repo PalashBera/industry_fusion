@@ -10,7 +10,7 @@ require('channels')
 require('indents')
 require('plugins/theme')
 require('plugins/simplebar.min')
-// require('indents')
+require('indents')
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -19,51 +19,51 @@ require('plugins/simplebar.min')
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-// document.addEventListener('turbolinks:load', function() {
-//   $('.flash-alert').delay(4000).slideUp(200, function() {
-//     $(this).alert('close');
-//   });
+document.addEventListener('turbolinks:load', function() {
+  $('.flash-alert').delay(4000).slideUp(200, function() {
+    $(this).alert('close');
+  });
 
-//   $('.se-pre-con').fadeOut('slow');
-//   SelectpickerHandler();
-//   DatepickerHandler();
-// });
+  $('.se-pre-con').fadeOut('slow');
+  // SelectpickerHandler();
+  // DatepickerHandler();
+});
 
-// $(document).on('click', '.remove-selectpicker-selections', function (e) {
-//   e.preventDefault();
-//   $(this).parent().find('.selectpicker').selectpicker('val', '');
-// });
+$(document).on('click', '.remove-selectpicker-selections', function (e) {
+  e.preventDefault();
+  $(this).parent().find('.selectpicker').selectpicker('val', '');
+});
 
-// $(document).on('click', '.remove_fields', function (event) {
-//   event.preventDefault();
-//   $(this).prev('input[type=hidden]').val('1');
-//   $(this).closest('section').find(':input').removeAttr('required');
-//   $(this).closest('section').hide();
-// });
+$(document).on('click', '.remove_fields', function (event) {
+  event.preventDefault();
+  $(this).prev('input[type=hidden]').val('1');
+  $(this).closest('section').find(':input').removeAttr('required');
+  $(this).closest('section').hide();
+});
 
-// $(document).on('click', '.add_fields', function (event) {
-//   event.preventDefault();
-//   var regexp, time;
-//   time = new Date().getTime();
-//   regexp = new RegExp($(this).data('id'), 'g');
-//   $(this).before($(this).data('fields').replace(regexp, time));
-//   SelectpickerHandler();
-// });
+$(document).on('click', '.add_fields', function (event) {
+  event.preventDefault();
+  var regexp, time;
+  time = new Date().getTime();
+  regexp = new RegExp($(this).data('id'), 'g');
+  $(this).before($(this).data('fields').replace(regexp, time));
+  SelectpickerHandler();
+});
 
-// const SelectpickerHandler = function () {
-//   $('.selectpicker').selectpicker({ size: '7' });
+const SelectpickerHandler = function () {
+  $('.selectpicker').selectpicker({ size: '7' });
 
-//   if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-//     $('.selectpicker').selectpicker('mobile');
-//   }
+  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    $('.selectpicker').selectpicker('mobile');
+  }
 
-//   $('.selectpicker').selectpicker('refresh');
-// }
+  $('.selectpicker').selectpicker('refresh');
+}
 
-// const DatepickerHandler = function () {
-//   $('#datepicker').datepicker({
-//     format: 'd-M-yyyy',
-//     autoclose: true,
-//     todayHighlight: true
-//   });
-// }
+const DatepickerHandler = function () {
+  $('#datepicker').datepicker({
+    format: 'd-M-yyyy',
+    autoclose: true,
+    todayHighlight: true
+  });
+}

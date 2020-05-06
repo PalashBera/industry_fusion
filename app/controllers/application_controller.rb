@@ -25,14 +25,14 @@ class ApplicationController < ActionController::Base
   def check_organization_presence
     return if current_organization
 
-    flash[:danger] = "You don't have any organization information. Please create your organization."
+    flash[:error] = "You don't have any organization information. Please create your organization."
     redirect_to new_organization_path
   end
 
   def authenticate_admin
     return if admin_user?
 
-    flash[:danger] = "You don't have access for this."
+    flash[:error] = "You don't have access for this."
     redirect_to root_path
   end
 
@@ -48,7 +48,7 @@ class ApplicationController < ActionController::Base
     if current_organization
       stored_location_for(resource) || after_sign_in_redirection
     else
-      flash[:danger] = "You don't have any organization information. Please create your organization."
+      flash[:error] = "You don't have any organization information. Please create your organization."
       new_organization_path
     end
   end

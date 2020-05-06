@@ -8,7 +8,7 @@ module LinksHelper
   end
 
   def edit_link_using_modal(controller_name, resource)
-    link_to '<i class="fas fa-edit text-primary"></i>'.html_safe,
+    link_to '<i class="fas fa-edit text-warning"></i>'.html_safe,
             url_for(controller: controller_name, action: "edit", id: resource.id),
             data: { remote: true },
             title: "Edit #{controller_name.singularize.humanize.titleize}"
@@ -83,7 +83,7 @@ module LinksHelper
   end
 
   def edit_link(controller_name, resource)
-    link_to '<i class="fas fa-edit text-primary"></i>'.html_safe,
+    link_to '<i class="fas fa-edit text-warning"></i>'.html_safe,
             url_for(controller: controller_name, action: "edit", id: resource.id),
             title: "Edit #{controller_name.singularize.humanize.titleize}"
   end

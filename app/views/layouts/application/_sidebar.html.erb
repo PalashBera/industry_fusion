@@ -16,27 +16,68 @@
           <% end %>
         </li>
 
-        <li class="section-title">
+        <%# <li class="section-title">
           UI Elements
-        </li>
+        </li> %>
 
         <li class="has-sub active expand">
-          <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#ui-elements" aria-expanded="false" aria-controls="ui-elements">
+          <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#master_links" aria-expanded="false" aria-controls="master_links">
             <i class="mdi mdi-folder-outline"></i>
-            <span class="nav-text">UI Components</span> <b class="caret"></b>
+            <span class="nav-text">Master</span> <b class="caret"></b>
           </a>
 
-          <ul class="collapse show" id="ui-elements" data-parent="#sidebar-menu">
+          <ul class="collapse show" id="master_links" data-parent="#sidebar-menu">
             <div class="sub-menu">
               <li>
-                <%= link_to root_path, class: "sidenav-item-link" do %>
-                  <span class="nav-text">Card</span>
+                <%= link_to master_brands_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Brands</span>
                 <% end %>
               </li>
 
               <li class="active">
-                <%= link_to root_path, class: "sidenav-item-link" do %>
-                  <span class="nav-text">Home</span>
+                <%= link_to master_cost_centers_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Cost Centers</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to master_item_groups_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Item Groups</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to master_uoms_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Unit Of Measurement</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to master_vendors_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Vendors</span>
+                <% end %>
+              </li>
+
+              <li>
+                <%= link_to master_items_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Items</span>
+                <% end %>
+              </li>
+            </div>
+          </ul>
+        </li>
+
+        <li class="has-sub expand">
+          <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#transaction_links" aria-expanded="false" aria-controls="transaction_links">
+            <i class="mdi mdi-folder-outline"></i>
+            <span class="nav-text">Transactions</span> <b class="caret"></b>
+          </a>
+
+          <ul class="collapse show" id="transaction_links" data-parent="#sidebar-menu">
+            <div class="sub-menu">
+              <li>
+                <%= link_to transactions_indents_path, class: "sidenav-item-link" do %>
+                  <span class="nav-text">Indents</span>
                 <% end %>
               </li>
             </div>
