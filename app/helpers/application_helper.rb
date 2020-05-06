@@ -34,7 +34,7 @@ module ApplicationHelper
     end
   end
 
-  def status_filter_items
+  def status_selection
     [%w[Active false], %w[Archived true]]
   end
 

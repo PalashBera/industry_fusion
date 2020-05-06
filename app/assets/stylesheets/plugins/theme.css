@@ -3238,18 +3238,13 @@ input[type="button"].btn-block {
     .custom-select {
       transition: none; } }
 
-.sidebar-left{
-  padding-bottom: 100px;
-}
-
 .nav {
   display: flex;
   flex-wrap: wrap;
   padding-left: 0;
   /* padding-bottom: 200px; */
   margin-bottom: 0;
-  list-style: none;
-}
+  list-style: none; }
 
 .nav-link {
   display: block;
