@@ -4,33 +4,21 @@
   <div class="form-row">
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :company_id %>
-
-      <div class="selectpicker-filter-dropdown">
-        <%= f.select :company_id, current_organization.companies.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
-      </div>
+      <%= f.select :company_id, current_organization.companies.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "form-control" } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :warehouse_id %>
-
-      <div class="selectpicker-filter-dropdown">
-        <%= f.select :warehouse_id, warehouse_options(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "selectpicker", "data-live-search": "true" } %>
-      </div>
+      <%= f.select :warehouse_id, warehouse_options(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :requirement_date %>
-
-      <div id="datepicker" class="input-group date" data-date-format="d-M-yyyy">
-        <%= f.text_field :requirement_date, value: format_requirement_date(f.object), required: true, readonly: true, class: "form-control" %>
-        <span class="input-group-addon ml-1"><i class="far fa-calendar-alt fa-2x"></i></span>
-      </div>
+      <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control" %>
     </div>
   </div>
 
   <hr>
-
-  <h5 class="m-2">Indent Items</h5>
 
   <%= f.fields_for :indent_items do |builder| %>
     <%= render "indent_item_fields", f: builder %>
@@ -42,3 +30,22 @@
     <%= f.submit yield(:button_title), class: "btn btn-primary btn-xs-block", data: { disable_with: "Saving..." } %>
   </div>
 <% end %>
+
+<script>
+  $('#indent_requirement_date').daterangepicker({
+    autoUpdateInput: false,
+    singleDatePicker: true,
+    locale: {
+      format: 'DD/MM/YYYY',
+      cancelLabel: 'Clear'
+    }
+  });
+
+  $('#indent_requirement_date').on('apply.daterangepicker', function (ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY'));
+  });
+
+  $('#indent_requirement_date').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+  });
+</script>

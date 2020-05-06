@@ -14,4 +14,8 @@ module IndentsHelper
   def format_requirement_date(object)
     object.id.present? ? object.requirement_date.strftime("%d-%b-%Y") : ""
   end
+
+  def priority_selection
+    [%w[Default default], %w[High high], %w[Medium medium], %w[Low low]]
+  end
 end
