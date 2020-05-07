@@ -5,7 +5,6 @@ class Item < ApplicationRecord
   include Nameable
 
   acts_as_tenant(:organization)
-  has_paper_trail ignore: %i[created_at updated_at]
 
   belongs_to :organization
   belongs_to :item_group
@@ -19,6 +18,8 @@ class Item < ApplicationRecord
 
   validates :primary_quantity, :secondary_quantity, presence: true, numericality: { greater_than: 0 }, if: :secondary_uom
   validate :check_secondary_uom_equality
+
+  has_paper_trail ignore: %i[created_at updated_at]
 
   def self.included_resources
     includes(:item_group, :uom, :secondary_uom)

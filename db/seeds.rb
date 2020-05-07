@@ -40,7 +40,7 @@ user2 = User.create!(
 
   company = Company.create!(
     name: company_name,
-    short_name: company_name.split(" ").map(&:first).join + " #{t}",
+    short_name: company_name.split.first[0..2],
     address1: Faker::Address.building_number + ", " + Faker::Address.street_name,
     address2: Faker::Address.secondary_address + ", " + Faker::Address.street_address,
     city: Faker::Address.city,
@@ -56,7 +56,7 @@ user2 = User.create!(
 
     Warehouse.create!(
       name: warehouse_name,
-      short_name: warehouse_name.split(" ").map(&:first).join + " #{t}#{tt}",
+      short_name: "W#{t}#{tt}",
       address1: Faker::Address.building_number + ", " + Faker::Address.street_name,
       address2: Faker::Address.secondary_address + ", " + Faker::Address.street_address,
       city: Faker::Address.city,
@@ -137,34 +137,35 @@ end
   )
 end
 
-10.times do |t|
-  User.current_user = [user1, user2].sample
-  company = organization.companies.sample
-  warehouse = company.warehouses.sample
-
-  indent = Indent.new(
-    requirement_date: Date.today + t.days,
-    organization_id: organization.id,
-    company_id: company.id,
-    warehouse_id: warehouse.id
-  ).save(validate: false)
-
-  3.times do
-    item = organization.items.sample
-    make = item.makes.sample
-    uom = item.uom
-
-    IndentItem.create!(
-      indent_id: indent.id,
-      item_id: item.id,
-      make_id: make.id,
-      uom_id: uom.id,
-      cost_center_id: organization.cost_centers.sample.id,
-      quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
-      priority: %w[default high medium low].sample,
-      organization_id: organization.id
-    )
-  end
-end
+# 10.times do |t|
+#   User.current_user = [user1, user2].sample
+#   company = organization.companies.sample
+#   warehouse = company.warehouses.sample
+#
+#   indent = Indent.new(
+#     requirement_date: Date.today + t.days,
+#     organization_id: organization.id,
+#     company_id: company.id,
+#     warehouse_id: warehouse.id,
+#     serial: t + 1
+#   ).save(validate: false)
+#
+#   3.times do
+#     item = organization.items.sample
+#     make = item.makes.sample
+#     uom = item.uom
+#
+#     IndentItem.create!(
+#       indent_id: indent.id,
+#       item_id: item.id,
+#       make_id: make.id,
+#       uom_id: uom.id,
+#       cost_center_id: organization.cost_centers.sample.id,
+#       quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
+#       priority: %w[default high medium low].sample,
+#       organization_id: organization.id
+#     )
+#   end
+# end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)
