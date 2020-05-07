@@ -66,7 +66,7 @@ module LinksHelper
       render(association.to_s.singularize + "_fields", f: builder)
     end
 
-    link_to '<i class="fa fa-plus "></i> Add'.html_safe, "#",
+    link_to '<i class="fa fa-plus"></i> Add more items'.html_safe, "#",
             class: "add_fields",
             data: { id: id, fields: fields.gsub("/n", "") }
   end
@@ -74,7 +74,8 @@ module LinksHelper
   def link_to_remove_fields
     link_to "<i class='fas fa-times text-danger'></i>".html_safe,
             "#",
-            class: "remove_fields"
+            class: "remove_fields",
+            title: "Remove Item"
   end
 
   def new_link(controller_name)

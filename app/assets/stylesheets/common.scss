@@ -1,7 +1,19 @@
-table.table td {
-  vertical-align: middle;
+table.table {
+  thead th {
+    color: #bfc7d9;
+    background-color: #1d1f26;
+  }
+
+  td {
+    vertical-align: middle;
+  }
 }
 
 .sidebar-left {
   padding-bottom: 100px;
+}
+
+.remove_fields {
+  margin-left: 5px;
+  margin-right: 5px;
 }

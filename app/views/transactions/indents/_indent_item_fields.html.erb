@@ -1,41 +1,41 @@
-<div class="form-row">
+<section class="form-row">
   <div class="form-group col-sm-12 col-lg-2">
-    <%= f.label :item_id %>
+    <%= f.label :item_id, class: "d-lg-none" %>
     <%= f.select :item_id, current_organization.items.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control indent-item-selection" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
-    <%= f.label :make_id %>
+    <%= f.label :make_id, class: "d-lg-none" %>
     <%= f.select :make_id, make_options(f.object), { prompt: "-- Make --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-2">
-    <%= f.label :quantity %>
+    <%= f.label :quantity, class: "d-lg-none" %>
     <%= f.number_field :quantity, required: true, min: 0, step: 0.01, class: "form-control", placeholder: "Quantity" %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
-    <%= f.label :uom_id, "UOM" %>
+    <%= f.label :uom_id, "UOM", class: "d-lg-none" %>
     <%= f.select :uom_id, uom_options(f.object), { prompt: "-- UOM --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-2">
-    <%= f.label :cost_center_id, "Cost Center" %>
+    <%= f.label :cost_center_id, "Cost Center", class: "d-lg-none" %>
     <%= f.select :cost_center_id, current_organization.cost_centers.order_by_name.pluck(:name, :id), { prompt: "-- Select Cost Center --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
-    <%= f.label :priority %>
+    <%= f.label :priority, class: "d-lg-none" %>
     <%= f.select :priority, priority_selection, { prompt: "-- Priority --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-2">
-    <%= f.label :note %>
+    <%= f.label :note, class: "d-lg-none" %>
     <%= f.text_field :note, class: "form-control", autocomplete: :off, placeholder: "Note" %>
   </div>
 
-  <div class="form-group col-sm-12 col-lg-1 d-flex justify-content-center align-items-center">
+  <div class="form-group d-flex justify-content-center align-items-center">
     <%= f.hidden_field :_destroy %>
     <%= link_to_remove_fields %>
   </div>
-</div>
+</section>

@@ -7,7 +7,7 @@ class Indent < ApplicationRecord
   belongs_to :company
   belongs_to :warehouse
 
-  has_many :indent_items
+  has_many :indent_items, dependent: :destroy
 
   has_paper_trail ignore: %i[created_at]
 
