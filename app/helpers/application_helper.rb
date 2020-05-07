@@ -46,7 +46,7 @@ module ApplicationHelper
     end
   end
 
-  def active_class(controller)
-    current_page?(controller: controller) ? "active" : ""
+  def active_class(str)
+    str == controller_name ? "active" : ""
   end
 end

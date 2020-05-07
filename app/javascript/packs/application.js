@@ -25,13 +25,6 @@ document.addEventListener('turbolinks:load', function() {
   });
 
   $('.se-pre-con').fadeOut('slow');
-  // SelectpickerHandler();
-  // DatepickerHandler();
-});
-
-$(document).on('click', '.remove-selectpicker-selections', function (e) {
-  e.preventDefault();
-  $(this).parent().find('.selectpicker').selectpicker('val', '');
 });
 
 $(document).on('click', '.remove_fields', function (event) {
@@ -47,23 +40,4 @@ $(document).on('click', '.add_fields', function (event) {
   time = new Date().getTime();
   regexp = new RegExp($(this).data('id'), 'g');
   $(this).before($(this).data('fields').replace(regexp, time));
-  SelectpickerHandler();
 });
-
-const SelectpickerHandler = function () {
-  $('.selectpicker').selectpicker({ size: '7' });
-
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-    $('.selectpicker').selectpicker('mobile');
-  }
-
-  $('.selectpicker').selectpicker('refresh');
-}
-
-const DatepickerHandler = function () {
-  $('#datepicker').datepicker({
-    format: 'd-M-yyyy',
-    autoclose: true,
-    todayHighlight: true
-  });
-}

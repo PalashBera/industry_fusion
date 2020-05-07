@@ -1,6 +1,8 @@
 <%= form_for [:transactions, @indent] do |f| %>
   <%= render "shared/error_messages", resource: @indent %>
 
+  <h4 class="mb-4">Indent Details:</h4>
+
   <div class="form-row">
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :company_id %>
@@ -20,7 +22,19 @@
 
   <hr>
 
+  <h4 class="mb-4">Indent Item Details:</h4>
+
   <%= f.fields_for :indent_items do |builder| %>
+    <section class="form-row d-none d-lg-flex">
+      <div class="col-lg-2"><label>Item</label></div>
+      <div class="col-lg-1"><label>Make</label></div>
+      <div class="col-lg-2"><label>Quantity</label></div>
+      <div class="col-lg-1"><label>UOM</label></div>
+      <div class="col-lg-2"><label>Cost Center</label></div>
+      <div class="col-lg-1"><label>Priority</label></div>
+      <div class="col-lg-2"><label>Note</label></div>
+    </section>
+
     <%= render "indent_item_fields", f: builder %>
   <% end %>
 
