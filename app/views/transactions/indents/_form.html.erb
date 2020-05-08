@@ -16,7 +16,7 @@
 
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :requirement_date %>
-      <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control" %>
+      <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control", autocomplete: :off %>
     </div>
   </div>
 

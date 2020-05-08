@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name", null: false
-    t.string "short_name", null: false
+    t.string "short_name", limit: 3, null: false
     t.string "address1", null: false
     t.string "address2", default: ""
     t.string "city", null: false
@@ -81,11 +81,11 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   create_table "indent_items", force: :cascade do |t|
     t.bigint "indent_id", null: false
     t.bigint "item_id", null: false
-    t.bigint "make_id", null: false
     t.bigint "uom_id", null: false
     t.bigint "cost_center_id", null: false
     t.decimal "quantity", precision: 12, scale: 2, null: false
     t.string "priority", default: "default", null: false
+    t.bigint "make_id"
     t.string "note", default: ""
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
@@ -105,6 +105,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   create_table "indents", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "warehouse_id", null: false
+    t.bigint "serial", null: false
     t.date "requirement_date", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
@@ -267,7 +268,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   create_table "warehouses", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.string "name", null: false
-    t.string "short_name", null: false
+    t.string "short_name", limit: 3, null: false
     t.string "address1", null: false
     t.string "address2", default: ""
     t.string "city", null: false
