@@ -22,10 +22,10 @@
         </li>
 
         <li class="<%= active_class("indents") %>">
-          <a class="sidenav-item-link" href="<%= transactions_indents_path %>">
+          <%= link_to transactions_indents_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-notebook"></i>
             <span class="nav-text">Indents</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="section-title">
@@ -33,52 +33,52 @@
         </li>
 
         <li class="<%= active_class("brands") %>">
-          <a class="sidenav-item-link" href="<%= master_brands_path %>">
+          <%= link_to master_brands_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-registered-trademark"></i>
             <span class="nav-text">Brands</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="<%= active_class("cost_centers") %>">
-          <a class="sidenav-item-link" href="<%= master_cost_centers_path %>">
+          <%= link_to master_cost_centers_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-steam"></i>
             <span class="nav-text">Cost Centers</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="<%= active_class("item_groups") %>">
-          <a class="sidenav-item-link" href="<%= master_item_groups_path %>">
+          <%= link_to master_item_groups_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-cart"></i>
             <span class="nav-text">Item Groups</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="<%= active_class("uoms") %>">
-          <a class="sidenav-item-link" href="<%= master_uoms_path %>">
+          <%= link_to master_uoms_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-scale-balance"></i>
             <span class="nav-text">Unit Of Measurement</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="<%= active_class("vendors") %>">
-          <a class="sidenav-item-link" href="<%= master_vendors_path %>">
+          <%= link_to master_vendors_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-alien"></i>
             <span class="nav-text">Vendors</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="<%= active_class("items") %>">
-          <a class="sidenav-item-link" href="<%= master_items_path %>">
+          <%= link_to master_items_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-hammer"></i>
             <span class="nav-text">Items</span>
-          </a>
+          <% end %>
         </li>
 
         <li class="<%= active_class("makes") %>">
-          <a class="sidenav-item-link" href="<%= master_makes_path %>">
+          <%= link_to master_makes_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-hammer"></i>
             <span class="nav-text">Makes</span>
-          </a>
+          <% end %>
         </li>
 
         <% if current_user.admin? %>
@@ -87,24 +87,24 @@
           </li>
 
           <li class="<%= active_class("users") %>">
-            <a class="sidenav-item-link" href="<%= admin_users_path %>">
+            <%= link_to admin_users_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-account-group"></i>
               <span class="nav-text">Users</span>
-            </a>
+            <% end %>
           </li>
 
           <li class="<%= active_class("companies") %>">
-            <a class="sidenav-item-link" href="<%= admin_companies_path %>">
+            <%= link_to admin_companies_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-factory"></i>
               <span class="nav-text">Companies</span>
-            </a>
+            <% end %>
           </li>
 
           <li class="<%= active_class("warehouses") %>">
-            <a class="sidenav-item-link" href="<%= admin_warehouses_path %>">
+            <%= link_to admin_warehouses_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-store"></i>
               <span class="nav-text">Warehouses</span>
-            </a>
+            <% end %>
           </li>
         <% end %>
       </ul>
