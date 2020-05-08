@@ -173,6 +173,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.references :brand,         foreign_key: true, null: false
     t.references :item,          foreign_key: true, null: false
     t.string     :cat_no,        default: ""
+    t.boolean    :archive,       default: false,    null: false
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
     t.references :organization,  foreign_key: true, null: false

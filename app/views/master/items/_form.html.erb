@@ -6,19 +6,19 @@
 
   <div class="form-row">
     <div class="form-group col-sm-12 col-md-6">
-      <%= f.label :item_group, "Item Group" %>
+      <%= f.label :item_group_id, "Item Group" %>
       <%= f.select :item_group_id, current_organization.item_groups.order_by_name.pluck(:name, :id), { prompt: "-- Select Item Group --" }, { required: true, class: "form-control" } %>
     </div>
 
     <div class="form-group col-sm-12 col-md-6">
-      <%= f.label :uom, "UOM" %>
+      <%= f.label :uom_id, "UOM" %>
       <%= f.select :uom_id, current_organization.uoms.order_by_name.pluck(:short_name, :id), { prompt: "-- Select UOM --" }, { required: true, class: "form-control" } %>
     </div>
   </div>
 
   <div class="form-row">
     <div class="form-group col-sm-12 col-md-6">
-      <%= f.label :secondary_uom, "Secondary UOM" %>
+      <%= f.label :secondary_uom_id, "Secondary UOM" %>
       <%= f.select :secondary_uom_id, current_organization.uoms.order_by_name.pluck(:short_name, :id), { prompt: "-- Select Secondary UOM --", include_blank: true }, { class: "form-control" } %>
     </div>
   </div>

@@ -6,7 +6,7 @@
 
   <div class="form-group col-sm-12 col-lg-1">
     <%= f.label :make_id, class: "d-lg-none" %>
-    <%= f.select :make_id, make_options(f.object), { prompt: "-- Make --" }, { required: true, class: "form-control" } %>
+    <%= f.select :make_id, make_options(f.object), { prompt: "-- Make --", include_blank: true }, { class: "form-control" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-2">
