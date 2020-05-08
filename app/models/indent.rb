@@ -3,7 +3,7 @@ class Indent < ApplicationRecord
 
   acts_as_tenant(:organization)
 
-  before_validation :set_serial
+  before_create :set_serial
 
   belongs_to :organization
   belongs_to :company

@@ -74,6 +74,13 @@
           </a>
         </li>
 
+        <li class="<%= active_class("makes") %>">
+          <a class="sidenav-item-link" href="<%= master_makes_path %>">
+            <i class="mdi mdi-hammer"></i>
+            <span class="nav-text">Makes</span>
+          </a>
+        </li>
+
         <% if current_user.admin? %>
           <li class="section-title">
             Admin

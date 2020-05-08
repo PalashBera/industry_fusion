@@ -30,7 +30,7 @@ $(document).on('change', '.indent-item-selection', function (e) {
       options = '<option value>-- Make --</option>';
 
       $.each(data['makes'], function(index, make) {
-        options += `<option value='${make.id}'>${make.brand_name}</option>`;
+        options += `<option value='${make.id}'>${make.brand_with_cat_no}</option>`;
       });
 
       $(`#indent_indent_items_attributes_${uniqueId}_make_id`).html(options);

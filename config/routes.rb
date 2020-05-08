@@ -47,6 +47,11 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
+    resources :makes, except: [:show, :destroy] do
+      get :change_logs, on: :member
+      get :export, on: :collection
+    end
+
     resources :vendors, except: [:show, :destroy]
   end
 

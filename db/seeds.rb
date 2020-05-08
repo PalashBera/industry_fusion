@@ -122,6 +122,7 @@ end
       brand_id: organization.brands.sample.id,
       item_id: item.id,
       cat_no: Faker::Code.isbn + tt.to_s,
+      archive: Faker::Boolean.boolean,
       organization_id: organization.id
     )
   end
