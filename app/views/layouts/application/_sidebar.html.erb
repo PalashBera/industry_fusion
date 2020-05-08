@@ -11,8 +11,8 @@
       <ul class="nav sidebar-inner" id="sidebar-menu">
         <li>
           <%= link_to dashboard_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-briefcase-account-outline"></i>
-            <span class="nav-text">Business Dashboard</span>
+            <i class="mdi mdi-view-dashboard"></i>
+            <span class="nav-text">Dashboard</span>
           <% end %>
         </li>
 
@@ -23,7 +23,7 @@
 
         <li class="<%= active_class("indents") %>">
           <%= link_to transactions_indents_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-notebook"></i>
+            <i class="mdi mdi-clipboard-text"></i>
             <span class="nav-text">Indents</span>
           <% end %>
         </li>
@@ -34,21 +34,21 @@
 
         <li class="<%= active_class("brands") %>">
           <%= link_to master_brands_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-registered-trademark"></i>
+            <i class="mdi mdi-puzzle"></i>
             <span class="nav-text">Brands</span>
           <% end %>
         </li>
 
         <li class="<%= active_class("cost_centers") %>">
           <%= link_to master_cost_centers_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-steam"></i>
+            <i class="mdi mdi-cash-multiple"></i>
             <span class="nav-text">Cost Centers</span>
           <% end %>
         </li>
 
         <li class="<%= active_class("item_groups") %>">
           <%= link_to master_item_groups_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-cart"></i>
+            <i class="mdi mdi-group"></i>
             <span class="nav-text">Item Groups</span>
           <% end %>
         </li>
@@ -62,21 +62,21 @@
 
         <li class="<%= active_class("vendors") %>">
           <%= link_to master_vendors_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-alien"></i>
+            <i class="mdi mdi-account-supervisor"></i>
             <span class="nav-text">Vendors</span>
           <% end %>
         </li>
 
         <li class="<%= active_class("items") %>">
           <%= link_to master_items_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-hammer"></i>
+            <i class="mdi mdi-ballot"></i>
             <span class="nav-text">Items</span>
           <% end %>
         </li>
 
         <li class="<%= active_class("makes") %>">
           <%= link_to master_makes_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-hammer"></i>
+            <i class="mdi mdi-hexagon-multiple"></i>
             <span class="nav-text">Makes</span>
           <% end %>
         </li>
@@ -102,7 +102,7 @@
 
           <li class="<%= active_class("warehouses") %>">
             <%= link_to admin_warehouses_path, class: "sidenav-item-link" do %>
-              <i class="mdi mdi-store"></i>
+              <i class="mdi mdi-office-building"></i>
               <span class="nav-text">Warehouses</span>
             <% end %>
           </li>
