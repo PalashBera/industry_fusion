@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     return if admin_user?
 
     flash[:error] = "You don't have access for this."
-    redirect_to root_path
+    redirect_to dashboard_path
   end
 
   private
@@ -54,11 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_redirection
-    if admin_user?
-      admin_root_path
-    else
-      root_path
-    end
+    dashboard_path
   end
 
   def set_current_user
