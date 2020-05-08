@@ -1,7 +1,7 @@
 <section class="form-row">
   <div class="form-group col-sm-12 col-lg-2">
     <%= f.label :item_id, class: "d-lg-none" %>
-    <%= f.select :item_id, current_organization.items.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control indent-item-selection" } %>
+    <%= f.select :item_id, current_organization.items.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control indent-item-selection" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
@@ -21,7 +21,7 @@
 
   <div class="form-group col-sm-12 col-lg-2">
     <%= f.label :cost_center_id, "Cost Center", class: "d-lg-none" %>
-    <%= f.select :cost_center_id, current_organization.cost_centers.order_by_name.pluck(:name, :id), { prompt: "-- Select Cost Center --" }, { required: true, class: "form-control" } %>
+    <%= f.select :cost_center_id, current_organization.cost_centers.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Cost Center --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
