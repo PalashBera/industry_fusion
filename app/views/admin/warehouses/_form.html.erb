@@ -1,7 +1,7 @@
 <%= render layout: "shared/form_modal_layout", locals: { resource: @warehouse, namespace: "admin" } do |f| %>
   <div class="form-group">
     <%= f.label :company_id %>
-    <%= f.select :company_id, current_organization.companies.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "form-control" } %>
+    <%= f.select :company_id, current_organization.companies.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group">

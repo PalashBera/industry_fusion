@@ -41,7 +41,7 @@ module LinksHelper
   def remove_filter_btn(controller_name)
     link_to "Remove Filter",
             url_for(controller: controller_name, action: "index"),
-            class: "btn btn-secondary btn-xs-block order-2 order-sm-1"
+            class: "btn btn-secondary"
   end
 
   def remove_selection_link
