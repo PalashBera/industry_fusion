@@ -137,35 +137,37 @@ end
   )
 end
 
-# 10.times do |t|
-#   User.current_user = [user1, user2].sample
-#   company = organization.companies.sample
-#   warehouse = company.warehouses.sample
-#
-#   indent = Indent.new(
-#     requirement_date: Date.today + t.days,
-#     organization_id: organization.id,
-#     company_id: company.id,
-#     warehouse_id: warehouse.id,
-#     serial: t + 1
-#   ).save(validate: false)
-#
-#   3.times do
-#     item = organization.items.sample
-#     make = item.makes.sample
-#     uom = item.uom
-#
-#     IndentItem.create!(
-#       indent_id: indent.id,
-#       item_id: item.id,
-#       make_id: make.id,
-#       uom_id: uom.id,
-#       cost_center_id: organization.cost_centers.sample.id,
-#       quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
-#       priority: %w[default high medium low].sample,
-#       organization_id: organization.id
-#     )
-#   end
-# end
+20.times do |t|
+  User.current_user = [user1, user2].sample
+  company = organization.companies.sample
+  warehouse = company.warehouses.sample
+
+  Indent.new(
+    requirement_date: Date.today + t.days,
+    organization_id: organization.id,
+    company_id: company.id,
+    warehouse_id: warehouse.id,
+    serial: t + 1
+  ).save(validate: false)
+
+  indent = Indent.last
+
+  [2, 3, 4].sample.times do
+    item = organization.items.sample
+    make = item.makes.sample
+    uom = item.uom
+
+    IndentItem.create!(
+      indent_id: indent.id,
+      item_id: item.id,
+      make_id: make.id,
+      uom_id: uom.id,
+      cost_center_id: organization.cost_centers.sample.id,
+      quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
+      priority: %w[default high medium low].sample,
+      organization_id: organization.id
+    )
+  end
+end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)
