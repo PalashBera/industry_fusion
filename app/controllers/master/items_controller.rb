@@ -37,9 +37,7 @@ class Master::ItemsController < Master::HomeController
   private
 
   def item_params
-    params.require(:item).permit(:name, :archive, :uom_id, :item_group_id, :secondary_uom_id,
-                                 :primary_quantity, :secondary_quantity,
-                                 makes_attributes: %i[id brand_id cat_no _destroy])
+    params.require(:item).permit(:name, :archive, :uom_id, :item_group_id, :secondary_uom_id, :primary_quantity, :secondary_quantity)
   end
 
   def item

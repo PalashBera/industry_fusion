@@ -1,10 +1,5 @@
 $('#form_modal').find('.modal-content').html('<%= j (render "form") %>');
 $('#form_modal').modal();
-$(".selectpicker").selectpicker({ size: '7' });
-
-if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-  $('.selectpicker').selectpicker('mobile');
-}
 
 $('#item_uom_id, #item_secondary_uom_id').change(function() {
   var primaryUOM = $('#item_uom_id').find(":selected").text();

@@ -29,6 +29,10 @@ class Item < ApplicationRecord
     [uom, secondary_uom].compact
   end
 
+  def convertion_equation
+    "#{primary_quantity} #{uom.short_name} = #{secondary_quantity} #{secondary_uom.short_name}" if secondary_uom
+  end
+
   private
 
   def check_secondary_uom_equality

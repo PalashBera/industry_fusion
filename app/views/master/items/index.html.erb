@@ -22,8 +22,7 @@
           <th scope="col"><%= sort_link @search, :item_group_name, "Item Group" %></th>
           <th scope="col">UOM</th>
           <th scope="col">Secondary UOM</th>
-          <th scope="col">Primary Qty</th>
-          <th scope="col">Secondary Qty</th>
+          <th scope="col">Convertion Equation</th>
           <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
           <th scope="col" class="text-center">Actions</th>
         </tr>
@@ -37,8 +36,7 @@
             <td><%= item.item_group.name %></td>
             <td><%= item.uom.short_name %></td>
             <td><%= item.secondary_uom&.short_name %></td>
-            <td><%= item.primary_quantity %></td>
-            <td><%= item.secondary_quantity %></td>
+            <td><%= item.convertion_equation %></td>
             <td><%= archive_status(item.archive).html_safe %></td>
             <td class="text-center">
               <div class="dropdown">
