@@ -70,8 +70,6 @@ Rails.application.routes.draw do
       get :export, on: :collection
       put :resend_invitation, on: :member
     end
-
-    root "home#index"
   end
 
   namespace :transactions do
@@ -90,5 +88,6 @@ Rails.application.routes.draw do
   end
 
   root "home#index"
+  get "/dashboard", to: "home#dashboard"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
