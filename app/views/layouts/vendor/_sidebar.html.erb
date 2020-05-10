@@ -1,0 +1,21 @@
+<aside class="left-sidebar sidebar-dark" id="left-sidebar">
+  <div id="sidebar" class="sidebar">
+    <div class="app-brand">
+      <%= link_to dashboard_path do %>
+        <%= image_tag "logo.png", alt: "School Management" %>
+        <span class="brand-name">Industry Fusion</span>
+      <% end %>
+    </div>
+
+    <div class="sidebar-left" data-simplebar style="height: 100%;">
+      <ul class="nav sidebar-inner" id="sidebar-menu">
+        <li>
+          <%= link_to dashboard_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-view-dashboard"></i>
+            <span class="nav-text">Dashboard</span>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</aside>

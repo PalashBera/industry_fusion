@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :vendors
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
   devise_for :users
 
-  resources :organizations, only: [:new, :create]
+  resources :organizations,      only: [:new, :create]
+  resources :store_informations, only: [:new, :create]
 
   namespace :master do
     resources :brands, except: [:show, :destroy] do

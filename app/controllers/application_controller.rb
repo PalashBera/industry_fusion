@@ -29,6 +29,15 @@ class ApplicationController < ActionController::Base
     redirect_to new_organization_path
   end
 
+  def check_store_presence
+    if current_vendor.store_information.blank?
+      flash[:error] = "You don't have any store information. Please create your store."
+      new_store_information_path
+    else
+      after_sign_in_redirection
+    end
+  end
+
   def authenticate_admin
     return if admin_user?
 
@@ -39,13 +48,15 @@ class ApplicationController < ActionController::Base
   private
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name mobile_number])
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name mobile_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name mobile_number organization_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name mobile_number organization_name])
     devise_parameter_sanitizer.permit(:accept_invitation, keys: %i[first_name last_name mobile_number])
   end
 
   def after_sign_in_path_for(resource)
-    if current_organization
+    if resource.class.name == "Vendor"
+      check_store_presence
+    elsif current_organization
       stored_location_for(resource) || after_sign_in_redirection
     else
       flash[:error] = "You don't have any organization information. Please create your organization."
@@ -57,8 +68,16 @@ class ApplicationController < ActionController::Base
     dashboard_path
   end
 
+  def user_or_vendor?
+    current_user || current_vendor
+  end
+
   def set_current_user
-    User.current_user = current_user
+    if current_vendor
+      Vendor.current_vendor = current_vendor
+    else
+      User.current_user = current_user
+    end
   end
 
   def remove_empty_parameters
@@ -74,6 +93,8 @@ class ApplicationController < ActionController::Base
   def resolve_layout
     if user_signed_in?
       "application"
+    elsif vendor_signed_in?
+      "vendor"
     else
       "basic"
     end

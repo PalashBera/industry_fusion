@@ -2,8 +2,10 @@ class HomeController < ApplicationController
   def index; end
 
   def dashboard
-    if current_user.admin?
+    if current_user&.admin?
       admin_dashboard
+    elsif current_vendor
+      vendor_dashboard
     else
       user_dashboard
     end

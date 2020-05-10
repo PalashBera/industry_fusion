@@ -56,6 +56,61 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     add_index :users, :confirmation_token,   unique: true
     add_index :users, :invitation_token,     unique: true
     # add_index :users, :unlock_token,         unique: true
+
+    create_table :vendors do |t|
+      ## User Information
+      t.string :first_name,        null: false, default: ""
+      t.string :last_name,         null: false, default: ""
+      t.string :mobile_number,     null: false, default: ""
+      t.string :organization_name, null: false, default: ""
+
+      ## Database authenticatable
+      t.string :email,              null: false, default: ""
+      t.string :encrypted_password, null: false, default: ""
+
+      ## Recoverable
+      t.string   :reset_password_token
+      t.datetime :reset_password_sent_at
+
+      ## Rememberable
+      t.datetime :remember_created_at
+
+      # Trackable
+      t.integer  :sign_in_count, default: 0, null: false
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.inet     :current_sign_in_ip
+      t.inet     :last_sign_in_ip
+
+      ## Confirmable
+      t.string   :confirmation_token
+      t.datetime :confirmed_at
+      t.datetime :confirmation_sent_at
+      t.string   :unconfirmed_email # Only if using reconfirmable
+
+      t.timestamps null: false
+    end
+
+    add_index :vendors, :email,                unique: true
+    add_index :vendors, :reset_password_token, unique: true
+    add_index :vendors, :confirmation_token,   unique: true
+  end
+
+  create_table :store_informations do |t|
+    t.string   :name,                          null: false
+    t.string   :address1,                      null: false
+    t.string   :address2,      default: ""
+    t.string   :city,                          null: false
+    t.string   :state,                         null: false
+    t.string   :country,                       null: false
+    t.string   :pin_code,      limit: 6,       null: false
+    t.string   :phone_number,  default: ""
+    t.boolean  :archive,       default: false, null: false
+    t.string   :pan_number,    limit: 10,      null: false
+    t.string   :gstn,          limit: 15,      null: false
+    t.bigint   :vendor_id,     index: true,    null: false, foreign_key: true
+    t.bigint   :created_by_id, index: true
+    t.bigint   :updated_by_id, index: true
   end
 
   create_table :organizations do |t|
@@ -177,16 +232,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
     t.references :organization,  foreign_key: true, null: false
-
-    t.timestamps
-  end
-
-  create_table :vendors do |t|
-    t.string     :name,                            null: false
-    t.string     :email,         index: true,      null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization, foreign_key: true, null: false
 
     t.timestamps
   end

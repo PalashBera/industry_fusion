@@ -1,0 +1,28 @@
+<% provide(:title, "Forgot Password") %>
+
+<div class="row justify-content-center">
+  <div class="col-sm-12 mb-4">
+    <h3 class="text-center">Forgot Password</h3>
+  </div>
+
+  <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4">
+    <div class="card">
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "shared/error_messages", resource: resource %>
+
+          <div class="form-group">
+            <%= f.label :email, "Email Address" %>
+            <%= f.email_field :email, class: "form-control", autofocus: true, required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255 %>
+          </div>
+
+          <%= f.submit "Send Instructions", class: "btn btn-primary", data: { disable_with: "Sending..." } %>
+        <% end %>
+
+        <hr>
+
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</div>
