@@ -198,14 +198,9 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "country", null: false
     t.string "pin_code", limit: 6, null: false
     t.string "phone_number", default: ""
-    t.boolean "archive", default: false, null: false
     t.string "pan_number", limit: 10, null: false
     t.string "gstn", limit: 15, null: false
     t.bigint "vendor_id", null: false
-    t.bigint "created_by_id"
-    t.bigint "updated_by_id"
-    t.index ["created_by_id"], name: "index_store_informations_on_created_by_id"
-    t.index ["updated_by_id"], name: "index_store_informations_on_updated_by_id"
     t.index ["vendor_id"], name: "index_store_informations_on_vendor_id"
   end
 
@@ -266,7 +261,6 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
     t.string "mobile_number", default: "", null: false
-    t.string "organization_name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

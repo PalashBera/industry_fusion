@@ -6,7 +6,8 @@ class StoreInformationsController < ApplicationController
   end
 
   def create
-    @store_information = current_vendor.create_store_information(store_information_params)
+    @store_information = StoreInformation.new(store_information_params)
+    @store_information.vendor = current_vendor
 
     if @store_information.save
       redirect_to dashboard_path, flash: { success: "Store Information has been successfully created." }

@@ -1,6 +1,10 @@
-<header class="main-header vendor-header" id="header">
-  <nav class="navbar navbar-expand-lg navbar-light">
-    <%= link_to "INDUSTRY FUSION", root_path, class: "navbar-brand" %>
+<header class="main-header" id="header">
+  <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
+    <button id="sidebar-toggler" class="sidebar-toggle">
+      <span class="sr-only">Toggle navigation</span>
+    </button>
+
+    <span class="page-title"><%= yield(:page_title) %></span>
 
     <div class="navbar-right">
       <ul class="nav navbar-nav">
@@ -12,39 +16,17 @@
 
           <ul class="dropdown-menu dropdown-menu-right">
             <li>
-              <a class="dropdown-link-item" href="<%= edit_user_registration_path %>">
-                <i class="mdi mdi-account-outline"></i>
-                <span class="nav-text">My Account</span>
-              </a>
-            </li>
-
-            <li>
-              <a class="dropdown-link-item" href="email-inbox.html">
-                <i class="mdi mdi-email-outline"></i>
-                <span class="nav-text">Message</span>
-                <span class="badge badge-pill badge-primary">24</span>
-              </a>
-            </li>
-
-            <li>
-              <a class="dropdown-link-item" href="user-activities.html">
-                <i class="mdi mdi-diamond-stone"></i>
-                <span class="nav-text">Activitise</span>
-              </a>
-            </li>
-
-            <li>
               <%= link_to edit_vendor_registration_path, class: "dropdown-link-item" do %>
                 <i class="mdi mdi-settings"></i>
-                <span class="nav-text">Account Settings</span>
+                <span class="nav-text">Account Setting</span>
               <% end %>
             </li>
 
             <li class="dropdown-footer">
-              <a class="dropdown-link-item" href="<%= destroy_user_session_path %>" data-method="delete">
+              <%= link_to destroy_vendor_session_path, method: :delete, class: "dropdown-link-item" do %>
                 <i class="mdi mdi-logout"></i>
                 <span class="nav-text">Log Out</span>
-              </a>
+              <% end %>
             </li>
           </ul>
         </li>

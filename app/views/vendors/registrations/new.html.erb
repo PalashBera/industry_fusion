@@ -34,11 +34,6 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :organization_name, "Organization Name" %>
-            <%= f.text_field :organization_name, class: "form-control", required: true, placeholder: "Organization Name" %>
-          </div>
-
-          <div class="form-group">
             <%= f.label :password %>
             <%= f.password_field :password, class: "form-control", required: true, placeholder: "Password", minlength: 6, maxlength: 128 %>
             <small id="passwordHelp" class="form-text text-muted">Password should be minimum <%= @minimum_password_length %> characters.</small>
@@ -54,7 +49,7 @@
 
         <hr>
 
-        <%= render "devise/shared/links" %>
+        <%= render "vendors/shared/links" %>
       </div>
     </div>
   </div>

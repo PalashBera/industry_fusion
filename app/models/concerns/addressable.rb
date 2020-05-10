@@ -13,8 +13,7 @@ module Addressable
     end
 
     validates :address1, :city, :state, :country, presence: true, length: { maximum: 255 }
-    validates :address2, length: { maximum: 255 }
-    validates :phone_number, length: {  minimum: 10, maximum: 10 }
+    validates :address2, :phone_number, length: { maximum: 255 }
     validates :pin_code, presence: true, length: { is: 6 }
   end
 end

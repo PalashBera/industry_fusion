@@ -62,7 +62,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string :first_name,        null: false, default: ""
       t.string :last_name,         null: false, default: ""
       t.string :mobile_number,     null: false, default: ""
-      t.string :organization_name, null: false, default: ""
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -105,12 +104,9 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.string   :country,                       null: false
     t.string   :pin_code,      limit: 6,       null: false
     t.string   :phone_number,  default: ""
-    t.boolean  :archive,       default: false, null: false
     t.string   :pan_number,    limit: 10,      null: false
     t.string   :gstn,          limit: 15,      null: false
     t.bigint   :vendor_id,     index: true,    null: false, foreign_key: true
-    t.bigint   :created_by_id, index: true
-    t.bigint   :updated_by_id, index: true
   end
 
   create_table :organizations do |t|
