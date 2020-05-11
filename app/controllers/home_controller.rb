@@ -1,8 +1,12 @@
 class HomeController < ApplicationController
+  before_action :authenticate_session!, only: :dashboard
+
   def index; end
 
   def dashboard
-    if current_user.admin?
+    if current_vendor
+      vendor_dashboard
+    elsif current_user.admin?
       admin_dashboard
     else
       user_dashboard

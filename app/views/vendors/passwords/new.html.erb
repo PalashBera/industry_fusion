@@ -1,14 +1,14 @@
-<% provide(:title, "Unlock Instructions") %>
+<% provide(:title, "Forgot Password") %>
 
 <div class="row justify-content-center">
   <div class="col-sm-12 mb-4">
-    <h3 class="text-center">Resend Unlock Instructions</h3>
+    <h3 class="text-center">Forgot Password</h3>
   </div>
 
   <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4">
     <div class="card">
       <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
           <%= render "shared/error_messages", resource: resource %>
 
           <div class="form-group">
@@ -21,7 +21,7 @@
 
         <hr>
 
-        <%= render "devise/shared/links" %>
+        <%= render "vendors/shared/links" %>
       </div>
     </div>
   </div>

@@ -189,6 +189,21 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
   end
 
+  create_table "store_informations", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address1", null: false
+    t.string "address2", default: ""
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "country", null: false
+    t.string "pin_code", limit: 6, null: false
+    t.string "phone_number", default: ""
+    t.string "pan_number", limit: 10, null: false
+    t.string "gstn", limit: 15, null: false
+    t.bigint "vendor_id", null: false
+    t.index ["vendor_id"], name: "index_store_informations_on_vendor_id"
+  end
+
   create_table "uoms", force: :cascade do |t|
     t.string "name", null: false
     t.string "short_name", limit: 4, null: false
@@ -243,17 +258,28 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   end
 
   create_table "vendors", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.bigint "created_by_id"
-    t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "mobile_number", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_by_id"], name: "index_vendors_on_created_by_id"
-    t.index ["email"], name: "index_vendors_on_email"
-    t.index ["organization_id"], name: "index_vendors_on_organization_id"
-    t.index ["updated_by_id"], name: "index_vendors_on_updated_by_id"
+    t.index ["confirmation_token"], name: "index_vendors_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_vendors_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true
   end
 
   create_table "versions", force: :cascade do |t|
@@ -311,7 +337,6 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "makes", "organizations"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
-  add_foreign_key "vendors", "organizations"
   add_foreign_key "warehouses", "companies"
   add_foreign_key "warehouses", "organizations"
 end
