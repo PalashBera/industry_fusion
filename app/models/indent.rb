@@ -13,16 +13,25 @@ class Indent < ApplicationRecord
 
   accepts_nested_attributes_for :indent_items, reject_if: :all_blank, allow_destroy: true
 
-  validates :serial, :indent_items, presence: true
+  validates :indent_items, presence: true
 
-  scope :order_by_serial, -> { order(:serial) }
   scope :filter_with_date_range, ->(start_date, end_date) { where("requirement_date >= ? AND requirement_date <= ?", start_date, end_date) }
 
   has_paper_trail ignore: %i[created_at]
 
+  def self.initial_financial_year
+    order(requirement_date: :asc).first&.financial_year
+  end
+
   def serial_number
     start_date, end_date = fy_date_range
     "IND/#{start_date.strftime("%y")}-#{end_date.strftime("%y")}/#{company.short_name}/#{warehouse.short_name}/#{serial.to_s.rjust(4, "0")}"
+  end
+
+  def financial_year
+    requirement_date.month < 4 ? start_year = requirement_date.year - 1 : start_year = requirement_date.year
+    requirement_date.month < 4 ? end_year = requirement_date.year : end_year = requirement_date.year + 1
+    [start_year, end_year]
   end
 
   private
@@ -37,6 +46,6 @@ class Indent < ApplicationRecord
   def fy_date_range
     requirement_date.month < 4 ? start_year = requirement_date.year - 1 : start_year = requirement_date.year
     requirement_date.month < 4 ? end_year = requirement_date.year : end_year = requirement_date.year + 1
-    [Date.new(start_year, 4, 1), Date.new(end_year, 3, 30)]
+    [Date.new(start_year, 4, 1), Date.new(end_year, 3, 31)]
   end
 end
