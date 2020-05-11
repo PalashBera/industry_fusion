@@ -24,6 +24,9 @@ class IndentItem < ApplicationRecord
 
   has_paper_trail ignore: %i[created_at updated_at]
 
+  scope :order_by_indent_serial, -> { order("indents.serial desc") }
+  scope :filter_by_financial_year, ->(fy_start_date, fy_end_date) { where("indents.requirement_date BETWEEN ? AND ?", fy_start_date, fy_end_date) }
+
   def self.included_resources
     includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)
   end

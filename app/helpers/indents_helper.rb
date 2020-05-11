@@ -18,4 +18,18 @@ module IndentsHelper
   def priority_selection
     [%w[Default default], %w[High high], %w[Medium medium], %w[Low low]]
   end
+
+  def fy_options
+    initial_fy = current_organization.indents.initial_financial_year[0]
+    current_fy = current_financial_year[1]
+    fy_array = []
+    year = current_fy
+
+    while year > initial_fy
+      fy_array << ["#{year - 1} - #{year}", "#{year - 1} - #{year}"]
+      year -= 1
+    end
+
+    fy_array
+  end
 end

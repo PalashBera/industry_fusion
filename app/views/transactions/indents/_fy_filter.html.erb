@@ -1,0 +1,4 @@
+<%= form_tag transactions_indents_path, method: :get, class: "form-inline fy-filter"  do %>
+  <%= label_tag :fy, "Financial Year :" %> &nbsp; &nbsp;
+  <%= select_tag :fy, options_for_select(fy_options, selected: params[:fy]), { class: "form-control" } %>
+<% end %>

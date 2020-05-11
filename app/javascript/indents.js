@@ -52,3 +52,7 @@ $(document).on('change', '.indent-item-selection', function (e) {
     }
   });
 });
+
+$(document).on('change', '.fy-filter', function (e) {
+  $(this).submit();
+});
