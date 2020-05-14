@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_151408) do
+ActiveRecord::Schema.define(version: 2020_05_12_143530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,17 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["item_id"], name: "index_makes_on_item_id"
     t.index ["organization_id"], name: "index_makes_on_organization_id"
     t.index ["updated_by_id"], name: "index_makes_on_updated_by_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "recipient_id"
+    t.string "action"
+    t.string "notifiable_type"
+    t.integer "notifiable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -335,6 +346,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
+  add_foreign_key "notifications", "users"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "warehouses", "companies"

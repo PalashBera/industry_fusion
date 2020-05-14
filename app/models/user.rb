@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :trackable, :invitable, :async
 
+  has_many :notifications
+
   belongs_to :organization, optional: true
 
   validates :admin, inclusion: { in: [true, false] }

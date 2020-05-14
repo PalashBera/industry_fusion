@@ -8,6 +8,32 @@
 
     <div class="navbar-right">
       <ul class="nav navbar-nav">
+        <li class="custom-dropdown">
+          <button class="notify-toggler custom-dropdown-toggler">
+            <i class="mdi mdi-bell-outline icon"></i>
+            <span class="badge badge-xs rounded-circle"><%= current_user.notifications.length %></span>
+          </button>
+          <div class="dropdown-notify">
+
+            <header>
+              <div class="nav nav-underline" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="nav-profile"
+                  aria-selected="false">Msg(<%= current_user.notifications.length %>)</a>
+              </div>
+
+              <% current_user.notifications.order_by_date.each do |notify| %>
+                <div class="tab-pane" id="message" role="tabpanel" aria-labelledby="message-tab">
+                  <div class="media media-sm p-4 mb-0">
+                    <div class="media-body">
+                      <%= notify.user.email %> <%= notify.action %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </header>
+          </div>
+        </li>
+
         <li class="dropdown user-menu">
           <button class="dropdown-toggle nav-link" data-toggle="dropdown">
             <span class="user-image rounded-circle user-initial"><%= current_user.initial %></span>
