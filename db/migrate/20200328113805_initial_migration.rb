@@ -87,15 +87,32 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.datetime :confirmation_sent_at
       t.string   :unconfirmed_email # Only if using reconfirmable
 
-      t.timestamps null: false
+      ## Lockable
+      # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
+      # t.string   :unlock_token # Only if unlock strategy is :email or :both
+      # t.datetime :locked_at
+
+      ## Invitable
+      t.string     :invitation_token
+      t.datetime   :invitation_created_at
+      t.datetime   :invitation_sent_at
+      t.datetime   :invitation_accepted_at
+      t.integer    :invitation_limit
+      t.references :invited_by, polymorphic: true
+      t.integer    :invitations_count, index: true
+
+      t.timestamps
     end
 
     add_index :vendors, :email,                unique: true
     add_index :vendors, :reset_password_token, unique: true
     add_index :vendors, :confirmation_token,   unique: true
+    add_index :vendors, :invitation_token,     unique: true
+    # add_index :users, :unlock_token,         unique: true
   end
 
   create_table :store_informations do |t|
+    t.bigint   :vendor_id,     index: true,    null: false, foreign_key: true
     t.string   :name,                          null: false
     t.string   :address1,                      null: false
     t.string   :address2,      default: ""
@@ -106,7 +123,8 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.string   :phone_number,  default: ""
     t.string   :pan_number,    limit: 10,      null: false
     t.string   :gstn,          limit: 15,      null: false
-    t.bigint   :vendor_id,     index: true,    null: false, foreign_key: true
+
+    t.timestamps
   end
 
   create_table :organizations do |t|

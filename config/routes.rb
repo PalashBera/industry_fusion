@@ -54,7 +54,9 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
-    resources :vendors, except: [:show, :destroy]
+    resources :vendors, only: [:index, :new, :create] do
+      put :resend_invitation, on: :member
+    end
   end
 
   namespace :admin do

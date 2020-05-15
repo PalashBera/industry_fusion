@@ -16,6 +16,8 @@ class Organization < ApplicationRecord
   has_many :makes
   has_many :indents
   has_many :indent_items
+  has_many :organization_vendors
+  has_many :vendors, through: :organization_vendors
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
 

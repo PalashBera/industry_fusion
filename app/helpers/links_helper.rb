@@ -91,11 +91,19 @@ module LinksHelper
             title: "Edit #{controller_name.singularize.humanize.titleize}"
   end
 
-  def resend_invitation_link(user)
-    link_to '<i class="far fa-paper-plane"></i>'.html_safe,
+  def resend_user_invitation_link(user)
+    link_to '<i class="far fa-paper-plane"></i> Resend Invitation'.html_safe,
             resend_invitation_admin_user_path(user),
             method: :put,
-            class: "ml-1",
-            title: "Resend Invitation"
+            title: "Resend Invitation",
+            class: "dropdown-item"
+  end
+
+  def resend_vendor_invitation_link(vendor)
+    link_to '<i class="far fa-paper-plane"></i> Resend Invitation'.html_safe,
+            resend_invitation_master_vendor_path(vendor),
+            method: :put,
+            title: "Resend Invitation",
+            class: "dropdown-item"
   end
 end
