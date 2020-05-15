@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_30_151408) do
+ActiveRecord::Schema.define(version: 2020_05_11_142440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,6 +171,20 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.index ["updated_by_id"], name: "index_makes_on_updated_by_id"
   end
 
+  create_table "organization_vendors", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "vendor_id", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_organization_vendors_on_created_by_id"
+    t.index ["organization_id"], name: "index_organization_vendors_on_organization_id"
+    t.index ["updated_by_id"], name: "index_organization_vendors_on_updated_by_id"
+    t.index ["vendor_id"], name: "index_organization_vendors_on_vendor_id"
+  end
+
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.string "address1", null: false
@@ -190,6 +204,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   end
 
   create_table "store_informations", force: :cascade do |t|
+    t.bigint "vendor_id", null: false
     t.string "name", null: false
     t.string "address1", null: false
     t.string "address2", default: ""
@@ -200,7 +215,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.string "phone_number", default: ""
     t.string "pan_number", limit: 10, null: false
     t.string "gstn", limit: 15, null: false
-    t.bigint "vendor_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["vendor_id"], name: "index_store_informations_on_vendor_id"
   end
 
@@ -275,10 +291,21 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_vendors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_vendors_on_email", unique: true
+    t.index ["invitation_token"], name: "index_vendors_on_invitation_token", unique: true
+    t.index ["invitations_count"], name: "index_vendors_on_invitations_count"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_vendors_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true
   end
 
@@ -335,6 +362,8 @@ ActiveRecord::Schema.define(version: 2020_03_30_151408) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
+  add_foreign_key "organization_vendors", "organizations"
+  add_foreign_key "organization_vendors", "vendors"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "warehouses", "companies"

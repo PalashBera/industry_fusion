@@ -1,6 +1,6 @@
 class Master::VendorsController < Master::HomeController
   def index
-    @search = Vendor.ransack(params[:q])
+    @search = current_organization.vendors.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
     @pagy, @vendors = pagy(@search.result, items: 20)
   end
@@ -10,34 +10,36 @@ class Master::VendorsController < Master::HomeController
   end
 
   def create
-    @vendor = Vendor.new(vendor_params)
+    @vendor = Vendor.find_or_initialize_by(vendor_params)
 
-    if @vendor.save
-      redirect_to master_vendors_path, flash: { success: "Vendor has been successfully created." }
-    else
+    if current_organization.vendors.include?(@vendor)
+      @vendor.errors.add(:email, " is already taken")
       render "new"
-    end
-  end
-
-  def edit
-    vendor
-  end
-
-  def update
-    if vendor.update(vendor_params)
-      redirect_to master_vendors_path, flash: { success: "Vendor has been successfully updated." }
     else
-      render "edit"
+      invite_vendor
+      @vendor.organization_vendors.create(organization_id: current_organization.id)
+      redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
     end
+  end
+
+  def resend_invitation
+    vendor = Vendor.find(params[:id])
+    Vendor.invite!({ email: vendor.email }, current_vendor).deliver_invitation
+    redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
   end
 
   private
 
   def vendor_params
-    params.require(:vendor).permit(:name, :email)
+    params.require(:vendor).permit(:email)
   end
 
-  def vendor
-    @vendor ||= Vendor.find(params[:id])
+  def invite_vendor
+    if @vendor.new_record?
+      Vendor.invite!(vendor_params, current_user).deliver_invitation
+      @vendor = Vendor.find_by(vendor_params)
+    else
+      @vendor.send_new_vendorship_mail
+    end
   end
 end
