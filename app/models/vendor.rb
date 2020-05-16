@@ -10,7 +10,7 @@ class Vendor < ApplicationRecord
 
   delegate :name, to: :store_information, allow_nil: true
 
-  def method_name
+  def send_new_vendorship_mail
     VendorMailer.organization_acknowledgement(self, User.current_user).deliver_later
   end
 
