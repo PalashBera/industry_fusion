@@ -1,8 +1,43 @@
 Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 
-  devise_for :users
-  devise_for :vendors
+  devise_for :users, skip: [:registrations, :invitations]
+
+  devise_scope :user do
+    resource :registration,
+      only: [:new, :create, :edit, :update],
+      path: "users",
+      path_names: { new: "sign_up" },
+      controller: "devise/registrations",
+      as: :user_registration
+
+    resource :invitation,
+      only: [:update,],
+      path: "users/invitation",
+      controller: "devise/invitations",
+      as: :user_invitation do
+        get "/accept", to: "devise/invitations#edit", as: :accept
+      end
+  end
+
+  devise_for :vendors, skip: [:registrations, :invitations]
+
+  devise_scope :vendor do
+    resource :registration,
+      only: [:new, :create, :edit, :update],
+      path: "vendors",
+      path_names: { new: "sign_up" },
+      controller: "devise/registrations",
+      as: :vendor_registration
+
+    resource :invitation,
+      only: [:update,],
+      path: "vendors/invitation",
+      controller: "devise/invitations",
+      as: :vendor_invitation do
+        get "/accept", to: "devise/invitations#edit", as: :accept
+      end
+  end
 
   resources :organizations,      only: [:new, :create]
   resources :store_informations, only: [:new, :create]
