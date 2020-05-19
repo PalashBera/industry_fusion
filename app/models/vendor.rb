@@ -2,7 +2,7 @@ class Vendor < ApplicationRecord
   include ModalFormable
   include UserInformable
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :trackable, :invitable, :async
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable, :confirmable, :trackable, :invitable, :async
 
   has_one :store_information
   has_many :organization_vendors

@@ -23,6 +23,12 @@ Rails.application.routes.draw do
   devise_for :vendors, skip: [:registrations, :invitations]
 
   devise_scope :vendor do
+    resource :registration,
+      only: [:edit, :update],
+      path: "vendors",
+      controller: "devise/registrations",
+      as: :vendor_registration
+
     resource :invitation,
       only: [:update,],
       path: "vendors/invitation",
