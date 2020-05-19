@@ -1,4 +1,7 @@
 class Master::VendorsController < Master::HomeController
+  include Exportable
+  include Importable
+
   def index
     @search = current_organization.vendors.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
@@ -24,7 +27,7 @@ class Master::VendorsController < Master::HomeController
 
   def resend_invitation
     vendor = Vendor.find(params[:id])
-    Vendor.invite!({ email: vendor.email }, current_vendor).deliver_invitation
+    Vendor.invite!({ email: vendor.email }, current_user).deliver_invitation
     redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
   end
 

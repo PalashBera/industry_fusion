@@ -10,6 +10,25 @@ class Vendor < ApplicationRecord
 
   delegate :name, to: :store_information, allow_nil: true
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
+      invite_vendor(row.to_h[:email])
+    end
+  end
+
+  def self.invite_vendor(email)
+    vendor = find_or_initialize_by(email: email)
+
+    if vendor.new_record?
+      invite!({ email: email }, User.current_user).deliver_invitation
+      vendor = find_by_email(email)
+    else
+      vendor.send_new_vendorship_mail
+    end
+
+    vendor.organization_vendors.create(organization_id: Organization.current_organization.id)
+  end
+
   def send_new_vendorship_mail
     VendorMailer.organization_acknowledgement(self, User.current_user).deliver_later
   end

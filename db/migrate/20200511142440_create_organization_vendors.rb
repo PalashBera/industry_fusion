@@ -9,5 +9,7 @@ class CreateOrganizationVendors < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_index :organization_vendors, [ :organization_id, :vendor_id ], unique: true
   end
 end

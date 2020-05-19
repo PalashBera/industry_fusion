@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_organization_vendors_on_created_by_id"
+    t.index ["organization_id", "vendor_id"], name: "index_organization_vendors_on_organization_id_and_vendor_id", unique: true
     t.index ["organization_id"], name: "index_organization_vendors_on_organization_id"
     t.index ["updated_by_id"], name: "index_organization_vendors_on_updated_by_id"
     t.index ["vendor_id"], name: "index_organization_vendors_on_vendor_id"
