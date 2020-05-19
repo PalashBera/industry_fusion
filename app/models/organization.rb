@@ -3,6 +3,8 @@ class Organization < ApplicationRecord
   include UserTrackable
   include Addressable
 
+  cattr_accessor :current_organization
+
   before_validation { self.name = name.to_s.squish }
 
   has_many :users

@@ -23,13 +23,6 @@ Rails.application.routes.draw do
   devise_for :vendors, skip: [:registrations, :invitations]
 
   devise_scope :vendor do
-    resource :registration,
-      only: [:new, :create, :edit, :update],
-      path: "vendors",
-      path_names: { new: "sign_up" },
-      controller: "devise/registrations",
-      as: :vendor_registration
-
     resource :invitation,
       only: [:update,],
       path: "vendors/invitation",
@@ -91,6 +84,11 @@ Rails.application.routes.draw do
 
     resources :vendors, only: [:index, :new, :create] do
       put :resend_invitation, on: :member
+
+      collection do
+        get  :export
+        post :import
+      end
     end
   end
 
