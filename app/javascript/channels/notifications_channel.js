@@ -2,7 +2,7 @@ import consumer from "./consumer"
 
 consumer.subscriptions.create("NotificationsChannel", {
   connected() {
-    // Called when the subscription is ready for use on the server
+    console.log("hi");
   },
 
   disconnected() {
@@ -11,6 +11,9 @@ consumer.subscriptions.create("NotificationsChannel", {
 
   received(data) {
     console.log(data);
-    $(".media-body").prepend(data.html);
+    var total_msg = data.length
+    $('.msg-body:not(.message-body-' + data.not_notifiable + ')').prepend(data.html);
+    $('.msg-tab:not(.message-tab-' + data.not_notifiable + ')').text('Msg(' + total_msg + ')');
+    $('.msg-count:not(.message-count-' + data.not_notifiable + ')').text(total_msg)
   }
 });

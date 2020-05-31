@@ -171,17 +171,6 @@ ActiveRecord::Schema.define(version: 2020_05_12_143530) do
     t.index ["updated_by_id"], name: "index_makes_on_updated_by_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.integer "recipient_id"
-    t.string "action"
-    t.string "notifiable_type"
-    t.integer "notifiable_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_notifications_on_user_id"
-  end
-
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.string "address1", null: false
@@ -227,6 +216,17 @@ ActiveRecord::Schema.define(version: 2020_05_12_143530) do
     t.index ["created_by_id"], name: "index_uoms_on_created_by_id"
     t.index ["organization_id"], name: "index_uoms_on_organization_id"
     t.index ["updated_by_id"], name: "index_uoms_on_updated_by_id"
+  end
+
+  create_table "user_notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "message", default: "", null: false
+    t.boolean "read", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_user_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -346,8 +346,8 @@ ActiveRecord::Schema.define(version: 2020_05_12_143530) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
-  add_foreign_key "notifications", "users"
   add_foreign_key "uoms", "organizations"
+  add_foreign_key "user_notifications", "users"
   add_foreign_key "users", "organizations"
   add_foreign_key "warehouses", "companies"
   add_foreign_key "warehouses", "organizations"

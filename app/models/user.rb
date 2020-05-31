@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :trackable, :invitable, :async
 
-  has_many :notifications
+  has_many :user_notifications
 
   belongs_to :organization, optional: true
 
