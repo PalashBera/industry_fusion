@@ -1,13 +1,17 @@
 require "rails_helper"
 
 RSpec.describe Company, type: :model do
-  let(:organization) { create(:organization) }
-  let!(:company)     { create(:company, name: "Industry Fusion", organization: organization) }
+  let!(:user)    { create :user }
+  let!(:company) { create :company }
+
+  before { User.stub(:current_user).and_return(user) }
 
   it_behaves_like "modal_formable"
   it_behaves_like "archivable"
   it_behaves_like "nameable"
   it_behaves_like "addressable"
+  it_behaves_like "short_nameable"
+  it_behaves_like "user_trackable"
 
   describe "active record columns" do
     it { should have_db_column(:organization_id) }
@@ -15,7 +19,6 @@ RSpec.describe Company, type: :model do
     it { should have_db_column(:updated_by_id) }
     it { should have_db_column(:created_at) }
     it { should have_db_column(:updated_at) }
-    it { should have_db_column(:short_name) }
   end
 
   describe "active record index" do
@@ -29,11 +32,5 @@ RSpec.describe Company, type: :model do
 
     it { should have_many(:warehouses) }
     it { should have_many(:indents) }
-  end
-
-  describe "validations" do
-    it { should validate_presence_of(:short_name) }
-    it { should validate_length_of(:short_name).is_at_most(8) }
-    it { should validate_uniqueness_of(:short_name).case_insensitive.scoped_to(:organization_id) }
   end
 end

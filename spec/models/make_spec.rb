@@ -1,7 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Make, type: :model do
-  let!(:make) { create :make }
+  let!(:current_user) { create :user }
+  before              { User.stub(:current_user).and_return(current_user)  }
+  let!(:make)         { create :make }
+
+  it_behaves_like "user_trackable"
 
   describe "active record columns" do
     it { should have_db_column(:organization_id) }
@@ -33,5 +37,13 @@ RSpec.describe Make, type: :model do
   describe "validations" do
     it { should validate_length_of(:cat_no).is_at_most(255) }
     it { should validate_uniqueness_of(:cat_no).case_insensitive.scoped_to(:item_id, :brand_id).allow_blank }
+  end
+
+  describe "#brand_with_cat_no" do
+    context "when we want to get brand with category no" do
+      it "should return brand with category number" do
+        expect(make.brand_with_cat_no).to eq("#{make.brand_name} - #{make.cat_no}")
+      end
+    end
   end
 end

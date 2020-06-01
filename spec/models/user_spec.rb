@@ -1,72 +1,29 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:user)         { create(:user, first_name: "Palash", last_name: "Bera") }
+  let(:user)         { create(:user) }
   let(:organization) { create(:organization) }
 
+  it_behaves_like "user_informable"
+
   describe "active record columns" do
-    it { should have_db_column(:email) }
-    it { should have_db_column(:encrypted_password) }
-    it { should have_db_column(:first_name) }
-    it { should have_db_column(:last_name) }
-    it { should have_db_column(:mobile_number) }
     it { should have_db_column(:admin) }
     it { should have_db_column(:organization_id) }
-    it { should have_db_column(:reset_password_token) }
-    it { should have_db_column(:reset_password_sent_at) }
-    it { should have_db_column(:remember_created_at) }
-    it { should have_db_column(:sign_in_count) }
-    it { should have_db_column(:current_sign_in_at) }
-    it { should have_db_column(:last_sign_in_at) }
-    it { should have_db_column(:current_sign_in_ip) }
-    it { should have_db_column(:last_sign_in_ip) }
-    it { should have_db_column(:confirmation_token) }
-    it { should have_db_column(:confirmed_at) }
-    it { should have_db_column(:confirmation_sent_at) }
-    it { should have_db_column(:unconfirmed_email) }
-    it { should have_db_column(:created_at) }
-    it { should have_db_column(:updated_at) }
+    it { should have_db_column(:invitation_token) }
+    it { should have_db_column(:invitation_created_at) }
+    it { should have_db_column(:invitation_sent_at) }
+    it { should have_db_column(:invitation_accepted_at) }
+    it { should have_db_column(:invitation_limit) }
+    it { should have_db_column(:invited_by_type) }
+    it { should have_db_column(:invited_by_id) }
+    it { should have_db_column(:invitations_count) }
   end
 
   describe "active record index" do
-    it { should have_db_index(:email) }
-    it { should have_db_index(:reset_password_token) }
     it { should have_db_index(:organization_id) }
-    it { should have_db_index(:confirmation_token) }
-  end
-
-  describe "callbacks" do
-    context "when first_name contains extra space and is not titleize" do
-      it "should remove extra space and make titleize" do
-        user = build(:user, first_name: " sachin   ramesh  ")
-        user.valid?
-        expect(user.first_name).to eq ("Sachin Ramesh")
-      end
-    end
-
-    context "when last_name contains extra space and is not titleize" do
-      it "should remove extra space and make titleize" do
-        user = build(:user, last_name: " roy   chowdhury  ")
-        user.valid?
-        expect(user.last_name).to eq ("Roy Chowdhury")
-      end
-    end
-
-    context "when email contains extra space and is not in downcase" do
-      it "should remove extra space and make downcase" do
-        user = build(:user, email: " PBERA@KREETI.COM ")
-        user.valid?
-        expect(user.email).to eq ("pbera@kreeti.com")
-      end
-    end
-
-    context "when mobile_number contains extra space" do
-      it "should remove extra space" do
-        user = build(:user, mobile_number: " 8441005506 ")
-        user.valid?
-        expect(user.mobile_number).to eq ("8441005506")
-      end
-    end
+    it { should have_db_index(:invitation_token) }
+    it { should have_db_index(:invitations_count) }
+    it { should have_db_index([:invited_by_type, :invited_by_id]) }
   end
 
   describe "associations" do
@@ -74,28 +31,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "validations" do
-    it { should validate_presence_of(:first_name) }
-    it { should validate_presence_of(:last_name) }
-    it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:mobile_number) }
-    it { should validate_presence_of(:password).on(:create) }
-    it { should validate_length_of(:first_name).is_at_most(255) }
-    it { should validate_length_of(:last_name).is_at_most(255) }
-    it { should validate_length_of(:email).is_at_most(255) }
-    it { should validate_length_of(:mobile_number).is_equal_to(10) }
-    it { should validate_length_of(:password).is_at_least(6).is_at_most(128) }
-  end
-
-  describe "#full_name" do
-    it "should return full name of user" do
-      expect(user.full_name).to eq ("Palash Bera")
-    end
-  end
-
-  describe "#initial" do
-    it "should return initial of user" do
-      expect(user.initial).to eq ("PB")
-    end
+    it { should allow_value(%w(true false)).for(:admin) }
   end
 
   describe "#admin?" do
@@ -126,6 +62,30 @@ RSpec.describe User, type: :model do
     context "when user is not admin" do
       it "should return true" do
         expect(user.non_admin?).to eq (true)
+      end
+    end
+  end
+
+  describe "#user_role" do
+    let(:admin_user)   { create(:admin_user) }
+    let(:general_user) { create(:user, invitation_accepted_at: Time.zone.now) }
+    let(:pending_user) { create(:user, invitation_accepted_at: nil) }
+
+    context "when user is admin" do
+      it "should return admin" do
+        expect(admin_user.user_role).to eq ("admin")
+      end
+    end
+
+    context "when user is not admin but general_user" do
+      it "should return general_user" do
+        expect(general_user.user_role).to eq ("general_user")
+      end
+    end
+
+    context "when user is neither admin nor general_user" do
+      it "should return pending" do
+        expect(pending_user.user_role).to eq ("pending")
       end
     end
   end
