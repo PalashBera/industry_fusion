@@ -6,6 +6,7 @@ class Organization < ApplicationRecord
   cattr_accessor :current_organization
 
   before_validation { self.name = name.to_s.squish }
+  after_validation :validate_fy_range
 
   has_many :users
   has_many :companies
@@ -22,8 +23,18 @@ class Organization < ApplicationRecord
   has_many :vendors, through: :organization_vendors
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
+  validates :fy_start_month, :fy_end_month, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
 
   scope :order_by_name, -> { order(:name) }
 
   has_paper_trail ignore: %i[created_at updated_at]
+
+  private
+
+  def validate_fy_range
+    return unless fy_start_month == fy_end_month
+
+    errors.add(:base, "Start month should not be same as end month")
+    errors.add(:base, "End month should not be same as start month")
+  end
 end
