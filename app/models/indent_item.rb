@@ -1,5 +1,6 @@
 class IndentItem < ApplicationRecord
   include UserTrackable
+  extend FinancialYearHelper
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   enum priority: { default: "default", high: "high", medium: "medium", low: "low" }, _suffix: true
@@ -25,7 +26,16 @@ class IndentItem < ApplicationRecord
   has_paper_trail ignore: %i[created_at updated_at]
 
   scope :order_by_indent_serial, -> { order("indents.serial desc") }
-  scope :filter_by_financial_year, ->(fy_start_date, fy_end_date) { where("indents.requirement_date BETWEEN ? AND ?", fy_start_date, fy_end_date) }
+  # scope :financial_year_filter, ->(fy_start_date, fy_end_date) { where("indents.requirement_date BETWEEN ? AND ?", fy_start_date, fy_end_date) }
+
+  def self.fy_filter(fy_param = nil)
+    fy_start_date, fy_end_date = fy_date_range(fy_param)
+    where("indents.requirement_date BETWEEN ? AND ?", fy_start_date, fy_end_date)
+  end
+
+  def self.ransackable_scopes(_auth_object = nil)
+    %i[fy_filter]
+  end
 
   def self.included_resources
     includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)

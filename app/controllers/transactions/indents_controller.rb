@@ -1,10 +1,9 @@
 class Transactions::IndentsController < Transactions::HomeController
-  include FinancialYearHelper
-
   def index
-    fy_start, fy_end = fy_date_range
-    @search = IndentItem.joins(:indent).filter_by_financial_year(fy_start, fy_end).order_by_indent_serial.ransack(params[:q])
-    @pagy, @indent_items = pagy_countless(@search.result.included_resources, link_extra: 'data-remote="true"') # have to sort by indent serial with respect to FY
+    @search = IndentItem.joins(:indent).ransack(params[:q])
+    @results = @search.result
+    @results = @results.fy_filter unless params[:q].present? && params[:q][:fy_filter].present?
+    @pagy, @indent_items = pagy_countless(@results.order_by_indent_serial.included_resources, link_extra: 'data-remote="true"')
   end
 
   def new

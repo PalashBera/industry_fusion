@@ -26,7 +26,7 @@ module IndentsHelper
     year = current_fy
 
     while year > initial_fy
-      fy_array << ["#{year - 1} - #{year}", "#{year - 1} - #{year}"]
+      fy_array << ["#{year - 1} - #{year}", "#{year - 1}-#{year}"]
       year -= 1
     end
 

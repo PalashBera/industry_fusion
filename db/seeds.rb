@@ -5,7 +5,9 @@ organization = Organization.create!(
   city: Faker::Address.city,
   state: Faker::Address.state,
   country: Faker::Address.country,
-  pin_code: Faker::Number.number(digits: 6).to_s
+  pin_code: Faker::Number.number(digits: 6).to_s,
+  fy_start_month: 4,
+  fy_end_month: 3
 )
 
 user1 = User.create!(
@@ -130,6 +132,7 @@ end
 
 20.times do |t|
   User.current_user = [user1, user2].sample
+  Organization.current_organization = organization
   company = organization.companies.sample
   warehouse = company.warehouses.sample
 
@@ -137,8 +140,7 @@ end
     requirement_date: Date.today + t.days,
     organization_id: organization.id,
     company_id: company.id,
-    warehouse_id: warehouse.id,
-    serial: t + 1
+    warehouse_id: warehouse.id
   ).save(validate: false)
 
   indent = Indent.last
