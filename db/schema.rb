@@ -188,6 +188,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
 
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
+    t.bigint "fy_start_month", null: false
+    t.bigint "fy_end_month", null: false
     t.string "address1", null: false
     t.string "address2", default: ""
     t.string "city", null: false
