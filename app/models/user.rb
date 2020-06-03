@@ -42,6 +42,10 @@ class User < ApplicationRecord
     end
   end
 
+  def notification_all_read?
+    user_notifications.reject(&:read).blank?
+  end
+
   protected
 
   def send_confirmation_instructions

@@ -13,6 +13,15 @@ class HomeController < ApplicationController
     end
   end
 
+  def mark_all_read
+    current_user.user_notifications.update_all(read: Time.zone.now)
+  end
+
+  def mark_read
+    @user_notification = UserNotification.find(params[:id])
+    @user_notification.update_column(:read, Time.zone.now)
+  end
+
   private
 
   def admin_dashboard

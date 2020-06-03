@@ -15,5 +15,6 @@ consumer.subscriptions.create("NotificationsChannel", {
     $('.msg-body:not(.message-body-' + data.not_notifiable + ')').prepend(data.html);
     $('.msg-tab:not(.message-tab-' + data.not_notifiable + ')').text('Msg(' + total_msg + ')');
     $('.msg-count:not(.message-count-' + data.not_notifiable + ')').text(total_msg)
+    $('.msg-tab:not(.message-tab-' + data.not_notifiable + ')').after('<a href="/mark_all_read" class="mt-4 badge badge-pill badge-primary mark-all-read mark-all", data-remote=true>Mark all as read</a>')
   }
 });

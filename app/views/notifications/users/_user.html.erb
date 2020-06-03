@@ -2,6 +2,7 @@
   <div class="media media-sm p-4 mb-0">
     <div class="media-body">
       <%= notification.message %>
+      <%= link_to "Mark as read", mark_read_path(id: notification.id), class: "mt-4 badge badge-pill badge-primary mark-read", remote: true %>
     </div>
   </div>
 </div>

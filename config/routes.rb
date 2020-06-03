@@ -90,6 +90,8 @@ Rails.application.routes.draw do
   end
 
   root "home#index"
+  get "mark_all_read", to: "home#mark_all_read"
+  get "mark_read", to: "home#mark_read"
   get "/dashboard", to: "home#dashboard"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

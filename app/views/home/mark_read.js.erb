@@ -1,0 +1,5 @@
+$('.mark-read').remove();
+
+<% if @user_notification.user.notification_all_read? %>
+  $('.mark-all-read').remove();
+<% end %>

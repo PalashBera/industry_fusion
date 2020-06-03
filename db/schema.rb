@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_143530) do
   create_table "user_notifications", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "message", default: "", null: false
-    t.boolean "read", default: false, null: false
+    t.date "read"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false

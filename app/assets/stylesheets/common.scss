@@ -32,3 +32,17 @@ table.table {
   line-height: 40px;
   font-size: 18px !important;
 }
+
+.mark-read, .mark-all-read {
+  margin-bottom: 5px;
+  padding-top: 8px !important;
+  color: #FFFFFF !important;
+}
+
+.mark-read {
+  padding: 5px !important;
+}
+
+.msg-body {
+  overflow-y: scroll;
+}

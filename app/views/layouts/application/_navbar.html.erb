@@ -18,14 +18,19 @@
             <header>
               <div class="nav nav-underline" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link msg-tab message-tab-<%= current_user.id %>" id="message-tab" data-toggle="tab" href="#message" role="tab" aria-controls="nav-profile" aria-selected="false">Msg(<%= current_user.user_notifications.length %>)</a>
+                <%= link_to "Mark all as read", mark_all_read_path, class: "mt-4 badge badge-pill badge-primary mark-all-read mark-all-#{current_user}", remote: true unless current_user.notification_all_read? %>
               </div>
-
+              <% binding.pry %>
               <div class="msg-body message-body-<%= current_user.id %> media-body">
                 <% current_user.user_notifications.order_by_date.each do |notify| %>
                   <div class="tab-pane" id="message" role="tabpanel" aria-labelledby="message-tab">
                     <div class="media media-sm p-4 mb-0">
                       <div class="media-body">
                         <%= notify.message %>
+
+                        <% unless notify.read %>
+                          <%= link_to "Mark as read", mark_read_path(id: notify.id), class: "mt-4 badge badge-pill badge-primary mark-read", remote: true %>
+                        <% end %>
                       </div>
                     </div>
                   </div>
