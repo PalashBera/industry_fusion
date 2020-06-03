@@ -1,13 +1,18 @@
 require "rails_helper"
 
 RSpec.describe Organization, type: :model do
+  let!(:current_user) { create :user }
+  before              { User.stub(:current_user).and_return(current_user)  }
   let!(:organization) { create(:organization, name: "Industry Fusion") }
 
   it_behaves_like "archivable"
   it_behaves_like "addressable"
+  it_behaves_like "user_trackable"
 
   describe "active record columns" do
     it { should have_db_column(:name) }
+    it { should have_db_column(:fy_start_month) }
+    it { should have_db_column(:fy_end_month) }
     it { should have_db_column(:created_by_id) }
     it { should have_db_column(:updated_by_id) }
     it { should have_db_column(:created_at) }
@@ -54,7 +59,7 @@ RSpec.describe Organization, type: :model do
       let!(:organization_1) { create(:organization, name: "ZARA Private Limited") }
       let!(:organization_2) { create(:organization, name: "KFC Private Limited") }
       it "should return records order by name" do
-        expect(Organization.order_by_name).to eq([organization, organization_2, organization_1])
+        expect(Organization.where(name: ["Industry Fusion", "ZARA Private Limited", "KFC Private Limited"]).order_by_name).to eq([organization, organization_2, organization_1])
       end
     end
   end

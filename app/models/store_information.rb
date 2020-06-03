@@ -2,7 +2,7 @@ class StoreInformation < ApplicationRecord
   include Addressable
 
   PAN_REGEX = /[a-z]{3}[cphfatblj][a-z]\d{4}[a-z]/i.freeze
-  GSTN_REGEX = /\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}/.freeze
+  GSTN_REGEX = /\d{2}[A-Z]{5}\d{4}[A-Z]{1}[A-Z\d]{1}[Z]{1}[A-Z\d]{1}/i.freeze
 
   before_validation do
     self.name = name.to_s.squish

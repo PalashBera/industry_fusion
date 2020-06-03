@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :company do
     name         { Faker::Company.industry }
-    short_name   { Faker::Name.initials(number: 4) }
+    short_name   { Faker::Name.initials(number: 3) }
     address1     { Faker::Address.street_address }
     address2     { Faker::Address.secondary_address }
     city         { Faker::Address.city }

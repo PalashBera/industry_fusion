@@ -1,12 +1,15 @@
 require "rails_helper"
 
 RSpec.describe Brand, type: :model do
-  let(:organization) { create(:organization) }
-  let!(:brand)       { create(:brand, name: "Industry Fusion", organization: organization) }
+  let!(:current_user) { create :user }
+  before              { User.stub(:current_user).and_return(current_user)  }
+  let!(:organization) { create(:organization) }
+  let!(:brand)        { create(:brand, name: "Industry Fusion", organization: organization) }
 
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
   it_behaves_like "nameable"
+  it_behaves_like "user_trackable"
 
   describe "active record columns" do
     it { should have_db_column(:organization_id) }

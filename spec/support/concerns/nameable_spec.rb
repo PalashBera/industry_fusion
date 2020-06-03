@@ -1,6 +1,7 @@
 require "rails_helper"
 
 shared_examples_for "nameable" do
+  let!(:resource)    { create(described_class.to_s.underscore.to_sym) }
   let(:nameable_org) { create(:organization) }
 
   describe "active record columns" do
