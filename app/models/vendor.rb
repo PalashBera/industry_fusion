@@ -14,8 +14,17 @@ class Vendor < ApplicationRecord
     end
   end
 
-  def self.invite_vendor(email)
+  protected
+
+  def send_confirmation_instructions
+    invitation_token.present? ? skip_confirmation_notification! : super
+  end
+
+  private
+
+  def invite_vendor(email)
     vendor = find_or_initialize_by(email: email)
+    return if vendorship?(vendor)
 
     if vendor.new_record?
       invite!({ email: email }, User.current_user).deliver_invitation
@@ -27,13 +36,11 @@ class Vendor < ApplicationRecord
     vendor.organization_vendors.create(organization_id: Organization.current_organization.id)
   end
 
-  def send_new_vendorship_mail
-    VendorMailer.organization_acknowledgement(self, User.current_user).deliver_later
+  def vendorship?(vendor)
+    vendor.organizations.include?(Organization.current_organization)
   end
 
-  protected
-
-  def send_confirmation_instructions
-    invitation_token.present? ? skip_confirmation_notification! : super
+  def send_new_vendorship_mail
+    VendorMailer.organization_acknowledgement(self, User.current_user).deliver_later
   end
 end
