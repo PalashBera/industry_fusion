@@ -20,26 +20,7 @@ Rails.application.routes.draw do
       end
   end
 
-  devise_for :vendors, skip: [:registrations, :invitations]
-
-  devise_scope :vendor do
-    resource :registration,
-      only: [:edit, :update],
-      path: "vendors",
-      controller: "devise/registrations",
-      as: :vendor_registration
-
-    resource :invitation,
-      only: [:update,],
-      path: "vendors/invitation",
-      controller: "devise/invitations",
-      as: :vendor_invitation do
-        get "/accept", to: "devise/invitations#edit", as: :accept
-      end
-  end
-
   resources :organizations,      only: [:new, :create]
-  resources :store_informations, only: [:new, :create]
 
   namespace :master do
     resources :brands, except: [:show, :destroy] do

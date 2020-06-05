@@ -10,24 +10,8 @@
         <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
       </li>
 
-      <li class="dropdown user-menu">
-        <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-          <span class="d-none d-lg-inline-block">Log In</span>
-        </button>
-
-        <ul class="dropdown-menu dropdown-menu-right">
-          <li>
-            <%= link_to new_user_session_path, class: "dropdown-link-item" do %>
-              <span class="nav-text">Organisation</span>
-            <% end %>
-          </li>
-
-          <li>
-            <%= link_to new_vendor_session_path, class: "dropdown-link-item" do %>
-              <span class="nav-text">Vendor</span>
-            <% end %>
-          </li>
-        </ul>
+      <li class="nav-item">
+        <%= link_to "Log In", new_user_session_path, class: "nav-link" %>
       </li>
     </ul>
   </div>

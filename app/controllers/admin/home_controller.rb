@@ -1,4 +1,3 @@
 class Admin::HomeController < ApplicationController
-  before_action :authenticate_resource!
-  before_action :authenticate_admin
+  before_action :authenticate_user!, :authenticate_admin, :check_organization_presence
 end
