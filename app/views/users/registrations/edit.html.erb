@@ -1,8 +1,12 @@
-<% provide(:title, "Edit #{resource_name.to_s.humanize}") %>
-<% provide(:page_title, "Edit #{resource_name.to_s.humanize}") %>
+<% provide(:title, "Account Settings") %>
+<% provide(:page_title, "Account Settings") %>
 
-<div class="row justify-content-center">
-  <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4">
+<div class="row">
+  <div class="col-xl-3">
+    <%= render "shared/settings_sidebar", active_class: "account" %>
+  </div>
+
+  <div class="col-sm-12 col-xl-9">
     <div class="card">
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
