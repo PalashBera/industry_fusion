@@ -3,8 +3,8 @@ class Vendor < ApplicationRecord
   include UserInformable
 
   has_one :store_information
-  has_many :organization_vendors
-  has_many :organizations, through: :organization_vendors
+  has_many :vendorships
+  has_many :organizations, through: :vendorships
 
   delegate :name, to: :store_information, allow_nil: true
 
@@ -33,7 +33,7 @@ class Vendor < ApplicationRecord
       vendor.send_new_vendorship_mail
     end
 
-    vendor.organization_vendors.create(organization_id: Organization.current_organization.id)
+    vendor.vendorships.create(organization_id: Organization.current_organization.id)
   end
 
   def vendorship?(vendor)

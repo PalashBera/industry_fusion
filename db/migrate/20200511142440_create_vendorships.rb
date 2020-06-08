@@ -1,6 +1,6 @@
-class CreateOrganizationVendors < ActiveRecord::Migration[6.0]
+class CreateVendorships < ActiveRecord::Migration[6.0]
   def change
-    create_table :organization_vendors do |t|
+    create_table :vendorships do |t|
       t.references :organization,  foreign_key: true, null: false
       t.references :vendor,        foreign_key: true, null: false
       t.boolean    :archive,       default: false,    null: false
@@ -10,6 +10,6 @@ class CreateOrganizationVendors < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :organization_vendors, [ :organization_id, :vendor_id ], unique: true
+    add_index :vendorships, [ :organization_id, :vendor_id ], unique: true
   end
 end

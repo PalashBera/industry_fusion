@@ -171,21 +171,6 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_makes_on_updated_by_id"
   end
 
-  create_table "organization_vendors", force: :cascade do |t|
-    t.bigint "organization_id", null: false
-    t.bigint "vendor_id", null: false
-    t.boolean "archive", default: false, null: false
-    t.bigint "created_by_id"
-    t.bigint "updated_by_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_by_id"], name: "index_organization_vendors_on_created_by_id"
-    t.index ["organization_id", "vendor_id"], name: "index_organization_vendors_on_organization_id_and_vendor_id", unique: true
-    t.index ["organization_id"], name: "index_organization_vendors_on_organization_id"
-    t.index ["updated_by_id"], name: "index_organization_vendors_on_updated_by_id"
-    t.index ["vendor_id"], name: "index_organization_vendors_on_vendor_id"
-  end
-
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
     t.bigint "fy_start_month", null: false
@@ -312,6 +297,21 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true
   end
 
+  create_table "vendorships", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "vendor_id", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_vendorships_on_created_by_id"
+    t.index ["organization_id", "vendor_id"], name: "index_vendorships_on_organization_id_and_vendor_id", unique: true
+    t.index ["organization_id"], name: "index_vendorships_on_organization_id"
+    t.index ["updated_by_id"], name: "index_vendorships_on_updated_by_id"
+    t.index ["vendor_id"], name: "index_vendorships_on_vendor_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.bigint "item_id", null: false
@@ -365,10 +365,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
-  add_foreign_key "organization_vendors", "organizations"
-  add_foreign_key "organization_vendors", "vendors"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
+  add_foreign_key "vendorships", "organizations"
+  add_foreign_key "vendorships", "vendors"
   add_foreign_key "warehouses", "companies"
   add_foreign_key "warehouses", "organizations"
 end

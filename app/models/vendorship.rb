@@ -1,4 +1,4 @@
-class OrganizationVendor < ApplicationRecord
+class Vendorship < ApplicationRecord
   include Archivable
   include ModalFormable
   include UserTrackable
