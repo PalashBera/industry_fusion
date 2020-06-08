@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       end
   end
 
-  resources :organizations,      only: [:new, :create]
+  resources :organizations, only: [:new, :create]
 
   namespace :master do
     resources :brands, except: [:show, :destroy] do
@@ -94,6 +94,8 @@ Rails.application.routes.draw do
       get :export, on: :collection
       put :resend_invitation, on: :member
     end
+
+    resources :organizations, only: [:edit, :update]
   end
 
   namespace :transactions do
