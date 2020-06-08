@@ -5,7 +5,9 @@ organization = Organization.create!(
   city: Faker::Address.city,
   state: Faker::Address.state,
   country: Faker::Address.country,
-  pin_code: Faker::Number.number(digits: 6).to_s
+  pin_code: Faker::Number.number(digits: 6).to_s,
+  fy_start_month: 4,
+  fy_end_month: 3
 )
 
 user1 = User.create!(

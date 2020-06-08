@@ -20,7 +20,7 @@ class Master::VendorsController < Master::HomeController
       render "new"
     else
       invite_vendor
-      @vendor.organization_vendors.create(organization_id: current_organization.id)
+      @vendor.vendorships.create(organization_id: current_organization.id)
       redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
     end
   end
