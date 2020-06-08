@@ -32,9 +32,8 @@ class Organization < ApplicationRecord
   private
 
   def validate_fy_range
-    return unless fy_start_month == fy_end_month
+    return if fy_start_month + fy_end_month == 13
 
-    errors.add(:base, "Start month should not be same as end month")
-    errors.add(:base, "End month should not be same as start month")
+    errors.add(:base, "Invaid financial year selection")
   end
 end
