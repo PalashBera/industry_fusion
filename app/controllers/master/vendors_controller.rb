@@ -13,9 +13,9 @@ class Master::VendorsController < Master::HomeController
   end
 
   def create
-    @vendor = Vendor.find_or_initialize_by(vendor_params)
+    @vendor = Vendor.new(vendor_params)
 
-    if current_organization.vendors.include?(@vendor)
+    if current_organization.vendors.find_by(vendor_params)
       @vendor.errors.add(:email, " is already taken")
       render "new"
     else
