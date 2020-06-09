@@ -8,7 +8,7 @@ module LinksHelper
   end
 
   def edit_link_using_modal(controller_name, resource)
-    link_to '<i class="fas fa-edit"></i> Edit'.html_safe,
+    link_to '<i class="mdi mdi-square-edit-outline mr-1"></i> Edit'.html_safe,
             url_for(controller: controller_name, action: "edit", id: resource.id),
             data: { remote: true },
             title: "Edit #{controller_name.singularize.humanize.titleize}",
@@ -16,7 +16,7 @@ module LinksHelper
   end
 
   def change_logs_link_using_modal(controller_name, resource)
-    link_to '<i class="fas fa-history"></i> Change Log'.html_safe,
+    link_to '<i class="mdi mdi-history mr-1"></i> Change Log'.html_safe,
             url_for(controller: controller_name, action: "change_logs", id: resource.id),
             data: { remote: true },
             title: "Show Change Logs",
@@ -92,7 +92,7 @@ module LinksHelper
   end
 
   def resend_user_invitation_link(user)
-    link_to '<i class="far fa-paper-plane"></i> Resend Invitation'.html_safe,
+    link_to '<i class="mdi mdi-send mr-1"></i> Resend Invitation'.html_safe,
             resend_invitation_admin_user_path(user),
             method: :put,
             title: "Resend Invitation",
@@ -100,10 +100,18 @@ module LinksHelper
   end
 
   def resend_vendor_invitation_link(vendor)
-    link_to '<i class="far fa-paper-plane"></i> Resend Invitation'.html_safe,
+    link_to '<i class="mdi mdi-send mr-1"></i> Resend Invitation'.html_safe,
             resend_invitation_master_vendor_path(vendor),
             method: :put,
             title: "Resend Invitation",
             class: "dropdown-item"
+  end
+
+  def new_modal_link(controller_name)
+    link_to "<b>Add New</b>".html_safe,
+            url_for(controller: controller_name, action: "new"),
+            data: { remote: true },
+            class: "ml-1",
+            title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
 end

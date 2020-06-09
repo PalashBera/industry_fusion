@@ -1,0 +1,38 @@
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :item_name, "Item&nbsp;Name".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :brand_name, "Brand&nbsp;Name".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :cat_no, "Catalogue&nbsp;Number".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @makes.each.with_index(1) do |make, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= make.item_name %></td>
+          <td><%= make.brand_name %></td>
+          <td><%= make.cat_no %></td>
+          <td><%= archive_status(make.archive).html_safe %></td>
+          <td class="text-center">
+            <div class="dropdown">
+              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <%= edit_link_using_modal(controller_name, make) %>
+                <%= change_logs_link_using_modal(controller_name, make) %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
