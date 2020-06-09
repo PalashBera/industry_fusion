@@ -6,6 +6,8 @@ class Vendor < ApplicationRecord
   has_many :vendorships
   has_many :organizations, through: :vendorships
 
+  devise :database_authenticatable, :invitable, :async
+
   delegate :name, to: :store_information, allow_nil: true
 
   def self.import(file)
