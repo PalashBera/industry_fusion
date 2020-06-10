@@ -32,7 +32,7 @@ class Organization < ApplicationRecord
   private
 
   def validate_fy_range
-    return if fy_start_month + fy_end_month == 13
+    return if (fy_start_month == 1 && fy_end_month == 12) || (fy_start_month - fy_end_month == 1)
 
     errors.add(:base, "Invaid financial year selection")
   end
