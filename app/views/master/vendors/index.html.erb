@@ -1,53 +1,35 @@
 <% provide(:title, "Vendors") %>
 <% provide(:page_title, "Vendors") %>
 
-<section class="mb-4 d-flex justify-content-between">
-  <section>
-    <%= new_link_using_modal(controller_name) %>
-  </section>
+<div class="card">
+  <div class="card-body">
+    <section class="mb-4 d-flex justify-content-between">
+      <section>
+        <%= new_link_using_modal(controller_name) %>
+        <%= filter_button(params[:q]) %>
+      </section>
 
-  <section>
-    <%= import_modal_btn(controller_name) %>
-    <%= excel_export_btn(controller_name) %>
-  </section>
-</section>
+      <section>
+        <%= import_modal_btn(controller_name) %>
+        <%= excel_export_btn(controller_name) %>
+      </section>
+    </section>
 
-<div class="card card-default">
-  <div class="table-responsive">
-    <table class="table table-hover" width="100%">
-      <thead class="thead">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Status</th>
-          <th scope="col" class="text-center">Actions</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @vendors.each.with_index(1) do |vendor, index| %>
-          <tr>
-            <td scope="row"><%= index %></td>
-            <td><%= vendor.name %></td>
-            <td><%= vendor.email %></td>
-            <td><%= vendor_status(vendor) %></td>
-            <td class="text-center">
-              <div class="dropdown">
-                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
-
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                  <%= resend_vendor_invitation_link(vendor) %>
-                </div>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if @vendors.present? %>
+      <%= render "index_table" %>
+    <% else %>
+      <div class="card">
+        <div class="card-body text-center">
+          <% if params[:q].present? %>
+            No result found. Please search with proper keywords.
+          <% else %>
+            No vendor has been added yet. <%= new_modal_link(controller_name) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 
-<%= render "shared/pagy" %>
 <%= render "shared/import_modal" %>
 <%= render "shared/form_modal_container" %>

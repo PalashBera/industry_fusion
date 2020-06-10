@@ -3,13 +3,27 @@
 }
 
 table.table {
-  thead th {
-    color: #bfc7d9;
-    background-color: #1d1f26;
+  border: 1px solid #E5E9F2;
+  margin-bottom: 20px;
+
+  thead {
+    background-color: #D4D4D4;
+  }
+
+  thead th:first-child, tbody td:first-child {
+    padding-left: 25px;
+  }
+
+  thead th:last-child, tbody td:last-child {
+    padding-right: 25px;
   }
 
   td {
     vertical-align: middle;
+  }
+
+  .icon-burger-mini {
+    font-size: 16px;
   }
 }
 
@@ -31,4 +45,16 @@ table.table {
   color: #bfc7d9 !important;
   line-height: 40px;
   font-size: 18px !important;
+}
+
+@media (min-width: 768px) {
+  .btn {
+    padding: 0.4rem 0.7rem !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .pagination .page-link {
+    padding: 0.5rem 1.3125rem !important;
+  }
 }

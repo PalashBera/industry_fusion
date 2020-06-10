@@ -16,4 +16,8 @@ module Addressable
     validates :address2, :phone_number, length: { maximum: 255 }
     validates :pin_code, presence: true, length: { is: 6 }
   end
+
+  def address
+    [address1, address2, city, state, country].reject(&:blank?).join(", ")
+  end
 end

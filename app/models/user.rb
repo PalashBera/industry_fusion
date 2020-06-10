@@ -10,10 +10,6 @@ class User < ApplicationRecord
 
   validates :admin, inclusion: { in: [true, false] }
 
-  def admin?
-    admin
-  end
-
   def non_admin?
     !admin?
   end

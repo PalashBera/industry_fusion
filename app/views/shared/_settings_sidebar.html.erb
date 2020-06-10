@@ -11,7 +11,7 @@
         <% end %>
       </li>
 
-      <% if current_organization %>
+      <% if allow_organization_settings? %>
         <li class="nav-item">
           <%= link_to edit_admin_organization_path(current_organization), class: "nav-link #{"active" if active_class == "organization"}" do %>
             <i class="mdi mdi-settings-outline mr-1"></i> Organization Settings
