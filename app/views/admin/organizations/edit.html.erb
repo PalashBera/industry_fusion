@@ -59,13 +59,13 @@
           <div class="form-row">
             <div class="form-group col-sm-12 col-md-6">
               <%= f.label :fy_start_month, "Start Month" %>
-              <%= f.select :fy_start_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control", required: true } %>
+              <%= f.select :fy_start_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control fy-start-month-selection", required: true } %>
               <small class="form-text text-muted">Financial year start month.</small>
             </div>
 
             <div class="form-group col-sm-12 col-md-6">
               <%= f.label :fy_end_month, "End Month" %>
-              <%= f.select :fy_end_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control", required: true } %>
+              <%= f.select :fy_end_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control fy-end-month-selection", required: true } %>
               <small class="form-text text-muted">Financial year end month.</small>
             </div>
           </div>
