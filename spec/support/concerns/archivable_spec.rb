@@ -4,11 +4,11 @@ shared_examples_for "archivable" do
   let(:resource_1) { create(described_class.to_s.underscore.to_sym, archive: true) }
   let(:resource_2) { create(described_class.to_s.underscore.to_sym, archive: false) }
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:archive) }
   end
 
-  describe "scopes" do
+  describe "#scopes" do
     context "archived" do
       it "should return archived reccords" do
         expect(described_class.archived.include?(resource_1)).to eq (true)

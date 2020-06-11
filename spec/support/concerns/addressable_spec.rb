@@ -1,7 +1,7 @@
 require "rails_helper"
 
 shared_examples_for "addressable" do
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:address1) }
     it { should have_db_column(:address2) }
     it { should have_db_column(:city) }
@@ -11,7 +11,7 @@ shared_examples_for "addressable" do
     it { should have_db_column(:phone_number) }
   end
 
-  describe "callbacks" do
+  describe "#callbacks" do
     context "when address1 contains extra space" do
       it "should remove extra space" do
         resource = build(described_class.to_s.underscore.to_sym, address1: " Salt Lake City ")
@@ -69,7 +69,7 @@ shared_examples_for "addressable" do
     end
   end
 
-  describe "validations" do
+  describe "#validations" do
     it { should validate_presence_of(:address1) }
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:state) }

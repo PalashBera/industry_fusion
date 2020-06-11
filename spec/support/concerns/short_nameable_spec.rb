@@ -1,11 +1,11 @@
 shared_examples_for "short_nameable" do
   let!(:resource) { create(described_class.to_s.underscore.to_sym) }
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:short_name) }
   end
 
-  describe "callbacks" do
+  describe "#callbacks" do
     context "when short name contains extra space" do
       it "should remove extra space" do
         resource = build(described_class.to_s.underscore.to_sym, short_name: " SBC ")
@@ -23,7 +23,7 @@ shared_examples_for "short_nameable" do
     end
   end
 
-  describe "validations" do
+  describe "#validations" do
     it { should validate_presence_of(:short_name) }
     it { should validate_length_of(:short_name).is_at_most(3) }
     it { should validate_uniqueness_of(:short_name).case_insensitive.scoped_to(:organization_id) }

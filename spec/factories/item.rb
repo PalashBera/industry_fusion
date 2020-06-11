@@ -1,9 +1,9 @@
 FactoryBot.define do
   factory :item do
-    name               { rand(999).to_s + " # " + Faker::Lorem.word + " # " + rand(99999).to_s }
+    name               { Faker::Beer.name + Time.zone.now.to_i.to_s }
     archive            { false }
-    primary_quantity   { rand(9999.99) }
-    secondary_quantity { rand(9999.99) }
+    primary_quantity   { (1..100).to_a.sample }
+    secondary_quantity { (1..100).to_a.sample }
     uom
     secondary_uom      { create :uom }
     item_group

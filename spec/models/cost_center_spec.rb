@@ -1,17 +1,17 @@
 require "rails_helper"
 
 RSpec.describe CostCenter, type: :model do
-  let!(:current_user) { create :user }
-  before              { User.stub(:current_user).and_return(current_user)  }
-  let(:organization)  { create(:organization) }
-  let!(:cost_center)  { create(:cost_center, name: "Toolkit", organization: organization) }
+  let!(:user)        { create :user }
+  let!(:cost_center) { create(:cost_center) }
+
+  before { User.stub(:current_user).and_return(user) }
 
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
   it_behaves_like "nameable"
   it_behaves_like "user_trackable"
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:description) }
     it { should have_db_column(:organization_id) }
     it { should have_db_column(:created_by_id) }
@@ -20,14 +20,15 @@ RSpec.describe CostCenter, type: :model do
     it { should have_db_column(:updated_at) }
   end
 
-  describe "active record index" do
+  describe "#active_record_index" do
     it { should have_db_index(:organization_id) }
     it { should have_db_index(:created_by_id) }
     it { should have_db_index(:updated_by_id) }
   end
 
-  describe "associations" do
+  describe "#associations" do
     it { should belong_to(:organization) }
+
     it { should have_many(:indent_items) }
   end
 end

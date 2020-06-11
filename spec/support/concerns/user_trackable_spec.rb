@@ -3,12 +3,12 @@ require "spec_helper"
 shared_examples_for "user_trackable" do
   let!(:resource) { create(described_class.to_s.underscore.to_sym) }
 
-  describe "callback" do
+  describe "@callbacks" do
     it { is_expected.to callback(:set_created_by).before(:create) }
     it { is_expected.to callback(:set_updated_by).before(:save) }
   end
 
-  describe "association" do
+  describe "#{}associations" do
     it { should belong_to(:created_by).class_name("User").optional }
     it { should belong_to(:updated_by).class_name("User").optional }
   end

@@ -3,13 +3,13 @@ require "rails_helper"
 shared_examples_for "modal_formable" do
   let!(:resource) { create(described_class.to_s.underscore.to_sym) }
 
-  describe "class_title" do
+  describe "#class_title" do
     it "should return resource class name as title" do
       expect(resource.class_title).to eq (described_class.to_s.underscore.humanize.titleize)
     end
   end
 
-  describe "button_name" do
+  describe "#button_name" do
     context "when resource is a new record" do
       it "should return create as button name" do
         new_resource = build(described_class.to_s.underscore.to_sym)
@@ -24,7 +24,7 @@ shared_examples_for "modal_formable" do
     end
   end
 
-  describe "button_name" do
+  describe "#button_name" do
     context "when resource is a new record" do
       it "should return modal header for new record" do
         new_resource = build(described_class.to_s.underscore.to_sym)
