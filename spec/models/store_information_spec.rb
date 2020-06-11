@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe StoreInformation, type: :model do
-  let!(:resource) { create(:store_information, name: " Salt Lake City Khaitan  ", pan_number: "eqtfc6151k", gstn: "11eqtfc6151k3zv") }
+  let!(:store_information) { create(:store_information) }
 
   it_behaves_like "addressable"
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:name) }
     it { should have_db_column(:pan_number) }
     it { should have_db_column(:gstn) }
@@ -13,27 +13,37 @@ RSpec.describe StoreInformation, type: :model do
     it { should have_db_column(:updated_at) }
   end
 
-  describe "active record index" do
+  describe "#active_record_index" do
     it { should have_db_index(:vendor_id) }
   end
 
-  describe "callbacks" do
-    context "when we want to get squished name, pan_number & gstn" do
-      it "should return squished name of store" do
-        expect(resource.name).to eq ("Salt Lake City Khaitan")
+  describe "#callbacks" do
+    context "when name contains extra spaces" do
+      it "should remove extra spaces" do
+        store_information = build(:store_information, name: " Industry  Fusion ")
+        store_information.valid?
+        expect(store_information.name).to eq("Industry Fusion")
       end
+    end
 
-      it "should return squished & capitalized pan_number of store" do
-        expect(resource.pan_number).to eq ("EQTFC6151K")
+    context "when PAN number is not capitalize" do
+      it "should capitalized PAN number" do
+        store_information = build(:store_information, pan_number: "bnepb7758n")
+        store_information.valid?
+        expect(store_information.pan_number).to eq("BNEPB7758N")
       end
+    end
 
-      it "should return squished & capitalized gstn of store" do
-        expect(resource.gstn).to eq ("11EQTFC6151K3ZV")
+    context "when GST number is not capitalize" do
+      it "should capitalized GST number" do
+        store_information = build(:store_information, gstn: "29bnepb7758n2z9")
+        store_information.valid?
+        expect(store_information.gstn).to eq("29BNEPB7758N2Z9")
       end
     end
   end
 
-  describe "associations" do
+  describe "#associations" do
     it { should belong_to(:vendor) }
   end
 

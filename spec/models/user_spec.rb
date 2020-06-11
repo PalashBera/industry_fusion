@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
   it_behaves_like "user_informable"
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:admin) }
     it { should have_db_column(:organization_id) }
     it { should have_db_column(:invitation_token) }
@@ -19,18 +19,18 @@ RSpec.describe User, type: :model do
     it { should have_db_column(:invitations_count) }
   end
 
-  describe "active record index" do
+  describe "#active_record_index" do
     it { should have_db_index(:organization_id) }
     it { should have_db_index(:invitation_token) }
     it { should have_db_index(:invitations_count) }
     it { should have_db_index([:invited_by_type, :invited_by_id]) }
   end
 
-  describe "associations" do
+  describe "#associations" do
     it { should belong_to(:organization).optional }
   end
 
-  describe "validations" do
+  describe "#validations" do
     it { should allow_value(%w(true false)).for(:admin) }
   end
 
@@ -39,13 +39,13 @@ RSpec.describe User, type: :model do
 
     context "when user is admin" do
       it "should return true" do
-        expect(admin_user.admin?).to eq (true)
+        expect(admin_user.admin?).to eq(true)
       end
     end
 
     context "when user is not admin" do
       it "should return false" do
-        expect(user.admin?).to eq (false)
+        expect(user.admin?).to eq(false)
       end
     end
   end
@@ -55,13 +55,13 @@ RSpec.describe User, type: :model do
 
     context "when user is admin" do
       it "should return false" do
-        expect(admin_user.non_admin?).to eq (false)
+        expect(admin_user.non_admin?).to eq(false)
       end
     end
 
     context "when user is not admin" do
       it "should return true" do
-        expect(user.non_admin?).to eq (true)
+        expect(user.non_admin?).to eq(true)
       end
     end
   end
@@ -73,19 +73,19 @@ RSpec.describe User, type: :model do
 
     context "when user is admin" do
       it "should return admin" do
-        expect(admin_user.user_role).to eq ("admin")
+        expect(admin_user.user_role).to eq("admin")
       end
     end
 
     context "when user is not admin but general_user" do
       it "should return general_user" do
-        expect(general_user.user_role).to eq ("general_user")
+        expect(general_user.user_role).to eq("general_user")
       end
     end
 
     context "when user is neither admin nor general_user" do
       it "should return pending" do
-        expect(pending_user.user_role).to eq ("pending")
+        expect(pending_user.user_role).to eq("pending")
       end
     end
   end
@@ -93,8 +93,8 @@ RSpec.describe User, type: :model do
   describe "#add_organization" do
     it "should add organization to user and update user as admin" do
       user.add_organization(organization)
-      expect(user.organization).to eq (organization)
-      expect(user.admin?).to eq (true)
+      expect(user.organization).to eq(organization)
+      expect(user.admin?).to eq(true)
     end
   end
 end

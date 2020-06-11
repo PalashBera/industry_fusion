@@ -1,12 +1,12 @@
 class Organization < ApplicationRecord
+  include Addressable
   include Archivable
   include UserTrackable
-  include Addressable
 
   cattr_accessor :current_organization
 
   before_validation { self.name = name.to_s.squish }
-  after_validation :validate_fy_range
+  before_validation :validate_fy_range
 
   has_many :users
   has_many :companies
@@ -32,7 +32,7 @@ class Organization < ApplicationRecord
   private
 
   def validate_fy_range
-    return if (fy_start_month == 1 && fy_end_month == 12) || (fy_start_month - fy_end_month == 1)
+    return if fy_start_month && fy_end_month && ((fy_start_month == 1 && fy_end_month == 12) || (fy_start_month - fy_end_month == 1))
 
     errors.add(:base, "Invaid financial year selection")
   end

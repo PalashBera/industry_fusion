@@ -8,8 +8,8 @@ FactoryBot.define do
     country      { Faker::Address.country }
     pin_code     { Faker::Number.number(digits: 6) }
     phone_number { Faker::PhoneNumber.phone_number }
-    pan_number   { Faker::Number.number(digits: 10) }
-    gstn         { Faker::Number.number(digits: 15) }
+    pan_number   { "BNEPB7758N" }
+    gstn         { "29BNEPB7758N2Z9" }
     vendor
   end
 end

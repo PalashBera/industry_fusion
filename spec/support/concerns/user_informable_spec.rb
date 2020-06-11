@@ -3,7 +3,7 @@ require "spec_helper"
 shared_examples_for "user_informable" do
   let!(:resource) { create(described_class.to_s.underscore.to_sym) }
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:email) }
     it { should have_db_column(:encrypted_password) }
     it { should have_db_column(:first_name) }
@@ -25,13 +25,13 @@ shared_examples_for "user_informable" do
     it { should have_db_column(:updated_at) }
   end
 
-  describe "active record index" do
+  describe "#active_record_index" do
     it { should have_db_index(:email) }
     it { should have_db_index(:reset_password_token) }
     it { should have_db_index(:confirmation_token) }
   end
 
-  describe "validations" do
+  describe "#validations" do
     it { should validate_presence_of(:first_name) }
     it { should validate_presence_of(:last_name) }
     it { should validate_presence_of(:email) }
@@ -58,7 +58,7 @@ shared_examples_for "user_informable" do
     end
   end
 
-  describe "callbacks" do
+  describe "#callbacks" do
     context "when first_name contains extra space and is not titleize" do
       it "should remove extra space and make titleize" do
         resource = build(described_class.to_s.underscore.to_sym, first_name: " sachin   ramesh  ")

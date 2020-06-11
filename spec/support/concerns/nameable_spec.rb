@@ -4,11 +4,11 @@ shared_examples_for "nameable" do
   let!(:resource)    { create(described_class.to_s.underscore.to_sym) }
   let(:nameable_org) { create(:organization) }
 
-  describe "active record columns" do
+  describe "#active_record_columns" do
     it { should have_db_column(:name) }
   end
 
-  describe "callbacks" do
+  describe "#callbacks" do
     context "when name contains extra space" do
       it "should remove extra space" do
         record_1 = build(described_class.to_s.underscore.to_sym, name: " KFC  ")
@@ -18,13 +18,13 @@ shared_examples_for "nameable" do
     end
   end
 
-  describe "validations" do
+  describe "#validations" do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_uniqueness_of(:name).case_insensitive.scoped_to(:organization_id) }
   end
 
-  describe "scopes" do
+  describe "#scopes" do
     context "order_by_name" do
       let(:record_1) { create(described_class.to_s.underscore.to_sym, name: "Name 1", organization: nameable_org) }
       let(:record_2) { create(described_class.to_s.underscore.to_sym, name: "Name 2", organization: nameable_org) }
