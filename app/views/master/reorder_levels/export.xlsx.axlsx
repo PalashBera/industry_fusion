@@ -13,7 +13,7 @@ wb.styles do |style|
       sheet.add_row [
         resource.item_name,
         resource.warehouse_name,
-        resource.quantity,
+        resource.quantity_with_uom,
         resource.priority.humanize.titleize,
         resource.archived_status
       ], style: [row_style, row_style, row_style, row_style, resource.archived? ? bg_red : bg_green]
