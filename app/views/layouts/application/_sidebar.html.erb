@@ -53,13 +53,6 @@
           <% end %>
         </li>
 
-        <li class="<%= active_class("warehouse_locations") %>">
-          <%= link_to master_warehouse_locations_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-map-marker"></i>
-            <span class="nav-text">Warehouse Locations</span>
-          <% end %>
-        </li>
-
         <li class="<%= active_class("uoms") %>">
           <%= link_to master_uoms_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-scale-balance"></i>
@@ -81,17 +74,24 @@
           <% end %>
         </li>
 
-        <li class="<%= active_class("reorder_levels") %>">
-          <%= link_to master_reorder_levels_path, class: "sidenav-item-link" do %>
-            <i class="mdi mdi-reorder-horizontal"></i>
-            <span class="nav-text">Reorder Levels</span>
-          <% end %>
-        </li>
-
         <li class="<%= active_class("makes") %>">
           <%= link_to master_makes_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-hexagon-multiple"></i>
             <span class="nav-text">Makes</span>
+          <% end %>
+        </li>
+
+        <li class="<%= active_class("warehouse_locations") %>">
+          <%= link_to master_warehouse_locations_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-map-marker"></i>
+            <span class="nav-text">Warehouse Locations</span>
+          <% end %>
+        </li>
+
+        <li class="<%= active_class("reorder_levels") %>">
+          <%= link_to master_reorder_levels_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-reorder-horizontal"></i>
+            <span class="nav-text">Reorder Levels</span>
           <% end %>
         </li>
 

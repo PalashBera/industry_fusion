@@ -12,9 +12,9 @@ wb.styles do |style|
     @resources.each do |resource|
       sheet.add_row [
         resource.name,
-        resource.warehouse.name,
+        resource.warehouse_name,
         resource.archived_status
-      ], style: [row_style, row_style, row_style, row_style, row_style, row_style, resource.archived? ? bg_red : bg_green]
+      ], style: [row_style, row_style, resource.archived? ? bg_red : bg_green]
     end
   end
 end

@@ -4,11 +4,9 @@
     <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
   </div>
 
-  <div class="form-row">
-    <div class="form-group col-sm-12 col-md-6">
-      <%= f.label :warehouse_id %>
-      <%= f.select :warehouse_id, current_organization.warehouses.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
-    </div>
+  <div class="form-group">
+    <%= f.label :warehouse_id %>
+    <%= f.select :warehouse_id, current_organization.warehouses.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="custom-control custom-checkbox">

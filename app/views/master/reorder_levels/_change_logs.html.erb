@@ -16,10 +16,10 @@
         <tbody>
           <% changeset.each do |key, value| %>
             <tr>
-              <% if key == "quantity" %>
-                <td>Quantity</td>
-                <td><%= value[0] %></td>
-                <td><%= value[1] %></td>
+              <% if key == "item_id" %>
+                <td>Item</td>
+                <td><%= Item.find(value[0]).name %></td>
+                <td><%= Item.find(value[1]).name %></td>
               <% end %>
 
               <% if key == "warehouse_id" %>
@@ -28,10 +28,10 @@
                 <td><%= Warehouse.find(value[1]).name %></td>
               <% end %>
 
-              <% if key == "item_id" %>
-                <td>Item</td>
-                <td><%= Item.find(value[0]).name %></td>
-                <td><%= Item.find(value[1]).name %></td>
+              <% if key == "quantity" %>
+                <td>Quantity</td>
+                <td><%= value[0] %></td>
+                <td><%= value[1] %></td>
               <% end %>
 
               <% if key == "priority" %>

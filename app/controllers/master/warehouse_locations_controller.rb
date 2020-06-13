@@ -5,7 +5,7 @@ class Master::WarehouseLocationsController < Master::HomeController
   def index
     @search = WarehouseLocation.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
-    @pagy, @warehouse_location_records = pagy(@search.result.included_resources, items: 20)
+    @pagy, @warehouse_locations = pagy(@search.result.included_resources, items: 20)
   end
 
   def new

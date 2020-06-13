@@ -11,11 +11,11 @@
     </thead>
 
     <tbody>
-      <% @warehouse_location_records.each.with_index(1) do |location, index| %>
+      <% @warehouse_locations.each.with_index(1) do |location, index| %>
         <tr>
           <td scope="row"><%= index %></td>
           <td><%= location.name %></td>
-          <td><%= location.warehouse.name %></td>
+          <td><%= location.warehouse_name %></td>
           <td><%= archive_status(location.archive).html_safe %></td>
           <td class="text-center">
             <div class="dropdown">

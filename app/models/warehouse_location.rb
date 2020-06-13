@@ -10,6 +10,8 @@ class WarehouseLocation < ApplicationRecord
   belongs_to :organization
   belongs_to :warehouse
 
+  delegate :name, to: :warehouse, prefix: true
+
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false, scope: %i[organization_id warehouse_id] }
 
   has_paper_trail ignore: %i[created_at updated_at]

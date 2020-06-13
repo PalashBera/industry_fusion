@@ -13,6 +13,7 @@ class ReorderLevel < ApplicationRecord
   belongs_to :item
 
   delegate :name, to: :item, prefix: true
+  delegate :name, to: :warehouse, prefix: true
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
 
