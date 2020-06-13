@@ -5,6 +5,8 @@ RSpec.describe User, type: :model do
   let(:organization) { create(:organization) }
 
   it_behaves_like "user_informable"
+  it_behaves_like "modal_formable"
+  it_behaves_like "timestampble"
 
   describe "#active_record_columns" do
     it { should have_db_column(:admin) }
@@ -28,10 +30,6 @@ RSpec.describe User, type: :model do
 
   describe "#associations" do
     it { should belong_to(:organization).optional }
-  end
-
-  describe "#validations" do
-    it { should allow_value(%w(true false)).for(:admin) }
   end
 
   describe "#admin?" do

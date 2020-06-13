@@ -1,8 +1,8 @@
 class Brand < ApplicationRecord
+  include Nameable
   include Archivable
   include ModalFormable
   include UserTrackable
-  include Nameable
 
   acts_as_tenant(:organization)
 

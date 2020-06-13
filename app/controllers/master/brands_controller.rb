@@ -17,7 +17,7 @@ class Master::BrandsController < Master::HomeController
     @brand = Brand.new(brand_params)
 
     if @brand.save
-      redirect_to master_brands_path, flash: { success: "Brand has been successfully created." }
+      redirect_to master_brands_path, flash: { success: t("flash_messages.created", name: "Brand") }
     else
       render "new"
     end
@@ -29,7 +29,7 @@ class Master::BrandsController < Master::HomeController
 
   def update
     if brand.update(brand_params)
-      redirect_to master_brands_path, flash: { success: "Brand has been successfully updated." }
+      redirect_to master_brands_path, flash: { success: t("flash_messages.updated", name: "Brand") }
     else
       render "edit"
     end

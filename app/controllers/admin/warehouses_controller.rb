@@ -16,7 +16,7 @@ class Admin::WarehousesController < Admin::HomeController
     @warehouse = Warehouse.new(warehouse_params)
 
     if @warehouse.save
-      redirect_to admin_warehouses_path, flash: { success: "Warehouse has been successfully created." }
+      redirect_to admin_warehouses_path, flash: { success: t("flash_messages.created", name: "Warehouse") }
     else
       render "new"
     end
@@ -28,7 +28,7 @@ class Admin::WarehousesController < Admin::HomeController
 
   def update
     if warehouse.update(warehouse_params)
-      redirect_to admin_warehouses_path, flash: { success: "Warehouse has been successfully updated." }
+      redirect_to admin_warehouses_path, flash: { success: t("flash_messages.updated", name: "Warehouse") }
     else
       render "edit"
     end

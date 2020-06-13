@@ -1,55 +1,49 @@
 require "rails_helper"
 
 RSpec.describe Item, type: :model do
-  let!(:user)          { create :user }
-  let(:uom)            { create(:uom) }
-  let!(:secondary_uom) { create(:uom) }
-  let!(:item)          { create(:item, uom: uom, secondary_uom: secondary_uom) }
-  let!(:item_1)        { create(:item, uom: uom, secondary_uom: nil) }
+  let(:user) { create(:user) }
+  let(:item) { create(:item) }
 
-  before { User.stub(:current_user).and_return(user) }
+  before(:each) do
+    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
+    User.stub(:current_user).and_return(user)
+  end
 
+  it_behaves_like "nameable"
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
-  it_behaves_like "nameable"
   it_behaves_like "user_trackable"
+  it_behaves_like "organization_associable"
+  it_behaves_like "timestampble"
 
   describe "#active_record_columns" do
-    it { should have_db_column(:organization_id) }
-    it { should have_db_column(:created_by_id) }
-    it { should have_db_column(:updated_by_id) }
-    it { should have_db_column(:created_at) }
-    it { should have_db_column(:updated_at) }
-    it { should have_db_column(:uom_id) }
     it { should have_db_column(:item_group_id) }
+    it { should have_db_column(:uom_id) }
     it { should have_db_column(:secondary_uom_id) }
     it { should have_db_column(:primary_quantity) }
     it { should have_db_column(:secondary_quantity) }
   end
 
   describe "#active_record_index" do
-    it { should have_db_index(:organization_id) }
+    it { should have_db_index(:item_group_id) }
     it { should have_db_index(:uom_id) }
     it { should have_db_index(:secondary_uom_id) }
-    it { should have_db_index(:item_group_id) }
-    it { should have_db_index(:created_by_id) }
-    it { should have_db_index(:updated_by_id) }
   end
 
   describe "#associations" do
-    it { should belong_to(:organization) }
+    it { should belong_to(:item_group) }
     it { should belong_to(:uom) }
     it { should belong_to(:secondary_uom).class_name("Uom").optional }
-    it { should belong_to(:item_group) }
 
     it { should have_many(:makes) }
     it { should have_many(:indent_items) }
+    it { should have_many(:reorder_levels) }
   end
 
   describe "#validations" do
     context "if secondary uom is present" do
       let(:secondary_uom) { create(:uom) }
-      let(:item_2)        { build(:item, secondary_uom: secondary_uom) }
+      let(:another_item)  { build(:item, secondary_uom: secondary_uom) }
 
       before { Item.any_instance.stub(:secondary_uom).and_return(true)  }
 
@@ -74,8 +68,10 @@ RSpec.describe Item, type: :model do
     end
 
     context "if secondary uom is absent" do
+      before { Item.any_instance.stub(:secondary_uom).and_return(false)  }
+
       it "should return null" do
-        expect(item_1.convertion_equation).to eq(nil)
+        expect(item.convertion_equation).to eq(nil)
       end
     end
   end

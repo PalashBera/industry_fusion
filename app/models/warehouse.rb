@@ -1,10 +1,10 @@
 class Warehouse < ApplicationRecord
-  include ModalFormable
-  include Archivable
-  include UserTrackable
   include Nameable
-  include Addressable
   include ShortNameable
+  include Addressable
+  include Archivable
+  include ModalFormable
+  include UserTrackable
 
   acts_as_tenant(:organization)
 

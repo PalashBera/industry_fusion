@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  include ModalFormable
   include UserInformable
+  include ModalFormable
 
   cattr_accessor :current_user
 

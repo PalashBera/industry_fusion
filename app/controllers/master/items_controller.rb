@@ -16,7 +16,7 @@ class Master::ItemsController < Master::HomeController
     @item = Item.new(item_params)
 
     if @item.save
-      redirect_to master_items_path, flash: { success: "Item has been successfully created." }
+      redirect_to master_items_path, flash: { success: t("flash_messages.created", name: "Item") }
     else
       render "new"
     end
@@ -28,7 +28,7 @@ class Master::ItemsController < Master::HomeController
 
   def update
     if item.update(item_params)
-      redirect_to master_items_path, flash: { success: "Item has been successfully updated." }
+      redirect_to master_items_path, flash: { success: t("flash_messages.updated", name: "Item") }
     else
       render "edit"
     end

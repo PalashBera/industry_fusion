@@ -9,15 +9,15 @@ class IndentItem < ApplicationRecord
   belongs_to :organization
   belongs_to :indent
   belongs_to :item
+  belongs_to :make, optional: true
   belongs_to :uom
   belongs_to :cost_center
-  belongs_to :make, optional: true
 
-  delegate :name, to: :cost_center, prefix: :cost_center
-  delegate :name, to: :item, prefix: :item
-  delegate :requirement_date, to: :indent, prefix: :indent
-  delegate :serial_number, to: :indent, prefix: :indent
-  delegate :brand_with_cat_no, to: :make, prefix: :make, allow_nil: true
+  delegate :serial_number,     to: :indent,      prefix: :indent
+  delegate :requirement_date,  to: :indent,      prefix: :indent
+  delegate :name,              to: :item,        prefix: :item
+  delegate :brand_with_cat_no, to: :make,        prefix: :make, allow_nil: true
+  delegate :name,              to: :cost_center, prefix: :cost_center
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
   validates :priority, presence: true

@@ -1,6 +1,4 @@
 shared_examples_for "short_nameable" do
-  let!(:resource) { create(described_class.to_s.underscore.to_sym) }
-
   describe "#active_record_columns" do
     it { should have_db_column(:short_name) }
   end
@@ -24,6 +22,8 @@ shared_examples_for "short_nameable" do
   end
 
   describe "#validations" do
+    let!(:short_named_resource) { create(described_class.to_s.underscore.to_sym) }
+
     it { should validate_presence_of(:short_name) }
     it { should validate_length_of(:short_name).is_at_most(3) }
     it { should validate_uniqueness_of(:short_name).case_insensitive.scoped_to(:organization_id) }

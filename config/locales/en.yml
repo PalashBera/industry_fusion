@@ -30,12 +30,14 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
-
   date:
     formats:
       default: "%d/%m/%Y"
 
   time:
     formats:
-      default: '%d/%m/%Y at %I:%M %p'
+      default: "%d/%m/%Y at %I:%M %p"
+
+  flash_messages:
+    created: "%{name} has been successfully created."
+    updated: "%{name} has been successfully updated."

@@ -17,7 +17,7 @@ class Master::ItemGroupsController < Master::HomeController
     @item_group = ItemGroup.new(item_group_params)
 
     if @item_group.save
-      redirect_to master_item_groups_path, flash: { success: "Item Group has been successfully created." }
+      redirect_to master_item_groups_path, flash: { success: t("flash_messages.created", name: "Item Group") }
     else
       render "new"
     end
@@ -29,7 +29,7 @@ class Master::ItemGroupsController < Master::HomeController
 
   def update
     if item_group.update(item_group_params)
-      redirect_to master_item_groups_path, flash: { success: "Item Group has been successfully updated." }
+      redirect_to master_item_groups_path, flash: { success: t("flash_messages.updated", name: "Item Group") }
     else
       render "edit"
     end

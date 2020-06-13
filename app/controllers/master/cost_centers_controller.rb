@@ -17,7 +17,7 @@ class Master::CostCentersController < Master::HomeController
     @cost_center = CostCenter.new(cost_center_params)
 
     if @cost_center.save
-      redirect_to master_cost_centers_path, flash: { success: "Cost Center has been successfully created." }
+      redirect_to master_cost_centers_path, flash: { success: t("flash_messages.created", name: "Cost Center") }
     else
       render "new"
     end
@@ -29,7 +29,7 @@ class Master::CostCentersController < Master::HomeController
 
   def update
     if cost_center.update(cost_center_params)
-      redirect_to master_cost_centers_path, flash: { success: "Cost Center has been successfully updated." }
+      redirect_to master_cost_centers_path, flash: { success: t("flash_messages.updated", name: "Cost Center") }
     else
       render "edit"
     end

@@ -1,12 +1,12 @@
 class Vendor < ApplicationRecord
-  include ModalFormable
   include UserInformable
-
-  has_one :store_information
-  has_many :vendorships
-  has_many :organizations, through: :vendorships
+  include ModalFormable
 
   devise :database_authenticatable, :invitable, :async
+
+  has_one  :store_information
+  has_many :vendorships
+  has_many :organizations, through: :vendorships
 
   delegate :name, to: :store_information, allow_nil: true
 
