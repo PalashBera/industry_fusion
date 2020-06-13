@@ -128,6 +128,22 @@ end
       organization_id: organization.id
     )
   end
+
+  ReorderLevel.create!(
+    item_id: item.id,
+    warehouse_id: User.current_user.organization.warehouses.non_archived.sample.id,
+    quantity: rand(1..100),
+    priority: %w[default high medium low].sample,
+    archive: Faker::Boolean.boolean,
+    organization_id: organization.id
+  )
+
+  WarehouseLocation.create!(
+    name: "Location - #{t}",
+    warehouse_id: User.current_user.organization.warehouses.non_archived.sample.id,
+    archive: Faker::Boolean.boolean,
+    organization_id: organization.id
+  )
 end
 
 20.times do |t|
