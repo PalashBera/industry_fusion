@@ -12,6 +12,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require "rspec/rails"
 require "spec_helper"
 require "database_cleaner"
+require "support/controller_helpers"
 
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
 
@@ -49,4 +50,7 @@ RSpec.configure do |config|
       with.library :rails
     end
   end
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include ControllerHelpers, type: :controller
 end

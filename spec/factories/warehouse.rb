@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :warehouse do
-    name         { Faker::Company.industry }
+    name         { Faker::Company.industry + Time.now.to_i.to_s }
     short_name   { Faker::Name.initials(number: 3) }
     address1     { Faker::Address.street_address }
     address2     { Faker::Address.secondary_address }

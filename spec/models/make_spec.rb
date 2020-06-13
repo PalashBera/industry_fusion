@@ -1,35 +1,31 @@
 require "rails_helper"
 
 RSpec.describe Make, type: :model do
-  let!(:user) { create(:user) }
+  let(:user)  { create(:user) }
   let(:brand) { create(:brand, name: "Lenovo") }
-  let!(:make) { create(:make, brand: brand, cat_no: "1234") }
+  let(:make)  { create(:make, brand: brand, cat_no: "1234") }
 
-  before { User.stub(:current_user).and_return(user) }
+  before(:each) do
+    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
+    User.stub(:current_user).and_return(user)
+  end
 
   it_behaves_like "user_trackable"
+  it_behaves_like "organization_associable"
+  it_behaves_like "timestampble"
 
   describe "#active_record_columns" do
-    it { should have_db_column(:organization_id) }
-    it { should have_db_column(:created_by_id) }
-    it { should have_db_column(:updated_by_id) }
-    it { should have_db_column(:created_at) }
-    it { should have_db_column(:updated_at) }
     it { should have_db_column(:item_id) }
     it { should have_db_column(:brand_id) }
     it { should have_db_column(:cat_no) }
   end
 
   describe "#active_record_index" do
-    it { should have_db_index(:organization_id) }
     it { should have_db_index(:item_id) }
     it { should have_db_index(:brand_id) }
-    it { should have_db_index(:created_by_id) }
-    it { should have_db_index(:updated_by_id) }
   end
 
   describe "#associations" do
-    it { should belong_to(:organization) }
     it { should belong_to(:item) }
     it { should belong_to(:brand) }
 
@@ -37,6 +33,8 @@ RSpec.describe Make, type: :model do
   end
 
   describe "#validations" do
+    let!(:make) { create(:make) }
+
     it { should validate_length_of(:cat_no).is_at_most(255) }
     it { should validate_uniqueness_of(:cat_no).case_insensitive.scoped_to(:item_id, :brand_id).allow_blank }
   end

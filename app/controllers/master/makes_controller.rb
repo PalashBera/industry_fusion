@@ -16,7 +16,7 @@ class Master::MakesController < Master::HomeController
     @make = Make.new(make_params)
 
     if @make.save
-      redirect_to master_makes_path, flash: { success: "Make has been successfully created." }
+      redirect_to master_makes_path, flash: { success: t("flash_messages.created", name: "Make") }
     else
       render "new"
     end
@@ -28,7 +28,7 @@ class Master::MakesController < Master::HomeController
 
   def update
     if make.update(make_params)
-      redirect_to master_makes_path, flash: { success: "Make has been successfully updated." }
+      redirect_to master_makes_path, flash: { success: t("flash_messages.updated", name: "Make") }
     else
       render "edit"
     end

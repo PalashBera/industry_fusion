@@ -1,16 +1,15 @@
 require "rails_helper"
 
 RSpec.describe StoreInformation, type: :model do
-  let!(:store_information) { create(:store_information) }
+  let(:store_information) { create(:store_information) }
 
   it_behaves_like "addressable"
+  it_behaves_like "timestampble"
 
   describe "#active_record_columns" do
     it { should have_db_column(:name) }
     it { should have_db_column(:pan_number) }
     it { should have_db_column(:gstn) }
-    it { should have_db_column(:created_at) }
-    it { should have_db_column(:updated_at) }
   end
 
   describe "#active_record_index" do
@@ -48,6 +47,8 @@ RSpec.describe StoreInformation, type: :model do
   end
 
   describe "#validattions" do
+    let!(:store_information) { create(:store_information) }
+
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_uniqueness_of(:name).case_insensitive }

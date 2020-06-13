@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
 
     if @organization.save
       current_user.add_organization(@organization)
-      redirect_to dashboard_path, flash: { success: "Organization has been successfully created." }
+      redirect_to dashboard_path, flash: { success: t("flash_messages.created", name: "Organization") }
     else
       render "new"
     end

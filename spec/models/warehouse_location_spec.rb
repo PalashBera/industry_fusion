@@ -1,39 +1,34 @@
 require "rails_helper"
 
 RSpec.describe WarehouseLocation, type: :model do
-  let!(:current_user) { create :user }
-  before              { User.stub(:current_user).and_return(current_user)  }
-  let(:warehouse)     { create(:warehouse) }
-  let(:nameable_org)  { create(:organization) }
-  let!(:location)     { create(:warehouse_location, name: "Name3", warehouse_id: warehouse.id, organization_id: nameable_org.id) }
+  let(:user)     { create :user }
+  let(:location) { create(:warehouse_location) }
+
+  before(:each) do
+    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
+    User.stub(:current_user).and_return(user)
+  end
 
   it_behaves_like "archivable"
   it_behaves_like "modal_formable"
   it_behaves_like "user_trackable"
+  it_behaves_like "organization_associable"
+  it_behaves_like "timestampble"
 
-  describe "active record columns" do
-    it { should have_db_column(:organization_id) }
-    it { should have_db_column(:created_by_id) }
-    it { should have_db_column(:updated_by_id) }
-    it { should have_db_column(:created_at) }
-    it { should have_db_column(:updated_at) }
-    it { should have_db_column(:warehouse_id) }
+  describe "#active_record_columns" do
     it { should have_db_column(:name) }
+    it { should have_db_column(:warehouse_id) }
   end
 
-  describe "active record index" do
-    it { should have_db_index(:organization_id) }
+  describe "#active_record_index" do
     it { should have_db_index(:warehouse_id) }
-    it { should have_db_index(:created_by_id) }
-    it { should have_db_index(:updated_by_id) }
   end
 
-  describe "associations" do
-    it { should belong_to(:organization) }
+  describe "#associations" do
     it { should belong_to(:warehouse) }
   end
 
-  describe "callbacks" do
+  describe "#callbacks" do
     context "when name contains extra space" do
       it "should remove extra space" do
         record_1 = build(described_class.to_s.underscore.to_sym, name: " KFC  ")
@@ -43,19 +38,19 @@ RSpec.describe WarehouseLocation, type: :model do
     end
   end
 
-  describe "validations" do
+  describe "#validations" do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_uniqueness_of(:name).case_insensitive.scoped_to([:organization_id, :warehouse_id]) }
   end
 
-  describe "scopes" do
+  describe "#scopes" do
     context "order_by_name" do
-      let(:record_1) { create(described_class.to_s.underscore.to_sym, name: "Name 1", organization: nameable_org) }
-      let(:record_2) { create(described_class.to_s.underscore.to_sym, name: "Name 2", organization: nameable_org) }
+      let!(:record_1) { create(described_class.to_s.underscore.to_sym, name: "Name 1") }
+      let!(:record_2) { create(described_class.to_s.underscore.to_sym, name: "Name 2") }
 
       it "should return records order by name" do
-        expect(nameable_org.public_send(described_class.to_s.pluralize.underscore).order_by_name).to eq([record_1, record_2, location])
+        expect(user.organization.warehouse_locations.order_by_name).to eq([record_1, record_2])
       end
     end
   end

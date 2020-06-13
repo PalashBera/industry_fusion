@@ -9,8 +9,8 @@ class ReorderLevel < ApplicationRecord
   acts_as_tenant(:organization)
 
   belongs_to :organization
-  belongs_to :warehouse
   belongs_to :item
+  belongs_to :warehouse
 
   delegate :name, to: :item, prefix: true
   delegate :name, to: :warehouse, prefix: true

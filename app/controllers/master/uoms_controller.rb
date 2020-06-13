@@ -17,7 +17,7 @@ class Master::UomsController < Master::HomeController
     @uom = Uom.new(uom_params)
 
     if @uom.save
-      redirect_to master_uoms_path, flash: { success: "UOM has been successfully created." }
+      redirect_to master_uoms_path, flash: { success: t("flash_messages.created", name: "UOM") }
     else
       render "new"
     end
@@ -29,7 +29,7 @@ class Master::UomsController < Master::HomeController
 
   def update
     if uom.update(uom_params)
-      redirect_to master_uoms_path, flash: { success: "UOM has been successfully updated." }
+      redirect_to master_uoms_path, flash: { success: t("flash_messages.updated", name: "UOM") }
     else
       render "edit"
     end

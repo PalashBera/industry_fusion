@@ -16,7 +16,7 @@ class Admin::CompaniesController < Admin::HomeController
     @company = Company.new(company_params)
 
     if @company.save
-      redirect_to admin_companies_path, flash: { success: "Company has been successfully created." }
+      redirect_to admin_companies_path, flash: { success: t("flash_messages.created", name: "Company") }
     else
       render "new"
     end
@@ -28,7 +28,7 @@ class Admin::CompaniesController < Admin::HomeController
 
   def update
     if company.update(company_params)
-      redirect_to admin_companies_path, flash: { success: "Company has been successfully updated." }
+      redirect_to admin_companies_path, flash: { success: t("flash_messages.updated", name: "Company") }
     else
       render "edit"
     end
