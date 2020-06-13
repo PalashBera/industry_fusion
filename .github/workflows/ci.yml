@@ -20,24 +20,37 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.6.6
 
+      - name: Ruby gem cache
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Install pg gem dependency
+        env:
+          RAILS_ENV: test
+        run: sudo apt-get -yqq install libpq-dev
+
       - name: bundle install
         env:
           RAILS_ENV: test
         run: |
-          sudo apt-get -yqq install libpq-dev
           gem install bundler
+          bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
       - name: Setup Database
         run: |
           cp config/database.yml.github-actions config/database.yml
-          bundle exec rails db:prepare --trace
+          bin/rails db:prepare --trace
         env:
           RAILS_ENV: test
 
