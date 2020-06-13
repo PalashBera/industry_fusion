@@ -13,6 +13,7 @@ class Item < ApplicationRecord
 
   has_many :makes
   has_many :indent_items
+  has_many :reorder_levels
 
   accepts_nested_attributes_for :makes, reject_if: :all_blank, allow_destroy: true
 

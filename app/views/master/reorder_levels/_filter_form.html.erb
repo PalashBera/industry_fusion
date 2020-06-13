@@ -1,0 +1,18 @@
+<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Items" } do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :item_name_cont_any, "Item" %>
+      <%= f.search_field :item_name_cont_any, placeholder: "Item Name", title: "Type item name", class: "form-control", autocomplete: :off %>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :warehouse_name_cont_any, "Warehouse" %>
+      <%= f.search_field :warehouse_name_cont_any, placeholder: "Item Name", title: "Type warehouse name", class: "form-control", autocomplete: :off %>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :archive_eq, "Status" %>
+      <%= f.select :archive_eq, status_selection, { prompt: "-- Select Status --" }, { class: "form-control" } %>
+    </div>
+  </div>
+<% end %>

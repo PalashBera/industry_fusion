@@ -191,6 +191,24 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
   end
 
+  create_table "reorder_levels", force: :cascade do |t|
+    t.decimal "quantity", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.bigint "item_id", null: false
+    t.string "priority", default: "default", null: false
+    t.bigint "updated_by_id"
+    t.bigint "created_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_reorder_levels_on_created_by_id"
+    t.index ["item_id"], name: "index_reorder_levels_on_item_id"
+    t.index ["organization_id"], name: "index_reorder_levels_on_organization_id"
+    t.index ["updated_by_id"], name: "index_reorder_levels_on_updated_by_id"
+    t.index ["warehouse_id"], name: "index_reorder_levels_on_warehouse_id"
+  end
+
   create_table "store_informations", force: :cascade do |t|
     t.bigint "vendor_id", null: false
     t.string "name", null: false
@@ -322,6 +340,21 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
+  create_table "warehouse_locations", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.bigint "updated_by_id"
+    t.bigint "created_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_warehouse_locations_on_created_by_id"
+    t.index ["organization_id"], name: "index_warehouse_locations_on_organization_id"
+    t.index ["updated_by_id"], name: "index_warehouse_locations_on_updated_by_id"
+    t.index ["warehouse_id"], name: "index_warehouse_locations_on_warehouse_id"
+  end
+
   create_table "warehouses", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.string "name", null: false
@@ -365,10 +398,15 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
+  add_foreign_key "reorder_levels", "items"
+  add_foreign_key "reorder_levels", "organizations"
+  add_foreign_key "reorder_levels", "warehouses"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "vendorships", "organizations"
   add_foreign_key "vendorships", "vendors"
+  add_foreign_key "warehouse_locations", "organizations"
+  add_foreign_key "warehouse_locations", "warehouses"
   add_foreign_key "warehouses", "companies"
   add_foreign_key "warehouses", "organizations"
 end

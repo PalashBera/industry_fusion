@@ -1,0 +1,30 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @reorder_level, namespace: "master" } do |f| %>
+  <div class="form-group">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity, required: true, class: "form-control", placeholder: "Quantity", autocomplete: :off, min: 1, step: 0.01 %>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :warehouse_id %>
+      <%= f.select :warehouse_id, current_organization.warehouses.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :item_id %>
+      <%= f.select :item_id, current_organization.items.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :priority %>
+      <%= f.select :priority, priority_selection, { prompt: "-- Priority --" }, { required: true, class: "form-control" } %>
+    </div>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <%= f.check_box :archive, class: "custom-control-input" %>
+    <%= f.label :archive, class: "custom-control-label" %>
+  </div>
+<% end %>

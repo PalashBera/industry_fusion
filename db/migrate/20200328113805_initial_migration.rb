@@ -279,4 +279,28 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :warehouse_locations do |t|
+    t.string     :name,          null: false
+    t.boolean    :archive,       default: false, null: false
+    t.references :organization,  null: false,    foreign_key: true
+    t.references :warehouse,     null: false,    foreign_key: true
+    t.bigint     :updated_by_id, index: true
+    t.bigint     :created_by_id, index: true
+
+    t.timestamps
+  end
+
+  create_table :reorder_levels do |t|
+    t.decimal    :quantity,      null: false,    precision: 10, scale: 2
+    t.boolean    :archive,       default: false, null: false
+    t.references :organization,  null: false,    foreign_key: true
+    t.references :warehouse,     null: false,    foreign_key: true
+    t.references :item,          null: false,    foreign_key: true
+    t.string     :priority,      null: false,    default: "default"
+    t.bigint     :updated_by_id, index: true
+    t.bigint     :created_by_id, index: true
+
+    t.timestamps
+  end
 end

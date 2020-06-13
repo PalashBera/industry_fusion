@@ -1,0 +1,42 @@
+<%= render layout: "shared/change_logs_modal", locals: { resource: @resource, attr: "name" } do %>
+  <% @versions.each_with_index do |version, index| %>
+    <hr>
+    <h6 class="mb-2 text-muted">Change Log <%= @versions.size - index %> – Done by <strong><%= version.whodunnit %></strong> at <%= I18n.l(version.created_at) %>.</h6>
+
+    <% changeset = version.changeset %>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th>Field Name</th>
+          <th>Previous Value</th>
+          <th>Current Value</th>
+        </thead>
+
+        <tbody>
+          <% changeset.each do |key, value| %>
+            <tr>
+              <% if key == "name" %>
+                <td>Name</td>
+                <td><%= value[0] %></td>
+                <td><%= value[1] %></td>
+              <% end %>
+
+              <% if key == "warehouse_id" %>
+                <td>Warehouse</td>
+                <td><%= Warehouse.find(value[0]).name %></td>
+                <td><%= Warehouse.find(value[1]).name %></td>
+              <% end %>
+
+              <% if key == "archive" %>
+                <td>Status</td>
+                <td><%= archive_status(value[0]).html_safe %></td>
+                <td><%= archive_status(value[1]).html_safe %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>
