@@ -3,10 +3,10 @@
     <thead class="thead">
       <tr>
         <th scope="col">#</th>
-        <th scope="col"><%= sort_link @search, :quantity, "Quantity" %></th>
         <th scope="col"><%= sort_link @search, :item_name, "Item".html_safe %></th>
         <th scope="col"><%= sort_link @search, :warehouse_name, "Warehouse".html_safe %></th>
-        <th scope="col">Priority</th>
+        <th scope="col"><%= sort_link @search, :quantity, "Quantity" %></th>
+        <th scope="col"><%= sort_link @search, :priority, "Priority" %></th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
@@ -16,10 +16,10 @@
       <% @reorder_levels.each.with_index(1) do |level, index| %>
         <tr>
           <td scope="row"><%= index %></td>
+          <td><%= level.item_name %></td>
+          <td><%= level.warehouse_name %></td>
           <td><%= level.quantity %></td>
-          <td><%= level.item.name %></td>
-          <td><%= level.warehouse.name %></td>
-          <td><%= level.priority %></td>
+          <td><%= level.priority.humanize.titleize %></td>
           <td><%= archive_status(level.archive).html_safe %></td>
           <td class="text-center">
             <div class="dropdown">

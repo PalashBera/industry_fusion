@@ -192,12 +192,12 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   end
 
   create_table "reorder_levels", force: :cascade do |t|
-    t.decimal "quantity", null: false
+    t.bigint "item_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.decimal "quantity", precision: 10, scale: 2, null: false
+    t.string "priority", default: "default", null: false
     t.boolean "archive", default: false, null: false
     t.bigint "organization_id", null: false
-    t.bigint "warehouse_id", null: false
-    t.bigint "item_id", null: false
-    t.string "priority", default: "default", null: false
     t.bigint "updated_by_id"
     t.bigint "created_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -341,10 +341,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   end
 
   create_table "warehouse_locations", force: :cascade do |t|
+    t.bigint "warehouse_id", null: false
     t.string "name", null: false
     t.boolean "archive", default: false, null: false
     t.bigint "organization_id", null: false
-    t.bigint "warehouse_id", null: false
     t.bigint "updated_by_id"
     t.bigint "created_by_id"
     t.datetime "created_at", precision: 6, null: false
