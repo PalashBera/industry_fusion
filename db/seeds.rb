@@ -164,3 +164,4 @@ end
 end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)
+# CI test
