@@ -12,6 +12,8 @@ class Warehouse < ApplicationRecord
   belongs_to :company
 
   has_many :indents
+  has_many :warehouse_locations
+  has_many :reorder_levels
 
   has_paper_trail ignore: %i[created_at updated_at]
 

@@ -78,6 +78,16 @@ Rails.application.routes.draw do
         post :import
       end
     end
+
+    resources :warehouse_locations, except: [:show, :destroy] do
+      get :change_logs, on: :member
+      get :export, on: :collection
+    end
+
+    resources :reorder_levels, except: [:show, :destroy] do
+      get :change_logs, on: :member
+      get :export, on: :collection
+    end
   end
 
   namespace :admin do

@@ -1,0 +1,34 @@
+<% provide(:title, "Warehouse Locations") %>
+<% provide(:page_title, "Warehouse Locations") %>
+
+<div class="card">
+  <div class="card-body">
+    <section class="mb-4 d-flex justify-content-between">
+      <section>
+        <%= new_link_using_modal(controller_name) %>
+        <%= filter_button(params[:q]) %>
+      </section>
+
+      <section>
+        <%= excel_export_btn(controller_name) %>
+      </section>
+    </section>
+
+    <% if @warehouse_location_records.present? %>
+      <%= render "index_table" %>
+    <% else %>
+      <div class="card">
+        <div class="card-body text-center">
+          <% if params[:q].present? %>
+            No result found. Please search with proper keywords.
+          <% else %>
+            No location has been added yet. <%= new_modal_link(controller_name) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render "filter_form" %>
+<%= render "shared/form_modal_container" %>

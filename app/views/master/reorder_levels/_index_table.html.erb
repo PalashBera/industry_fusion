@@ -1,0 +1,40 @@
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :quantity, "Quantity" %></th>
+        <th scope="col"><%= sort_link @search, :item_name, "Item".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :warehouse_name, "Warehouse".html_safe %></th>
+        <th scope="col">Priority</th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @reorder_levels.each.with_index(1) do |level, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= level.quantity %></td>
+          <td><%= level.item.name %></td>
+          <td><%= level.warehouse.name %></td>
+          <td><%= level.priority %></td>
+          <td><%= archive_status(level.archive).html_safe %></td>
+          <td class="text-center">
+            <div class="dropdown">
+              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <%= edit_link_using_modal(controller_name, level) %>
+                <%= change_logs_link_using_modal(controller_name, level) %>
+              </div>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>
