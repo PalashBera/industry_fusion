@@ -38,7 +38,8 @@ jobs:
           RAILS_ENV: test
         run: |
           sudo apt-get -yqq install libpq-dev
-          gem install bundler path vendor/bundle
+          gem install bundler
+          bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
       - name: Setup Database
