@@ -38,6 +38,21 @@ en:
     formats:
       default: "%d/%m/%Y at %I:%M %p"
 
+  page_title: "Industry Fusion"
+
+  alert_prefix:
+    success: "Well done!"
+    info: "Heads up!"
+    warning: "Warning!"
+    danger: "Oh snap!"
+
+  message_type:
+    notice: "info"
+    alert: "danger"
+
   flash_messages:
     created: "%{name} has been successfully created."
     updated: "%{name} has been successfully updated."
+
+  active:
+    active

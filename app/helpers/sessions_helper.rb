@@ -7,10 +7,6 @@ module SessionsHelper
     @current_organization ||= current_user&.organization
   end
 
-  def current_store
-    @current_store ||= current_vendor&.store_information
-  end
-
   def allow_organization_settings?
     current_organization && admin_user_signed_in?
   end
