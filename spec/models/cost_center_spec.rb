@@ -9,6 +9,7 @@ RSpec.describe CostCenter, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
+  it_behaves_like "archivable"
   it_behaves_like "modal_formable"
   it_behaves_like "user_trackable"
   it_behaves_like "organization_associable"
@@ -17,7 +18,6 @@ RSpec.describe CostCenter, type: :model do
   describe "#active_record_columns" do
     it { should have_db_column(:name) }
     it { should have_db_column(:description) }
-    it { should have_db_column(:archive) }
   end
 
   describe "#callbacks" do
@@ -56,57 +56,6 @@ RSpec.describe CostCenter, type: :model do
     context "order_by_name" do
       it "should return cost centers order by name" do
         expect(CostCenter.order_by_name).to eq([cost_center_1, cost_center_2])
-      end
-    end
-
-    context "archived" do
-      it "should return archived cost centers" do
-        expect(CostCenter.archived.include?(cost_center_1)).to eq(true)
-        expect(CostCenter.archived.include?(cost_center_2)).to eq(false)
-      end
-    end
-
-    context "non-archived" do
-      it "should return non-archived cost centers" do
-        expect(CostCenter.non_archived.include?(cost_center_2)).to eq(true)
-        expect(CostCenter.non_archived.include?(cost_center_1)).to eq(false)
-      end
-    end
-  end
-
-  describe "#archived?" do
-    let!(:cost_center_1) { create(:cost_center, name: "Name 1", archive: true) }
-    let!(:cost_center_2) { create(:cost_center, name: "Name 2", archive: false) }
-
-    it "should return true for archived cost centers" do
-      expect(cost_center_1.archived?).to eq(true)
-      expect(cost_center_2.archived?).to eq(false)
-    end
-  end
-
-  describe "#non_archived?" do
-    let!(:cost_center_1) { create(:cost_center, name: "Name 1", archive: true) }
-    let!(:cost_center_2) { create(:cost_center, name: "Name 2", archive: false) }
-
-    it "should return true for non-archived cost centers" do
-      expect(cost_center_1.non_archived?).to eq(false)
-      expect(cost_center_2.non_archived?).to eq(true)
-    end
-  end
-
-  describe "#archived_status" do
-    let!(:cost_center_1) { create(:cost_center, name: "Name 1", archive: true) }
-    let!(:cost_center_2) { create(:cost_center, name: "Name 2", archive: false) }
-
-    context "when record is archived" do
-      it "should return Archived" do
-        expect(cost_center_1.archived_status).to eq("Archived")
-      end
-    end
-
-    context "when record is non-archived" do
-      it "should return Active" do
-        expect(cost_center_2.archived_status).to eq("Active")
       end
     end
   end

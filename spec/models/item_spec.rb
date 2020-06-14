@@ -9,6 +9,7 @@ RSpec.describe Item, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
+  it_behaves_like "archivable"
   it_behaves_like "modal_formable"
   it_behaves_like "user_trackable"
   it_behaves_like "organization_associable"
@@ -18,7 +19,6 @@ RSpec.describe Item, type: :model do
     it { should have_db_column(:name) }
     it { should have_db_column(:item_group_id) }
     it { should have_db_column(:uom_id) }
-    it { should have_db_column(:archive) }
     it { should have_db_column(:secondary_uom_id) }
     it { should have_db_column(:primary_quantity) }
     it { should have_db_column(:secondary_quantity) }
@@ -91,57 +91,6 @@ RSpec.describe Item, type: :model do
     context "order_by_name" do
       it "should return items order by name" do
         expect(Item.order_by_name).to eq([item_1, item_2])
-      end
-    end
-
-    context "archived" do
-      it "should return archived items" do
-        expect(Item.archived.include?(item_1)).to eq(true)
-        expect(Item.archived.include?(item_2)).to eq(false)
-      end
-    end
-
-    context "non-archived" do
-      it "should return non-archived items" do
-        expect(Item.non_archived.include?(item_1)).to eq(false)
-        expect(Item.non_archived.include?(item_2)).to eq(true)
-      end
-    end
-  end
-
-  describe "#archived?" do
-    let!(:item_1) { create(:item, name: "Name 1", archive: true) }
-    let!(:item_2) { create(:item, name: "Name 2", archive: false) }
-
-    it "should return true for archived items" do
-      expect(item_1.archived?).to eq(true)
-      expect(item_2.archived?).to eq(false)
-    end
-  end
-
-  describe "#non_archived?" do
-    let!(:item_1) { create(:item, name: "Name 1", archive: true) }
-    let!(:item_2) { create(:item, name: "Name 2", archive: false) }
-
-    it "should return true for non-archived items" do
-      expect(item_1.non_archived?).to eq(false)
-      expect(item_2.non_archived?).to eq(true)
-    end
-  end
-
-  describe "#archived_status" do
-    let!(:item_1) { create(:item, name: "Name 1", archive: true) }
-    let!(:item_2) { create(:item, name: "Name 2", archive: false) }
-
-    context "when record is archived" do
-      it "should return Archived" do
-        expect(item_1.archived_status).to eq("Archived")
-      end
-    end
-
-    context "when record is non-archived" do
-      it "should return Active" do
-        expect(item_2.archived_status).to eq("Active")
       end
     end
   end
