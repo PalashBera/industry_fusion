@@ -42,7 +42,7 @@ RSpec.describe Indent, type: :model do
     let!(:indent_3) { create(:indent, requirement_date: Time.zone.now + 2.days) }
 
     it "should return records ordered by serial" do
-      expect(user.organization.indents.order_by_serial).to eq([indent_1, indent_2, indent_3])
+      expect(Indent.order_by_serial).to eq([indent_1, indent_2, indent_3])
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe Indent, type: :model do
     let!(:indent_3) { create(:indent, requirement_date: Time.zone.now + 2.days) }
 
     it "should return records filtered in a specific date range" do
-      filtered_records = user.organization.indents.filter_with_date_range(Time.zone.now, Time.zone.now + 1.days).order_by_serial
+      filtered_records = Indent.filter_with_date_range(Time.zone.now, Time.zone.now + 1.days).order_by_serial
       expect(filtered_records.include?(indent_1)).to eq(true)
       expect(filtered_records.include?(indent_2)).to eq(true)
       expect(filtered_records.include?(indent_3)).to eq(false)
