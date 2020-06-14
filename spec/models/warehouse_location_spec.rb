@@ -31,9 +31,9 @@ RSpec.describe WarehouseLocation, type: :model do
   describe "#callbacks" do
     context "when name contains extra space" do
       it "should remove extra space" do
-        record_1 = build(described_class.to_s.underscore.to_sym, name: " KFC  ")
-        record_1.valid?
-        expect(record_1.name).to eq ("KFC")
+        warehouse_location = build(:warehouse_location, name: " KFC  ")
+        warehouse_location.valid?
+        expect(warehouse_location.name).to eq ("KFC")
       end
     end
   end
@@ -41,16 +41,26 @@ RSpec.describe WarehouseLocation, type: :model do
   describe "#validations" do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
-    it { should validate_uniqueness_of(:name).case_insensitive.scoped_to([:organization_id, :warehouse_id]) }
+
+    context "when same warehouse location name present for an organization and warehouse" do
+      let!(:warehouse)          { create(:warehouse) }
+      let!(:warehouse_location) { create(:warehouse_location, name: "Nokia", warehouse: warehouse) }
+
+      it "should not save this warehouse location" do
+        new_warehouse_location = build(:warehouse_location, name: "Nokia", warehouse_id: warehouse.id)
+        new_warehouse_location.valid?
+        expect(new_warehouse_location.errors[:name]).to include("has already been taken")
+      end
+    end
   end
 
   describe "#scopes" do
     context "order_by_name" do
-      let!(:record_1) { create(described_class.to_s.underscore.to_sym, name: "Name 1") }
-      let!(:record_2) { create(described_class.to_s.underscore.to_sym, name: "Name 2") }
+      let!(:warehouse_location_1) { create(:warehouse_location, name: "Name 1") }
+      let!(:warehouse_location_2) { create(:warehouse_location, name: "Name 2") }
 
-      it "should return records order by name" do
-        expect(user.organization.warehouse_locations.order_by_name).to eq([record_1, record_2])
+      it "should return warehouse locations order by name" do
+        expect(WarehouseLocation.order_by_name).to eq([warehouse_location_1, warehouse_location_2])
       end
     end
   end
