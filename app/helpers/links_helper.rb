@@ -44,12 +44,6 @@ module LinksHelper
             class: "btn btn-secondary"
   end
 
-  def remove_selection_link
-    link_to '<i class="fas fa-minus-circle"></i>'.html_safe,
-            "#",
-            class: "remove-selectpicker-selections"
-  end
-
   def import_modal_btn(controller_name)
     link_to '<i class="fas fa-file-import"></i><span class="d-none d-md-inline-block ml-1">Import</span>'.html_safe,
             "#",
