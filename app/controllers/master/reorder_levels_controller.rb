@@ -16,7 +16,7 @@ class Master::ReorderLevelsController < Master::HomeController
     @reorder_level = ReorderLevel.new(reorder_level_params)
 
     if @reorder_level.save
-      redirect_to master_reorder_levels_path, flash: { success: "Reorder level has been successfully created." }
+      redirect_to master_reorder_levels_path, flash: { success: t("flash_messages.created", name: "Reorder level") }
     else
       render "new"
     end
@@ -28,7 +28,7 @@ class Master::ReorderLevelsController < Master::HomeController
 
   def update
     if reorder_level.update(reorder_level_params)
-      redirect_to master_reorder_levels_path, flash: { success: "Reorder level has been successfully updated." }
+      redirect_to master_reorder_levels_path, flash: { success: t("flash_messages.updated", name: "Reorder level") }
     else
       render "edit"
     end
