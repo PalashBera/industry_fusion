@@ -10,6 +10,8 @@ RSpec.describe Make, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
+  it_behaves_like "archivable"
+  it_behaves_like "modal_formable"
   it_behaves_like "user_trackable"
   it_behaves_like "organization_associable"
   it_behaves_like "timestampble"
