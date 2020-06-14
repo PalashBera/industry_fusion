@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :store_information do
-    name         { Faker::Company.industry + rand(9999999).to_s }
+    name         { Faker::Company.industry + (Time.now.to_f * 100000000000000000000000000000000).to_i.to_s }
     address1     { Faker::Address.street_address }
     address2     { Faker::Address.secondary_address }
     city         { Faker::Address.city }

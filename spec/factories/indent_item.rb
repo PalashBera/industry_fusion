@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :indent_item do
-    quantity { rand(9999.99) }
+    quantity { rand(1..100) }
     priority { %w[default high medium low].sample }
     indent
     item
