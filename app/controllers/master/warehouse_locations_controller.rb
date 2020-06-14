@@ -16,7 +16,7 @@ class Master::WarehouseLocationsController < Master::HomeController
     @warehouse_location = WarehouseLocation.new(warehouse_location_params)
 
     if @warehouse_location.save
-      redirect_to master_warehouse_locations_path, flash: { success: "Location has been successfully created." }
+      redirect_to master_warehouse_locations_path, flash: { success: t("flash_messages.created", name: "Location") }
     else
       render "new"
     end
@@ -28,7 +28,7 @@ class Master::WarehouseLocationsController < Master::HomeController
 
   def update
     if warehouse_location.update(warehouse_location_params)
-      redirect_to master_warehouse_locations_path, flash: { success: "Location has been successfully updated." }
+      redirect_to master_warehouse_locations_path, flash: { success: t("flash_messages.updated", name: "Location") }
     else
       render "edit"
     end
