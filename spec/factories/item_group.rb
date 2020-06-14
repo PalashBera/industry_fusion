@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :item_group do
-    name         { Faker::Beer.name + rand(9999).to_s }
+    name         { Faker::Company.industry + (Time.now.to_f * 100000000000000000000000000000000).to_i.to_s }
     description  { Faker::Lorem.sentence }
     archive      { false }
     organization
