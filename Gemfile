@@ -5,6 +5,7 @@ ruby "2.6.6"
 
 gem "acts_as_tenant", "~> 0.4.4"
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
+gem "cancancan", "~> 1.15"
 gem "caxlsx_rails", "~> 0.6.2"
 gem "delayed_job_active_record", "~> 4.1", ">= 4.1.4"
 gem "devise", "~> 4.7", ">= 4.7.1"

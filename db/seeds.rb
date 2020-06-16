@@ -1,3 +1,10 @@
+master_models = %w[Brand CostCenter ItemGroup Item Make Uom Vendor]
+
+master_models.each do |model|
+  Permission.create!(name: "Read", subject_class: model, action: "read", group: "master")
+  Permission.create!(name: "Write", subject_class: model, action: "write", group: "master")
+end
+
 organization = Organization.create!(
   name: "Industry Fusion Pvt. Ltd.",
   address1: Faker::Address.building_number + ", " + Faker::Address.street_name,
@@ -10,6 +17,16 @@ organization = Organization.create!(
   fy_end_month: 3
 )
 
+# the highest role with all the permissions.
+Role.create!(name: "Super Admin", organization_id: organization.id)
+
+# other role
+Role.create!(name: "Staff", organization_id: organization.id)
+
+# assign super admin the permission to manage all the models and controllers
+role = Role.find_by_name("Super Admin")
+role.permissions << Permission.all
+
 user1 = User.create!(
   first_name: "Palash",
   last_name: "Bera",
@@ -20,7 +37,8 @@ user1 = User.create!(
   admin: true,
   confirmation_sent_at: Time.current,
   confirmed_at: Time.current + 5.minutes,
-  organization_id: organization.id
+  organization_id: organization.id,
+  role_id: role.id
 )
 
 user2 = User.create!(
@@ -33,7 +51,8 @@ user2 = User.create!(
   admin: true,
   confirmation_sent_at: Time.current,
   confirmed_at: Time.current + 5.minutes,
-  organization_id: organization.id
+  organization_id: organization.id,
+  role_id: Role.find_by_name("Staff").id
 )
 
 5.times do |t|

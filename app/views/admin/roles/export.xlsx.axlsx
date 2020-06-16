@@ -1,0 +1,42 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  header_style = style.add_style(bg_color: "EFC376", border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
+  bg_red = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "FF0000", alignment: { horizontal: :center })
+  bg_green = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "00FF00", alignment: { horizontal: :center })
+
+  wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
+    grouped_permissions = Permission.all.group_by(&:subject_class)
+    header_row = ["Name"]
+    keys = grouped_permissions.keys.map { |k| k.underscore.humanize.titleize }
+    header_row.concat keys
+    header_row << "Status"
+
+    sheet.add_row header_row, style: header_style
+
+    @resources.each do |resource|
+      each_row = [resource.name]
+
+      keys.each do |key|
+        if resource.permissions.group_by(&:subject_class)[key]
+          each_row << resource.permissions.group_by(&:subject_class)[key].map(&:name).join(", ")
+        else
+          each_row << ""
+        end
+      end
+
+      each_row << resource.archived_status
+
+      each_row_style = [row_style]
+
+      grouped_permissions.each do
+        each_row_style << row_style
+      end
+
+      resource.archived? ? status_style = bg_red : status_style = bg_green
+      each_row_style << status_style
+      sheet.add_row each_row, style: each_row_style
+    end
+  end
+end

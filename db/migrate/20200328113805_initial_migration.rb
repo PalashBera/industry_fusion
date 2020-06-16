@@ -1,5 +1,30 @@
 class InitialMigration < ActiveRecord::Migration[6.0]
   def change
+    create_table :roles do |t|
+      t.string     :name,         null: false
+      t.boolean    :archive,      null: false, default: false
+      t.references :organization, null: false, foreign_key: true
+      t.bigint     :created_by_id,  index: true
+      t.bigint     :updated_by_id,  index: true
+
+      t.timestamps
+    end
+
+    create_table :permissions do |t|
+      t.string :name,          null: false
+      t.string :subject_class, null: false
+      t.string :action,        null: false
+      t.string :group,         null: false
+
+      t.timestamps
+    end
+
+    create_join_table :roles, :permissions do |t|
+      t.index  [:role_id, :permission_id], name: "uniq_role_permission", unique: true
+
+      t.timestamps
+    end
+
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -47,6 +72,8 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.integer    :invitation_limit
       t.references :invited_by, polymorphic: true
       t.integer    :invitations_count, index: true
+
+      t.references :role, foreign_key: true, null: false
 
       t.timestamps
     end

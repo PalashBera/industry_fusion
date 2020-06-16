@@ -107,6 +107,10 @@ Rails.application.routes.draw do
     end
 
     resources :organizations, only: [:edit, :update]
+
+    resources :roles, except: :destroy do
+      get :export, on: :collection
+    end
   end
 
   namespace :transactions do

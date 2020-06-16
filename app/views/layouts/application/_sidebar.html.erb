@@ -100,13 +100,6 @@
             Admin
           </li>
 
-          <li class="<%= active_class("users") %>">
-            <%= link_to admin_users_path, class: "sidenav-item-link" do %>
-              <i class="mdi mdi-account-group"></i>
-              <span class="nav-text">Users</span>
-            <% end %>
-          </li>
-
           <li class="<%= active_class("companies") %>">
             <%= link_to admin_companies_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-factory"></i>
@@ -118,6 +111,20 @@
             <%= link_to admin_warehouses_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-office-building"></i>
               <span class="nav-text">Warehouses</span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_class("roles") %>">
+            <%= link_to admin_roles_path, class: "sidenav-item-link" do %>
+              <i class="mdi mdi-account-group"></i>
+              <span class="nav-text">Roles</span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_class("users") %>">
+            <%= link_to admin_users_path, class: "sidenav-item-link" do %>
+              <i class="mdi mdi-account-group"></i>
+              <span class="nav-text">Users</span>
             <% end %>
           </li>
         <% end %>

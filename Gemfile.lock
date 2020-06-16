@@ -70,6 +70,7 @@ GEM
     bootsnap (1.4.6-java)
       msgpack (~> 1.0)
     builder (3.2.4)
+    cancancan (1.17.0)
     caxlsx (3.0.1)
       htmlentities (~> 4.3, >= 4.3.4)
       mimemagic (~> 0.3)
@@ -351,6 +352,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_tenant (~> 0.4.4)
   bootsnap (~> 1.4, >= 1.4.6)
+  cancancan (~> 1.15)
   caxlsx_rails (~> 0.6.2)
   database_cleaner (~> 1.8, >= 1.8.3)
   delayed_job_active_record (~> 4.1, >= 4.1.4)

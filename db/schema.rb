@@ -191,6 +191,23 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
   end
 
+  create_table "permissions", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "subject_class", null: false
+    t.string "action", null: false
+    t.string "group", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "permissions_roles", id: false, force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "permission_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["role_id", "permission_id"], name: "uniq_role_permission", unique: true
+  end
+
   create_table "reorder_levels", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.bigint "warehouse_id", null: false
@@ -207,6 +224,19 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["organization_id"], name: "index_reorder_levels_on_organization_id"
     t.index ["updated_by_id"], name: "index_reorder_levels_on_updated_by_id"
     t.index ["warehouse_id"], name: "index_reorder_levels_on_warehouse_id"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_roles_on_created_by_id"
+    t.index ["organization_id"], name: "index_roles_on_organization_id"
+    t.index ["updated_by_id"], name: "index_roles_on_updated_by_id"
   end
 
   create_table "store_informations", force: :cascade do |t|
@@ -268,6 +298,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count"
+    t.bigint "role_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -277,6 +308,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   create_table "vendors", force: :cascade do |t|
@@ -401,8 +433,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "reorder_levels", "items"
   add_foreign_key "reorder_levels", "organizations"
   add_foreign_key "reorder_levels", "warehouses"
+  add_foreign_key "roles", "organizations"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
+  add_foreign_key "users", "roles"
   add_foreign_key "vendorships", "organizations"
   add_foreign_key "vendorships", "vendors"
   add_foreign_key "warehouse_locations", "organizations"

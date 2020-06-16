@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery
+
   include Pagy::Backend
   include SessionsHelper
 
@@ -11,6 +13,11 @@ class ApplicationController < ActionController::Base
   before_action :set_paper_trail_whodunnit
   before_action :set_current_user, :set_current_organization
   before_action :remove_empty_parameters, only: :index
+
+  rescue_from CanCan::AccessDenied do |_exception|
+    flash[:alert] = "Access denied. You are not authorized to access the requested page."
+    redirect_to(dashboard_path)
+  end
 
   protected
 
@@ -34,6 +41,12 @@ class ApplicationController < ActionController::Base
 
     flash[:error] = "You don't have access."
     redirect_to dashboard_path
+  end
+
+  def permission
+    name.gsub("Controller", "").singularize.split("::").last.constantize.name
+  rescue StandardError
+    nil
   end
 
   private
@@ -77,5 +90,14 @@ class ApplicationController < ActionController::Base
     else
       "basic"
     end
+  end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user)
+  end
+
+  # load the permissions for the current user so that UI can be manipulated
+  def load_permissions
+    @current_permissions = current_user.role.permissions.map { |i| [i.subject_class, i.action] }
   end
 end

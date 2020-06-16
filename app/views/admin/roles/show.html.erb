@@ -1,0 +1,17 @@
+<% provide(:title, @role.name) %>
+<% provide(:page_title, @role.name) %>
+
+<div class="card card-default">
+  <div class="card-body">
+    <h4>Master Permissions</h4><hr>
+
+    <div class="row">
+      <% @permissions.for_master.group_by(&:subject_class).each do |k, v| %>
+        <div class="col-6 mb-3">
+          <p class="text-primary"><strong><%= k.underscore.humanize.upcase %></strong></p>
+          <p><%= v.map(&:name).join(", ") %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

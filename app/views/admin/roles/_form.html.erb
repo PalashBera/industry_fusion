@@ -1,0 +1,42 @@
+<%= form_for [:admin, @role] do |f| %>
+  <%= render "shared/error_messages", resource: @role %>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :name %>
+      <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autofocus: true, autocomplete: :off, maxlength: 255 %>
+    </div>
+  </div>
+
+  <div class="custom-control custom-checkbox mb-5">
+    <%= f.check_box :archive, class: "custom-control-input" %>
+    <%= f.label :archive, class: "custom-control-label" %>
+  </div>
+
+  <h5>Master Permissions</h5><hr>
+
+  <div class="row">
+    <% Permission.for_master.group_by(&:subject_class).each do |k, v| %>
+      <div class="col-6">
+        <div class="form-row">
+          <div class="form-group col-sm-12 col-md-12 mb-0">
+            <strong class="text-primary"><%= k.underscore.humanize.upcase %></strong>
+          </div>
+
+          <% v.each do |permission| %>
+            <div class="form-group col-sm-12 col-md-6">
+              <div class="custom-control custom-checkbox">
+                <%= check_box_tag "role[permission_ids][]", permission.id, @permissions.include?(permission), class: "custom-control-input", id: "permission_#{permission.id}" %>
+                <label for="permission_<%= permission.id %>" class="custom-control-label"><%= permission.name %></label>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group mt-3">
+    <%= f.submit yield(:button_title), class: "btn btn-primary", data: { disable_with: "Saving..." } %>
+  </div>
+<% end %>
