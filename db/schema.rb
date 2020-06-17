@@ -249,10 +249,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.boolean "admin", default: false, null: false
     t.boolean "archive", default: false, null: false
     t.boolean "sidebar_collapse", default: false, null: false
+    t.text "warehouse_ids", default: [], array: true
+    t.bigint "organization_id"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id"
-    t.text "warehouse_ids", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
