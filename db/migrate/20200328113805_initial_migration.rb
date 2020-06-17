@@ -6,14 +6,20 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string :encrypted_password, null: false, default: ""
 
       ## User information
-      t.string  :first_name,         null: false, default: ""
-      t.string  :last_name,          null: false, default: ""
-      t.string  :mobile_number,      null: false, default: ""
-      t.boolean :admin,              null: false, default: false
-      t.boolean :sidebar_collapse,   null: false, default: false
+      t.string  :first_name,        null: false, default: ""
+      t.string  :last_name,         null: false, default: ""
+      t.string  :mobile_number,     null: false, default: ""
+      t.boolean :admin,             null: false, default: false
+      t.boolean :archive,           null: false, default: false
+      t.boolean :sidebar_collapse,  null: false, default: false
+      t.bigint  :created_by_id,     index: true
+      t.bigint  :updated_by_id,     index: true
 
       ## Organization references
       t.references :organization, foreign_key: true
+
+      ## Warehouse references
+      t.text :warehouse_ids, array: true, default: []
 
       ## Recoverable
       t.string   :reset_password_token

@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <%= f.label :warehouse_id %>
-    <%= f.select :warehouse_id, current_organization.warehouses.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
+    <%= f.select :warehouse_id, Warehouse.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="custom-control custom-checkbox">

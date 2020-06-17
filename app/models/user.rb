@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Archivable
+  include UserTrackable
   include UserInformable
   include ModalFormable
 
@@ -9,6 +11,8 @@ class User < ApplicationRecord
   belongs_to :organization, optional: true
 
   validates :admin, inclusion: { in: [true, false] }
+
+  has_paper_trail only: %i[archive warehouse_ids]
 
   def non_admin?
     !admin?

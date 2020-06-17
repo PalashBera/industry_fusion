@@ -26,6 +26,8 @@
               <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                <%= edit_link_using_modal(controller_name, user) unless user.admin? %>
+                <%= change_logs_link_using_modal(controller_name, user) unless user.admin? %>
                 <%= resend_user_invitation_link(user) %>
               </div>
             </div>

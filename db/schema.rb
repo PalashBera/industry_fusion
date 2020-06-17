@@ -247,8 +247,12 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "last_name", default: "", null: false
     t.string "mobile_number", default: "", null: false
     t.boolean "admin", default: false, null: false
+    t.boolean "archive", default: false, null: false
     t.boolean "sidebar_collapse", default: false, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
     t.bigint "organization_id"
+    t.text "warehouse_ids", default: [], array: true
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -272,12 +276,14 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["created_by_id"], name: "index_users_on_created_by_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["updated_by_id"], name: "index_users_on_updated_by_id"
   end
 
   create_table "vendors", force: :cascade do |t|
