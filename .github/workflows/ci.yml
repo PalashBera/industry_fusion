@@ -5,8 +5,8 @@ on:
       - master
 
   pull_request:
-    branches:
-      - master
+    types: [opened, edited, reopened, synchronize]
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -30,13 +30,13 @@ jobs:
         with:
           ruby-version: 2.6.6
 
-      - name: Ruby gem cache
-        uses: actions/cache@v1
+      - name: Ruby gem cache dependencies
+        uses: actions/cache@preview
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            ${{ runner.os }}-gems-
+            ${{ runner.os }}-gem-
 
       - name: Install pg gem dependency
         env:
