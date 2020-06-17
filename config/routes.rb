@@ -101,9 +101,13 @@ Rails.application.routes.draw do
       get :export, on: :collection
     end
 
-    resources :users, only: [:index, :new, :create] do
+    resources :users, except: [:show, :destroy] do
       get :export, on: :collection
-      put :resend_invitation, on: :member
+
+      member do
+        get :change_logs
+        put :resend_invitation
+      end
     end
 
     resources :organizations, only: [:edit, :update]

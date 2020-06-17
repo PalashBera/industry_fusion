@@ -2,12 +2,12 @@
   <div class="form-row">
     <div class="form-group col-sm-12 col-md-6">
       <%= f.label :item_id %>
-      <%= f.select :item_id, current_organization.items.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
+      <%= f.select :item_id, Item.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
     </div>
 
     <div class="form-group col-sm-12 col-md-6">
       <%= f.label :warehouse_id %>
-      <%= f.select :warehouse_id, current_organization.warehouses.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
+      <%= f.select :warehouse_id, Warehouse.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
     </div>
 
     <div class="form-group col-sm-12 col-md-6">

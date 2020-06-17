@@ -1,12 +1,12 @@
 <%= render layout: "shared/form_modal_layout", locals: { resource: @make, namespace: "master" } do |f| %>
   <div class="form-group">
     <%= f.label :item_id %>
-    <%= f.select :item_id, current_organization.items.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
+    <%= f.select :item_id, Item.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group">
     <%= f.label :brand_id %>
-    <%= f.select :brand_id, current_organization.brands.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
+    <%= f.select :brand_id, Brand.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control" } %>
   </div>
 
   <div class="form-group">

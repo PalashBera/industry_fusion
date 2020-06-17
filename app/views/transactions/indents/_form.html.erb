@@ -6,7 +6,7 @@
   <div class="form-row">
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :company_id %>
-      <%= f.select :company_id, current_organization.companies.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "form-control" } %>
+      <%= f.select :company_id, Company.accessible_companies(accessible_warehouse_ids).non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "form-control" } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
