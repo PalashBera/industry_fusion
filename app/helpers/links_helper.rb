@@ -108,4 +108,10 @@ module LinksHelper
             class: "ml-1",
             title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
+
+  def new_link_without_icon(controller_name)
+    link_to "Add New",
+            url_for(controller: controller_name, action: "new"),
+            title: "Add New #{controller_name.singularize.humanize.titleize}"
+  end
 end

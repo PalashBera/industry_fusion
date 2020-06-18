@@ -95,4 +95,18 @@ RSpec.describe User, type: :model do
       expect(user.admin?).to eq(true)
     end
   end
+
+  describe "#collapse_it" do
+    it "should return collapse value" do
+      user.collapse_it
+      expect(user.sidebar_collapse).to eq(true)
+    end
+  end
+
+  describe "#open_it" do
+    it "should return collapse value" do
+      user.open_it
+      expect(user.sidebar_collapse).to eq(false)
+    end
+  end
 end

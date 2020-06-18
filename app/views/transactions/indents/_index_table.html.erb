@@ -1,0 +1,33 @@
+<div class="table-responsive">
+  <table id="records_table" class="table table-hover" width="100%">
+    <thead>
+      <tr>
+        <th scope="col">Serial</th>
+        <th scope="col">Item</th>
+        <th scope="col">Make</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Cost Center</th>
+        <th scope="col">Requirement Date</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @indent_items.each  do |indent_item, index| %>
+        <tr>
+          <td><%= indent_item.indent_serial_number %></td>
+          <td><%= indent_item.item_name %></td>
+          <td><%= indent_item.make_brand_with_cat_no %></td>
+          <td><%= indent_item.quantity_with_uom %></td>
+          <td><%= indent_item.cost_center_name %></td>
+          <td><%= I18n.l(indent_item.indent_requirement_date) %></td>
+          <td><%= indent_item.priority %></td>
+          <td><%= edit_link(controller_name, indent_item.indent) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/form_modal_container" %>

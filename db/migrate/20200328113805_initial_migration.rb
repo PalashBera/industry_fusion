@@ -10,6 +10,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string  :last_name,          null: false, default: ""
       t.string  :mobile_number,      null: false, default: ""
       t.boolean :admin,              null: false, default: false
+      t.boolean :sidebar_collapse,   null: false, default: false
 
       ## Organization references
       t.references :organization, foreign_key: true

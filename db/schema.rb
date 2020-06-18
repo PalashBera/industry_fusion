@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "last_name", default: "", null: false
     t.string "mobile_number", default: "", null: false
     t.boolean "admin", default: false, null: false
+    t.boolean "sidebar_collapse", default: false, null: false
     t.bigint "organization_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
