@@ -5,8 +5,8 @@ RSpec.describe Item, type: :model do
   let(:item) { create(:item) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archivable"
@@ -55,10 +55,10 @@ RSpec.describe Item, type: :model do
     it { should validate_length_of(:name).is_at_most(255) }
 
     context "when same item name present for an organization" do
-      let!(:item) { create(:item, name: "Nokia") }
+      let!(:item) { create(:item, name: "Nokia", organization_id: Organization.current_organization.id) }
 
       it "should not save this item" do
-        new_item = build(:item, name: "Nokia")
+        new_item = build(:item, name: "Nokia", organization_id: Organization.current_organization.id)
         new_item.valid?
         expect(new_item.errors[:name]).to include("has already been taken")
       end

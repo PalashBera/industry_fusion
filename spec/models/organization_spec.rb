@@ -5,8 +5,8 @@ RSpec.describe Organization, type: :model do
   let(:organization) { create(:organization) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "addressable"

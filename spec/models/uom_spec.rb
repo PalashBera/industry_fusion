@@ -5,8 +5,8 @@ RSpec.describe Uom, type: :model do
   let(:uom)  { create(:uom) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archivable"
@@ -50,10 +50,10 @@ RSpec.describe Uom, type: :model do
     it { should validate_length_of(:short_name).is_at_most(4) }
 
     context "when same uom name and short name present for an organization" do
-      let!(:uom) { create(:uom, name: "Nokia", short_name: "AAA") }
+      let!(:uom) { create(:uom, name: "Nokia", short_name: "AAA", organization_id: Organization.current_organization.id) }
 
       it "should not save this uom" do
-        new_uom = build(:uom, name: "Nokia", short_name: "AAA")
+        new_uom = build(:uom, name: "Nokia", short_name: "AAA", organization_id: Organization.current_organization.id)
         new_uom.valid?
         expect(new_uom.errors[:name]).to include("has already been taken")
         expect(new_uom.errors[:short_name]).to include("has already been taken")

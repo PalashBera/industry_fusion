@@ -5,8 +5,8 @@ RSpec.describe CostCenter, type: :model do
   let(:cost_center) { create(:cost_center) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archivable"
@@ -39,10 +39,10 @@ RSpec.describe CostCenter, type: :model do
     it { should validate_length_of(:name).is_at_most(255) }
 
     context "when same cost center name present for an organization" do
-      let!(:cost_center) { create(:cost_center, name: "Nokia") }
+      let!(:cost_center) { create(:cost_center, name: "Nokia", organization_id: Organization.current_organization.id) }
 
       it "should not save this cost_center" do
-        new_cost_center = build(:cost_center, name: "Nokia")
+        new_cost_center = build(:cost_center, name: "Nokia", organization_id: Organization.current_organization.id)
         new_cost_center.valid?
         expect(new_cost_center.errors[:name]).to include("has already been taken")
       end

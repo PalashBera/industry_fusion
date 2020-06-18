@@ -6,8 +6,8 @@ RSpec.describe Warehouse, type: :model do
   let(:warehouse) { create(:warehouse, company) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "addressable"
@@ -52,10 +52,10 @@ RSpec.describe Warehouse, type: :model do
     it { should validate_length_of(:short_name).is_at_most(3) }
 
     context "when same warehouse name and short name present for an organization" do
-      let!(:warehouse) { create(:warehouse, name: "Nokia", short_name: "AAA") }
+      let!(:warehouse) { create(:warehouse, name: "Nokia", short_name: "AAA", organization_id: Organization.current_organization.id) }
 
       it "should not save this warehouse" do
-        new_warehouse = build(:warehouse, name: "Nokia", short_name: "AAA")
+        new_warehouse = build(:warehouse, name: "Nokia", short_name: "AAA", organization_id: Organization.current_organization.id)
         new_warehouse.valid?
         expect(new_warehouse.errors[:name]).to include("has already been taken")
         expect(new_warehouse.errors[:short_name]).to include("has already been taken")

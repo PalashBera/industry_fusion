@@ -23,6 +23,7 @@ class Organization < ApplicationRecord
   has_many :warehouse_locations
   has_many :reorder_levels
   has_many :vendors, through: :vendorships
+  has_many :roles
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   validates :fy_start_month, :fy_end_month, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }

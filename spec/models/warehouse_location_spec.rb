@@ -5,8 +5,8 @@ RSpec.describe WarehouseLocation, type: :model do
   let(:location) { create(:warehouse_location) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archivable"
@@ -43,11 +43,11 @@ RSpec.describe WarehouseLocation, type: :model do
     it { should validate_length_of(:name).is_at_most(255) }
 
     context "when same warehouse location name present for an organization and warehouse" do
-      let!(:warehouse)          { create(:warehouse) }
-      let!(:warehouse_location) { create(:warehouse_location, name: "Nokia", warehouse: warehouse) }
+      let!(:warehouse)          { create(:warehouse, organization_id: Organization.current_organization.id) }
+      let!(:warehouse_location) { create(:warehouse_location, name: "Nokia", warehouse: warehouse, organization_id: Organization.current_organization.id) }
 
       it "should not save this warehouse location" do
-        new_warehouse_location = build(:warehouse_location, name: "Nokia", warehouse_id: warehouse.id)
+        new_warehouse_location = build(:warehouse_location, name: "Nokia", warehouse_id: warehouse.id, organization_id: Organization.current_organization.id)
         new_warehouse_location.valid?
         expect(new_warehouse_location.errors[:name]).to include("has already been taken")
       end

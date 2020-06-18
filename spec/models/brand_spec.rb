@@ -5,8 +5,8 @@ RSpec.describe Brand, type: :model do
   let(:brand) { create(:brand) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archivable"
@@ -38,10 +38,10 @@ RSpec.describe Brand, type: :model do
     it { should validate_length_of(:name).is_at_most(255) }
 
     context "when same brand name present for an organization" do
-      let!(:brand) { create(:brand, name: "Nokia") }
+      let!(:brand) { create(:brand, name: "Nokia", organization_id: Organization.current_organization.id) }
 
       it "should not save this brand" do
-        new_brand = build(:brand, name: "Nokia")
+        new_brand = build(:brand, name: "Nokia", organization_id: Organization.current_organization.id)
         new_brand.valid?
         expect(new_brand.errors[:name]).to include("has already been taken")
       end

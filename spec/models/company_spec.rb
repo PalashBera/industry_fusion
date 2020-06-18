@@ -5,8 +5,8 @@ RSpec.describe Company, type: :model do
   let(:company) { create(:company) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    Organization.current_organization = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "addressable"
@@ -59,10 +59,10 @@ RSpec.describe Company, type: :model do
     it { should validate_length_of(:short_name).is_at_most(3) }
 
     context "when same company name and short name present for an organization" do
-      let!(:company) { create(:company, name: "Nokia", short_name: "AAA") }
+      let!(:company) { create(:company, name: "Nokia", short_name: "AAA", organization_id: Organization.current_organization.id) }
 
       it "should not save this company" do
-        new_company = build(:company, name: "Nokia", short_name: "AAA")
+        new_company = build(:company, name: "Nokia", short_name: "AAA", organization_id: Organization.current_organization.id)
         new_company.valid?
         expect(new_company.errors[:name]).to include("has already been taken")
         expect(new_company.errors[:short_name]).to include("has already been taken")
