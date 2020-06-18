@@ -125,6 +125,7 @@ Rails.application.routes.draw do
   end
 
   root "home#index"
-  get "/dashboard", to: "home#dashboard"
+  get "/toggle_collapse", to: "home#toggle_collapse"
+  get "/dashboard",       to: "home#dashboard"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

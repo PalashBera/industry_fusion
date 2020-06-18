@@ -1,32 +1,27 @@
 <% provide(:title, "Indents") %>
 <% provide(:page_title, "Indents") %>
 
-<section class="mb-4 d-flex justify-content-between">
-  <section>
-    <%= new_link(controller_name) %>
-  </section>
-</section>
-
 <div class="card card-default">
-  <div class="table-responsive">
-    <table id="records_table" class="table table-hover" width="100%">
-      <thead>
-        <tr>
-          <th scope="col">Serial</th>
-          <th scope="col">Item</th>
-          <th scope="col">Make</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Cost Center</th>
-          <th scope="col">Requirement Date</th>
-          <th scope="col">Priority</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
+  <div class="card-body">
+    <section class="mb-4 d-flex justify-content-between">
+      <section>
+        <%= new_link(controller_name) %>
+      </section>
+    </section>
 
-      <tbody>
-        <%= render "page_items" %>
-      </tbody>
-    </table>
+    <% if @indent_items.present? %>
+      <%= render "index_table" %>
+    <% else %>
+      <div class="card">
+        <div class="card-body text-center p-3">
+          <% if params[:q].present? %>
+            No result found. Please search with proper keywords.
+          <% else %>
+            No indent has been added yet. <%= new_link_without_icon(controller_name) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
 

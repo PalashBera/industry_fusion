@@ -26,7 +26,7 @@
     <%= javascript_pack_tag "application", "data-turbolinks-track": "reload" %>
   </head>
 
-  <body class="navbar-fixed sidebar-fixed" id="body">
+  <body class="navbar-fixed sidebar-fixed app-sidebar <%= current_user.sidebar_collapse? ? "sidebar-minified" : "sidebar-minified-out" %>" id="body">
 
     <script>
       NProgress.configure({ showSpinner: false });

@@ -1,0 +1,5 @@
+<% if @collapsed %>
+  $('.app-sidebar').removeClass('sidebar-minified-out').addClass('sidebar-minified');
+<% else %>
+  $('.app-sidebar').removeClass('sidebar-minified').addClass('sidebar-minified-out');
+<% end %>

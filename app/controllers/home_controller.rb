@@ -11,6 +11,11 @@ class HomeController < ApplicationController
     end
   end
 
+  def toggle_collapse
+    current_user.toggle_sidebar_collapse
+    @collapsed = current_user.sidebar_collapse
+  end
+
   private
 
   def admin_dashboard

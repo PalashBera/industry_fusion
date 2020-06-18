@@ -14,6 +14,10 @@ class User < ApplicationRecord
     !admin?
   end
 
+  def toggle_sidebar_collapse
+    update_column(:sidebar_collapse, !sidebar_collapse)
+  end
+
   def general_user?
     invitation_accepted_at.present?
   end
