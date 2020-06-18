@@ -10,6 +10,7 @@ RSpec.describe User, type: :model do
 
   describe "#active_record_columns" do
     it { should have_db_column(:admin) }
+    it { should have_db_column(:sidebar_collapse) }
     it { should have_db_column(:organization_id) }
     it { should have_db_column(:invitation_token) }
     it { should have_db_column(:invitation_created_at) }
@@ -96,17 +97,12 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#collapse_it" do
-    it "should return collapse value" do
-      user.collapse_it
-      expect(user.sidebar_collapse).to eq(true)
-    end
-  end
-
-  describe "#open_it" do
-    it "should return collapse value" do
-      user.open_it
-      expect(user.sidebar_collapse).to eq(false)
+  describe "#toggle_sidebar_collapse" do
+    it "should toggle sidebar_collapse value" do
+      previous_value = user.sidebar_collapse
+      user.toggle_sidebar_collapse
+      expect(user.sidebar_collapse).to eq(!previous_value)
+      expect(user.sidebar_collapse).not_to eq(previous_value)
     end
   end
 end

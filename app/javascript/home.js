@@ -1,7 +1,7 @@
 $(document).on('click', '.app-sidebar', function(e) {
   $.ajax({
     method: 'GET',
-    url: '/collapse',
+    url: '/toggle_collapse',
     dataType: 'json'
   });
 });

@@ -11,8 +11,8 @@ class HomeController < ApplicationController
     end
   end
 
-  def collapse
-    current_user.sidebar_collapse? ? current_user.open_it : current_user.collapse_it
+  def toggle_collapse
+    current_user.toggle_sidebar_collapse
     @collapsed = current_user.sidebar_collapse
   end
 

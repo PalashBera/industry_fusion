@@ -14,20 +14,7 @@
     </thead>
 
     <tbody>
-      <% @indent_items.each  do |indent_item, index| %>
-        <tr>
-          <td><%= indent_item.indent_serial_number %></td>
-          <td><%= indent_item.item_name %></td>
-          <td><%= indent_item.make_brand_with_cat_no %></td>
-          <td><%= indent_item.quantity_with_uom %></td>
-          <td><%= indent_item.cost_center_name %></td>
-          <td><%= I18n.l(indent_item.indent_requirement_date) %></td>
-          <td><%= indent_item.priority %></td>
-          <td><%= edit_link(controller_name, indent_item.indent) %></td>
-        </tr>
-      <% end %>
+      <%= render "page_items" %>
     </tbody>
   </table>
 </div>
-
-<%= render "shared/form_modal_container" %>
