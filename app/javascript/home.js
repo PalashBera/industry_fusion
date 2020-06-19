@@ -1,4 +1,4 @@
-$(document).on('click', '.app-sidebar', function(e) {
+$(document).on('click', '#sidebar-toggler', function(e) {
   $.ajax({
     method: 'GET',
     url: '/toggle_collapse',

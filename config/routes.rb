@@ -110,7 +110,12 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :organizations, only: [:edit, :update]
+    resources :organizations, only: [:edit, :update] do
+      collection do
+        get :preferences
+        put :preferences
+      end
+    end
   end
 
   namespace :transactions do

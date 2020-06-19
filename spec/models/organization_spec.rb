@@ -18,6 +18,8 @@ RSpec.describe Organization, type: :model do
     it { should have_db_column(:name) }
     it { should have_db_column(:fy_start_month) }
     it { should have_db_column(:fy_end_month) }
+    it { should have_db_column(:page_help_needed) }
+    it { should have_db_column(:send_master_notification) }
   end
 
   describe "#callbacks" do

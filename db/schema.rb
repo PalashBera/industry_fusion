@@ -183,6 +183,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "pin_code", limit: 6, null: false
     t.string "phone_number", default: ""
     t.boolean "archive", default: false, null: false
+    t.boolean "page_help_needed", default: true, null: false
+    t.boolean "send_master_notification", default: true, null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
