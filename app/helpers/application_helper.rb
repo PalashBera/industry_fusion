@@ -40,4 +40,9 @@ module ApplicationHelper
   def active_class(str)
     str == controller_name ? t("active") : ""
   end
+
+  def page_help_needed?
+    help_message = PageHelp.find_by(controller_name: params[:controller], action_name: params[:action]) if current_organization.page_help_needed?
+    [current_organization.page_help_needed? && help_message.present?, help_message]
+  end
 end

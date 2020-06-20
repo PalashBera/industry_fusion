@@ -180,4 +180,10 @@ end
 end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)
-# CI test
+
+PageHelp.create!(
+  controller_name: "master/brands",
+  action_name: "index",
+  help_text: "This is product brands list page. Create brand which will be associated with item in the make section.",
+  help_type: "primary"
+)

@@ -97,4 +97,45 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe "#page_help_needed?" do
+    let!(:current_organization) { create(:organization) }
+    let!(:page_help)            { create(:page_help) }
+
+    context "when page_help_needed is marked as false" do
+      before do
+        params[:controller] = "master/brands"
+        params[:action] = "index"
+      end
+
+      it "should return nil array" do
+        current_organization.update(page_help_needed: false)
+        expect(page_help_needed?).to eq([false, nil])
+      end
+    end
+
+    context "when page_help_needed is marked as true and page help is not present" do
+      before do
+        params[:controller] = "master/items"
+        params[:action] = "index"
+      end
+
+      it "should return nil array" do
+        current_organization.update(page_help_needed: true)
+        expect(page_help_needed?).to eq([false, nil])
+      end
+    end
+
+    context "when page_help_needed is marked as true and page help is present" do
+      before do
+        params[:controller] = "master/brands"
+        params[:action] = "index"
+      end
+
+      it "should return not nil array" do
+        current_organization.update(page_help_needed: true)
+        expect(page_help_needed?).to eq([true, page_help])
+      end
+    end
+  end
 end

@@ -193,6 +193,15 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_organizations_on_updated_by_id"
   end
 
+  create_table "page_helps", force: :cascade do |t|
+    t.string "controller_name", null: false
+    t.string "action_name", null: false
+    t.string "help_text", null: false
+    t.string "help_type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "reorder_levels", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.bigint "warehouse_id", null: false
