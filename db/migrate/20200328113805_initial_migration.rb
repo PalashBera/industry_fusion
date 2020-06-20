@@ -312,4 +312,13 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :page_helps do |t|
+    t.string :controller_name, null: false
+    t.string :action_name,     null: false
+    t.string :help_text,       null: false
+    t.string :help_type,       null: false
+
+    t.timestamps
+  end
 end

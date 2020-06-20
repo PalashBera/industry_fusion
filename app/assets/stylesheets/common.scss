@@ -58,3 +58,9 @@ table.table {
     padding: 0.5rem 1.3125rem !important;
   }
 }
+
+@media (min-width: 1200px) {
+  .content-wrapper .content {
+    padding: 1.875rem;
+  }
+}
