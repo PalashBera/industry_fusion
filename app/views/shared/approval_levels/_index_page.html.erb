@@ -1,0 +1,31 @@
+<div class="col-sm-12 col-xl-9">
+  <% if @approval_levels.present? %>
+    <% @approval_levels.each.with_index(1) do |level, index| %>
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <h5 class="mb-3 col-sm-6 col-md-3"><%= "#{index.ordinalize} #{approval_controller_name} Approval Level" %></h5>
+            <p class="col-sm-6 col-md-3 text-sm-right text-md-left"><span class="mr-1"><%= edit_link(controller_name, level) %></span><span><%= delete_link(controller_name, level) %></span></p>
+            <p class="col-sm-12">
+              <%= render "shared/approval_levels/user_tables", object: level.level_users.included_resources %>
+            </p>
+          </div>
+        </div>
+
+        <div class="mb-3 ml-3">
+          <%= new_link(controller_name) %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="card">
+      <div class="card-body text-center">
+        <% if params[:q].present? %>
+          No result found. Please search with proper keywords.
+        <% else %>
+          No Approval Level has been added yet. <%= new_link_without_btn(controller_name) %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

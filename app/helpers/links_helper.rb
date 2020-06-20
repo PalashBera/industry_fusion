@@ -52,12 +52,16 @@ module LinksHelper
             title: "Import #{controller_name.humanize.titleize}"
   end
 
-  def link_to_add_fields(form, association)
+  def link_to_add_fields(form, association, path = "")
     new_object = form.object.public_send(association).klass.new
     id = new_object.object_id
 
     fields = form.fields_for(association, new_object, child_index: id) do |builder|
-      render(association.to_s.singularize + "_fields", f: builder)
+      if path.present?
+        render(path, f: builder)
+      else
+        render(association.to_s.singularize + "_fields", f: builder)
+      end
     end
 
     link_to '<i class="fa fa-plus"></i> Add more items'.html_safe, "#",
@@ -76,6 +80,12 @@ module LinksHelper
     link_to '<i class="fas fa-plus-circle"></i><span class="d-none d-md-inline-block ml-1">Add New</span>'.html_safe,
             url_for(controller: controller_name, action: "new"),
             class: "btn btn-primary",
+            title: "Add New #{controller_name.singularize.humanize.titleize}"
+  end
+
+  def new_link_without_btn(controller_name)
+    link_to "Add New",
+            url_for(controller: controller_name, action: "new"),
             title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
 
@@ -113,5 +123,13 @@ module LinksHelper
     link_to "Add New",
             url_for(controller: controller_name, action: "new"),
             title: "Add New #{controller_name.singularize.humanize.titleize}"
+  end
+
+  def delete_link(controller_name, resource)
+    link_to '<i class="fas fa-trash-alt text-danger"></i>'.html_safe,
+            url_for(controller: controller_name, action: "destroy", id: resource.id),
+            title: "Delete #{controller_name.singularize.humanize.titleize}",
+            data: { confirm: "Are you sure?" },
+            method: :delete
   end
 end

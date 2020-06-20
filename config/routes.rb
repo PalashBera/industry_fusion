@@ -116,6 +116,11 @@ Rails.application.routes.draw do
         put :preferences
       end
     end
+
+    resources :indent_approval_levels, except: :show
+    resources :qc_approval_levels, except: :show
+    resources :po_approval_levels, except: :show
+    resources :grn_approval_levels, except: :show
   end
 
   namespace :transactions do

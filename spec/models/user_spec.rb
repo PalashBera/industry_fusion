@@ -89,6 +89,14 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#pending_acception?" do
+    let(:pending_user) { create(:user, invitation_accepted_at: nil) }
+
+    it "should return pending" do
+      expect(pending_user.pending_acception?).to eq(true)
+    end
+  end
+
   describe "#add_organization" do
     it "should add organization to user and update user as admin" do
       user.add_organization(organization)

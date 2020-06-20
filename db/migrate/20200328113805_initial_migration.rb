@@ -16,6 +16,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.references :organization,      foreign_key: true
       t.bigint     :created_by_id,     index: true
       t.bigint     :updated_by_id,     index: true
+      t.bigint     :level_id
 
       ## Organization references
 
@@ -116,6 +117,25 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     add_index :vendors, :confirmation_token,   unique: true
     add_index :vendors, :invitation_token,     unique: true
     # add_index :users, :unlock_token,         unique: true
+
+    create_table :approval_levels do |t|
+      t.references :organization,  null: false, foreign_key: true
+      t.string     :approval_type, index: true
+      t.bigint     :updated_by_id, index: true
+      t.bigint     :created_by_id, index: true
+
+      t.timestamps
+    end
+
+    create_table :level_users do |t|
+      t.references :approval_level, null: false, foreign_key: true
+      t.references :user,           null: false, foreign_key: true
+      t.references :organization,   null: false, foreign_key: true
+      t.bigint     :updated_by_id,  index: true
+      t.bigint     :created_by_id,  index: true
+
+      t.timestamps
+    end
   end
 
   create_table :store_informations do |t|

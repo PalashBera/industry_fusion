@@ -1,0 +1,14 @@
+<% provide(:title, "PO Approvals") %>
+<% provide(:page_title, "PO Approvals") %>
+
+<div class="row">
+  <div class="col-xl-3">
+    <%= render "shared/approval_levels/sidebar", active_class: "po" %>
+  </div>
+
+  <%= render "shared/approval_levels/index_page" %>
+</div>
+
+<div id="auto_next_link">
+  <%= render "shared/auto_incremental_pagy" %>
+</div>

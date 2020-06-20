@@ -1,0 +1,21 @@
+<div class="table-responsive">
+  <table class="table table-hover" width="100%">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"><%= sort_link @search, :level_users_user_first_name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :level_users_user_email, "Email" %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% object.each.with_index(1) do |level_user, index| %>
+        <tr>
+          <td scope="row"><%= index %></td>
+          <td><%= level_user.user.full_name %></td>
+          <td><%= level_user.user.email %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,16 @@
+<% provide(:title, "Indent Approvals") %>
+<% provide(:page_title, "Indent Approvals") %>
+
+<div class="row">
+  <div class="col-xl-3">
+    <%= render "shared/approval_levels/sidebar", active_class: "approval" %>
+  </div>
+
+  <div class="col-sm-12 col-xl-9">
+    <div class="card">
+      <div class="card-body">
+        <%= render "shared/approval_levels/form", url: admin_indent_approval_level_path , method: :put %>
+      </div>
+    </div>
+  </div>
+</div>

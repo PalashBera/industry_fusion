@@ -45,4 +45,16 @@ module ApplicationHelper
     help_message = PageHelp.find_by(controller_name: params[:controller], action_name: params[:action]) if current_organization.page_help_needed?
     [current_organization.page_help_needed? && help_message.present?, help_message]
   end
+
+  def approval_active_class(str)
+    controller_name.include?(str) ? t("active") : ""
+  end
+
+  def approval_controller_name
+    controller.class.name.split("::")[1].split(/(?=[A-Z])/)[0]
+  end
+
+  def check_disability(object)
+    object.id ? "disabled" : ""
+  end
 end
