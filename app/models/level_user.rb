@@ -11,8 +11,4 @@ class LevelUser < ApplicationRecord
   def self.included_resources
     includes(:approval_level, :user, :organization)
   end
-
-  def check_user_presence(ids)
-    ids.include?(user_id) ? "error" : "success"
-  end
 end

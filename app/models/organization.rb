@@ -22,7 +22,7 @@ class Organization < ApplicationRecord
   has_many :vendorships
   has_many :warehouse_locations
   has_many :reorder_levels
-  has_many :approval_levels
+  has_many :approval_levels, dependent: :nullify
   has_many :vendors, through: :vendorships
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }

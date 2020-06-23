@@ -1,9 +1,10 @@
 require "rails_helper"
 
 RSpec.describe LinksHelper, type: :helper do
-  let(:user)   { create(:user) }
-  let(:brand)  { create(:brand) }
-  let(:vendor) { create(:vendor) }
+  let(:user)           { create(:user) }
+  let(:brand)          { create(:brand) }
+  let(:vendor)         { create(:vendor) }
+  let(:approval_level) { create :approval_level }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -137,6 +138,24 @@ RSpec.describe LinksHelper, type: :helper do
       expect(link.attributes["href"].value).to eq("/master/brands/new")
       expect(link.attributes["data-remote"].value).to eq("true")
       expect(link.attributes["class"].value).to eq("ml-1")
+    end
+  end
+
+  describe "#delete_link" do
+    it "creates a button link for delete records" do
+      link = Nokogiri::HTML(helper.delete_link("admin/indent_approval_levels", approval_level)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/admin/indent_approval_levels/#{approval_level.id}")
+      expect(link.attributes["data-confirm"].value).to eq("Are you sure?")
+      expect(link.attributes["title"].value).to eq("Delete Admin/Indent Approval Level")
+      expect(link.attributes["data-method"].value).to eq("delete")
+    end
+  end
+
+  describe "#edit_link" do
+    it "creates a button link for edit records" do
+      link = Nokogiri::HTML(helper.edit_link("admin/indent_approval_levels", approval_level)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/admin/indent_approval_levels/#{approval_level.id}/edit")
+      expect(link.attributes["title"].value).to eq("Edit Admin/Indent Approval Level")
     end
   end
 end
