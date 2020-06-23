@@ -50,11 +50,7 @@ module ApplicationHelper
     controller_name.include?(str) ? t("active") : ""
   end
 
-  def approval_controller_name
-    controller.class.name.split("::")[1].split(/(?=[A-Z])/)[0]
-  end
-
-  def check_disability(object)
-    object.id ? "disabled" : ""
+  def approval_level_type
+    controller_name.split("_")[0]
   end
 end

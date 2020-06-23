@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
   let(:user)                  { create(:admin_user) }
-  let(:indent_approval_level) { create(:approval_level, approval_type: "Indent") }
+  let(:indent_approval_level) { create(:approval_level, approval_type: "indent") }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -75,7 +75,7 @@ RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
 
-    it "assigns the requested indent_approval_level to an instance variable" do
+    it "assigns the requested indent approval level to an instance variable" do
       sign_in user
       get :edit, params: { id: indent_approval_level.id }
       expect(assigns(:approval_level)).to eq(indent_approval_level)
@@ -91,55 +91,55 @@ RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
   describe "POST #create" do
     it "requires login" do
       sign_out user
-      post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+      post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
       expect(response).to have_http_status(302)
     end
 
     context "with valid attributes" do
-      it "saves the new indent_approval_level in the database" do
+      it "saves the new indent approval level in the database" do
         sign_in user
         expect {
-          post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+          post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         }.to change(ApprovalLevel, :count).by(1)
       end
 
       it "returns http status 302" do
         sign_in user
-        post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+        post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(response).to have_http_status(302)
       end
 
-      it "assigns a newly created but unsaved indent_approval_level to an instance variable" do
+      it "assigns a newly created but unsaved indent approval level to an instance variable" do
         sign_in user
-        post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+        post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(assigns(:approval_level)).to be_a(ApprovalLevel)
         expect(assigns(:approval_level)).to be_persisted
       end
 
       it "have success flash message" do
         sign_in user
-        post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
-        expect(flash[:success]).to eq(I18n.t("flash_messages.created", name: "Indent Approval Level"))
+        post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
+        expect(flash[:success]).to eq(I18n.t("flash_messages.created", name: "Indent approval level"))
       end
 
       it "redirects to indent approval levels index page" do
         sign_in user
-        post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+        post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(response).to redirect_to(admin_indent_approval_levels_path)
       end
     end
 
     context "with invalid attributes" do
-      it "does not save the new indent_approval_level in the database" do
+      it "does not save the new indent approval level in the database" do
         sign_in user
         expect{
-          post :create, params: { approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { }}}}
+          post :create, params: { approval_level: { approval_type: "indent", level_users_attributes: { "0": { }}}}
         }.not_to change(ApprovalLevel, :count)
       end
 
-      it "assigns a newly created but unsaved indent_approval_level an instance variable" do
+      it "assigns a newly created but unsaved indent approval level an instance variable" do
         sign_in user
-        post :create, params: { approval_level: { approval_type: "", level_users_attributes: {"0" => { user_id: user.id }}}}
+        post :create, params: { approval_level: { approval_type: "", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(assigns(:approval_level)).to be_a_new(ApprovalLevel)
       end
 
@@ -160,39 +160,39 @@ RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
   describe "PATCH #update" do
     it "requires login" do
       sign_out user
-      put :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+      put :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
       expect(response).to have_http_status(302)
     end
 
     context "with valid attributes" do
-      it "updates the requested indent_approval_level" do
+      it "updates the requested indent approval level" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Grn", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Grn", level_users_attributes: { "0": { user_id: user.id }}}}
         indent_approval_level.reload
         expect(indent_approval_level.approval_type).to eq("Grn")
       end
 
       it "returns http status 302" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(response).to have_http_status(302)
       end
 
-      it "assigns the requested indent_approval_level to an instance variable" do
+      it "assigns the requested indent approval level to an instance variable" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(assigns(:approval_level)).to eq(indent_approval_level)
       end
 
       it "have success flash message" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
-        expect(flash[:success]).to eq(I18n.t("flash_messages.updated", name: "Indent Approval Level"))
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
+        expect(flash[:success]).to eq(I18n.t("flash_messages.updated", name: "Indent approval level"))
       end
 
-      it "redirects to indent_approval_level index page" do
+      it "redirects to indent approval level index page" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Indent", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(response).to redirect_to(admin_indent_approval_levels_path)
       end
     end
@@ -201,32 +201,32 @@ RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
       it "does not update the requested approval" do
         sign_in user
         expect {
-          patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: {"0" => { user_id: user.id }}}}
+          patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: { "0": { user_id: user.id }}}}
         }.not_to change { indent_approval_level.reload.attributes }
       end
 
       it "assigns the indent approval level to an instance variable" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(assigns(:approval_level)).to eq(indent_approval_level)
       end
 
       it "returns http status 200" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(response).to have_http_status(200)
       end
 
       it "re-renders the :edit template" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: {"0" => { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "", level_users_attributes: { "0": { user_id: user.id }}}}
         expect(response).to render_template(:edit)
       end
     end
   end
 
   describe "DELETE #destroy" do
-    let!(:approval_level_1) { create :approval_level, approval_type: "Indent" }
+    let!(:approval_level_1) { create :approval_level, approval_type: "indent" }
 
     it "requires login" do
       sign_out user
@@ -247,7 +247,7 @@ RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
       }.to change(ApprovalLevel, :count).by(-1)
     end
 
-    it "redirects to indent_approval_level index page" do
+    it "redirects to indent approval level index page" do
       sign_in user
       delete :destroy, params: { id: indent_approval_level.id }
       expect(response).to redirect_to(admin_indent_approval_levels_path)

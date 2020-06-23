@@ -1,16 +1,12 @@
-<% provide(:title, "GRN Approvals") %>
-<% provide(:page_title, "GRN Approvals") %>
+<% provide(:title, "GRN Approval Levels") %>
+<% provide(:page_title, "GRN Approval Levels") %>
 
 <div class="row">
-  <div class="col-xl-3">
-    <%= render "shared/approval_levels/sidebar", active_class: "grn" %>
+  <div class="col-sm-12 col-md-3">
+    <%= render "shared/approval_levels/sidebar" %>
   </div>
 
-  <div class="col-sm-12 col-xl-9">
-    <div class="card">
-      <div class="card-body">
-        <%= render "shared/approval_levels/form", url: admin_grn_approval_level_path , method: :put %>
-      </div>
-    </div>
+  <div class="col-sm-12 col-md-9">
+    <%= render "shared/approval_levels/form", url: admin_grn_approval_level_path %>
   </div>
 </div>

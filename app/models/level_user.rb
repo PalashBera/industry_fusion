@@ -3,12 +3,12 @@ class LevelUser < ApplicationRecord
 
   acts_as_tenant(:organization)
 
-  belongs_to :approval_level, inverse_of: :level_users
+  belongs_to :approval_level
   belongs_to :user
 
-  has_paper_trail ignore: %i[created_at updated_at]
+  validates :user_id, uniqueness: { scope: :approval_level_id }
 
-  def self.included_resources
-    includes(:approval_level, :user, :organization)
-  end
+  # validates_each :user_id do |record, attr, value|
+  #   record.errors.add attr, :taken if record.approval_level.level_users.map(&:user_id).count(value) > 1
+  # end
 end

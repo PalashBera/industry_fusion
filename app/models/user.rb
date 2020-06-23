@@ -10,7 +10,7 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
 
-  has_many :level_users, dependent: :destroy
+  has_many :level_users
 
   validates :admin, inclusion: { in: [true, false] }
 

@@ -18,10 +18,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.bigint     :updated_by_id,     index: true
       t.bigint     :level_id
 
-      ## Organization references
-
-      ## Warehouse references
-
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
@@ -119,8 +115,8 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     # add_index :users, :unlock_token,         unique: true
 
     create_table :approval_levels do |t|
+      t.string     :approval_type, null: false, index: true
       t.references :organization,  null: false, foreign_key: true
-      t.string     :approval_type, index: true
       t.bigint     :updated_by_id, index: true
       t.bigint     :created_by_id, index: true
 

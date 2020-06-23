@@ -1,14 +1,12 @@
-<% provide(:title, "QC Approvals") %>
-<% provide(:page_title, "QC Approvals") %>
+<% provide(:title, "QC Approval Levels") %>
+<% provide(:page_title, "QC Approval Levels") %>
 
 <div class="row">
-  <div class="col-xl-3">
-    <%= render "shared/approval_levels/sidebar", active_class: "qc" %>
+  <div class="col-sm-12 col-md-3">
+    <%= render "shared/approval_levels/sidebar" %>
   </div>
 
-  <%= render "shared/approval_levels/index_page" %>
-</div>
-
-<div id="auto_next_link">
-  <%= render "shared/auto_incremental_pagy" %>
+  <div class="col-sm-12 col-md-9">
+    <%= render "shared/approval_levels/index_page" %>
+  </div>
 </div>

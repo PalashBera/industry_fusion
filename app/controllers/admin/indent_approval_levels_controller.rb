@@ -1,7 +1,6 @@
 class Admin::IndentApprovalLevelsController < Admin::HomeController
   def index
-    @search = ApprovalLevel.indent.ransack(params[:q])
-    @pagy, @approval_levels = pagy(@search.result(distinct: true).included_resources, items: 20)
+    @approval_levels = ApprovalLevel.indent.included_resources
   end
 
   def new
@@ -13,7 +12,7 @@ class Admin::IndentApprovalLevelsController < Admin::HomeController
     @approval_level = ApprovalLevel.new(approval_level_params)
 
     if @approval_level.save
-      redirect_to admin_indent_approval_levels_path, flash: { success: t("flash_messages.created", name: "Indent Approval Level") }
+      redirect_to admin_indent_approval_levels_path, flash: { success: t("flash_messages.created", name: "Indent approval level") }
     else
       render "new"
     end
@@ -25,7 +24,7 @@ class Admin::IndentApprovalLevelsController < Admin::HomeController
 
   def update
     if approval_level.update(approval_level_params)
-      redirect_to admin_indent_approval_levels_path, flash: { success: t("flash_messages.updated", name: "Indent Approval Level") }
+      redirect_to admin_indent_approval_levels_path, flash: { success: t("flash_messages.updated", name: "Indent approval level") }
     else
       render "edit"
     end
@@ -33,13 +32,13 @@ class Admin::IndentApprovalLevelsController < Admin::HomeController
 
   def destroy
     approval_level.destroy
-    redirect_to admin_indent_approval_levels_path, flash: { success: t("flash_messages.deleted", name: "Indent Approval Level") }
+    redirect_to admin_indent_approval_levels_path, flash: { error: t("flash_messages.deleted", name: "Indent approval level") }
   end
 
   private
 
   def approval_level_params
-    params.require(:approval_level).permit(:approval_type, level_users_attributes: [:id, :user_id, :approval_level_id, :_destroy] )
+    params.require(:approval_level).permit(:approval_type, level_users_attributes: %i[id user_id approval_level_id _destroy])
   end
 
   def approval_level

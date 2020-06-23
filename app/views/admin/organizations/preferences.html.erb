@@ -2,11 +2,11 @@
 <% provide(:page_title, "Organization Preferences") %>
 
 <div class="row">
-  <div class="col-xl-3">
+  <div class="col-sm-12 col-md-3">
     <%= render "shared/settings_sidebar", active_class: "organization" %>
   </div>
 
-  <div class="col-sm-12 col-xl-9">
+  <div class="col-sm-12 col-md-9">
     <div class="card">
       <div class="card-body">
         <%= form_for [:admin, @organization], url: preferences_admin_organizations_path, method: :put do |f| %>

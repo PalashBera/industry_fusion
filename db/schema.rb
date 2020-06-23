@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   enable_extension "plpgsql"
 
   create_table "approval_levels", force: :cascade do |t|
+    t.string "approval_type", null: false
     t.bigint "organization_id", null: false
-    t.string "approval_type"
     t.bigint "updated_by_id"
     t.bigint "created_by_id"
     t.datetime "created_at", precision: 6, null: false
@@ -289,10 +289,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.boolean "archive", default: false, null: false
     t.boolean "sidebar_collapse", default: false, null: false
     t.text "warehouse_ids", default: [], array: true
-    t.bigint "level_id"
     t.bigint "organization_id"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
+    t.bigint "level_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

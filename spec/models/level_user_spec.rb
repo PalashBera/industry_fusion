@@ -23,7 +23,21 @@ RSpec.describe LevelUser, type: :model do
   end
 
   describe "#associations" do
-    it { should belong_to(:approval_level).inverse_of(:level_users) }
+    it { should belong_to(:approval_level) }
     it { should belong_to(:user) }
+  end
+
+  describe "#validations" do
+    context "when same user is present for an approval level" do
+      let!(:approval_level) { create(:approval_level) }
+      let!(:user)           { create :user }
+      let!(:level_user)     { create(:level_user, user_id: user.id, approval_level_id: approval_level.id) }
+
+      it "should not save this brand" do
+        new_level_user = build(:level_user, user_id: user.id, approval_level_id: approval_level.id)
+        new_level_user.valid?
+        expect(new_level_user.errors[:user_id]).to include("has already been taken")
+      end
+    end
   end
 end

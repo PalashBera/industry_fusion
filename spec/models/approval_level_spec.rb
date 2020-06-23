@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe ApprovalLevel, type: :model do
-  let!(:user)           { create :user }
-  let!(:approval_level) { create(:approval_level) }
+  let(:user)           { create :user }
+  let(:approval_level) { create(:approval_level) }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -24,7 +24,7 @@ RSpec.describe ApprovalLevel, type: :model do
   end
 
   describe "#associations" do
-    it { should have_many(:level_users).dependent(:destroy).inverse_of(:approval_level) }
+    it { should have_many(:level_users).dependent(:destroy) }
     it { should accept_nested_attributes_for(:level_users).allow_destroy(true) }
   end
 
@@ -35,10 +35,10 @@ RSpec.describe ApprovalLevel, type: :model do
   end
 
   describe "#scopes" do
-    let!(:approval_level_indent) { create(:approval_level, approval_type: "Indent") }
-    let!(:approval_level_qc) { create(:approval_level, approval_type: "Qc") }
-    let!(:approval_level_po) { create(:approval_level, approval_type: "Po") }
-    let!(:approval_level_grn) { create(:approval_level, approval_type: "Grn") }
+    let!(:approval_level_indent) { create(:approval_level, approval_type: "indent") }
+    let!(:approval_level_qc) { create(:approval_level, approval_type: "qc") }
+    let!(:approval_level_po) { create(:approval_level, approval_type: "po") }
+    let!(:approval_level_grn) { create(:approval_level, approval_type: "grn") }
 
     context "indent" do
       it "should return approval_levels whose approval_type is indent" do
