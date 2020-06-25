@@ -15,6 +15,19 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "approval_levels", force: :cascade do |t|
+    t.string "approval_type", null: false
+    t.bigint "organization_id", null: false
+    t.bigint "updated_by_id"
+    t.bigint "created_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["approval_type"], name: "index_approval_levels_on_approval_type"
+    t.index ["created_by_id"], name: "index_approval_levels_on_created_by_id"
+    t.index ["organization_id"], name: "index_approval_levels_on_organization_id"
+    t.index ["updated_by_id"], name: "index_approval_levels_on_updated_by_id"
+  end
+
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "archive", default: false, null: false
@@ -154,6 +167,21 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_items_on_updated_by_id"
   end
 
+  create_table "level_users", force: :cascade do |t|
+    t.bigint "approval_level_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.bigint "updated_by_id"
+    t.bigint "created_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["approval_level_id"], name: "index_level_users_on_approval_level_id"
+    t.index ["created_by_id"], name: "index_level_users_on_created_by_id"
+    t.index ["organization_id"], name: "index_level_users_on_organization_id"
+    t.index ["updated_by_id"], name: "index_level_users_on_updated_by_id"
+    t.index ["user_id"], name: "index_level_users_on_user_id"
+  end
+
   create_table "makes", force: :cascade do |t|
     t.bigint "brand_id", null: false
     t.bigint "item_id", null: false
@@ -264,6 +292,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.bigint "organization_id"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
+    t.bigint "level_id"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -396,6 +425,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_warehouses_on_updated_by_id"
   end
 
+  add_foreign_key "approval_levels", "organizations"
   add_foreign_key "brands", "organizations"
   add_foreign_key "companies", "organizations"
   add_foreign_key "cost_centers", "organizations"
@@ -413,6 +443,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "items", "organizations"
   add_foreign_key "items", "uoms"
   add_foreign_key "items", "uoms", column: "secondary_uom_id"
+  add_foreign_key "level_users", "approval_levels"
+  add_foreign_key "level_users", "organizations"
+  add_foreign_key "level_users", "users"
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"

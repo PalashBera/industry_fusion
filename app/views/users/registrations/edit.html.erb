@@ -2,11 +2,11 @@
 <% provide(:page_title, "Account Settings") %>
 
 <div class="row">
-  <div class="col-xl-3">
+  <div class="col-sm-12 col-md-3">
     <%= render "shared/settings_sidebar", active_class: "account" %>
   </div>
 
-  <div class="col-sm-12 col-xl-9">
+  <div class="col-sm-12 col-md-9">
     <div class="card">
       <div class="card-body">
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>

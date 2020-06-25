@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
 
+  has_many :level_users
+
   validates :admin, inclusion: { in: [true, false] }
 
   has_paper_trail only: %i[archive warehouse_ids]

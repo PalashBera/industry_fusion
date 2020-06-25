@@ -47,6 +47,8 @@ RSpec.describe Organization, type: :model do
     it { should have_many(:vendorships) }
     it { should have_many(:warehouse_locations) }
     it { should have_many(:reorder_levels) }
+    it { should have_many(:approval_levels) }
+    it { should have_many(:level_users) }
     it { should have_many(:vendors) }
   end
 

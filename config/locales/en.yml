@@ -53,6 +53,7 @@ en:
   flash_messages:
     created: "%{name} has been successfully created."
     updated: "%{name} has been successfully updated."
+    deleted: "%{name} has been successfully deleted."
 
   active:
     active

@@ -1,0 +1,12 @@
+<% provide(:title, "GRN Approval Levels") %>
+<% provide(:page_title, "GRN Approval Levels") %>
+
+<div class="row">
+  <div class="col-sm-12 col-md-3">
+    <%= render "shared/approval_levels/sidebar" %>
+  </div>
+
+  <div class="col-sm-12 col-md-9">
+    <%= render "shared/approval_levels/form", url: admin_grn_approval_level_path %>
+  </div>
+</div>

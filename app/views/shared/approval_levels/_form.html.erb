@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_for @approval_level, url: url do |f| %>
+      <%= render partial: "shared/error_messages", locals: { resource: @approval_level } %>
+      <%= f.hidden_field :approval_type, value: approval_level_type %>
+
+      <%= f.fields_for :level_users do |level| %>
+        <%= render "shared/approval_levels/level_user_fields", f: level %>
+      <% end %>
+
+      <%= link_to_add_fields f, :level_users, "shared/approval_levels/level_user_fields" %>
+
+      <div class="form-group mt-2">
+        <%= f.submit "Submit", class: "btn btn-primary", disabled_with: "Saving..." , title: "Save Approval" %>
+      </div>
+    <% end %>
+  </div>
+</div>
