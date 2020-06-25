@@ -780,7 +780,7 @@ $(document).on('ready turbolinks:load', function() {
       startAngle: 4.8,
       emptyFill: [gray]
     })
-  };
+  }
 });
 
 $(document).on('turbolinks:load', function() {
