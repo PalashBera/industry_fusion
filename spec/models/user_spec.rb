@@ -11,6 +11,7 @@ RSpec.describe User, type: :model do
   describe "#active_record_columns" do
     it { should have_db_column(:admin) }
     it { should have_db_column(:sidebar_collapse) }
+    it { should have_db_column(:warehouse_ids) }
     it { should have_db_column(:organization_id) }
     it { should have_db_column(:invitation_token) }
     it { should have_db_column(:invitation_created_at) }

@@ -83,4 +83,12 @@ shared_examples_for "addressable" do
     it { should validate_length_of(:phone_number).is_at_most(255) }
     it { should validate_length_of(:pin_code).is_equal_to(6) }
   end
+
+  describe "#address" do
+    let!(:resource) { create(described_class.to_s.underscore.to_sym, address1: "Salt Lake City", address2: "College More", city: "Kolkata", state: "West Bengal", country: "India", pin_code: "700091") }
+
+    it "should return address of the record" do
+      expect(resource.address).to eq ("Salt Lake City, College More, Kolkata, West Bengal, India")
+    end
+  end
 end
