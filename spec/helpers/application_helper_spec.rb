@@ -138,4 +138,28 @@ RSpec.describe ApplicationHelper, type: :helper do
       end
     end
   end
+
+  describe "#approval_active_class" do
+    let(:controller_name) { "indent_approval" }
+
+    context "when parameter is present in the controller name" do
+      it "should return active" do
+        expect(approval_active_class("indent")).to eq(t("active"))
+      end
+    end
+
+    context "when parameter is not present in the controller name" do
+      it "should return blank string" do
+        expect(approval_active_class("grn")).to eq("")
+      end
+    end
+  end
+
+  describe "#approval_level_type" do
+    let(:controller_name) { "indent_approval" }
+
+    it "should return type of controller" do
+      expect(approval_level_type).to eq("indent")
+    end
+  end
 end

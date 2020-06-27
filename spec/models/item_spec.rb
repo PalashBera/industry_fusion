@@ -110,4 +110,15 @@ RSpec.describe Item, type: :model do
       end
     end
   end
+
+  describe "#uoms" do
+    let!(:uom_1) { create(:uom) }
+    let!(:uom_2) { create(:uom) }
+    let!(:item)  { create(:item, uom_id: uom_1.id, secondary_uom_id: uom_2.id) }
+
+    it "should return associated uoms" do
+      expect(item.uoms.include?(uom_1)).to eq(true)
+      expect(item.uoms.include?(uom_2)).to eq(true)
+    end
+  end
 end
