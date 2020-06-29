@@ -1,7 +1,7 @@
 class Organization < ApplicationRecord
-  include Addressable
-  include Archivable
-  include UserTrackable
+  include AddressModule
+  include ArchiveModule
+  include UserTrackingModule
 
   cattr_accessor :current_organization
 

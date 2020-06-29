@@ -3,8 +3,8 @@ require "rails_helper"
 RSpec.describe StoreInformation, type: :model do
   let(:store_information) { create(:store_information) }
 
-  it_behaves_like "addressable"
-  it_behaves_like "timestampble"
+  it_behaves_like "address_module"
+  it_behaves_like "timestamp_module"
 
   describe "#active_record_columns" do
     it { should have_db_column(:name) }

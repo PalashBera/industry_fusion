@@ -1,10 +1,10 @@
 class Company < ApplicationRecord
-  include Nameable
-  include ShortNameable
-  include Addressable
-  include Archivable
-  include ModalFormable
-  include UserTrackable
+  include NameModule
+  include ShortNameModule
+  include AddressModule
+  include ArchiveModule
+  include ModalFormModule
+  include UserTrackingModule
 
   acts_as_tenant(:organization)
 

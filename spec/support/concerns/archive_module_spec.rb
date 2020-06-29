@@ -1,6 +1,6 @@
 require "rails_helper"
 
-shared_examples_for "archivable" do
+shared_examples_for "archive_module" do
   let!(:archived_resource)     { create(described_class.to_s.underscore.to_sym, archive: true) }
   let!(:non_archived_resource) { create(described_class.to_s.underscore.to_sym, archive: false) }
 

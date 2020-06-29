@@ -1,4 +1,4 @@
-module Addressable
+module AddressModule
   extend ActiveSupport::Concern
 
   included do

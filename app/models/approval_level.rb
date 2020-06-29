@@ -1,6 +1,6 @@
 class ApprovalLevel < ApplicationRecord
-  include UserTrackable
-  include ModalFormable
+  include UserTrackingModule
+  include ModalFormModule
 
   acts_as_tenant(:organization)
 

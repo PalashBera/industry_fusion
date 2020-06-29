@@ -1,4 +1,4 @@
-module ShortNameable
+module ShortNameModule
   extend ActiveSupport::Concern
 
   included do
