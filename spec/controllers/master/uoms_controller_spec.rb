@@ -5,6 +5,7 @@ RSpec.describe Master::UomsController, type: :controller do
   let(:uom)  { create(:uom) }
 
   before(:each) do
+    @request.host = "#{user.organization.subdomain}.example.com"
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end
@@ -13,7 +14,7 @@ RSpec.describe Master::UomsController, type: :controller do
     it "requires login" do
       sign_out user
       get :index
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(new_user_session_url)
     end
 
     it "returns http status 200" do

@@ -1,12 +1,11 @@
 class Organization < ApplicationRecord
-  include AddressModule
   include ArchiveModule
   include UserTrackingModule
 
   cattr_accessor :current_organization
 
   before_validation { self.name = name.to_s.squish }
-  before_validation :validate_fy_range
+  before_validation :set_fy_range
 
   has_many :users
   has_many :companies
@@ -26,18 +25,27 @@ class Organization < ApplicationRecord
   has_many :level_users
   has_many :vendors, through: :vendorships
 
-  validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
+  validates :name, presence: true, length: { maximum: 255 }
+  validates :subdomain, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
   validates :fy_start_month, :fy_end_month, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
 
   scope :order_by_name, -> { order(:name) }
 
   has_paper_trail ignore: %i[created_at updated_at]
 
+  def self.subdomain_match(subdomain, _request)
+    subdomain == "app" || Organization.find_by_subdomain(subdomain)
+  end
+
   private
 
-  def validate_fy_range
-    return if fy_start_month && fy_end_month && ((fy_start_month == 1 && fy_end_month == 12) || (fy_start_month - fy_end_month == 1))
-
-    errors.add(:base, "Invaid financial year selection")
+  def set_fy_range
+    if fy_start_month == 1
+      self.fy_end_month = 12
+    elsif fy_start_month.to_i.between?(2, 12)
+      self.fy_end_month = fy_start_month - 1
+    else
+      self.fy_start_month = self.fy_end_month = nil
+    end
   end
 end

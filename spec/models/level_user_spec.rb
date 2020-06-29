@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe LevelUser, type: :model do
   let(:user)       { create :user }
-  let(:level_user) { create(:level_user) }
+  let(:level_user) { create(:level_user, user_id: user.id) }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -31,10 +31,9 @@ RSpec.describe LevelUser, type: :model do
   describe "#validations" do
     context "when same user is present for an approval level" do
       let!(:approval_level) { create(:approval_level) }
-      let!(:user)           { create :user }
       let!(:level_user)     { create(:level_user, user_id: user.id, approval_level_id: approval_level.id) }
 
-      it "should not save this brand" do
+      it "should not save this level user" do
         new_level_user = build(:level_user, user_id: user.id, approval_level_id: approval_level.id)
         new_level_user.valid?
         expect(new_level_user.errors[:user_id]).to include("has already been taken")

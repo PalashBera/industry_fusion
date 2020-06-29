@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :approval_level do
-    approval_type { ["Indent", "Qc", "Po", "Grn"].sample }
+    approval_type { ApprovalLevel::APPROVAL_TYPES.sample }
     organization
 
     before :create do |approval_level|

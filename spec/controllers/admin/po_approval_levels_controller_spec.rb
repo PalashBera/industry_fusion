@@ -5,6 +5,7 @@ RSpec.describe Admin::PoApprovalLevelsController, type: :controller do
   let(:po_approval_level) { create(:approval_level, approval_type: "po") }
 
   before(:each) do
+    @request.host = "#{user.organization.subdomain}.example.com"
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end
@@ -13,7 +14,7 @@ RSpec.describe Admin::PoApprovalLevelsController, type: :controller do
     it "requires login" do
       sign_out user
       get :index
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(new_user_session_url)
     end
 
     it "returns http status 200" do
@@ -40,7 +41,7 @@ RSpec.describe Admin::PoApprovalLevelsController, type: :controller do
     it "requires login" do
       sign_out user
       get :new
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(new_user_session_url)
     end
 
     it "returns http status 200" do
@@ -231,7 +232,7 @@ RSpec.describe Admin::PoApprovalLevelsController, type: :controller do
     it "requires login" do
       sign_out user
       delete :destroy, params: { id: po_approval_level.id }
-      expect(response).to redirect_to(new_user_session_path)
+      expect(response).to redirect_to(new_user_session_url)
     end
 
     it "returns http status 302" do

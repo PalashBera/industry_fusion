@@ -11,7 +11,6 @@ require('indents')
 require('plugins/theme')
 require('plugins/simplebar.min')
 require('indents')
-require('organization')
 require('home')
 
 // Uncomment to copy all static images under ../images to the output folder and reference
