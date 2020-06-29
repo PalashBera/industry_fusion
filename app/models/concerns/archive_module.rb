@@ -1,4 +1,4 @@
-module Archivable
+module ArchiveModule
   extend ActiveSupport::Concern
 
   included do

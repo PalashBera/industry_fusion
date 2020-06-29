@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  include Archivable
-  include UserTrackable
-  include UserInformable
-  include ModalFormable
+  include ArchiveModule
+  include UserTrackingModule
+  include UserInformationModule
+  include ModalFormModule
 
   cattr_accessor :current_user
 

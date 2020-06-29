@@ -10,12 +10,12 @@ RSpec.describe Warehouse, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
-  it_behaves_like "addressable"
-  it_behaves_like "archivable"
-  it_behaves_like "modal_formable"
-  it_behaves_like "user_trackable"
-  it_behaves_like "organization_associable"
-  it_behaves_like "timestampble"
+  it_behaves_like "address_module"
+  it_behaves_like "archive_module"
+  it_behaves_like "modal_form_module"
+  it_behaves_like "user_tracking_module"
+  it_behaves_like "organization_association_module"
+  it_behaves_like "timestamp_module"
 
   describe "#active_record_columns" do
     it { should have_db_column(:company_id) }

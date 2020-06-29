@@ -1,5 +1,5 @@
 class IndentItem < ApplicationRecord
-  include UserTrackable
+  include UserTrackingModule
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   enum priority: { default: "default", high: "high", medium: "medium", low: "low" }, _suffix: true

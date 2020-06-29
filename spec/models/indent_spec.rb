@@ -9,9 +9,9 @@ RSpec.describe Indent, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
-  it_behaves_like "user_trackable"
-  it_behaves_like "organization_associable"
-  it_behaves_like "timestampble"
+  it_behaves_like "user_tracking_module"
+  it_behaves_like "organization_association_module"
+  it_behaves_like "timestamp_module"
 
   describe "#active_record_columns" do
     it { should have_db_column(:company_id) }
@@ -25,6 +25,10 @@ RSpec.describe Indent, type: :model do
     it { should have_db_index(:warehouse_id) }
   end
 
+  describe "#callbacks" do
+    it { is_expected.to callback(:set_serial).before(:create) }
+  end
+
   describe "#associations" do
     it { should belong_to(:company) }
     it { should belong_to(:warehouse) }
@@ -32,8 +36,8 @@ RSpec.describe Indent, type: :model do
     it { should have_many(:indent_items) }
   end
 
-  describe "#callbacks" do
-    it { is_expected.to callback(:set_serial).before(:create) }
+  describe "#validations" do
+    it { should accept_nested_attributes_for(:indent_items).allow_destroy(true) }
   end
 
   describe "#order_by_serial" do

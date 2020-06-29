@@ -1,6 +1,6 @@
 require "spec_helper"
 
-shared_examples_for "user_informable" do
+shared_examples_for "user_information_module" do
   let!(:resource) { create(described_class.to_s.underscore.to_sym) }
 
   describe "#active_record_columns" do

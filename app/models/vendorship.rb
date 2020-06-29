@@ -1,7 +1,7 @@
 class Vendorship < ApplicationRecord
-  include Archivable
-  include ModalFormable
-  include UserTrackable
+  include ArchiveModule
+  include ModalFormModule
+  include UserTrackingModule
 
   belongs_to :organization
   belongs_to :vendor

@@ -1,6 +1,6 @@
 class Vendor < ApplicationRecord
-  include UserInformable
-  include ModalFormable
+  include UserInformationModule
+  include ModalFormModule
 
   devise :database_authenticatable, :invitable, :async
 

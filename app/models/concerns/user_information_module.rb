@@ -1,4 +1,4 @@
-module UserInformable
+module UserInformationModule
   extend ActiveSupport::Concern
 
   included do

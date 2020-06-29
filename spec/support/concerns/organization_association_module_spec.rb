@@ -1,6 +1,6 @@
 require "rails_helper"
 
-shared_examples_for "organization_associable" do
+shared_examples_for "organization_association_module" do
   describe "#active_record_columns" do
     it { should have_db_column(:organization_id) }
   end

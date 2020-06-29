@@ -1,7 +1,7 @@
 class ReorderLevel < ApplicationRecord
-  include Archivable
-  include ModalFormable
-  include UserTrackable
+  include ArchiveModule
+  include ModalFormModule
+  include UserTrackingModule
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   enum priority: { default: "default", high: "high", medium: "medium", low: "low" }, _suffix: true

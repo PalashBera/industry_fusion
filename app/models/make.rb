@@ -1,7 +1,7 @@
 class Make < ApplicationRecord
-  include Archivable
-  include ModalFormable
-  include UserTrackable
+  include ArchiveModule
+  include ModalFormModule
+  include UserTrackingModule
 
   acts_as_tenant(:organization)
 

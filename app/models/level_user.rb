@@ -1,5 +1,5 @@
 class LevelUser < ApplicationRecord
-  include UserTrackable
+  include UserTrackingModule
 
   acts_as_tenant(:organization)
 

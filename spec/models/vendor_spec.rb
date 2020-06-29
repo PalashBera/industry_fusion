@@ -1,9 +1,9 @@
 require "rails_helper"
 
 RSpec.describe Vendor, type: :model do
-  it_behaves_like "user_informable"
-  it_behaves_like "modal_formable"
-  it_behaves_like "timestampble"
+  it_behaves_like "user_information_module"
+  it_behaves_like "modal_form_module"
+  it_behaves_like "timestamp_module"
 
   describe "#active_record_columns" do
     it { should have_db_column(:invitation_token) }

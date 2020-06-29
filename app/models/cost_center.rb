@@ -1,8 +1,8 @@
 class CostCenter < ApplicationRecord
-  include Nameable
-  include Archivable
-  include ModalFormable
-  include UserTrackable
+  include NameModule
+  include ArchiveModule
+  include ModalFormModule
+  include UserTrackingModule
 
   acts_as_tenant(:organization)
 

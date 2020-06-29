@@ -1,4 +1,4 @@
-module UserTrackable
+module UserTrackingModule
   extend ActiveSupport::Concern
 
   included do

@@ -68,12 +68,12 @@ RSpec.describe PageHelp, type: :model do
 
   describe "#validations" do
     it { should validate_presence_of(:controller_name) }
-    it { should validate_length_of(:controller_name).is_at_most(255) }
     it { should validate_presence_of(:action_name) }
-    it { should validate_length_of(:action_name).is_at_most(255) }
     it { should validate_presence_of(:help_text) }
-    it { should validate_length_of(:help_text).is_at_most(255) }
     it { should validate_presence_of(:help_type) }
+    it { should validate_length_of(:controller_name).is_at_most(255) }
+    it { should validate_length_of(:action_name).is_at_most(255) }
+    it { should validate_length_of(:help_text).is_at_most(255) }
     it { should validate_length_of(:help_type).is_at_most(255) }
 
 

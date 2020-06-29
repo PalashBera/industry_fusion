@@ -1,6 +1,6 @@
 require "rails_helper"
 
-shared_examples_for "modal_formable" do
+shared_examples_for "modal_form_module" do
   let!(:resource) { create(described_class.to_s.underscore.to_sym) }
 
   describe "#class_title" do

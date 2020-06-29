@@ -1,4 +1,4 @@
-module ModalFormable
+module ModalFormModule
   extend ActiveSupport::Concern
 
   def class_title

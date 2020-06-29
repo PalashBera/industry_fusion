@@ -1,6 +1,6 @@
 require "rails_helper"
 
-shared_examples_for "addressable" do
+shared_examples_for "address_module" do
   describe "#active_record_columns" do
     it { should have_db_column(:address1) }
     it { should have_db_column(:address2) }
