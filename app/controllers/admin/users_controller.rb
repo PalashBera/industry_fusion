@@ -42,6 +42,11 @@ class Admin::UsersController < Admin::HomeController
     redirect_to admin_users_path, flash: { success: "User will receive invitation mail shortly." }
   end
 
+  def toggle_activation
+    user.toggle_activation
+    redirect_to admin_users_path
+  end
+
   private
 
   def user
@@ -49,7 +54,7 @@ class Admin::UsersController < Admin::HomeController
   end
 
   def user_params
-    params.require(:user).permit(:email, :archive, warehouse_ids: [])
+    params.require(:user).permit(:email)
   end
 
   def user_update_params
