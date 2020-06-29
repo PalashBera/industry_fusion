@@ -1,5 +1,5 @@
-<% @indent_items.each  do |indent_item, index| %>
-  <tr>
+<% @indent_items.each_with_index  do |indent_item, index| %>
+  <tr class="<%= "border-bottom" if @bordered_items.last != indent_item.id && @bordered_items.include?(indent_item.id) %>">
     <td><%= indent_item.indent_serial_number %></td>
     <td><%= indent_item.item_name %></td>
     <td><%= indent_item.make_brand_with_cat_no %></td>
