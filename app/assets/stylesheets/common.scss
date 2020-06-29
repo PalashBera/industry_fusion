@@ -47,6 +47,10 @@ table.table {
   font-size: 18px !important;
 }
 
+.indent-table .border-bottom {
+  border-bottom: 2px solid #9e6de0 !important;
+}
+
 @media (min-width: 768px) {
   .btn {
     padding: 0.4rem 0.7rem !important;
