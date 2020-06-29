@@ -11,4 +11,8 @@ module UsersHelper
       '<span class="badge badge-secondary" title="Pending">Pending</span>'.html_safe
     end
   end
+
+  def activation_status(user)
+    user.archive? ? '<i class="mdi mdi-block-helper"></i>' : '<i class="fas fa-check-circle"></i>'
+  end
 end

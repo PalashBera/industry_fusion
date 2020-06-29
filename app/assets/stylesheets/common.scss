@@ -47,6 +47,10 @@ table.table {
   font-size: 18px !important;
 }
 
+.user-detail {
+  overflow-x: visible !important;
+}
+
 @media (min-width: 768px) {
   .btn {
     padding: 0.4rem 0.7rem !important;

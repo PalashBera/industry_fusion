@@ -5,11 +5,6 @@
       <%= f.email_field :email, class: "form-control", required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255 %>
     </div>
   <% else %>
-    <div class="custom-control custom-checkbox mb-5">
-      <%= f.check_box :archive, class: "custom-control-input" %>
-      <%= f.label :archive, class: "custom-control-label" %>
-    </div>
-
     <h5>Asign Warehouses</h5><hr>
 
     <% Warehouse.order_by_name.each do |warehouse| %>

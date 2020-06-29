@@ -114,4 +114,26 @@ module LinksHelper
             url_for(controller: controller_name, action: "new"),
             title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
+
+  def assign_warehouse_link(user)
+    link_to '<i class="mdi mdi-office-building"></i><span class="d-none d-md-inline-block ml-1">Assign Warehouse</span>'.html_safe,
+            url_for(action: "edit", id: user.id),
+            data: { remote: true },
+            title: "Assign Warehouse",
+            class: "dropdown-item"
+  end
+
+  def deactivation_link(user)
+    link_to '<i class="mdi mdi-block-helper"></i><span class="d-none d-md-inline-block ml-1">Deactivate</span>'.html_safe,
+            url_for(action: "toggle_activation", id: user.id),
+            title: "Deactivate",
+            class: "dropdown-item"
+  end
+
+  def activation_link(user)
+    link_to '<i class="fas fa-check-circle"></i><span class="d-none d-md-inline-block ml-1">Activate</span>'.html_safe,
+            url_for(action: "toggle_activation", id: user.id),
+            title: "Deactivate",
+            class: "dropdown-item"
+  end
 end

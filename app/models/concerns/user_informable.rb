@@ -9,9 +9,13 @@ module UserInformable
       self.mobile_number = mobile_number.to_s.squish
     end
 
-    validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }
+    validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }, unless: :check_params
     validates :password, presence: true, length: { minimum: 6, maximum: 128 }, on: :create
-    validates :mobile_number, presence: true, length: { is: 10 }
+    validates :mobile_number, presence: true, length: { is: 10 }, unless: :check_params
+  end
+
+  def check_params
+    first_name.blank? && last_name.blank? && email.present? && warehouse_ids.present?
   end
 
   def full_name

@@ -22,6 +22,10 @@ class User < ApplicationRecord
     update_column(:sidebar_collapse, !sidebar_collapse)
   end
 
+  def toggle_activation
+    update_column(:archive, !archive)
+  end
+
   def general_user?
     invitation_accepted_at.present?
   end
