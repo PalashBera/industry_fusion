@@ -168,9 +168,9 @@ RSpec.describe Admin::QcApprovalLevelsController, type: :controller do
     context "with valid attributes" do
       it "updates the requested qc approval level" do
         sign_in user
-        patch :update, params: { id: qc_approval_level.id, approval_level: { approval_type: "Grn", level_users_attributes: { "0": { user_id: user.id }}}}
+        patch :update, params: { id: qc_approval_level.id, approval_level: { approval_type: "qc", level_users_attributes: { "0": { user_id: user.id }}}}
         qc_approval_level.reload
-        expect(qc_approval_level.approval_type).to eq("Grn")
+        expect(qc_approval_level.approval_type).to eq("qc")
       end
 
       it "returns http status 302" do

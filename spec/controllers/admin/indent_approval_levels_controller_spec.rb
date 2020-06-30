@@ -168,9 +168,9 @@ RSpec.describe Admin::IndentApprovalLevelsController, type: :controller do
     context "with valid attributes" do
       it "updates the requested indent approval level" do
         sign_in user
-        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "Grn", level_users_attributes: { "0": { user_id: user.id }}}}
+        patch :update, params: { id: indent_approval_level.id, approval_level: { approval_type: "indent", level_users_attributes: { "0": { user_id: user.id }}}}
         indent_approval_level.reload
-        expect(indent_approval_level.approval_type).to eq("Grn")
+        expect(indent_approval_level.approval_type).to eq("indent")
       end
 
       it "returns http status 302" do

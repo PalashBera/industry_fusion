@@ -168,9 +168,9 @@ RSpec.describe Admin::PoApprovalLevelsController, type: :controller do
     context "with valid attributes" do
       it "updates the requested po approval level" do
         sign_in user
-        patch :update, params: { id: po_approval_level.id, approval_level: { approval_type: "Grn", level_users_attributes: { "0": { user_id: user.id }}}}
+        patch :update, params: { id: po_approval_level.id, approval_level: { approval_type: "po", level_users_attributes: { "0": { user_id: user.id }}}}
         po_approval_level.reload
-        expect(po_approval_level.approval_type).to eq("Grn")
+        expect(po_approval_level.approval_type).to eq("po")
       end
 
       it "returns http status 302" do
