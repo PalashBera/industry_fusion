@@ -18,56 +18,13 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :address1, "Address 1" %>
-            <%= f.text_field :address1, class: "form-control", required: true, placeholder: "Address 1", maxlength: 255 %>
+            <%= f.label :subdomain %>
+            <%= f.text_field :subdomain, class: "form-control", disabled: true %>
           </div>
 
           <div class="form-group">
-            <%= f.label :address2, "Address 2" %>
-            <%= f.text_field :address2, class: "form-control", placeholder: "Address 2", maxlength: 255 %>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :city %>
-              <%= f.text_field :city, class: "form-control", required: true, placeholder: "City", maxlength: 255 %>
-            </div>
-
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :state %>
-              <%= f.text_field :state, class: "form-control", required: true, placeholder: "State", maxlength: 255 %>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :country %>
-              <%= f.text_field :country, class: "form-control", required: true, placeholder: "Country", maxlength: 255 %>
-            </div>
-
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :pin_code, "PIN Code" %>
-              <%= f.text_field :pin_code, class: "form-control", required: true, placeholder: "PIN Code", minlength: 6, maxlength: 6 %>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :phone_number, "Phone Number" %>
-            <%= f.text_field :phone_number, class: "form-control", placeholder: "Phone Number", maxlength: 255 %>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :fy_start_month, "Start Month" %>
-              <%= f.select :fy_start_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control fy-start-month-selection", required: true } %>
-              <small class="form-text text-muted">Financial year start month.</small>
-            </div>
-
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :fy_end_month, "End Month" %>
-              <%= f.select :fy_end_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control fy-end-month-selection", required: true } %>
-              <small class="form-text text-muted">Financial year end month.</small>
-            </div>
+            <%= f.label :fy_start_month, "Financial Year Start Month" %>
+            <%= f.select :fy_start_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control", required: true } %>
           </div>
 
           <%= f.submit "Update", class: "btn btn-primary", data: { disable_with: "Updating..." } %>

@@ -13,7 +13,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.boolean    :archive,           null: false, default: false
       t.boolean    :sidebar_collapse,  null: false, default: false
       t.text       :warehouse_ids,     array: true, default: []
-      t.references :organization,      foreign_key: true
+      t.references :organization,      null: false, foreign_key: true
       t.bigint     :created_by_id,     index: true
       t.bigint     :updated_by_id,     index: true
 
@@ -151,15 +151,9 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
   create_table :organizations do |t|
     t.string   :name,                                     null: false
+    t.string   :subdomain,                                null: false
     t.bigint   :fy_start_month,                           null: false
     t.bigint   :fy_end_month,                             null: false
-    t.string   :address1,                                 null: false
-    t.string   :address2,                 default: ""
-    t.string   :city,                                     null: false
-    t.string   :state,                                    null: false
-    t.string   :country,                                  null: false
-    t.string   :pin_code,                 limit: 6,       null: false
-    t.string   :phone_number,             default: ""
     t.boolean  :archive,                  default: false, null: false
     t.boolean  :page_help_needed,         default: true,  null: false
     t.boolean  :send_master_notification, default: true,  null: false

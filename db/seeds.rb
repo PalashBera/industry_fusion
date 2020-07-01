@@ -1,13 +1,8 @@
 organization = Organization.create!(
   name: "Industry Fusion Pvt. Ltd.",
-  address1: Faker::Address.building_number + ", " + Faker::Address.street_name,
-  address2: Faker::Address.secondary_address + ", " + Faker::Address.street_address,
-  city: Faker::Address.city,
-  state: Faker::Address.state,
-  country: Faker::Address.country,
-  pin_code: Faker::Number.number(digits: 6).to_s,
   fy_start_month: 4,
-  fy_end_month: 3
+  fy_end_month: 3,
+  subdomain: "industryfuision"
 )
 
 user1 = User.create!(

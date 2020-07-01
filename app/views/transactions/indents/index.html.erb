@@ -3,7 +3,7 @@
 
 <%= render "shared/page_help" %>
 
-<div class="card card-default">
+<div class="card">
   <div class="card-body">
     <section class="mb-4 d-flex justify-content-between">
       <section>
@@ -15,7 +15,7 @@
       <%= render "index_table" %>
     <% else %>
       <div class="card">
-        <div class="card-body text-center p-3">
+        <div class="card-body text-center">
           <% if params[:q].present? %>
             No result found. Please search with proper keywords.
           <% else %>

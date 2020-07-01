@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!, :check_organization_presence, only: :dashboard
+  before_action :authenticate_user!, only: %i[dashboard toggle_collapse]
 
   def index; end
 

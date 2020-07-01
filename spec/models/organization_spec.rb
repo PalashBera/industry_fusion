@@ -9,7 +9,6 @@ RSpec.describe Organization, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
-  it_behaves_like "address_module"
   it_behaves_like "archive_module"
   it_behaves_like "user_tracking_module"
   it_behaves_like "timestamp_module"
@@ -55,9 +54,18 @@ RSpec.describe Organization, type: :model do
   describe "#validations" do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
-    it { should validate_uniqueness_of(:name).case_insensitive }
     it { should validate_presence_of(:fy_start_month) }
     it { should validate_presence_of(:fy_end_month) }
+
+    context "when same subdomain present for an organization" do
+      let!(:organization) { create(:organization, subdomain: "Nokia") }
+
+      it "should not save this organization" do
+        new_organization = build(:organization, subdomain: "Nokia")
+        new_organization.valid?
+        expect(new_organization.errors[:subdomain]).to include("has already been taken")
+      end
+    end
   end
 
   describe "#scopes" do

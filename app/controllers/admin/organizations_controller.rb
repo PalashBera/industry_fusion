@@ -27,7 +27,7 @@ class Admin::OrganizationsController < Admin::HomeController
   private
 
   def organization_params
-    params.require(:organization).permit(:name, :address1, :address2, :city, :state, :country, :pin_code, :phone_number, :fy_start_month, :fy_end_month)
+    params.require(:organization).permit(:name, :fy_start_month)
   end
 
   def organization_preference_params

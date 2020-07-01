@@ -2,4 +2,6 @@
 
 <p>You can confirm your account email through the link below:</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<% customised_confirmation_url = "http://app.lvh.me:3000/users/confirmation?confirmation_token=#{ @token }" %>
+
+<p><%= link_to "Confirm my account", customised_confirmation_url %></p>

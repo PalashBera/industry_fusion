@@ -35,9 +35,9 @@ RSpec.describe ApprovalLevel, type: :model do
 
   describe "#scopes" do
     let!(:approval_level_indent) { create(:approval_level, approval_type: "indent") }
-    let!(:approval_level_qc) { create(:approval_level, approval_type: "qc") }
-    let!(:approval_level_po) { create(:approval_level, approval_type: "po") }
-    let!(:approval_level_grn) { create(:approval_level, approval_type: "grn") }
+    let!(:approval_level_qc)     { create(:approval_level, approval_type: "qc") }
+    let!(:approval_level_po)     { create(:approval_level, approval_type: "po") }
+    let!(:approval_level_grn)    { create(:approval_level, approval_type: "grn") }
 
     context "indent" do
       it "should return approval_levels whose approval_type is indent" do

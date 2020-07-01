@@ -2,6 +2,8 @@ class ApprovalLevel < ApplicationRecord
   include UserTrackingModule
   include ModalFormModule
 
+  APPROVAL_TYPES = %w[indent qc po grn].freeze
+
   acts_as_tenant(:organization)
 
   belongs_to :organization
@@ -10,7 +12,7 @@ class ApprovalLevel < ApplicationRecord
 
   accepts_nested_attributes_for :level_users, allow_destroy: true, reject_if: :all_blank
 
-  validates :approval_type, presence: true, length: { maximum: 255 }
+  validates :approval_type, presence: true, length: { maximum: 255 }, inclusion: { in: APPROVAL_TYPES }
   validates :level_users, presence: true
 
   scope :indent, -> { where(approval_type: "indent") }

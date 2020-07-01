@@ -201,15 +201,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
 
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
+    t.string "subdomain", null: false
     t.bigint "fy_start_month", null: false
     t.bigint "fy_end_month", null: false
-    t.string "address1", null: false
-    t.string "address2", default: ""
-    t.string "city", null: false
-    t.string "state", null: false
-    t.string "country", null: false
-    t.string "pin_code", limit: 6, null: false
-    t.string "phone_number", default: ""
     t.boolean "archive", default: false, null: false
     t.boolean "page_help_needed", default: true, null: false
     t.boolean "send_master_notification", default: true, null: false
@@ -289,7 +283,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.boolean "archive", default: false, null: false
     t.boolean "sidebar_collapse", default: false, null: false
     t.text "warehouse_ids", default: [], array: true
-    t.bigint "organization_id"
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.string "reset_password_token"

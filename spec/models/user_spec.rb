@@ -6,13 +6,13 @@ RSpec.describe User, type: :model do
 
   it_behaves_like "user_information_module"
   it_behaves_like "modal_form_module"
+  it_behaves_like "organization_association_module"
   it_behaves_like "timestamp_module"
 
   describe "#active_record_columns" do
     it { should have_db_column(:admin) }
     it { should have_db_column(:sidebar_collapse) }
     it { should have_db_column(:warehouse_ids) }
-    it { should have_db_column(:organization_id) }
     it { should have_db_column(:invitation_token) }
     it { should have_db_column(:invitation_created_at) }
     it { should have_db_column(:invitation_sent_at) }
@@ -24,14 +24,9 @@ RSpec.describe User, type: :model do
   end
 
   describe "#active_record_index" do
-    it { should have_db_index(:organization_id) }
     it { should have_db_index(:invitation_token) }
     it { should have_db_index(:invitations_count) }
     it { should have_db_index([:invited_by_type, :invited_by_id]) }
-  end
-
-  describe "#associations" do
-    it { should belong_to(:organization).optional }
   end
 
   describe "#admin?" do
