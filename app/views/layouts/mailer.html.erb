@@ -1,134 +1,120 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title><%= yield(:title) %> | <%= yield(:company_name) %></title>
 
-    <script src="//code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <style>
-      /* Email styles need to be inline */
-      @import url('https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap');
-
-      body {
-        max-width: 800px;
+    <style type="text/css">
+      .primary-button:hover {
+        background-color: #F54C37 !important;
       }
 
-      header {
-        margin-bottom: 50px;
+      .danger-button:hover {
+        background-color: #71767A !important;
       }
 
-      main {
-        background-color: #F8F9Fa;
-        padding: 60px !important;
+      .secondary-button:hover {
+        background-color: #A8C274 !important;
       }
 
-      footer {
-        margin-top: 50px;
-      }
+      @media(max-width: 589px) {
+        .page-subtitle {
+          font-size: 16px !important;
+        }
 
-      .navbar-brand {
-        font-family: Spicy Rice, cursive;
-      }
+        .page-title {
+          font-size: 28px !important;
+        }
 
-      .social-links tbody {
-        display: inline-block;
-      }
+        .body-title {
+          font-size: 20px !important;
+        }
 
-      .social-links td {
-        border: 0px !important;
-        padding: 6px;
-      }
-
-      .contact-info tbody {
-        display: inline-block;
-      }
-
-      .contact-info td {
-        border: 0px !important;
-        padding: 6px;
-      }
-
-      .contact-info {
-        margin-top: 35px;
+        p {
+          font-size: 14px !important;
+        }
       }
     </style>
   </head>
 
-  <body class="container-fluid">
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <%= link_to "Industry Fusion", "http://localhost:3000", class: "navbar-brand" %>
-      </nav>
-    </header>
+  <body bgcolor="#F6F8F1" style="margin: 0; padding: 0; min-width: 100%!important;">
+  	<table width="100%" bgcolor="#F6F8F1" border="0" cellpadding="0" cellspacing="0">
+  		<tr>
+  	  	<td>
+  	    	<table bgcolor="#FFFFFF" align="center" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px;">
+  	      	<tr>
+  	        	<td bgcolor="#C7D8A7" style="padding: 40px 30px 20px 30px;">
+  	          	<table width="70" align="left" border="0" cellpadding="0" cellspacing="0">
+  	            	<tr>
+  	              	<td height="70" style="padding: 0 20px 20px 0;">
+  	                	<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/icon.gif" width="70" height="70" border="0" alt="logo" />
+  	              	</td>
+  		            </tr>
+  		          </table>
 
-    <main>
-      <%= yield %>
-    </main>
+  		          <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 100%; max-width: 425px;">
+  		            <tr>
+  		              <td height="70">
+  		                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  		                  <tr>
+  		                    <td class="page-subtitle" style="font-size: 20px; color: #FFFFFF; text-transform: uppercase; font-weight: bold; font-family: sans-serif; letter-spacing: 5px; padding: 0 0 0 3px;">
+  		                      <%= yield(:title) %>
+  		                    </td>
+  		                  </tr>
 
-    <footer>
-      <table class="table table-responsive text-center social-links">
-        <tbody class="align-middle">
-          <tr>
-            <td>
-              <a href="https://www.facebook.com" target="_blank">
-                <img src="https://ci5.googleusercontent.com/proxy/Pzm9BPjhl1Vz5or83MU4FdapDaI8BDm5xcyaFq7LDybxoK8X4oW3a-HMNj75yiwNSo_GwV7MP8TBm4KX01prYBIo04oYs9MLuLPzCRqsTSZXZXYsJTtXEmJwcTeiUpdZvAo5yB2NywMlt10OfDN9xp8nA4vNuWrMODL15IY4-j_Mxhli0UsHtIMEHeJj=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_facebook.png">
-              </a>
-            </td>
+  		                  <tr>
+  		                    <td class="page-title" style="padding: 5px 0 0 0; color: #153643; font-family: sans-serif; font-size: 33px; line-height: 38px; font-weight: bold;">
+  		                      <%= yield(:company_name) %>
+  		                    </td>
+  		                  </tr>
+  		                </table>
+  		              </td>
+  		            </tr>
+  		          </table>
+  		        </td>
+  		      </tr>
 
-            <td>
-              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
-            </td>
+  		      <tr>
+  		        <td style="padding: 30px 30px 30px 30px; border-bottom: 1px solid #F2EEED;">
+  		          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  		            <%= yield %>
+  		          </table>
+  		        </td>
+  		      </tr>
 
-            <td>
-              <a href="https://www.twitter.com" target="_blank">
-                <img src="https://ci4.googleusercontent.com/proxy/fmY3lYx2QOF1Zg6rex8Ff6YeL_TzTFGa4jbb-OHHa0lCptx0V0X9-GW-xcDZI4f7P3eZy3hJsxrgenw4MnyI-xSeucWKaLYY2ig9G1Xm-GTPD_tOpC8awQCn9TtkR2caw1EcaC8O9urODLP6bdVD8cdA_Y0p1P0ID310Mlnl0v-N9bj8msFYeSwAiGk=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_twitter.png">
-              </a>
-            </td>
+  		      <tr>
+  		        <td bgcolor="#44525f" style="padding: 20px 30px 15px 30px;">
+  		          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  		            <tr>
+  		              <td align="center" style="font-family: sans-serif; font-size: 14px; color: #FFFFFF;">
+  		                &copy; 2020 Industry Fusion | India
+  		              </td>
+  		            </tr>
+  		            <tr>
+  		              <td align="center" style="padding: 20px 0 0 0;">
+  		                <table border="0" cellspacing="0" cellpadding="0">
+  		                  <tr>
+  		                    <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+  		                      <a href="http://www.facebook.com/">
+  		                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/facebook.png" width="37" height="37" alt="Facebook" border="0" />
+  		                      </a>
+  		                    </td>
 
-            <td>
-              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
-            </td>
-
-            <td>
-              <a href="https://www.youtube.com" target="_blank">
-                <img src="https://ci4.googleusercontent.com/proxy/BN7rwIqSFDXol2l3MOvFxPqKzWaoKzm8pHyoE61sv2B7Mabhobke9YtjnEDY9w-OVb-Bh16L0hZGVdwETtJauuO90ATcXhrkEcRW13urHC4b0aHdipQ59R-q3tYjFU7iUz-zvmSelPwAv3W-hj9pSkpl8MQ4cpNmkrv8kMoqyBZalMW7rJ0S1jIcNX0=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_youtube.png">
-              </a>
-            </td>
-
-            <td>
-              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
-            </td>
-
-            <td>
-              <a href="https://www.linkedin.com" target="_blank">
-                <img src="https://ci5.googleusercontent.com/proxy/IJFyNuRdSZ6qc9BiZY6PQykS6w2zmbzMTVqB9webEZAPZegoaSy7sm8FrdkooQ76PYLgA6BOfiEh6g3rAl-IKcOpomUUsfNhnSwS_mgXISsdMTjBuqNWb_-TJfKNPxi2eF0lCl3WZUd4vq8rIvmENOWpCIFGb0G7KBaybA3uXPlpRup0qV52N5BQxxro=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_linkedin.png">
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <table class="table table-responsive text-center contact-info">
-        <tbody class="align-middle">
-          <tr>
-            <td>
-              <img src="https://img.icons8.com/ios-glyphs/40/000000/cell-phone.png"/>
-              <span>00 0000 0000 00</span>
-            </td>
-
-            <td>
-              <img src="https://ci5.googleusercontent.com/proxy/OuUuFACFBy5qlZ2Ug-J7ezoZLZ0yRHYXDTq7Sk0Wfbm5YewQK4n1LHl4Q1tmpc5PGbaPpgu6spUiAFrzIhTK8H04Vxo653b6Xkz00YAYSOJZmfdV4y6TH9YYeNzYSQTs3vyESVAmHKB_uz1o4oNCfnRFSJlEQTQclX7qti-LEwHzJOVZOuqc0vIp=s0-d-e1-ft#http://contentz.mkt8887.com/ra/2020/12460/03/3336832/Aqua_Segmented_Communication_V2_No_Credit_History_images_sline.png">
-            </td>
-
-            <td>
-              <img src="https://img.icons8.com/ios-filled/40/000000/email-open.png"/>
-              <span>contact@industry_fusion.com</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </footer>
+  		                    <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
+  		                      <a href="http://www.twitter.com/">
+  		                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/210284/twitter.png" width="37" height="37" alt="Twitter" border="0" />
+  		                      </a>
+  		                    </td>
+  		                  </tr>
+  		                </table>
+  		              </td>
+  		            </tr>
+  		          </table>
+  		        </td>
+  		      </tr>
+  		    </table>
+  	    </td>
+  	  </tr>
+  	</table>
   </body>
 </html>

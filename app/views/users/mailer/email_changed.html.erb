@@ -1,7 +1,31 @@
-<p>Hello <%= @email %>!</p>
+<% provide(:title, "Email Change") %>
+<% provide(:company_name, "Industry Fusion") %>
 
-<% if @resource.try(:unconfirmed_email?) %>
-  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
-<% else %>
-  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
-<% end %>
+<tr>
+  <td class="body-title" style="color: #153643; font-family: sans-serif; padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold; text-transform: uppercase;">
+    <% if @resource.try(:unconfirmed_email?) %>
+      Email Change Request
+    <% else %>
+      Email Changed Successfully
+    <% end %>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Dear <%= @resource.full_name %>,</p>
+
+    <% if @resource.try(:unconfirmed_email?) %>
+      <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+    <% else %>
+      <p>We're contacting you to notify you that your email has been successfully changed to <%= @resource.email %>.</p>
+    <% end %>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Thanks,</p>
+    <p>Team Industry Fusion</p>
+  </td>
+</tr>

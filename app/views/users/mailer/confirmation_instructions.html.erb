@@ -1,7 +1,35 @@
-<p>Welcome <%= @email %>!</p>
+<% provide(:title, "Email Confirmation") %>
+<% provide(:company_name, "Industry Fusion") %>
+<% account_confirmation_url = "http://app.lvh.me:3000/users/confirmation?confirmation_token=#{ @token }" %>
 
-<p>You can confirm your account email through the link below:</p>
+<tr>
+  <td class="body-title" style="color: #153643; font-family: sans-serif; padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold; text-transform: uppercase;">
+    Email Confirmation
+  </td>
+</tr>
 
-<% customised_confirmation_url = "http://app.lvh.me:3000/users/confirmation?confirmation_token=#{ @token }" %>
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Dear <%= @resource.full_name %>,</p>
+    <p>Please confirm your account email by clicking on the bellow button.</p>
+  </td>
+</tr>
 
-<p><%= link_to "Confirm my account", customised_confirmation_url %></p>
+<tr>
+  <td style="padding: 20px 0 20px 0;">
+    <table border="0" cellspacing="0" cellpadding="0">
+      <tr height="45">
+        <td>
+          <a href="<%= account_confirmation_url %>" target="_blank" class="primary-button" style="background-color: #e05443; color: #FFFFFF; text-decoration: none; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 12px 30px;">Confirm email</a>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Thanks,</p>
+    <p>Team Industry Fusion</p>
+  </td>
+</tr>
