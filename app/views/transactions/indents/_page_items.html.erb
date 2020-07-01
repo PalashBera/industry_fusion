@@ -1,12 +1,12 @@
-<% @indent_items.each_with_index  do |indent_item, index| %>
-  <tr class="<%= "border-bottom" if @bordered_items.last != indent_item.id && @bordered_items.include?(indent_item.id) %>">
-    <td><%= indent_item.indent_serial_number %></td>
-    <td><%= indent_item.item_name %></td>
-    <td><%= indent_item.make_brand_with_cat_no %></td>
-    <td><%= indent_item.quantity_with_uom %></td>
-    <td><%= indent_item.cost_center_name %></td>
-    <td><%= I18n.l(indent_item.indent_requirement_date) %></td>
-    <td><%= indent_item.priority %></td>
-    <td><%= edit_link(controller_name, indent_item.indent) %></td>
+<% @indent_items.each_with_index  do |item, index| %>
+  <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
+    <td><%= item.indent_serial_number %></td>
+    <td><%= item.item_name %></td>
+    <td><%= item.make_brand_with_cat_no %></td>
+    <td><%= item.quantity_with_uom %></td>
+    <td><%= item.cost_center_name %></td>
+    <td><%= I18n.l(item.indent_requirement_date) %></td>
+    <td><%= item.priority %></td>
+    <td><%= edit_link(controller_name, item.indent) %></td>
   </tr>
 <% end %>
