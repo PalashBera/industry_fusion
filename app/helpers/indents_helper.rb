@@ -14,4 +14,8 @@ module IndentsHelper
   def format_requirement_date(object)
     object.id.present? ? object.requirement_date.strftime("%d-%b-%Y") : ""
   end
+
+  def border_bottom_attached?(item_ids, item_id)
+    item_ids.last != item_id && item_ids.include?(item_id)
+  end
 end
