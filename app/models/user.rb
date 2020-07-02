@@ -36,26 +36,12 @@ class User < ApplicationRecord
     update_column(:sidebar_collapse, !sidebar_collapse)
   end
 
-  def general_user?
-    invitation_accepted_at.present?
+  def toggle_activation
+    update_column(:archive, !archive)
   end
 
   def pending_acception?
-    user_role == "pending"
-  end
-
-  def add_organization(organization)
-    update(admin: true, organization_id: organization.id)
-  end
-
-  def user_role
-    if general_user?
-      "general_user"
-    elsif admin?
-      "admin"
-    else
-      "pending"
-    end
+    invitation_accepted_at.nil?
   end
 
   protected

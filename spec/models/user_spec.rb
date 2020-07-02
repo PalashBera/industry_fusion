@@ -61,43 +61,11 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#user_role" do
-    let(:admin_user)   { create(:admin_user) }
-    let(:general_user) { create(:user, invitation_accepted_at: Time.zone.now) }
-    let(:pending_user) { create(:user, invitation_accepted_at: nil) }
-
-    context "when user is admin" do
-      it "should return admin" do
-        expect(admin_user.user_role).to eq("admin")
-      end
-    end
-
-    context "when user is not admin but general_user" do
-      it "should return general_user" do
-        expect(general_user.user_role).to eq("general_user")
-      end
-    end
-
-    context "when user is neither admin nor general_user" do
-      it "should return pending" do
-        expect(pending_user.user_role).to eq("pending")
-      end
-    end
-  end
-
   describe "#pending_acception?" do
     let(:pending_user) { create(:user, invitation_accepted_at: nil) }
 
     it "should return pending" do
       expect(pending_user.pending_acception?).to eq(true)
-    end
-  end
-
-  describe "#add_organization" do
-    it "should add organization to user and update user as admin" do
-      user.add_organization(organization)
-      expect(user.organization).to eq(organization)
-      expect(user.admin?).to eq(true)
     end
   end
 
@@ -107,6 +75,15 @@ RSpec.describe User, type: :model do
       user.toggle_sidebar_collapse
       expect(user.sidebar_collapse).to eq(!previous_value)
       expect(user.sidebar_collapse).not_to eq(previous_value)
+    end
+  end
+
+  describe "#toggle_activation" do
+    it "should toggle archive value" do
+      previous_value = user.archive
+      user.toggle_activation
+      expect(user.archive).to eq(!previous_value)
+      expect(user.archive).not_to eq(previous_value)
     end
   end
 end

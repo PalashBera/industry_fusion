@@ -9,9 +9,9 @@ module UserInformationModule
       self.mobile_number = mobile_number.to_s.squish
     end
 
-    validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }
+    validates :first_name, :last_name, :email, presence: true, length: { maximum: 255 }, unless: :check_validaiton?
     validates :password, presence: true, length: { minimum: 6, maximum: 128 }, on: :create
-    validates :mobile_number, presence: true, length: { is: 10 }
+    validates :mobile_number, presence: true, length: { is: 10 }, unless: :check_validaiton?
   end
 
   def full_name
@@ -20,5 +20,9 @@ module UserInformationModule
 
   def initial
     "#{first_name[0]}#{last_name[0]}"
+  end
+
+  def check_validaiton?
+    respond_to?(:warehouse_ids_changed?) && warehouse_ids_changed?
   end
 end
