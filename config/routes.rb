@@ -140,7 +140,7 @@ Rails.application.routes.draw do
     end
 
     namespace :transactions do
-      resources :indents, except: [:show, :destroy]
+      resources :indents, except: [:destroy]
 
       resources :companies, only: [] do
         get :warehouses, on: :member

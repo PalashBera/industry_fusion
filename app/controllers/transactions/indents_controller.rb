@@ -11,6 +11,10 @@ class Transactions::IndentsController < Transactions::HomeController
     @indent_item = @indent.indent_items.build
   end
 
+  def show
+    indent
+  end
+
   def create
     @indent = Indent.new(indent_params)
 

@@ -1264,7 +1264,7 @@ Metrics/ModuleLength:
   Description: 'Avoid modules longer than 100 lines of code.'
   Enabled: true
   CountComments: false  # count full line comments?
-  Max: 100
+  Max: 150
 
 Metrics/ParameterLists:
   Description: 'Avoid parameter lists longer than three or four parameters.'

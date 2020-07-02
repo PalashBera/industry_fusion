@@ -69,7 +69,8 @@ module LinksHelper
   def edit_link(controller_name, resource)
     link_to '<i class="mdi mdi-square-edit-outline"></i><span class="d-none d-md-inline-block ml-1">Edit</span>'.html_safe,
             url_for(controller: controller_name, action: "edit", id: resource.id),
-            title: "Edit #{controller_name.singularize.humanize.titleize}"
+            title: "Edit #{controller_name.singularize.humanize.titleize}",
+            class: "dropdown-item"
   end
 
   def delete_link(controller_name, resource)
@@ -119,5 +120,11 @@ module LinksHelper
     link_to '<i class="mdi mdi-check-decagram mr-1"></i> Activate'.html_safe,
             url_for(controller: controller_name, action: "toggle_activation", id: user.id),
             title: "Activate", data: { confirm: "Are you sure?" }, class: "dropdown-item"
+
+  def show_link(controller_name, resource)
+    link_to '<i class="mdi mdi-information-outline"></i><span class="d-none d-md-inline-block ml-1">Show</span>'.html_safe,
+            url_for(controller: controller_name, action: "show", id: resource.id),
+            title: "Show #{controller_name.singularize.humanize.titleize}",
+            class: "dropdown-item"
   end
 end
