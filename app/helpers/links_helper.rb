@@ -88,6 +88,6 @@ module LinksHelper
 
   def show_link(controller_name, resource)
     link_to '<i class="mdi mdi-information-outline"></i><span class="d-none d-md-inline-block ml-1">Show</span>'.html_safe,
-            url_for(controller: controller_name, action: "show", id: resource.id), title: "Show #{controller_name.singularize.humanize.titleize}", class: "dropdown-item"
+            url_for(controller: controller_name, action: "show", id: resource.id), title: "Show #{resource.class.name}", class: "dropdown-item"
   end
 end
