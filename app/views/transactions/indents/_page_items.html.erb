@@ -7,6 +7,15 @@
     <td><%= item.cost_center_name %></td>
     <td><%= I18n.l(item.indent_requirement_date) %></td>
     <td><%= item.priority %></td>
-    <td><%= edit_link(controller_name, item.indent) %></td>
+    <td class="text-center">
+      <div class="dropdown">
+        <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+          <%= show_link(controller_name, item.indent) %>
+          <%= edit_link(controller_name, item.indent) %>
+        </div>
+      </div>
+    </td>
   </tr>
 <% end %>

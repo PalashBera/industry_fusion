@@ -1,0 +1,103 @@
+<% provide(:title, "Indents") %>
+<% provide(:page_title, "#{@indent.serial_number}") %>
+
+<div class="card">
+  <div class="card-body">
+    <div class="indent-details">
+      <h3 class="text-center">Indent Details</h3>
+      <br>
+
+      <div class=row>
+        <div class="col-sm-6 text-right">
+          Company
+        </div>
+
+        <div class="col-sm-6">
+          <%= @indent.company.name %>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class="col-sm-6 text-right">
+          Warehouse
+        </div>
+
+        <div class="col-sm-6">
+          <%= @indent.warehouse.name %>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class="col-sm-6 text-right">
+          Serial
+        </div>
+
+        <div class="col-sm-6">
+          <%= @indent.serial_number %>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class="col-sm-6 text-right">
+          Requirement Date
+        </div>
+
+        <div class="col-sm-6">
+          <%= @indent.requirement_date %>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class="col-sm-6 text-right">
+          Created By
+        </div>
+
+        <div class="col-sm-6">
+          <%= @indent.created_by.full_name %>
+        </div>
+      </div>
+
+      <div class=row>
+        <div class="col-sm-6 text-right">
+          Created At
+        </div>
+
+        <div class="col-sm-6">
+          <%= I18n.l(@indent.created_at) %>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="indent-item-details">
+      <h4 class="text-center">Indent Item Details</h4>
+      <br>
+        <div class="table-responsive">
+          <table id="records_table" class="table indent-table" width="100%">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Make</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Cost&nbsp;Center</th>
+                <th scope="col">Priority</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @indent.indent_items.each_with_index  do |item, index| %>
+                <tr>
+                  <td><%= item.item_name %></td>
+                  <td><%= item.make_brand_with_cat_no %></td>
+                  <td><%= item.quantity_with_uom %></td>
+                  <td><%= item.cost_center_name %></td>
+                  <td><%= item.priority %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>
