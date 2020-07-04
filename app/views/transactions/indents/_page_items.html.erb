@@ -1,5 +1,6 @@
 <% @indent_items.each_with_index  do |item, index| %>
   <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
+    <td><%= check_box_tag "indent_item_#{ item.id }", "#{ item.id }" %></td>
     <td><%= item.indent_serial_number %></td>
     <td><%= item.item_name %></td>
     <td><%= item.brand_details %></td>
