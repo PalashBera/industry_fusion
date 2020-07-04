@@ -1,0 +1,11 @@
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <%= link_to "Pending", transactions_indents_path, class: "nav-link #{ set_active_class("pending_indents", current_tab) }" %>
+  </li>
+  <li class="nav-item">
+    <%= link_to "Approved", approved_transactions_indents_path, class: "nav-link #{ set_active_class("approved_indents", current_tab) }" %>
+  </li>
+  <li class="nav-item">
+      <a href="#" class="nav-link">Amended</a>
+  </li>
+</ul>

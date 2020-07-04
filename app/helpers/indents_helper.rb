@@ -24,4 +24,8 @@ module IndentsHelper
   def border_bottom_attached?(item_ids, item_id)
     item_ids.last != item_id && item_ids.include?(item_id)
   end
+
+  def set_active_class(menu_item, current_tab)
+    current_tab == menu_item ? "active" : ""
+  end
 end

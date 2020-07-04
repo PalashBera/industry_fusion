@@ -31,6 +31,8 @@ class IndentItem < ApplicationRecord
 
   has_paper_trail ignore: %i[created_at updated_at current_level approval_ids locked approved]
 
+  scope :filter_by_approved, -> { where("indent_items.approve = TRUE") }
+
   def self.included_resources
     includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)
   end

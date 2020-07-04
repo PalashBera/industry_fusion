@@ -7,11 +7,11 @@
   <div class="card-body">
     <section class="mb-4 d-flex justify-content-between">
       <section>
-        <%= new_link_btn(controller_name) %>
+        <%= new_link(controller_name) %>
       </section>
 
       <section>
-        <%= render partial: "status_tabs", locals: { current_tab: "pending_indents" } %>
+        <%= render partial: "status_tabs", locals: { current_tab: "approved_indents" } %>
       </section>
     </section>
 
@@ -23,7 +23,7 @@
           <% if params[:q].present? %>
             No result found. Please search with proper keywords.
           <% else %>
-            No indent has been added yet. <%= new_link(controller_name) %>
+            No indent has been added yet. <%= new_link_without_icon(controller_name) %>
           <% end %>
         </div>
       </div>
@@ -43,6 +43,7 @@
 
     if (wBottom > elBottom) {
       if ($('#next_link')[0] !== undefined) {    // checking next page link is available or not
+        $('.se-pre-con').show();
         $('#next_link')[0].click();
         $('#next_link').data("loading", true);
       }

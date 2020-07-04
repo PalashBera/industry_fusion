@@ -153,6 +153,7 @@ Rails.application.routes.draw do
         collection do
           get :email_approval
           get :email_rejection
+          get :approved
         end
       end
 
