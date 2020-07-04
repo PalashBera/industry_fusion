@@ -7,6 +7,7 @@
         <th scope="col"><%= sort_link @search, :short_name, "Short&nbsp;Name".html_safe %></th>
         <th scope="col">Address</th>
         <th scope="col"><%= sort_link @search, :phone_number, "Phone&nbsp;Number".html_safe %></th>
+        <th scope="col">Logo</th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
@@ -20,6 +21,7 @@
           <td><%= company.short_name %></td>
           <td><%= company.address %></td>
           <td><%= company.phone_number %></td>
+          <td><%= image_tag company.logo.url, alt: "logo", height: 40 %></td>
           <td><%= archive_status(company.archive).html_safe %></td>
           <td class="text-center">
             <div class="dropdown">

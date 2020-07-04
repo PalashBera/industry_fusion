@@ -178,6 +178,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.string     :short_name,    limit: 3,          null: false
     t.string     :address1,                         null: false
     t.string     :address2,      default: ""
+    t.attachment :logo
     t.string     :city,                             null: false
     t.string     :state,                            null: false
     t.string     :country,                          null: false

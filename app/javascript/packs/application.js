@@ -24,8 +24,6 @@ document.addEventListener('turbolinks:load', function() {
   $('.flash-alert').delay(4000).slideUp(200, function() {
     $(this).alert('close');
   });
-
-  $('.se-pre-con').fadeOut('slow');
 });
 
 $(document).on('click', '.remove_fields', function (event) {
