@@ -138,7 +138,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.boolean "archive", default: false, null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.string "hsn_code", limit: 8, null: false
+    t.string "hsn_code", limit: 8
     t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
