@@ -227,7 +227,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.boolean    :archive,       default: false,    null: false
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
-    t.string     :hsn_code,      limit: 8,          null: false
+    t.string     :hsn_code,      limit: 8
     t.references :organization,  foreign_key: true, null: false
 
     t.timestamps
