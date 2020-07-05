@@ -28,6 +28,23 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_approval_levels_on_updated_by_id"
   end
 
+  create_table "approvals", force: :cascade do |t|
+    t.bigint "indent_item_id", null: false
+    t.integer "level", null: false
+    t.text "user_ids", default: [], array: true
+    t.boolean "archive", default: false, null: false
+    t.string "action_type"
+    t.datetime "action_taken_at"
+    t.bigint "action_taken_by_id"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_approvals_on_created_by_id"
+    t.index ["indent_item_id"], name: "index_approvals_on_indent_item_id"
+    t.index ["updated_by_id"], name: "index_approvals_on_updated_by_id"
+  end
+
   create_table "brands", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "archive", default: false, null: false
@@ -104,6 +121,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "priority", default: "default", null: false
     t.bigint "make_id"
     t.string "note", default: ""
+    t.boolean "locked", default: false, null: false
+    t.boolean "approved", default: false, null: false
+    t.integer "current_level", default: 0, null: false
+    t.text "approval_ids", default: [], array: true
     t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
@@ -439,6 +460,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   end
 
   add_foreign_key "approval_levels", "organizations"
+  add_foreign_key "approvals", "indent_items"
   add_foreign_key "brands", "organizations"
   add_foreign_key "companies", "organizations"
   add_foreign_key "cost_centers", "organizations"

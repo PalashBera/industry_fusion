@@ -2,7 +2,7 @@
   <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
     <td><%= item.indent_serial_number %></td>
     <td><%= item.item_name %></td>
-    <td><%= item.make_brand_with_cat_no %></td>
+    <td><%= item.brand_details %></td>
     <td><%= item.quantity_with_uom %></td>
     <td><%= item.cost_center_name %></td>
     <td><%= I18n.l(item.indent_requirement_date) %></td>
@@ -15,6 +15,7 @@
           <%= show_action_link(controller_name, item.indent) %>
           <%= edit_action_link(controller_name, item.indent) %>
           <%= print_action_link(controller_name, item.indent) %>
+          <%= send_approval_action_link(controller_name, item) if item.unlocked? %>
         </div>
       </div>
     </td>

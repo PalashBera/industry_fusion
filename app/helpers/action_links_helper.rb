@@ -60,4 +60,11 @@ module ActionLinksHelper
             class: "dropdown-item",
             target: "_blank"
   end
+
+  def send_approval_action_link(controller_name, resource)
+    link_to '<i class="mdi mdi-account-check-outline"></i><span class="d-none d-md-inline-block ml-1">Send for Approval</span>'.html_safe,
+            url_for(controller: controller_name, action: "send_for_approval", id: resource.id),
+            title: "Send #{resource.class.name} for Approval",
+            class: "dropdown-item"
+  end
 end

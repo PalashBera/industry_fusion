@@ -19,4 +19,8 @@ class ApprovalLevel < ApplicationRecord
   def self.included_resources
     includes({ level_users: :user })
   end
+
+  def user_ids
+    level_users.map(&:user_id)
+  end
 end

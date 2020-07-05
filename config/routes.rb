@@ -145,7 +145,15 @@ Rails.application.routes.draw do
 
     namespace :transactions do
       resources :indents, except: [:destroy] do
-        get :print, on: :member
+        member do
+          get :print
+          get :send_for_approval
+        end
+
+        collection do
+          get :email_approval
+          get :email_rejection
+        end
       end
 
       resources :companies, only: [] do

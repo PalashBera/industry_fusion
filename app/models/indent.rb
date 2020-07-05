@@ -14,6 +14,10 @@ class Indent < ApplicationRecord
 
   accepts_nested_attributes_for :indent_items, reject_if: :all_blank, allow_destroy: true
 
+  delegate :name, to: :company,   prefix: :company
+  delegate :name, to: :warehouse, prefix: :warehouse
+  delegate :name, to: :indentor,  prefix: :indentor, allow_nil: true
+
   validates :serial, :indent_items, presence: true
 
   scope :order_by_serial,        -> { order(:serial) }
