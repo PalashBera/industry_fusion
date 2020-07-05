@@ -17,12 +17,6 @@
             <i class="mdi mdi-settings-outline mr-1"></i> Organization Account
           <% end %>
         </li>
-
-        <li class="nav-item">
-          <%= link_to preferences_admin_organizations_path, class: "nav-link #{"active" if active_class == "organization" && params[:action] == "preferences"}" do %>
-            <i class="mdi mdi-nut mr-1"></i> Organization Preferences
-          <% end %>
-        </li>
       <% end %>
     </ul>
   </div>

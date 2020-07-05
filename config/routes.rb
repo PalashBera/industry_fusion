@@ -126,12 +126,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :organizations, only: [:edit, :update] do
-        collection do
-          get :preferences
-          put :preferences
-        end
-      end
+      resources :organizations, only: [:edit, :update]
 
       resources :indent_approval_levels, except: :show
       resources :qc_approval_levels,     except: :show
