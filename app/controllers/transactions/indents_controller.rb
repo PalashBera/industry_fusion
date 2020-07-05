@@ -1,4 +1,6 @@
 class Transactions::IndentsController < Transactions::HomeController
+  layout "print", only: :print
+
   def index
     @search = IndentItem.joins(:indent).ransack(params[:q])
     indent_items = @search.result.order_by_date
@@ -35,6 +37,10 @@ class Transactions::IndentsController < Transactions::HomeController
     else
       render "edit"
     end
+  end
+
+  def print
+    indent
   end
 
   private

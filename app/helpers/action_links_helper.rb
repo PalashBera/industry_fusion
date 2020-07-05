@@ -52,4 +52,12 @@ module ActionLinksHelper
             title: "Resend Invitation",
             class: "dropdown-item"
   end
+
+  def print_action_link(controller_name, resource)
+    link_to '<i class="mdi mdi-printer"></i> Print'.html_safe,
+            url_for(controller: controller_name, action: "print", id: resource.id),
+            title: "Print #{resource.class.name}",
+            class: "dropdown-item",
+            target: "_blank"
+  end
 end
