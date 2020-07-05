@@ -92,7 +92,7 @@ RSpec.describe Master::ItemGroupsController, type: :controller do
   describe "POST #create" do
     it "requires login" do
       sign_out user
-      post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1" }}
+      post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1", hsn_code: "123456" }}
       expect(response).to have_http_status(:unauthorized)
     end
 
@@ -100,32 +100,32 @@ RSpec.describe Master::ItemGroupsController, type: :controller do
       it "saves the new item group in the database" do
         sign_in user
         expect {
-          post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1" }}
+          post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1", hsn_code: "123456" }}
         }.to change(ItemGroup, :count).by(1)
       end
 
       it "returns http status 200" do
         sign_in user
-        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1" }}
+        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1", hsn_code: "123456" }}
         expect(response).to have_http_status(:ok)
       end
 
       it "assigns a newly created but unsaved item group to an instance variable" do
         sign_in user
-        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1" }}
+        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1", hsn_code: "123456" }}
         expect(assigns(:item_group)).to be_a(ItemGroup)
         expect(assigns(:item_group)).to be_persisted
       end
 
       it "have success flash message" do
         sign_in user
-        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1" }}
-        expect(flash[:success]).to eq(I18n.t("flash_messages.created", name: "Item Group"))
+        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1", hsn_code: "123456" }}
+        expect(flash[:success]).to eq(I18n.t("flash_messages.created", name: "Item Group", hsn_code: "123456"))
       end
 
       it "redirects to item groups index page" do
         sign_in user
-        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1" }}
+        post :create, xhr: true, format: :js, params: { item_group: { name: "ItemGroup 1", hsn_code: "123456" }}
         expect(response).to redirect_to(master_item_groups_path)
       end
     end

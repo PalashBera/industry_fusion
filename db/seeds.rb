@@ -90,6 +90,7 @@ Uom.create(name: "milliliter", short_name: "ml",  archive: Faker::Boolean.boolea
 
   ItemGroup.create!(
     name: Faker::Beer.name + "+" + t.to_s,
+    hsn_code: Faker::Number.number(digits: 8),
     description: Faker::Lorem.sentence(word_count: 6, supplemental: true, random_words_to_add: 3),
     archive: Faker::Boolean.boolean,
     organization_id: organization.id

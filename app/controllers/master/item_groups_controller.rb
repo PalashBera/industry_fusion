@@ -38,7 +38,7 @@ class Master::ItemGroupsController < Master::HomeController
   private
 
   def item_group_params
-    params.require(:item_group).permit(:name, :description, :archive)
+    params.require(:item_group).permit(:name, :description, :archive, :hsn_code)
   end
 
   def item_group
