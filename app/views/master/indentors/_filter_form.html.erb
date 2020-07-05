@@ -1,0 +1,13 @@
+<%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Indentor" } do |f| %>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :name_cont_any, "Name" %>
+      <%= f.search_field :name_cont_any, placeholder: "Name", title: "Type indentor name", class: "form-control", autocomplete: :off %>
+    </div>
+
+    <div class="form-group col-md-6 col-sm-12">
+      <%= f.label :archive_eq, "Status" %>
+      <%= f.select :archive_eq, status_selection, { include_blank: true }, { class: "form-control" } %>
+    </div>
+  </div>
+<% end %>

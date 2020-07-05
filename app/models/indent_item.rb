@@ -22,6 +22,8 @@ class IndentItem < ApplicationRecord
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
   validates :priority, presence: true
 
+  scope :order_by_date, -> { order(created_at: :desc) }
+
   has_paper_trail ignore: %i[created_at updated_at]
 
   def self.included_resources

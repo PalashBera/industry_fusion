@@ -26,12 +26,13 @@ RSpec.describe Indent, type: :model do
   end
 
   describe "#callbacks" do
-    it { is_expected.to callback(:set_serial).before(:create) }
+    it { is_expected.to callback(:set_serial).before(:validation).on(:create) }
   end
 
   describe "#associations" do
     it { should belong_to(:company) }
     it { should belong_to(:warehouse) }
+    it { should belong_to(:indentor).optional }
 
     it { should have_many(:indent_items) }
   end

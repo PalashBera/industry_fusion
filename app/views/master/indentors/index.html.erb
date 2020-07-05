@@ -1,0 +1,38 @@
+<% provide(:title, "Indentors") %>
+<% provide(:page_title, "Indentors") %>
+
+<%= render "shared/page_help" %>
+
+<div class="card">
+  <div class="card-body">
+    <section class="mb-4 d-flex justify-content-between">
+      <section>
+        <%= new_link_using_modal(controller_name) %>
+        <%= filter_button(params[:q]) %>
+      </section>
+
+      <section>
+        <%= import_modal_btn(controller_name) %>
+        <%= excel_export_btn(controller_name) %>
+      </section>
+    </section>
+
+    <% if @indentors.present? %>
+      <%= render "index_table" %>
+    <% else %>
+      <div class="card">
+        <div class="card-body text-center">
+          <% if params[:q].present? %>
+            No result found. Please search with proper keywords.
+          <% else %>
+            No indentor has been added yet. <%= new_modal_link(controller_name) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render "filter_form" %>
+<%= render "shared/import_modal" %>
+<%= render "shared/form_modal_container" %>

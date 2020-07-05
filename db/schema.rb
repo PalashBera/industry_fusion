@@ -100,9 +100,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "priority", default: "default", null: false
     t.bigint "make_id"
     t.string "note", default: ""
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cost_center_id"], name: "index_indent_items_on_cost_center_id"
@@ -115,18 +115,33 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_indent_items_on_updated_by_id"
   end
 
+  create_table "indentors", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_indentors_on_created_by_id"
+    t.index ["organization_id"], name: "index_indentors_on_organization_id"
+    t.index ["updated_by_id"], name: "index_indentors_on_updated_by_id"
+  end
+
   create_table "indents", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "warehouse_id", null: false
     t.bigint "serial", null: false
     t.date "requirement_date", null: false
+    t.bigint "indentor_id"
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_indents_on_company_id"
     t.index ["created_by_id"], name: "index_indents_on_created_by_id"
+    t.index ["indentor_id"], name: "index_indents_on_indentor_id"
     t.index ["organization_id"], name: "index_indents_on_organization_id"
     t.index ["updated_by_id"], name: "index_indents_on_updated_by_id"
     t.index ["warehouse_id"], name: "index_indents_on_warehouse_id"
@@ -429,7 +444,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "indent_items", "makes"
   add_foreign_key "indent_items", "organizations"
   add_foreign_key "indent_items", "uoms"
+  add_foreign_key "indentors", "organizations"
   add_foreign_key "indents", "companies"
+  add_foreign_key "indents", "indentors"
   add_foreign_key "indents", "organizations"
   add_foreign_key "indents", "warehouses"
   add_foreign_key "item_groups", "organizations"
