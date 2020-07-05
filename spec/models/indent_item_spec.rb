@@ -50,19 +50,6 @@ RSpec.describe IndentItem, type: :model do
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
   end
 
-  describe "#scopes" do
-    let!(:indent)        { create(:indent) }
-    let!(:indent_item_1) { create(:indent_item, indent_id: indent.id) }
-    let!(:indent_item_2) { create(:indent_item, indent_id: indent.id) }
-
-    context "order_by_date" do
-      it "should return indent_items order by date" do
-        indent_item = indent.indent_items.first
-        expect(IndentItem.order_by_date).to eq([indent_item_2, indent_item_1, indent_item])
-      end
-    end
-  end
-
   describe "#quantity_with_uom" do
     let!(:indent_item) { create(:indent_item) }
 

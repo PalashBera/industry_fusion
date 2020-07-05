@@ -304,6 +304,10 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.string     :priority,      default: "default", null: false
     t.references :make,          foreign_key: true
     t.string     :note,          default: ""
+    t.boolean    :locked,        default: false,     null: false
+    t.boolean    :approved,      default: false,     null: false
+    t.integer    :current_level, default: 0,         null: false
+    t.text       :approval_ids,  array: true, default: []
     t.references :organization,  foreign_key: true,  null: false
     t.bigint     :created_by_id, index: true
     t.bigint     :updated_by_id, index: true
@@ -340,6 +344,20 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.string :action_name,     null: false
     t.string :help_text,       null: false
     t.string :help_type,       null: false
+
+    t.timestamps
+  end
+
+  create_table :approvals do |t|
+    t.references :indent_item, null: false, foreign_key: true
+    t.integer    :level,       null: false
+    t.text       :user_ids,    array: true, default: []
+    t.boolean    :archive,     null: false, default: false
+    t.string     :action_type
+    t.datetime   :action_taken_at
+    t.bigint     :action_taken_by_id
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
 
     t.timestamps
   end
