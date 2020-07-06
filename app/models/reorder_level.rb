@@ -4,7 +4,8 @@ class ReorderLevel < ApplicationRecord
   include UserTrackingModule
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
-  enum priority: { default: "default", high: "high", medium: "medium", low: "low" }, _suffix: true
+  PRIORITY_LIST = %w[default high medium low].freeze
+  enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
 
   acts_as_tenant(:organization)
 
@@ -16,6 +17,7 @@ class ReorderLevel < ApplicationRecord
   delegate :name, to: :warehouse, prefix: true
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
+  validates :priority, presence: true
 
   has_paper_trail ignore: %i[created_at updated_at]
 

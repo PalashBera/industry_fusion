@@ -27,6 +27,10 @@ RSpec.describe ReorderLevel, type: :model do
     it { should have_db_index(:warehouse_id) }
   end
 
+  describe "#enums" do
+    it { should define_enum_for(:priority).with_values(default: "default", high: "high", medium: "medium", low: "low").backed_by_column_of_type(:string).with_suffix }
+  end
+
   describe "#associations" do
     it { should belong_to(:warehouse) }
     it { should belong_to(:item) }
@@ -35,6 +39,7 @@ RSpec.describe ReorderLevel, type: :model do
   describe "#validations" do
     it { should validate_presence_of(:quantity) }
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
+    it { should validate_presence_of(:priority) }
   end
 
   describe "#quantity_with_uom" do

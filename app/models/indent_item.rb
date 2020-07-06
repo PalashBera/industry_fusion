@@ -2,7 +2,8 @@ class IndentItem < ApplicationRecord
   include UserTrackingModule
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
-  enum priority: { default: "default", high: "high", medium: "medium", low: "low" }, _suffix: true
+  PRIORITY_LIST = %w[default high medium low].freeze
+  enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
 
   acts_as_tenant(:organization)
 

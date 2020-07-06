@@ -23,14 +23,25 @@ RSpec.describe DropdownHelper, type: :helper do
     end
   end
 
-  describe "#priority_selection" do
+  describe "#indent_item_priority_selection" do
     it "should return 4 priorities" do
-      expect(priority_selection.length).to eq(4)
+      expect(indent_item_priority_selection.length).to eq(4)
     end
 
     it "should have 4 priorities" do
-      values = priority_selection.map{ |p| p[1] }
-      expect(values).to eq(["default", "high", "medium", "low"])
+      values = indent_item_priority_selection.map{ |p| p[1] }
+      expect(values).to eq(IndentItem::PRIORITY_LIST)
+    end
+  end
+
+  describe "#reorder_level_priority_selection" do
+    it "should return 4 priorities" do
+      expect(reorder_level_priority_selection.length).to eq(4)
+    end
+
+    it "should have 4 priorities" do
+      values = reorder_level_priority_selection.map{ |p| p[1] }
+      expect(values).to eq(ReorderLevel::PRIORITY_LIST)
     end
   end
 end

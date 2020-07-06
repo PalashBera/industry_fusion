@@ -5,7 +5,7 @@ class ItemGroup < ApplicationRecord
   include UserTrackingModule
 
   acts_as_tenant(:organization)
-  
+
   before_validation { self.hsn_code = hsn_code.to_s.squish.upcase }
 
   belongs_to :organization

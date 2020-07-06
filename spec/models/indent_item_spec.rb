@@ -32,6 +32,10 @@ RSpec.describe IndentItem, type: :model do
     it { should have_db_index(:cost_center_id) }
   end
 
+  describe "#enums" do
+    it { should define_enum_for(:priority).with_values(default: "default", high: "high", medium: "medium", low: "low").backed_by_column_of_type(:string).with_suffix }
+  end
+
   describe "#associations" do
     it { should belong_to(:indent) }
     it { should belong_to(:item) }
