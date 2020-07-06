@@ -29,10 +29,10 @@
                 <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
 
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                  <%= assign_warehouse_link(controller_name, user) %>
-                  <%= user.archive? ? activation_link(controller_name, user) : deactivation_link(controller_name, user) %>
+                  <%= assign_warehouse_action_link(controller_name, user) %>
+                  <%= user.archive? ? activation_action_link(controller_name, user) : deactivation_action_link(controller_name, user) %>
                   <%= change_logs_link_using_modal(controller_name, user) %>
-                  <%= resend_user_invitation_link(user) if user.pending_acception? %>
+                  <%= resend_user_invitation_action_link(user) if user.pending_acception? %>
                 </div>
               </div>
             <% end %>

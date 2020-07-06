@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-body">
     <div class="text-md-right mb-3">
-      <%= new_link(controller_name) %>
+      <%= new_link_btn(controller_name) %>
     </div>
 
     <% if @approval_levels.blank? %>
       <div class="card">
         <div class="card-body text-center">
-          No <%= approval_level_type %> approval level has been added yet. <%= new_link_without_btn(controller_name) %>
+          No <%= approval_level_type %> approval level has been added yet. <%= new_link(controller_name) %>
         </div>
       </div>
     <% else %>
