@@ -3,11 +3,12 @@ class Indent < ApplicationRecord
 
   acts_as_tenant(:organization)
 
-  before_create :set_serial
+  before_validation :set_serial, on: :create
 
   belongs_to :organization
   belongs_to :company
   belongs_to :warehouse
+  belongs_to :indentor, optional: true
 
   has_many :indent_items, dependent: :destroy
 
@@ -35,6 +36,8 @@ class Indent < ApplicationRecord
   end
 
   def fy_date_range
+    return unless requirement_date
+
     requirement_date.month < 4 ? start_year = requirement_date.year - 1 : start_year = requirement_date.year
     requirement_date.month < 4 ? end_year =   requirement_date.year : end_year =   requirement_date.year + 1
     [Date.new(start_year, 4, 1), Date.new(end_year, 3, 30)]

@@ -125,6 +125,12 @@ end
     )
   end
 
+  Indentor.create!(
+    name: Faker::Name.name + Time.zone.now.to_s,
+    archive: Faker::Boolean.boolean,
+    organization_id: organization.id
+  )
+
   ReorderLevel.create!(
     item_id: item.id,
     warehouse_id: User.current_user.organization.warehouses.non_archived.sample.id,
@@ -146,10 +152,12 @@ end
   User.current_user = [user1, user2].sample
   company = organization.companies.sample
   warehouse = company.warehouses.sample
+  indentors = (1..20).to_a
 
   Indent.new(
     requirement_date: Date.today + t.days,
     organization_id: organization.id,
+    indentor_id: indentors[t],
     company_id: company.id,
     warehouse_id: warehouse.id,
     serial: t + 1

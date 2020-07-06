@@ -15,6 +15,11 @@
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
+      <%= f.label :indentor_id %>
+      <%= f.select :indentor_id, Indentor.non_archived.pluck(:name, :id), { prompt: "-- Select Indentor --" }, { class: "form-control" } %>
+    </div>
+
+    <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :requirement_date %>
       <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control", autocomplete: :off %>
     </div>

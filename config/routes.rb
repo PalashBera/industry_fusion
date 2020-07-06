@@ -48,6 +48,15 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :indentors, except: [:show, :destroy] do
+        get :change_logs, on: :member
+
+        collection do
+          get  :export
+          post :import
+        end
+      end
+
       resources :uoms, except: [:show, :destroy] do
         get :change_logs, on: :member
 

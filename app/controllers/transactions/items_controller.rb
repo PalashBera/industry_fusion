@@ -1,6 +1,6 @@
 class Transactions::ItemsController < Transactions::HomeController
   def makes
-    makes = item.makes.included_resources
+    makes = item.makes.non_archived.included_resources
     render json: { makes: makes.as_json(only: :id, methods: :brand_with_cat_no) }
   end
 

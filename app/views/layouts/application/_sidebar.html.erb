@@ -81,6 +81,13 @@
           <% end %>
         </li>
 
+        <li class="<%= active_class("indentors") %>">
+          <%= link_to master_indentors_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-account-tie"></i>
+            <span class="nav-text">Indentors</span>
+          <% end %>
+        </li>
+
         <li class="<%= active_class("warehouse_locations") %>">
           <%= link_to master_warehouse_locations_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-map-marker"></i>
