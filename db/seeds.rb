@@ -135,7 +135,7 @@ end
     item_id: item.id,
     warehouse_id: User.current_user.organization.warehouses.non_archived.sample.id,
     quantity: rand(1..100),
-    priority: %w[default high medium low].sample,
+    priority: ReorderLevel::PRIORITY_LIST.sample,
     archive: Faker::Boolean.boolean,
     organization_id: organization.id
   )
@@ -177,7 +177,7 @@ end
       uom_id: uom.id,
       cost_center_id: organization.cost_centers.sample.id,
       quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
-      priority: %w[default high medium low].sample,
+      priority: IndentItem::PRIORITY_LIST.sample,
       organization_id: organization.id
     )
   end

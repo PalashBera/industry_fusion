@@ -3,6 +3,7 @@ class ApprovalLevel < ApplicationRecord
   include ModalFormModule
 
   APPROVAL_TYPES = %w[indent qc po grn].freeze
+  enum approval_type: Hash[APPROVAL_TYPES.map { |item| [item, item] }]
 
   acts_as_tenant(:organization)
 
@@ -12,13 +13,8 @@ class ApprovalLevel < ApplicationRecord
 
   accepts_nested_attributes_for :level_users, allow_destroy: true, reject_if: :all_blank
 
-  validates :approval_type, presence: true, length: { maximum: 255 }, inclusion: { in: APPROVAL_TYPES }
+  validates :approval_type, presence: true
   validates :level_users, presence: true
-
-  scope :indent, -> { where(approval_type: "indent") }
-  scope :qc,     -> { where(approval_type: "qc") }
-  scope :po,     -> { where(approval_type: "po") }
-  scope :grn,    -> { where(approval_type: "grn") }
 
   def self.included_resources
     includes({ level_users: :user })

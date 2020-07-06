@@ -12,7 +12,11 @@ module DropdownHelper
     [%w[Active false], %w[Archived true]]
   end
 
-  def priority_selection
-    [%w[Default default], %w[High high], %w[Medium medium], %w[Low low]]
+  def indent_item_priority_selection
+    IndentItem::PRIORITY_LIST.map { |item| [item.humanize.titleize, item] }
+  end
+
+  def reorder_level_priority_selection
+    ReorderLevel::PRIORITY_LIST.map { |item| [item.humanize.titleize, item] }
   end
 end
