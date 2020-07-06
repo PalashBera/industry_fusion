@@ -48,8 +48,20 @@
     <%= f.text_field :phone_number, class: "form-control", placeholder: "Phone Number", maxlength: 255 %>
   </div>
 
+  <div class="custom-file mb-3">
+    <%= f.file_field :logo, class: "custom-file-input file-upload-field", accept: "image/x-png, image/jpeg" %>
+    <%= f.label :logo, class: "custom-file-label" %>
+  </div>
+
   <div class="custom-control custom-checkbox">
     <%= f.check_box :archive, class: "custom-control-input" %>
     <%= f.label :archive, class: "custom-control-label" %>
   </div>
 <% end %>
+
+<script>
+  $('.file-upload-field').change(function() {
+    var filename = $(this)[0].files.length ? $(this)[0].files[0].name : "";
+    $(this).closest('div').find('label').html(filename);
+  });
+</script>

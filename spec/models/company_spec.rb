@@ -50,6 +50,7 @@ RSpec.describe Company, type: :model do
   describe "#associations" do
     it { should have_many(:warehouses) }
     it { should have_many(:indents) }
+    it { should have_attached_file(:logo) }
   end
 
   describe "#validations" do
@@ -57,6 +58,8 @@ RSpec.describe Company, type: :model do
     it { should validate_presence_of(:short_name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_length_of(:short_name).is_at_most(3) }
+    it { should validate_attachment_size(:logo).less_than(2.megabytes) }
+    it { should validate_attachment_content_type(:logo).allowing("image/png", "image/jpeg") }
 
     context "when same company name and short name present for an organization" do
       let!(:company) { create(:company, name: "Nokia", short_name: "AAA") }

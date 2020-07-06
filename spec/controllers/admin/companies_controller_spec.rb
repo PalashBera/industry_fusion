@@ -97,16 +97,18 @@ RSpec.describe Admin::CompaniesController, type: :controller do
     end
 
     context "with valid attributes" do
+      logo = fixture_file_upload(Rails.root.join("spec", "fixtures", "images", "missing_image.jpg"), "image/jpg")
+
       it "saves the new company in the database" do
         sign_in user
         expect {
-          post :create, xhr: true, format: :js, params: { company: { name: "Company 1", short_name: "CMP", address1: "Demo", state: "Demo", city: "Demo", country: "Demo", pin_code: "121212" }}
+          post :create, xhr: true, format: :js, params: { company: { name: "Company 1", short_name: "CMP", address1: "Demo", state: "Demo", city: "Demo", country: "Demo", pin_code: "121212", logo: logo }}
         }.to change(Company, :count).by(1)
       end
 
       it "returns http status 200" do
         sign_in user
-        post :create, xhr: true, format: :js, params: { company: { name: "Company 1", short_name: "CMP", address1: "Demo", state: "Demo", city: "Demo", country: "Demo", pin_code: "121212" }}
+        post :create, xhr: true, format: :js, params: { company: { name: "Company 1", short_name: "CMP", address1: "Demo", state: "Demo", city: "Demo", country: "Demo", pin_code: "121212", logo: logo }}
         expect(response).to have_http_status(:ok)
       end
 
@@ -125,7 +127,7 @@ RSpec.describe Admin::CompaniesController, type: :controller do
 
       it "redirects to companies index page" do
         sign_in user
-        post :create, xhr: true, format: :js, params: { company: { name: "Company 1", short_name: "CMP", address1: "Demo", state: "Demo", city: "Demo", country: "Demo", pin_code: "121212" }}
+        post :create, xhr: true, format: :js, params: { company: { name: "Company 1", short_name: "CMP", address1: "Demo", state: "Demo", city: "Demo", country: "Demo", pin_code: "121212", logo: logo }}
         expect(response).to redirect_to(admin_companies_path)
       end
     end

@@ -46,6 +46,10 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "short_name", limit: 3, null: false
     t.string "address1", null: false
     t.string "address2", default: ""
+    t.string "logo_file_name"
+    t.string "logo_content_type"
+    t.bigint "logo_file_size"
+    t.datetime "logo_updated_at"
     t.string "city", null: false
     t.string "state", null: false
     t.string "country", null: false

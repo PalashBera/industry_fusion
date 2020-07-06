@@ -1,7 +1,11 @@
+require "paperclip/matchers"
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
+
+  config.include Paperclip::Shoulda::Matchers
 
   config.mock_with :rspec do |mocks|
     mocks.syntax = %i[should receive]

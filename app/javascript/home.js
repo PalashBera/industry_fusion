@@ -13,7 +13,6 @@ var loadNextPage = function () {
 
   if (wBottom > elBottom) {
     if ($('#next_link')[0] !== undefined) {    // checking next page link is available or not
-      $('.se-pre-con').show();
       $('#next_link')[0].click();
       $('#next_link').data("loading", true);
     }
