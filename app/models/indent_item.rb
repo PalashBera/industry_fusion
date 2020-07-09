@@ -18,6 +18,7 @@ class IndentItem < ApplicationRecord
   delegate :requirement_date,  to: :indent,      prefix: :indent
   delegate :name,              to: :item,        prefix: :item
   delegate :brand_with_cat_no, to: :make,        prefix: :make, allow_nil: true
+  delegate :short_name,        to: :uom,         prefix: :uom
   delegate :name,              to: :cost_center, prefix: :cost_center
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
@@ -33,5 +34,9 @@ class IndentItem < ApplicationRecord
 
   def quantity_with_uom
     "#{quantity} #{uom.short_name}"
+  end
+
+  def priority_level
+    priority.humanize.titleize
   end
 end

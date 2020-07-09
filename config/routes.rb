@@ -144,7 +144,9 @@ Rails.application.routes.draw do
     end
 
     namespace :transactions do
-      resources :indents, except: [:destroy]
+      resources :indents, except: [:destroy] do
+        get :print, on: :member
+      end
 
       resources :companies, only: [] do
         get :warehouses, on: :member
