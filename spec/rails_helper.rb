@@ -17,6 +17,7 @@ require "support/controller_helpers"
 Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
 
 ActiveRecord::Migration.maintain_test_schema!
+ActiveJob::Base.queue_adapter = :test
 include ActionDispatch::TestProcess
 
 RSpec.configure do |config|

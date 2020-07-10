@@ -57,3 +57,13 @@ en:
 
   active:
     active
+
+  indent_approval:
+    action_taken: "Indent item has been successfully %{action}."
+    action_already_taken: "Indent item has already been %{action}."
+
+  mail:
+    indent_approval:
+      subject: "Indent Approval Request for – #%{serial}"
+    new_vendorship:
+      subject: "New Vendorship – %{name}"

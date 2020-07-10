@@ -43,6 +43,6 @@ class Vendor < ApplicationRecord
   end
 
   def send_new_vendorship_mail
-    VendorMailer.organization_acknowledgement(self, User.current_user).deliver_later
+    VendorMailer.organization_acknowledgement(id, User.current_user.id).deliver_later
   end
 end

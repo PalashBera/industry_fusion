@@ -70,7 +70,7 @@ class IndentItem < ApplicationRecord
       approval_items << approvals.create(level: index, user_ids: level.user_ids)
     end
 
-    update(approval_ids: approval_items.map(&:id), current_level: 1)
+    update(approval_ids: approval_items.map(&:id))
   end
 
   def archive_all_pending_approvals
@@ -82,6 +82,6 @@ class IndentItem < ApplicationRecord
   end
 
   def unlock_item
-    update(locked: false)
+    update(locked: false) if locked
   end
 end

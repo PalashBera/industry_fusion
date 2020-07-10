@@ -76,4 +76,14 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end
+
+  describe "#send_approval_action_link" do
+    let(:indent_item) { indent.indent_items.first }
+
+    it "creates a sned for approval link for indent item" do
+      link = Nokogiri::HTML(helper.send_approval_action_link("transactions/indents", indent_item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/transactions/indents/#{indent_item.id}/send_for_approval")
+      expect(link.attributes["class"].value).to eq("dropdown-item")
+    end
+  end
 end
