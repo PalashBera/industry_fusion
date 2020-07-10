@@ -35,4 +35,11 @@ RSpec.describe ApprovalLevel, type: :model do
     it { should validate_presence_of(:approval_type) }
     it { should validate_presence_of(:level_users) }
   end
+
+  describe "#user_ids" do
+    it "should return user_ids of it's level users" do
+      expected_user_id = approval_level.level_users.first.user_id
+      expect(approval_level.user_ids.include?(expected_user_id)).to eq(true)
+    end
+  end
 end

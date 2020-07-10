@@ -7,6 +7,6 @@ class ApprovalMailer < ApplicationMailer
     @sender = User.find(sender_id)
     @jwt_token = Auth.issue(approval: approval_id, user: recipient_id)
 
-    mail to: @recipient.email, subject: "Indent Approval Request for – ##{@indent_item.indent_serial_number}"
+    mail to: @recipient.email, subject: I18n.t("mail.indent_approval.subject", serial: @indent_item.indent_serial_number)
   end
 end
