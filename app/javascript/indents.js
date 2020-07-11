@@ -1,3 +1,13 @@
+$(document).on('click', '.bulk-action-checkbox', function (e) {
+  var checkedCount = $('.bulk-action-checkbox:checked').length;
+
+  if (checkedCount > 0) {
+    $('.fixed-action-bar').removeClass('hide')
+  } else {
+    $('.fixed-action-bar').addClass('hide')
+  }
+});
+
 $(document).on('change', '#indent_company_id', function (e) {
   var companyId = $(this).find(':selected').val();
 

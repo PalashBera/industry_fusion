@@ -9,4 +9,9 @@ class Transactions::Indents::ApprovedIndentsController < Transactions::HomeContr
   def show
     @indent = Indent.find(params[:id])
   end
+
+  def create
+    IndentItem.where(id: params[:indent_item][:ids].reject(&:blank?)).update_all(approve: true)
+    redirect_to transactions_indents_pending_indents_path, flash: { success: "Selected indent items has been successfully approved." }
+  end
 end

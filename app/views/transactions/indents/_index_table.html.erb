@@ -20,4 +20,9 @@
       </tbody>
     </table>
   </div>
+
+  <div class="fixed-action-bar text-center hide">
+    <%# <%= link_to "Approve", transactions_indents_approved_indents_path, method: :post, class: "btn btn-danger" %>
+    <%= submit_tag "Approve", "data-disable-with": "Approving", class: "btn btn-danger" %>
+  </div>
 <% end %>

@@ -16,7 +16,7 @@
     </section>
 
     <% if @indent_items.present? %>
-      <%= render partial: "transactions/indents/index_table", locals: { form_submit_path: transactions_indents_pending_indents_path } %>
+      <%= render partial: "transactions/indents/index_table", locals: { form_submit_path: transactions_indents_approved_indents_path } %>
     <% else %>
       <div class="card">
         <div class="card-body text-center">
