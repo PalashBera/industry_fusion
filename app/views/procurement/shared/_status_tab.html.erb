@@ -1,0 +1,21 @@
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <%= link_to "Pending", procurement_pending_indents_path, class: "nav-link #{set_active_class("pending", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Approved", "#", class: "nav-link #{set_active_class("approved", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Amended", "#", class: "nav-link #{set_active_class("amended", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Rejected", "#", class: "nav-link #{set_active_class("rejected", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "All", "#", class: "nav-link #{set_active_class("all", current_tab)}" %>
+  </li>
+</ul>

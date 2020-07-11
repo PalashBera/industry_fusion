@@ -1,9 +1,9 @@
 <% provide(:title, "Indent Approval") %>
 <% provide(:company_name, @indent_item.indent.company.name) %>
 
-<% approve_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/transactions/indents/email_approval?token=#{@jwt_token}" %>
-<% reject_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/transactions/indents/email_rejection?token=#{@jwt_token}" %>
-<% details_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/transactions/indents/#{@indent_item.indent_id}" %>
+<% approve_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/procurement/indents/pending/email_approval?token=#{@jwt_token}" %>
+<% reject_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/procurement/indents/pending/email_rejection?token=#{@jwt_token}" %>
+<% details_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/procurement/indents/pending/#{@indent_item.indent_id}" %>
 
 <tr>
   <td class="body-title" style="color: #153643; font-family: sans-serif; padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;">

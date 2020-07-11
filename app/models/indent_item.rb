@@ -28,6 +28,7 @@ class IndentItem < ApplicationRecord
   validates :priority, presence: true
 
   default_scope { order(created_at: :desc) }
+  scope :pending, -> { where(approved: false) }
 
   has_paper_trail ignore: %i[created_at updated_at current_level approval_ids locked approved]
 

@@ -1,15 +1,15 @@
 require "auth"
 
-class Transactions::IndentsController < Transactions::HomeController
+class Procurement::PendingIndentsController < Procurement::HomeController
   layout "print", only: :print
 
   skip_before_action :authenticate_user!, only: %i[email_approval email_rejection]
 
   def index
     @search = IndentItem.joins(:indent).ransack(params[:q])
-    indent_items = @search.result
+    indent_items = @search.result.pending
     @bordered_item_ids = indent_items.group_by(&:indent_id).map { |_k, v| v.last.id }
-    @pagy, @indent_items = pagy_countless(indent_items.included_resources, link_extra: 'data-remote="true"') # have to sort by indent serial with respect to FY
+    @pagy, @indent_items = pagy_countless(indent_items.included_resources, link_extra: 'data-remote="true"')
   end
 
   def new
@@ -25,7 +25,7 @@ class Transactions::IndentsController < Transactions::HomeController
     @indent = Indent.new(indent_params)
 
     if @indent.save
-      redirect_to transactions_indents_path, flash: { success: t("flash_messages.created", name: "Indent") }
+      redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.created", name: "Indent") }
     else
       render "new"
     end
@@ -37,7 +37,7 @@ class Transactions::IndentsController < Transactions::HomeController
 
   def update
     if indent.update(indent_params)
-      redirect_to transactions_indents_path, flash: { success: t("flash_messages.updated", name: "Indent") }
+      redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.updated", name: "Indent") }
     else
       render "edit"
     end
@@ -50,7 +50,7 @@ class Transactions::IndentsController < Transactions::HomeController
   def send_for_approval
     item = IndentItem.find(params[:id])
     item.create_approvals && item.send_for_approval
-    redirect_to transactions_indents_path, flash: { success: t("flash_messages.created", name: "Approval request") }
+    redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.created", name: "Approval request") }
   end
 
   def email_approval
