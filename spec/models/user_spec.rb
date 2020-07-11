@@ -29,6 +29,10 @@ RSpec.describe User, type: :model do
     it { should have_db_index([:invited_by_type, :invited_by_id]) }
   end
 
+  describe "#callbacks" do
+    it { is_expected.to callback(:create_approval_levels).after(:save).if(:admin?) }
+  end
+
   describe "#admin?" do
     let(:admin_user) { create(:admin_user) }
 

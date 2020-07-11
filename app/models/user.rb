@@ -16,6 +16,8 @@ class User < ApplicationRecord
     self.subdomain = subdomain.to_s.squish.downcase
   end
 
+  after_save :create_approval_levels, if: :admin?
+
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :trackable, :invitable, :async
 
   belongs_to :organization
@@ -57,6 +59,19 @@ class User < ApplicationRecord
       errors.add(:subdomain, "is not valid. Spaces and special characters (like $,!,% etc) are not allowed")
     elsif %w[app www vendor account admin superadmin].include?(subdomain) || Organization.find_by(subdomain: subdomain)
       errors.add(:subdomain, "has already been taken")
+    end
+  end
+
+  def create_approval_levels
+    ApprovalLevel::APPROVAL_TYPES.each do |type|
+      ApprovalLevel.create(
+        approval_type: type,
+        organization_id: organization_id,
+        created_by_id: id,
+        level_users_attributes: [
+          { user_id: id, organization_id: organization_id, created_by_id: id }
+        ]
+      )
     end
   end
 end
