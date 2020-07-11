@@ -53,4 +53,8 @@ module ApplicationHelper
   def approval_level_type
     controller_name.split("_")[0]
   end
+
+  def set_active_class(menu_item, current_tab)
+    current_tab == menu_item ? t("active") : ""
+  end
 end

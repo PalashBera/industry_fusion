@@ -21,8 +21,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
   describe "#show_action_link" do
     it "creates a button link for edit record" do
-      link = Nokogiri::HTML(helper.show_action_link("transactions/indents", indent)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/transactions/indents/#{indent.id}")
+      link = Nokogiri::HTML(helper.show_action_link("procurement/pending_indents", indent)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent.id}")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end
@@ -81,8 +81,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:indent_item) { indent.indent_items.first }
 
     it "creates a sned for approval link for indent item" do
-      link = Nokogiri::HTML(helper.send_approval_action_link("transactions/indents", indent_item)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/transactions/indents/#{indent_item.id}/send_for_approval")
+      link = Nokogiri::HTML(helper.send_approval_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/send_for_approval")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end

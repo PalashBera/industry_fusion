@@ -7,6 +7,10 @@
   <div class="card-body">
     <section class="mb-4 d-flex justify-content-between">
       <section>
+        <%= render partial: "procurement/shared/status_tab", locals: { current_tab: "pending" } %>
+      </section>
+
+      <section>
         <%= new_link_btn(controller_name) %>
       </section>
     </section>

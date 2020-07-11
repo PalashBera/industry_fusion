@@ -3,7 +3,7 @@ $(document).on('change', '#indent_company_id', function (e) {
 
   $.ajax({
     method: 'GET',
-    url: `/transactions/companies/${companyId}/warehouses`,
+    url: `/procurement/companies/${companyId}/warehouses`,
     dataType: 'json',
     success: function(data, status, xhr) {
       options = '<option value>-- Select Warehouse --</option>';
@@ -24,7 +24,7 @@ $(document).on('change', '.indent-item-selection', function (e) {
 
   $.ajax({
     method: 'GET',
-    url: `/transactions/items/${itemId}/makes`,
+    url: `/procurement/items/${itemId}/makes`,
     dataType: 'json',
     success: function(data, status, xhr) {
       options = '<option value>-- Make --</option>';
@@ -39,7 +39,7 @@ $(document).on('change', '.indent-item-selection', function (e) {
 
   $.ajax({
     method: 'GET',
-    url: `/transactions/items/${itemId}/uoms`,
+    url: `/procurement/items/${itemId}/uoms`,
     dataType: 'json',
     success: function(data, status, xhr) {
       options = '<option value>-- UOM --</option>';

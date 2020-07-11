@@ -143,8 +143,8 @@ Rails.application.routes.draw do
       resources :grn_approval_levels,    except: :show
     end
 
-    namespace :transactions do
-      resources :indents, except: [:destroy] do
+    namespace :procurement do
+      resources :pending_indents, except: [:destroy], path: "indents/pending" do
         member do
           get :print
           get :send_for_approval
