@@ -1,6 +1,3 @@
-<% provide(:title, "Indents") %>
-<% provide(:page_title, "#{@indent.serial_number}") %>
-
 <div class="card">
   <div class="card-body">
     <div class="indent-details">
@@ -13,7 +10,7 @@
         </div>
 
         <div class="col-sm-6">
-          <%= @indent.company.name %>
+          <%= indent.company.name %>
         </div>
       </div>
 
@@ -23,7 +20,7 @@
         </div>
 
         <div class="col-sm-6">
-          <%= @indent.warehouse.name %>
+          <%= indent.warehouse.name %>
         </div>
       </div>
 
@@ -33,7 +30,7 @@
         </div>
 
         <div class="col-sm-6">
-          <%= @indent.serial_number %>
+          <%= indent.serial_number %>
         </div>
       </div>
 
@@ -43,7 +40,7 @@
         </div>
 
         <div class="col-sm-6">
-          <%= @indent.requirement_date %>
+          <%= indent.requirement_date %>
         </div>
       </div>
 
@@ -63,7 +60,7 @@
         </div>
 
         <div class="col-sm-6">
-          <%= @indent.created_by.full_name %>
+          <%= indent.created_by.full_name %>
         </div>
       </div>
 
@@ -73,7 +70,7 @@
         </div>
 
         <div class="col-sm-6">
-          <%= I18n.l(@indent.created_at) %>
+          <%= I18n.l(indent.created_at) %>
         </div>
       </div>
     </div>
@@ -96,7 +93,7 @@
             </thead>
 
             <tbody>
-              <% @indent.indent_items.each_with_index  do |item, index| %>
+              <% indent.indent_items.each_with_index  do |item, index| %>
                 <tr>
                   <td><%= item.item_name %></td>
                   <td><%= item.brand_details %></td>

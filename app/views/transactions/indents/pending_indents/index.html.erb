@@ -1,0 +1,55 @@
+<% provide(:title, "Pending Indents") %>
+<% provide(:page_title, "Indents") %>
+
+<%= render "shared/page_help" %>
+
+<div class="card">
+  <div class="card-body">
+    <section class="mb-4 d-flex justify-content-between">
+      <section>
+        <%= new_link_btn(controller_name) %>
+      </section>
+
+      <section>
+        <%= render partial: "transactions/indents/status_tabs", locals: { current_tab: "pending_indents" } %>
+      </section>
+    </section>
+
+    <% if @indent_items.present? %>
+      <%= render partial: "transactions/indents/index_table", locals: { form_submit_path: transactions_indents_pending_indents_path } %>
+    <% else %>
+      <div class="card">
+        <div class="card-body text-center">
+          <% if params[:q].present? %>
+            No result found. Please search with proper keywords.
+          <% else %>
+            No indent has been added yet. <%= new_link(controller_name) %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div id="auto_next_link">
+  <%= render "shared/auto_incremental_pagy" %>
+</div>
+
+<script>
+  var loadNextPage = function () {
+    if ($('#records_table').height() === undefined || $('#next_link').data("loading")) { return }  // prevent multiple loading
+    var wBottom = $(window).scrollTop() + $(window).height();
+    var elBottom = $('#records_table').offset().top + $('#records_table').height();
+
+    if (wBottom > elBottom) {
+      if ($('#next_link')[0] !== undefined) {    // checking next page link is available or not
+        $('#next_link')[0].click();
+        $('#next_link').data("loading", true);
+      }
+    }
+  };
+
+  window.addEventListener('resize', loadNextPage);
+  window.addEventListener('scroll', loadNextPage);
+  window.addEventListener('load', loadNextPage);
+</script>

@@ -1,4 +1,4 @@
-<%= form_tag transactions_indents_path do %>
+<%= form_tag form_submit_path do %>
   <div class="table-responsive">
     <table id="records_table" class="table table-hover indent-table" width="100%">
       <thead>
@@ -16,7 +16,7 @@
       </thead>
 
       <tbody>
-        <%= render "page_items" %>
+        <%= render "transactions/indents/page_items" %>
       </tbody>
     </table>
   </div>

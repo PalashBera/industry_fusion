@@ -157,6 +157,11 @@ Rails.application.routes.draw do
         end
       end
 
+      namespace :indents do
+        resources :pending_indents, except: [:destroy]
+        resources :approved_indents, except: [:edit, :update, :destroy]
+      end
+
       resources :companies, only: [] do
         get :warehouses, on: :member
       end
