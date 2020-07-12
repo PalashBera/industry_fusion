@@ -6,6 +6,8 @@ class Item < ApplicationRecord
 
   acts_as_tenant(:organization)
 
+  attr_accessor :attachments
+
   belongs_to :organization
   belongs_to :item_group
   belongs_to :uom
@@ -14,6 +16,7 @@ class Item < ApplicationRecord
   has_many :makes
   has_many :indent_items
   has_many :reorder_levels
+  has_many :item_images, dependent: :destroy
 
   accepts_nested_attributes_for :makes, reject_if: :all_blank, allow_destroy: true
 
@@ -23,7 +26,7 @@ class Item < ApplicationRecord
   has_paper_trail ignore: %i[created_at updated_at]
 
   def self.included_resources
-    includes(:item_group, :uom, :secondary_uom)
+    includes(:item_group, :uom, :secondary_uom, :item_images)
   end
 
   def uoms
@@ -32,6 +35,10 @@ class Item < ApplicationRecord
 
   def convertion_equation
     "#{primary_quantity} #{uom.short_name} = #{secondary_quantity} #{secondary_uom.short_name}" if secondary_uom
+  end
+
+  def image_attached?
+    item_images.present?
   end
 
   private

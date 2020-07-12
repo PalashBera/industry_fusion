@@ -92,6 +92,8 @@ RSpec.describe Master::ItemsController, type: :controller do
   end
 
   describe "POST #create" do
+    image = fixture_file_upload(Rails.root.join("spec", "fixtures", "images", "missing_image.jpg"), "image/jpg")
+
     it "requires login" do
       sign_out user
       post :create, xhr: true, format: :js, params: { item: { name: "Item 1", item_group_id: item_group.id, uom_id: uom.id }}
@@ -104,6 +106,13 @@ RSpec.describe Master::ItemsController, type: :controller do
         expect {
           post :create, xhr: true, format: :js, params: { item: { name: "Item 1", item_group_id: item_group.id, uom_id: uom.id }}
         }.to change(Item, :count).by(1)
+      end
+
+      it "creates item_image record" do
+        sign_in user
+        expect {
+          post :create, xhr: true, format: :js, params: { item: { name: "Item 1", item_group_id: item_group.id, uom_id: uom.id, attachments: [image] }}
+        }.to change(ItemImage, :count).by(1)
       end
 
       it "returns http status 200" do
@@ -161,6 +170,8 @@ RSpec.describe Master::ItemsController, type: :controller do
   end
 
   describe "PATCH #update" do
+    image = fixture_file_upload(Rails.root.join("spec", "fixtures", "images", "missing_image.jpg"), "image/jpg")
+
     it "requires login" do
       sign_out user
       patch :update, xhr: true, format: :js, params: { id: item.id, item: { name: "Item KFC" }}
@@ -197,6 +208,13 @@ RSpec.describe Master::ItemsController, type: :controller do
         sign_in user
         patch :update, xhr: true, format: :js, params: { id: item.id, item: { name: "Item MAC" }}
         expect(response).to redirect_to(master_items_path)
+      end
+
+      it "creates item_image record" do
+        sign_in user
+        expect {
+          patch :update, xhr: true, format: :js, params: { id: item.id, item: { attachments: [image] }}
+        }.to change(ItemImage, :count).by(1)
       end
     end
 

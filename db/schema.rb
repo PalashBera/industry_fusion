@@ -187,6 +187,21 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_item_groups_on_updated_by_id"
   end
 
+  create_table "item_images", force: :cascade do |t|
+    t.bigint "item_id", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.datetime "image_updated_at"
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_item_images_on_created_by_id"
+    t.index ["item_id"], name: "index_item_images_on_item_id"
+    t.index ["updated_by_id"], name: "index_item_images_on_updated_by_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.bigint "item_group_id", null: false
     t.bigint "uom_id", null: false
@@ -476,6 +491,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "indents", "organizations"
   add_foreign_key "indents", "warehouses"
   add_foreign_key "item_groups", "organizations"
+  add_foreign_key "item_images", "items"
   add_foreign_key "items", "item_groups"
   add_foreign_key "items", "organizations"
   add_foreign_key "items", "uoms"

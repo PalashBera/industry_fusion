@@ -74,6 +74,12 @@ table.table {
   }
 }
 
+.delete-image-btn {
+  position: absolute;
+  right: 0px;
+  z-index: 99999;
+}
+
 @media (min-width: 768px) {
   .btn {
     padding: 0.4rem 0.7rem !important;
