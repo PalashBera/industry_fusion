@@ -25,7 +25,7 @@ class Approval < ApplicationRecord
       action_already_taken_message
     else
       update(action_type: "rejected", action_taken_at: Time.now, action_taken_by_id: user_id)
-      indent_item.unlock_item
+      indent_item.mark_as_rejected
       I18n.t("indent_approval.action_taken", action: "rejected")
     end
   end

@@ -156,6 +156,12 @@ Rails.application.routes.draw do
         end
       end
 
+      resources :approved_indents, only: [:index, :show], path: "indents/approved" do
+        member do
+          get :print
+        end
+      end
+
       resources :companies, only: [] do
         get :warehouses, on: :member
       end

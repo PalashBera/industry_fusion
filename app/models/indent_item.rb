@@ -3,7 +3,10 @@ class IndentItem < ApplicationRecord
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   PRIORITY_LIST = %w[default high medium low].freeze
+  STATUS_LIST = %w[pending approved amended rejected].freeze
+
   enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
+  enum status: Hash[STATUS_LIST.map { |item| [item, item] }]
 
   acts_as_tenant(:organization)
 
@@ -28,7 +31,6 @@ class IndentItem < ApplicationRecord
   validates :priority, presence: true
 
   default_scope { order(created_at: :desc) }
-  scope :pending, -> { where(approved: false) }
 
   has_paper_trail ignore: %i[created_at updated_at current_level approval_ids locked approved]
 
@@ -40,7 +42,7 @@ class IndentItem < ApplicationRecord
     "#{quantity} #{uom.short_name}"
   end
 
-  def priority_level
+  def display_priority
     priority.humanize.titleize
   end
 
@@ -54,7 +56,7 @@ class IndentItem < ApplicationRecord
 
   def send_for_approval(level = 1)
     approval = Approval.find_by(id: approval_ids[level - 1].to_i)
-    update(approved: true) && return unless approval
+    mark_as_approved && return unless approval
 
     approval.user_ids.each do |recipient_id|
       ApprovalMailer.indent_approval(id, approval.id, recipient_id, User.current_user.id).deliver_later
@@ -82,7 +84,15 @@ class IndentItem < ApplicationRecord
     !locked
   end
 
-  def unlock_item
-    update(locked: false) if locked
+  def mark_as_rejected
+    update(locked: false, status: "rejected")
+  end
+
+  def mark_as_approved
+    update(locked: true, status: "approved")
+  end
+
+  def display_status
+    status.humanize.titleize
   end
 end

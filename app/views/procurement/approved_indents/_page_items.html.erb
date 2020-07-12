@@ -13,9 +13,7 @@
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
           <%= show_action_link(controller_name, item.indent) %>
-          <%= edit_action_link(controller_name, item.indent) %>
           <%= print_action_link(controller_name, item.indent) %>
-          <%= send_approval_action_link(controller_name, item) if item.unlocked? %>
         </div>
       </div>
     </td>
