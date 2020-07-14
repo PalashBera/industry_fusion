@@ -1,12 +1,12 @@
 <section class="form-row">
   <div class="form-group col-sm-12 col-lg-2">
     <%= f.label :item_id, class: "d-lg-none" %>
-    <%= f.select :item_id, Item.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Item --" }, { required: true, class: "form-control indent-item-selection", disabled: f.object.locked? } %>
+    <%= f.select :item_id, item_dropdown_list(f.object), { prompt: "-- Select Item --" }, { required: true, class: "form-control indent-item-selection", disabled: f.object.locked? } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
     <%= f.label :make_id, class: "d-lg-none" %>
-    <%= f.select :make_id, make_options(f.object), { prompt: "-- Make --", include_blank: true }, { class: "form-control", disabled: f.object.locked? } %>
+    <%= f.select :make_id, make_dropdown_list(f.object), { prompt: "-- Make --", include_blank: true }, { class: "form-control", disabled: f.object.locked? } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-2">
@@ -16,12 +16,12 @@
 
   <div class="form-group col-sm-12 col-lg-1">
     <%= f.label :uom_id, "UOM", class: "d-lg-none" %>
-    <%= f.select :uom_id, uom_options(f.object), { prompt: "-- UOM --" }, { required: true, class: "form-control", disabled: f.object.locked? } %>
+    <%= f.select :uom_id, uom_dropdown_list(f.object), { prompt: "-- UOM --" }, { required: true, class: "form-control", disabled: f.object.locked? } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-2">
     <%= f.label :cost_center_id, "Cost Center", class: "d-lg-none" %>
-    <%= f.select :cost_center_id, CostCenter.non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Cost Center --" }, { required: true, class: "form-control", disabled: f.object.locked? } %>
+    <%= f.select :cost_center_id, cost_center_dropdown_list(f.object), { prompt: "-- Select Cost Center --" }, { required: true, class: "form-control", disabled: f.object.locked? } %>
   </div>
 
   <div class="form-group col-sm-12 col-lg-1">
