@@ -1,4 +1,6 @@
-<%= form_for [:procurement_pending, @indent] do |f| %>
+<% @locked = @indent.indent_items.any? { |item| item.locked? } %>
+
+<%= form_for [namespace.to_sym, @indent] do |f| %>
   <%= render "shared/error_messages", resource: @indent %>
 
   <h4 class="mb-4">Indent Details:</h4>
@@ -6,22 +8,22 @@
   <div class="form-row">
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :company_id %>
-      <%= f.select :company_id, Company.accessible_companies(accessible_warehouse_ids).non_archived.order_by_name.pluck(:name, :id), { prompt: "-- Select Company --" }, { required: true, class: "form-control" } %>
+      <%= f.select :company_id, company_dropdown_list(f.object), { prompt: "-- Select Company --" }, { required: true, class: "form-control", disabled: @locked } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :warehouse_id %>
-      <%= f.select :warehouse_id, warehouse_options(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control" } %>
+      <%= f.select :warehouse_id, warehouse_dropdown_list(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control", disabled: @locked } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :indentor_id %>
-      <%= f.select :indentor_id, Indentor.non_archived.pluck(:name, :id), { prompt: "-- Select Indentor --" }, { class: "form-control" } %>
+      <%= f.select :indentor_id, indentor_dropdown_list(f.object), { prompt: "-- Select Indentor --" }, { class: "form-control", disabled: @locked } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-3">
       <%= f.label :requirement_date %>
-      <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control", autocomplete: :off %>
+      <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control", disabled: @locked, autocomplete: :off %>
     </div>
   </div>
 
@@ -40,10 +42,10 @@
       <div class="col-lg-2"><label>Note</label></div>
     </section>
 
-    <%= render "indent_item_fields", f: builder %>
+    <%= render "procurement/shared/indent_item_fields", f: builder %>
   <% end %>
 
-  <%= link_to_add_fields f, :indent_items %>
+  <%= link_to_add_fields f, :indent_items, "procurement/shared/indent_item_fields" %>
 
   <div class="form-group mt-3">
     <%= f.submit yield(:button_title), class: "btn btn-primary", data: { disable_with: "Saving..." } %>

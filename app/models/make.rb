@@ -16,6 +16,8 @@ class Make < ApplicationRecord
 
   validates :cat_no, length: { maximum: 255 }, uniqueness: { allow_blank: true, case_sensitive: false, scope: %i[item_id brand_id] }
 
+  scope :item_filter, ->(item_id) { where(item_id: item_id) }
+
   has_paper_trail ignore: %i[created_at updated_at]
 
   def self.included_resources

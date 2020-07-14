@@ -159,8 +159,13 @@ Rails.application.routes.draw do
       end
 
       resources :approved_indents, only: [:index, :show], path: "indents/approved" do
+        get :print, on: :member
+      end
+
+      resources :rejected_indents, except: [:new, :create, :destroy], path: "indents/rejected" do
         member do
           get :print
+          get :send_for_approval
         end
       end
 

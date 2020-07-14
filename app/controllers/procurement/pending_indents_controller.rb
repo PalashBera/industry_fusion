@@ -1,16 +1,6 @@
-require "auth"
-
-class Procurement::PendingIndentsController < Procurement::HomeController
-  layout "print", only: :print
-
-  skip_before_action :authenticate_user!, only: %i[email_approval email_rejection]
-
+class Procurement::PendingIndentsController < Procurement::IndentsController
   def index
-    @search = IndentItem.joins(:indent).ransack(params[:q])
-    indent_items = @search.result.pending
-    @total_count = indent_items.count
-    @bordered_item_ids = indent_items.group_by(&:indent_id).map { |_k, v| v.last.id }
-    @pagy, @indent_items = pagy_countless(indent_items.included_resources, link_extra: 'data-remote="true"')
+    super
   end
 
   def new
@@ -19,7 +9,7 @@ class Procurement::PendingIndentsController < Procurement::HomeController
   end
 
   def show
-    indent
+    super
   end
 
   def create
@@ -33,46 +23,32 @@ class Procurement::PendingIndentsController < Procurement::HomeController
   end
 
   def edit
-    indent
+    super
   end
 
   def update
-    if indent.update(indent_params)
-      redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.updated", name: "Indent") }
-    else
-      render "edit"
-    end
+    super
   end
 
   def print
-    indent
+    super
   end
 
   def send_for_approval
-    item = IndentItem.find(params[:id])
-    item.create_approvals && item.send_for_approval
-    redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.created", name: "Approval request") }
+    super
   end
 
   def email_approval
-    auth = Auth.decode(params[:token])
-    approval = Approval.find_by(id: auth.first["approval"])
-    user = User.find_by(id: auth.first["user"])
-
-    if approval && user && approval.user_ids.include?(user.id.to_s)
-      @message = approval.approve(user.id)
+    if auth_verified?
+      @message = @approval.approve(@user.id)
     else
       @message = "Invaid access. Please try again using application."
     end
   end
 
   def email_rejection
-    auth = Auth.decode(params[:token])
-    approval = Approval.find_by(id: auth.first["approval"])
-    user = User.find_by(id: auth.first["user"])
-
-    if approval && user && approval.user_ids.include?(user.id.to_s)
-      @message = approval.reject(user.id)
+    if auth_verified?
+      @message = @approval.reject(@user.id)
     else
       @message = "Invaid access. Please try again using application."
     end
@@ -81,11 +57,25 @@ class Procurement::PendingIndentsController < Procurement::HomeController
   private
 
   def indent
-    @indent ||= Indent.find(params[:id])
+    super
   end
 
   def indent_params
-    params.require(:indent).permit(:requirement_date, :company_id, :warehouse_id, :indentor_id,
-                                   indent_items_attributes: %i[id item_id cost_center_id make_id uom_id quantity priority note _destroy])
+    super
+  end
+
+  def redirect
+    redirect_to procurement_pending_indents_path
+  end
+
+  def scope_method
+    "pending"
+  end
+
+  def auth_verified?
+    auth = Auth.decode(params[:token])
+    @approval = Approval.find_by(id: auth.first["approval"])
+    @user = User.find_by(id: auth.first["user"])
+    @approval && @user && @approval.user_ids.include?(@user.id.to_s)
   end
 end

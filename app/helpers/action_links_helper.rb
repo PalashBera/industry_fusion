@@ -54,7 +54,7 @@ module ActionLinksHelper
   end
 
   def print_action_link(controller_name, resource)
-    link_to '<i class="mdi mdi-printer"></i> Print'.html_safe,
+    link_to raw('<i class="mdi mdi-printer"></i> Print'),
             url_for(controller: controller_name, action: "print", id: resource.id),
             title: "Print",
             class: "dropdown-item",
@@ -62,7 +62,7 @@ module ActionLinksHelper
   end
 
   def send_approval_action_link(controller_name, resource)
-    link_to '<i class="mdi mdi-account-check-outline"></i><span class="d-none d-md-inline-block ml-1">Send for Approval</span>'.html_safe,
+    link_to raw('<i class="mdi mdi-account-check-outline"></i> Send for Approval'),
             url_for(controller: controller_name, action: "send_for_approval", id: resource.id),
             title: "Send for Approval",
             class: "dropdown-item"

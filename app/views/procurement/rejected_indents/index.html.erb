@@ -1,11 +1,11 @@
-<% provide(:title, "Approved Indents") %>
-<% provide(:page_title, "Approved Indents") %>
+<% provide(:title, "Rejected Indents") %>
+<% provide(:page_title, "Rejected Indents") %>
 
 <%= render "shared/page_help" %>
 
 <div class="card">
   <div class="card-body">
-    <%= render partial: "procurement/shared/status_tab", locals: { current_tab: "approved" } %>
+    <%= render partial: "procurement/shared/status_tab", locals: { current_tab: "rejected" } %>
 
     <section class="mb-4 d-flex justify-content-between">
       <h3 class="text-muted">Total Count: <%= @total_count %></h3>
