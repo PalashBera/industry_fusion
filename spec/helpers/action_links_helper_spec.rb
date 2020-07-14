@@ -77,12 +77,24 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
+  describe "#print_action_link" do
+    let(:indent_item) { indent.indent_items.first }
+
+    it "creates a sned for approval link for indent item" do
+      link = Nokogiri::HTML(helper.print_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/print")
+      expect(link.attributes["title"].value).to eq("Print")
+      expect(link.attributes["class"].value).to eq("dropdown-item")
+    end
+  end
+
   describe "#send_approval_action_link" do
     let(:indent_item) { indent.indent_items.first }
 
     it "creates a sned for approval link for indent item" do
       link = Nokogiri::HTML(helper.send_approval_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/send_for_approval")
+      expect(link.attributes["title"].value).to eq("Send for Approval")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end

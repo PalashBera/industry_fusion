@@ -3,7 +3,7 @@ FactoryBot.define do
     quantity      { rand(1..100) }
     priority      { IndentItem::PRIORITY_LIST.sample }
     locked        { false }
-    approved      { false }
+    status        { "pending" }
     current_level { 0 }
     approval_ids  { [] }
     indent

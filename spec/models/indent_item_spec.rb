@@ -71,11 +71,11 @@ RSpec.describe IndentItem, type: :model do
     end
   end
 
-  describe "#priority_level" do
+  describe "#display_priority" do
     let!(:indent_item) { create(:indent_item, priority: "high") }
 
     it "should return High" do
-      expect(indent_item.priority_level).to eq("High")
+      expect(indent_item.display_priority).to eq("High")
     end
   end
 
@@ -103,7 +103,7 @@ RSpec.describe IndentItem, type: :model do
     context "when approval is not present" do
       it "should marked as approved" do
         indent_item.send_for_approval
-        expect(indent_item.approved).to eq(true)
+        expect(indent_item.approved?).to eq(true)
       end
     end
 
@@ -166,15 +166,6 @@ RSpec.describe IndentItem, type: :model do
       it "should return true" do
         expect(indent_item.unlocked?).to eq(true)
       end
-    end
-  end
-
-  describe "#unlock_item" do
-    let!(:indent_item) { create(:indent_item, locked: true) }
-
-    it "should archive all pending approvals" do
-      indent_item.unlock_item
-      expect(indent_item.locked).to eq(false)
     end
   end
 end

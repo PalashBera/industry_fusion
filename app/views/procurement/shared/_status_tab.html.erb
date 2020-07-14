@@ -1,10 +1,10 @@
-<ul class="nav nav-pills">
+<ul class="nav nav-tabs mb-5">
   <li class="nav-item">
     <%= link_to "Pending", procurement_pending_indents_path, class: "nav-link #{set_active_class("pending", current_tab)}" %>
   </li>
 
   <li class="nav-item">
-    <%= link_to "Approved", "#", class: "nav-link #{set_active_class("approved", current_tab)}" %>
+    <%= link_to "Approved", procurement_approved_indents_path, class: "nav-link #{set_active_class("approved", current_tab)}" %>
   </li>
 
   <li class="nav-item">
