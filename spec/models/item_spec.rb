@@ -48,6 +48,7 @@ RSpec.describe Item, type: :model do
     it { should have_many(:makes) }
     it { should have_many(:indent_items) }
     it { should have_many(:reorder_levels) }
+    it { should have_many(:item_images).dependent(:destroy) }
   end
 
   describe "#validations" do
@@ -119,6 +120,23 @@ RSpec.describe Item, type: :model do
     it "should return associated uoms" do
       expect(item.uoms.include?(uom_1)).to eq(true)
       expect(item.uoms.include?(uom_2)).to eq(true)
+    end
+  end
+
+  describe "#image_attached?" do
+    context "when item image is present for an item" do
+      let(:image)       { fixture_file_upload(Rails.root.join("spec", "fixtures", "images", "missing_image.jpg"), "image/jpg") }
+      let!(:item_image) { create :item_image, image: image, item_id: item.id }
+
+      it "should return true if image is attached to the item" do
+        expect(item.image_attached?).to eq(true)
+      end
+    end
+
+    context "when item image is not present for an item" do
+      it "should return true if image is attached to the item" do
+        expect(item.image_attached?).to eq(false)
+      end
     end
   end
 end

@@ -8,6 +8,7 @@
         <th scope="col">UOM</th>
         <th scope="col">Secondary&nbsp;UOM</th>
         <th scope="col">Convertion&nbsp;Equation</th>
+        <th scope="col">Images</th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
@@ -22,6 +23,7 @@
           <td><%= item.uom.short_name %></td>
           <td><%= item.secondary_uom&.short_name %></td>
           <td><%= item.convertion_equation %></td>
+          <td><%= show_images_link(item) if item.image_attached? %></td>
           <td><%= archive_status(item.archive).html_safe %></td>
           <td class="text-center">
             <div class="dropdown">
@@ -40,3 +42,4 @@
 </div>
 
 <%= render "shared/pagy" %>
+<div id="image_modal_block"></div>

@@ -361,4 +361,13 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     t.timestamps
   end
+
+  create_table :item_images do |t|
+    t.references :item,          null: false, foreign_key: true
+    t.attachment :image
+    t.bigint     :created_by_id, index: true
+    t.bigint     :updated_by_id, index: true
+
+    t.timestamps
+  end
 end

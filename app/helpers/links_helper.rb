@@ -52,4 +52,21 @@ module LinksHelper
             title: "Delete #{controller_name.singularize.humanize.titleize}",
             class: "text-danger"
   end
+
+  def show_images_link(item)
+    link_to raw('<i class="mdi mdi-camera-image"></i> Images'),
+            url_for(controller: "master/item_images", action: "index", item_id: item.id),
+            remote: true,
+            title: "Show Images",
+            class: "text-secondary"
+  end
+
+  def delete_image_link(image)
+    link_to raw('<i class="mdi mdi-close"></i>'),
+            url_for(controller: "master/item_images", action: "destroy", id: image.id),
+            method: :delete,
+            data: { confirm: "Are you sure you want to delete the image?" },
+            title: "Delete Image",
+            class: "btn btn-danger btn-sm delete-image-btn"
+  end
 end

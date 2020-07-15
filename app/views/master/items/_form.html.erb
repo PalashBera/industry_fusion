@@ -39,8 +39,33 @@
     </div>
   </div>
 
+  <div class="form-row">
+    <div class="custom-file mb-3">
+      <%= f.file_field :attachments, multiple: true, class: "custom-file-input file-upload-field", accept: "image/x-png, image/jpeg" %>
+      <%= f.label :attachments, "Images", class: "custom-file-label" %>
+    </div>
+  </div>
+
   <div class="custom-control custom-checkbox">
     <%= f.check_box :archive, class: "custom-control-input" %>
     <%= f.label :archive, class: "custom-control-label" %>
   </div>
 <% end %>
+
+<script>
+  $('.file-upload-field').change(function() {
+    var filename = []
+
+    $(this)[0].files.forEach(function (item, index) {
+      filename[index] = item.name
+    });
+
+    var str = filename.join(', ')
+
+    if (str.length > 25) {
+      str = str.substring(0, 25) + '...'
+    }
+
+    $(this).closest('div').find('label').html(str);
+  });
+</script>

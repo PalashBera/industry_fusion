@@ -4,6 +4,8 @@ RSpec.describe LinksHelper, type: :helper do
   let(:user)           { create(:user) }
   let(:brand)          { create(:brand) }
   let(:approval_level) { create :approval_level }
+  let(:item_image)     { create :item_image }
+  let(:item)           { create :item }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -30,8 +32,8 @@ RSpec.describe LinksHelper, type: :helper do
     it "creates a button link for removing fields" do
       link = Nokogiri::HTML(helper.link_to_remove_fields).children.children.children[0]
       expect(link.attributes["href"].value).to eq("#")
-      expect(link.attributes["class"].value).to eq("remove_fields")
       expect(link.attributes["title"].value).to eq("Remove Item")
+      expect(link.attributes["class"].value).to eq("remove_fields")
     end
   end
 
@@ -64,6 +66,27 @@ RSpec.describe LinksHelper, type: :helper do
       expect(link.attributes["data-method"].value).to eq("delete")
       expect(link.attributes["data-confirm"].value).to eq("Are you sure?")
       expect(link.attributes["class"].value).to eq("text-danger")
+    end
+  end
+
+  describe "#show_images_link" do
+    it "creates a button link for showing images records" do
+      link = Nokogiri::HTML(helper.show_images_link(item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/master/item_images?item_id=#{item.id}")
+      expect(link.attributes["data-remote"].value).to eq("true")
+      expect(link.attributes["title"].value).to eq("Show Images")
+      expect(link.attributes["class"].value).to eq("text-secondary")
+    end
+  end
+
+  describe "#delete_image_link" do
+    it "creates a button link for delete image record" do
+      link = Nokogiri::HTML(helper.delete_image_link(item_image)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/master/item_images/#{item_image.id}")
+      expect(link.attributes["data-method"].value).to eq("delete")
+      expect(link.attributes["data-confirm"].value).to eq("Are you sure you want to delete the image?")
+      expect(link.attributes["title"].value).to eq("Delete Image")
+      expect(link.attributes["class"].value).to eq("btn btn-danger btn-sm delete-image-btn")
     end
   end
 end

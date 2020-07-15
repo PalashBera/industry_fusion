@@ -5,7 +5,7 @@
   </button>
 </div>
 
-<%= form_for [namespace.to_sym, resource], remote: true do |f| %>
+<%= form_for [namespace.to_sym, resource], remote: true, html: { multipart: true } do |f| %>
   <div class="modal-body">
     <%= render partial: "shared/error_messages", locals: { resource: resource } %>
 
