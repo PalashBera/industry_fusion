@@ -74,12 +74,21 @@ RSpec.describe Company, type: :model do
   end
 
   describe "#scopes" do
-    let!(:company_1) { create(:company, name: "Name 1", archive: true) }
-    let!(:company_2) { create(:company, name: "Name 2", archive: false) }
+    let!(:company_1)   { create(:company, name: "Name 1", archive: true) }
+    let!(:company_2)   { create(:company, name: "Name 2", archive: false) }
+    let!(:warehouse_1) { create :warehouse, company_id: company_1.id }
+    let!(:warehouse_2) { create :warehouse, company_id: company_2.id }
 
     context "order_by_name" do
       it "should return companies order by name" do
         expect(Company.order_by_name).to eq([company_1, company_2])
+      end
+    end
+
+    context "#warehouse_filter" do
+      it "should return companies which has some specific warehouses" do
+        expect(Company.warehouse_filter(warehouse_1.id).include?(company_1)).to eq(true)
+        expect(Company.warehouse_filter(warehouse_1.id).include?(company_2)).to eq(false)
       end
     end
   end

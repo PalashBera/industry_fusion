@@ -13,7 +13,7 @@ class Company < ApplicationRecord
   has_many :warehouses
   has_many :indents
 
-  scope :accessible, ->(warehouse_ids) { joins(:warehouses).where(warehouses: { id: warehouse_ids }).distinct }
+  scope :warehouse_filter, ->(warehouse_ids) { joins(:warehouses).where(warehouses: { id: warehouse_ids }).distinct }
 
   has_paper_trail ignore: %i[created_at updated_at]
 

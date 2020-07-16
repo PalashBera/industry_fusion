@@ -168,4 +168,12 @@ RSpec.describe IndentItem, type: :model do
       end
     end
   end
+
+  describe "#display_status" do
+    let!(:indent_item) { create(:indent_item, status: "pending") }
+
+    it "should return status with proper format" do
+      expect(indent_item.display_status).to eq("Pending")
+    end
+  end
 end

@@ -1,6 +1,6 @@
 module IndentsHelper
   def company_dropdown_list(object)
-    companies = Company.accessible(accessible_warehouse_ids).non_archived
+    companies = Company.warehouse_filter(accessible_warehouse_ids).non_archived
     dropdown_list = companies.pluck(:name, :id)
     return dropdown_list unless object.company_id
 
@@ -15,7 +15,7 @@ module IndentsHelper
   def warehouse_dropdown_list(object)
     return [] unless object.company_id
 
-    warehouses = Warehouse.accessible(accessible_warehouse_ids).company_filter(object.company_id).non_archived.order_by_name
+    warehouses = Warehouse.id_filter(accessible_warehouse_ids).company_filter(object.company_id).non_archived.order_by_name
     dropdown_list = warehouses.pluck(:name, :id)
 
     unless warehouses.pluck(:id).include?(object.warehouse_id)
@@ -85,11 +85,7 @@ module IndentsHelper
     dropdown_list
   end
 
-  def format_requirement_date(object)
-    object.id.present? ? object.requirement_date.strftime("%d-%b-%Y") : ""
-  end
-
   def border_bottom_attached?(item_ids, item_id)
-    item_ids.last != item_id && item_ids.include?(item_id)
+    item_ids.include?(item_id) && item_ids.last != item_id
   end
 end
