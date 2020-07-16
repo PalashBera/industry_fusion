@@ -8,6 +8,8 @@ FactoryBot.define do
     sidebar_collapse { false }
     warehouse_ids    { [] }
     organization
+
+    after(:build)    { |user| user.stub(:create_approval_levels) {}}
   end
 
   factory :admin_user, parent: :user do
