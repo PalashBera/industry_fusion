@@ -15,7 +15,7 @@ class Warehouse < ApplicationRecord
   has_many :warehouse_locations
   has_many :reorder_levels
 
-  scope :accessible,     ->(ids) { where(id: ids) }
+  scope :id_filter,      ->(ids) { where(id: ids) }
   scope :company_filter, ->(company_id) { where(company_id: company_id) }
 
   has_paper_trail ignore: %i[created_at updated_at]

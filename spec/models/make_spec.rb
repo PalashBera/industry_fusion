@@ -48,4 +48,18 @@ RSpec.describe Make, type: :model do
       end
     end
   end
+
+  describe "#scopes" do
+    let(:item_1) { create :item }
+    let(:item_2) { create :item }
+    let(:make_1) { create :make, item_id: item_1.id }
+    let(:make_2) { create :make, item_id: item_2.id }
+
+    context "#item_filter" do
+      it "should return make records associated to some specific item" do
+        expect(Make.item_filter(item_1.id).include?(make_1)).to eq(true)
+        expect(Make.item_filter(item_1.id).include?(make_2)).to eq(false)
+      end
+    end
+  end
 end

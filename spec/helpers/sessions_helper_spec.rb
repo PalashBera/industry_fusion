@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe SessionsHelper, type: :helper do
   let(:admin_user) { create(:admin_user) }
-  let(:user) { create(:user) }
+  let(:user)       { create(:user) }
 
   describe "#admin_user_signed_in?" do
     context "when admin is logged in" do

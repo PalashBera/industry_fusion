@@ -64,12 +64,28 @@ RSpec.describe Warehouse, type: :model do
   end
 
   describe "#scopes" do
-    let!(:warehouse_1) { create(:warehouse, name: "Name 1", archive: true) }
-    let!(:warehouse_2) { create(:warehouse, name: "Name 2", archive: false) }
+    let!(:company_1)   { create :company }
+    let!(:company_2)   { create :company }
+    let!(:warehouse_1) { create(:warehouse, name: "Name 1", archive: true, company_id: company_1.id) }
+    let!(:warehouse_2) { create(:warehouse, name: "Name 2", archive: false, company_id: company_2.id) }
 
     context "order_by_name" do
       it "should return warehouses order by name" do
         expect(Warehouse.order_by_name).to eq([warehouse_1, warehouse_2])
+      end
+    end
+
+    context "id_filter" do
+      it "should return specific warehouse passed as parameter" do
+        expect(Warehouse.id_filter(warehouse_1.id).include?(warehouse_1)).to eq(true)
+        expect(Warehouse.id_filter(warehouse_1.id).include?(warehouse_2)).to eq(false)
+      end
+    end
+
+    context "company_filter" do
+      it "should return specific warehouse associated with some company passed as parameter" do
+        expect(Warehouse.company_filter(company_1.id).include?(warehouse_1)).to eq(true)
+        expect(Warehouse.company_filter(company_1.id).include?(warehouse_2)).to eq(false)
       end
     end
   end
