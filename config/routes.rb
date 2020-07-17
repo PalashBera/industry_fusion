@@ -158,7 +158,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :approved_indents, only: [:index, :show], path: "indents/approved" do
+      resources :approved_indents, only: [:index, :show, :destroy], path: "indents/approved" do
         get :print, on: :member
       end
 
@@ -167,6 +167,10 @@ Rails.application.routes.draw do
           get :print
           get :send_for_approval
         end
+      end
+
+      resources :amended_indents, only: [:index, :show, :destroy], path: "indents/amended" do
+        get :print, on: :member
       end
 
       resources :companies, only: [] do

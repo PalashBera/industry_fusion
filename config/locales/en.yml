@@ -54,6 +54,8 @@ en:
     created: "%{name} has been successfully created."
     updated: "%{name} has been successfully updated."
     deleted: "%{name} has been successfully deleted."
+    restored: "%{name} has been successfully restored."
+    amended: "%{name} has been successfully amended."
 
   active:
     active

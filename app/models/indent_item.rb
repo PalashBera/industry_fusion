@@ -92,6 +92,10 @@ class IndentItem < ApplicationRecord
     update(locked: true, status: "approved")
   end
 
+  def mark_as_amended
+    update(locked: true, status: "amended")
+  end
+
   def display_status
     status.humanize.titleize
   end
