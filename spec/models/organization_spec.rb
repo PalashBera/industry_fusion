@@ -16,7 +16,6 @@ RSpec.describe Organization, type: :model do
   describe "#active_record_columns" do
     it { should have_db_column(:name) }
     it { should have_db_column(:fy_start_month) }
-    it { should have_db_column(:fy_end_month) }
     it { should have_db_column(:page_help_needed) }
     it { should have_db_column(:send_master_notification) }
   end
@@ -54,7 +53,6 @@ RSpec.describe Organization, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_presence_of(:fy_start_month) }
-    it { should validate_presence_of(:fy_end_month) }
 
     context "when same subdomain present for an organization" do
       let!(:organization) { create(:organization, subdomain: "Nokia") }
@@ -74,6 +72,20 @@ RSpec.describe Organization, type: :model do
 
       it "should return records order by name" do
         expect(Organization.where(name: ["Industry Fusion", "ZARA Private Limited", "KFC Private Limited"]).order_by_name).to eq([org_2, org_1])
+      end
+    end
+  end
+
+  describe "#fy_date_range" do
+    let(:organization)   { create :organization, fy_start_month: 1 }
+    let(:organization_1) { create :organization, fy_start_month: 3 }
+
+    context "when we want to get fy_start_month & fy_end_month" do
+      it "it should return fy_start_month and fy_end_month as an array" do
+        expect(organization.fy_date_range).to eq([1, 12])
+      end
+      it "it should return fy_start_month and fy_end_month as an array" do
+        expect(organization_1.fy_date_range).to eq([3, 2])
       end
     end
   end

@@ -42,8 +42,9 @@ class Indent < ApplicationRecord
   def fy_date_range
     return unless requirement_date
 
-    requirement_date.month < 4 ? start_year = requirement_date.year - 1 : start_year = requirement_date.year
-    requirement_date.month < 4 ? end_year =   requirement_date.year : end_year =   requirement_date.year + 1
+    start_month, end_month = Organization.current_organization.fy_date_range
+    start_year = requirement_date.month < start_month ? requirement_date.year - 1 : requirement_date.year
+    end_year =   requirement_date.month < end_month ? requirement_date.year : requirement_date.year + 1
     [Date.new(start_year, 4, 1), Date.new(end_year, 3, 30)]
   end
 end

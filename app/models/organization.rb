@@ -5,7 +5,6 @@ class Organization < ApplicationRecord
   cattr_accessor :current_organization
 
   before_validation { self.name = name.to_s.squish }
-  before_validation :set_fy_range
 
   has_many :users
   has_many :companies
@@ -26,7 +25,7 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :subdomain, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }
-  validates :fy_start_month, :fy_end_month, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
+  validates :fy_start_month, presence: true, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 12 }
 
   scope :order_by_name, -> { order(:name) }
 
@@ -36,15 +35,17 @@ class Organization < ApplicationRecord
     subdomain == "app" || Organization.find_by(subdomain: subdomain)
   end
 
-  private
+  def fy_date_range
+    fy_end_month = 0
 
-  def set_fy_range
     if fy_start_month == 1
-      self.fy_end_month = 12
+      fy_end_month = 12
     elsif fy_start_month.to_i.between?(2, 12)
-      self.fy_end_month = fy_start_month - 1
+      fy_end_month = fy_start_month - 1
     else
-      self.fy_start_month = self.fy_end_month = nil
+      fy_end_month = nil
     end
+
+    [fy_start_month, fy_end_month]
   end
 end

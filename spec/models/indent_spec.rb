@@ -7,6 +7,7 @@ RSpec.describe Indent, type: :model do
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
+    Organization.stub(:current_organization).and_return(user.organization)
   end
 
   it_behaves_like "user_tracking_module"
@@ -65,11 +66,56 @@ RSpec.describe Indent, type: :model do
   end
 
   describe "#serial_number" do
-    let!(:indent) { create(:indent, requirement_date: Time.zone.now + 10.day) }
+    context "When Organization FY start month is January" do
+      let!(:organization) { create :organization, fy_start_month: 1 }
+      let!(:indent)   { create(:indent, requirement_date: Time.zone.now + 10.day, organization_id: organization.id) }
+      let!(:indent_1) { create(:indent, requirement_date: Time.zone.now + 11.day, organization_id: organization.id) }
+      let!(:indent_2) { create(:indent, requirement_date: Time.zone.now + 366.day, organization_id: organization.id) }
 
-    it "should return the serial number of the indent" do
-      serial = "IND/20-21/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
-      expect(indent.serial_number).to eq(serial)
+      before do
+        Organization.stub(:current_organization).and_return(organization)
+      end
+
+      it "should return the serial number of the indent" do
+        serial = "IND/20-20/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
+        expect(indent.serial_number).to eq(serial)
+      end
+
+      it "should return the serial number of the indent_1" do
+        serial = "IND/20-20/#{indent_1.company.short_name}/#{indent_1.warehouse.short_name}/#{((indent.serial) + 1).to_s.rjust(4, "0")}"
+        expect(indent_1.serial_number).to eq(serial)
+      end
+
+      it "should return the serial number of the indent_2" do
+        serial = "IND/21-21/#{indent_2.company.short_name}/#{indent_2.warehouse.short_name}/#{1.to_s.rjust(4, "0")}"
+        expect(indent_2.serial_number).to eq(serial)
+      end
+    end
+
+    context "When Organization FY start month is April" do
+      let!(:organization) { create :organization, fy_start_month: 4 }
+      let!(:indent)   { create(:indent, requirement_date: Time.zone.now + 10.day, organization_id: organization.id) }
+      let!(:indent_1) { create(:indent, requirement_date: Time.zone.now + 11.day, organization_id: organization.id) }
+      let!(:indent_2) { create(:indent, requirement_date: Time.zone.now + 366.day, organization_id: organization.id) }
+
+      before do
+        Organization.stub(:current_organization).and_return(organization)
+      end
+
+      it "should return the serial number of the indent" do
+        serial = "IND/20-21/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
+        expect(indent.serial_number).to eq(serial)
+      end
+
+      it "should return the serial number of the indent_1" do
+        serial = "IND/20-21/#{indent_1.company.short_name}/#{indent_1.warehouse.short_name}/#{((indent.serial) + 1).to_s.rjust(4, "0")}"
+        expect(indent_1.serial_number).to eq(serial)
+      end
+
+      it "should return the serial number of the indent_2" do
+        serial = "IND/21-22/#{indent_2.company.short_name}/#{indent_2.warehouse.short_name}/#{1.to_s.rjust(4, "0")}"
+        expect(indent_2.serial_number).to eq(serial)
+      end
     end
   end
 end
