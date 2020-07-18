@@ -2,10 +2,12 @@ module Exportable
   extend ActiveSupport::Concern
 
   def export
+    @search = model_class.ransack(params[:q])
+
     if model_class.methods.include?(:included_resources)
-      @resources =  model_class.all.included_resources
+      @resources =  @search.result(distinct: true).included_resources
     else
-      @resources =  model_class.all
+      @resources =  @search.result(distinct: true)
     end
 
     respond_to do |format|
