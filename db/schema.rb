@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.bigint "indent_item_id", null: false
     t.integer "level", null: false
     t.text "user_ids", default: [], array: true
-    t.boolean "archive", default: false, null: false
     t.string "action_type"
     t.datetime "action_taken_at"
     t.bigint "action_taken_by_id"

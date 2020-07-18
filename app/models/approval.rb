@@ -1,6 +1,5 @@
 class Approval < ApplicationRecord
   include UserTrackingModule
-  include ArchiveModule
 
   ACTION_TYPES = %w[approved rejected].freeze
 
