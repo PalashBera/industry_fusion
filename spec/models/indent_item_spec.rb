@@ -169,6 +169,36 @@ RSpec.describe IndentItem, type: :model do
     end
   end
 
+  describe "#mark_as_rejected" do
+    let!(:indent_item) { create(:indent_item, status: "pending") }
+
+    it "should update status of indent item" do
+      indent_item.mark_as_rejected
+      expect(indent_item.status).to eq("rejected")
+      expect(indent_item.locked).to eq(false)
+    end
+  end
+
+  describe "#mark_as_approved" do
+    let!(:indent_item) { create(:indent_item, status: "pending") }
+
+    it "should update status of indent item" do
+      indent_item.mark_as_approved
+      expect(indent_item.status).to eq("approved")
+      expect(indent_item.locked).to eq(true)
+    end
+  end
+
+  describe "#mark_as_amended" do
+    let!(:indent_item) { create(:indent_item, status: "pending") }
+
+    it "should update status of indent item" do
+      indent_item.mark_as_amended
+      expect(indent_item.status).to eq("amended")
+      expect(indent_item.locked).to eq(true)
+    end
+  end
+
   describe "#display_status" do
     let!(:indent_item) { create(:indent_item, status: "pending") }
 

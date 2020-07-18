@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
   end
 
   describe "#callbacks" do
-    it { is_expected.to callback(:create_approval_levels).after(:save).if(:admin?) }
+    it { is_expected.to callback(:create_approval_levels).after(:create).if(:admin?) }
   end
 
   describe "#admin?" do

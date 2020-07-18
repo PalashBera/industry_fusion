@@ -16,7 +16,7 @@ class User < ApplicationRecord
     self.subdomain = subdomain.to_s.squish.downcase
   end
 
-  after_save :create_approval_levels, if: :admin?
+  after_create :create_approval_levels, if: :admin?
 
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :trackable, :invitable, :async
 

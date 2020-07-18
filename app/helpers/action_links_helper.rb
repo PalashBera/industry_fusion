@@ -67,4 +67,22 @@ module ActionLinksHelper
             title: "Send for Approval",
             class: "dropdown-item"
   end
+
+  def restore_action_link(controller_name, resource)
+    link_to raw('<i class="mdi mdi-backup-restore"></i> Restore'),
+            url_for(controller: controller_name, action: "destroy", id: resource.id),
+            method: :delete,
+            data: { confirm: "Do you want to restore this indent?" },
+            title: "Restore",
+            class: "dropdown-item"
+  end
+
+  def amended_action_link(controller_name, resource)
+    link_to raw('<i class="mdi mdi-block-helper"></i> Amend'),
+            url_for(controller: controller_name, action: "destroy", id: resource.id),
+            method: :delete,
+            data: { confirm: "Do you want to amend this indent?" },
+            title: "Amend",
+            class: "dropdown-item"
+  end
 end

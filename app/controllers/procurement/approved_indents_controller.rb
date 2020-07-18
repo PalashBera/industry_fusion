@@ -7,6 +7,12 @@ class Procurement::ApprovedIndentsController < Procurement::IndentsController
     super
   end
 
+  def destroy
+    indent_item = IndentItem.find(params[:id])
+    indent_item.mark_as_amended
+    redirect_to procurement_approved_indents_path, flash: { success: t("flash_messages.amended", name: "Item item") }
+  end
+
   def print
     super
   end
