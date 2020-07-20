@@ -66,7 +66,6 @@ class IndentItem < ApplicationRecord
   end
 
   def create_approvals
-    archive_all_pending_approvals
     approval_items = []
 
     ApprovalLevel.indent.each.with_index(1) do |level, index|
@@ -74,10 +73,6 @@ class IndentItem < ApplicationRecord
     end
 
     update(approval_ids: approval_items.map(&:id))
-  end
-
-  def archive_all_pending_approvals
-    approvals.non_archived.update_all(archive: true)
   end
 
   def unlocked?

@@ -9,7 +9,6 @@ RSpec.describe Approval, type: :model do
     User.stub(:current_user).and_return(user)
   end
 
-  it_behaves_like "archive_module"
   it_behaves_like "user_tracking_module"
   it_behaves_like "timestamp_module"
 

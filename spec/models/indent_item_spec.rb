@@ -136,18 +136,7 @@ RSpec.describe IndentItem, type: :model do
 
     it "should update approval_ids" do
       indent_item.create_approvals
-      expected_ids = indent_item.approvals.non_archived.pluck(:id)
-      expect(indent_item.approval_ids).to eq(expected_ids)
-    end
-  end
-
-  describe "#archive_all_pending_approvals" do
-    let!(:approval_level) { create(:approval_level, approval_type: "indent") }
-
-    it "should archive all pending approvals" do
-      indent_item.create_approvals
-      indent_item.archive_all_pending_approvals
-      expect(indent_item.approvals.non_archived.count).to eq(0)
+      expect(indent_item.approval_ids.present?).to eq(true)
     end
   end
 

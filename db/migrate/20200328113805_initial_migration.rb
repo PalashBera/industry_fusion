@@ -352,7 +352,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     t.references :indent_item, null: false, foreign_key: true
     t.integer    :level,       null: false
     t.text       :user_ids,    array: true, default: []
-    t.boolean    :archive,     null: false, default: false
     t.string     :action_type
     t.datetime   :action_taken_at
     t.bigint     :action_taken_by_id
