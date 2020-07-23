@@ -2,7 +2,7 @@ require "rails_helper"
 
 shared_examples_for "export_module" do
   let(:user)    { create(:admin_user) }
-  let(:example) { create(described_class.to_s.split('::')[1].gsub('Controller', '').singularize.underscore.downcase.to_sym, archive: true) }
+  let(:example) { create(described_class.to_s.split("::")[1].gsub("Controller", "").singularize.underscore.downcase.to_sym, archive: true) }
 
   before(:each) do
     @request.host = "#{user.organization.subdomain}.example.com"
@@ -13,7 +13,7 @@ shared_examples_for "export_module" do
   describe "GET export" do
     it "should return proper response header" do
       get :export, params: { q: { archive_eq: "true"} }, format: "xlsx"
-      expect(response.header['Content-Type']).to include "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      expect(response.header["Content-Type"]).to include "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     end
 
     it "requires login & returns the proper search results" do

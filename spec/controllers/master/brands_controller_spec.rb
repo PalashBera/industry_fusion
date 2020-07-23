@@ -4,7 +4,6 @@ RSpec.describe Master::BrandsController, type: :controller do
   let(:user)  { create(:user) }
   let(:brand) { create(:brand) }
 
-
   before(:each) do
     @request.host = "#{user.organization.subdomain}.example.com"
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
