@@ -11,6 +11,8 @@ RSpec.describe Master::WarehouseLocationsController, type: :controller do
     User.stub(:current_user).and_return(user)
   end
 
+  it_behaves_like "export_module"
+
   describe "GET index" do
     it "requires login" do
       sign_out user
