@@ -3,7 +3,7 @@ class IndentItem < ApplicationRecord
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   PRIORITY_LIST = %w[default high medium low].freeze
-  STATUS_LIST = %w[pending approved amended rejected].freeze
+  STATUS_LIST = %w[pending approved amended rejected cancelled].freeze
 
   enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
   enum status: Hash[STATUS_LIST.map { |item| [item, item] }]
@@ -89,6 +89,14 @@ class IndentItem < ApplicationRecord
 
   def mark_as_amended
     update(locked: true, status: "amended")
+  end
+
+  def mark_as_cancelled
+    update(locked: true, status: "cancelled")
+  end
+
+  def mark_as_pending
+    update(locked: false, status: "pending")
   end
 
   def display_status

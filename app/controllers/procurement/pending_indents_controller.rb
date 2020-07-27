@@ -30,6 +30,12 @@ class Procurement::PendingIndentsController < Procurement::IndentsController
     super
   end
 
+  def destroy
+    indent_item = IndentItem.find(params[:id])
+    indent_item.mark_as_cancelled
+    redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.cancelled", name: "Item item") }
+  end
+
   def print
     super
   end

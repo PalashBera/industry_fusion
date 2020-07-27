@@ -124,4 +124,17 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end
+
+  describe "#cancelled_action_link" do
+    let(:indent_item) { indent.indent_items.first }
+
+    it "creates a cancel link for indent item" do
+      link = Nokogiri::HTML(helper.cancelled_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}")
+      expect(link.attributes["data-method"].value).to eq("delete")
+      expect(link.attributes["data-confirm"].value).to eq("Do you want to cancel this indent?")
+      expect(link.attributes["title"].value).to eq("Cancel")
+      expect(link.attributes["class"].value).to eq("dropdown-item")
+    end
+  end
 end

@@ -56,6 +56,7 @@ en:
     deleted: "%{name} has been successfully deleted."
     restored: "%{name} has been successfully restored."
     amended: "%{name} has been successfully amended."
+    cancelled: "%{name} has been successfully cancelled."
 
   active:
     active

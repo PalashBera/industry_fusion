@@ -3,12 +3,7 @@ module Exportable
 
   def export
     @search = model_class.ransack(params[:q])
-
-    if model_class.methods.include?(:included_resources)
-      @resources =  @search.result(distinct: true).included_resources
-    else
-      @resources =  @search.result(distinct: true)
-    end
+    set_resources
 
     respond_to do |format|
       format.xlsx do
@@ -20,6 +15,14 @@ module Exportable
   private
 
   def model_class
-    controller_name.singularize.classify.constantize
+    @model_class ||= controller_name.singularize.classify.constantize
+  end
+
+  def set_resources
+    if model_class.methods.include?(:included_resources)
+      @resources =  @search.result(distinct: true).included_resources
+    else
+      @resources =  @search.result(distinct: true)
+    end
   end
 end

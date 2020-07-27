@@ -34,6 +34,7 @@ RSpec.describe IndentItem, type: :model do
 
   describe "#enums" do
     it { should define_enum_for(:priority).with_values(default: "default", high: "high", medium: "medium", low: "low").backed_by_column_of_type(:string).with_suffix }
+    it { should define_enum_for(:status).with_values(pending: "pending", approved: "approved", amended: "amended", rejected: "rejected", cancelled: "cancelled").backed_by_column_of_type(:string) }
   end
 
   describe "#callbacks" do
@@ -185,6 +186,26 @@ RSpec.describe IndentItem, type: :model do
       indent_item.mark_as_amended
       expect(indent_item.status).to eq("amended")
       expect(indent_item.locked).to eq(true)
+    end
+  end
+
+  describe "#mark_as_cancelled" do
+    let!(:indent_item) { create(:indent_item, status: "pending") }
+
+    it "should update status of indent item" do
+      indent_item.mark_as_cancelled
+      expect(indent_item.status).to eq("cancelled")
+      expect(indent_item.locked).to eq(true)
+    end
+  end
+
+  describe "#mark_as_pending" do
+    let!(:indent_item) { create(:indent_item, status: "cancelled") }
+
+    it "should update status of indent item" do
+      indent_item.mark_as_pending
+      expect(indent_item.status).to eq("pending")
+      expect(indent_item.locked).to eq(false)
     end
   end
 
