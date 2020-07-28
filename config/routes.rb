@@ -146,7 +146,7 @@ Rails.application.routes.draw do
     end
 
     namespace :procurement do
-      resources :pending_indents, path: "indents/pending" do
+      resources :pending_indents, path: "indents/pending", controller: "indents/pending_indents" do
         member do
           get :print
           get :send_for_approval
@@ -158,22 +158,22 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :approved_indents, only: [:index, :show, :destroy], path: "indents/approved" do
+      resources :approved_indents, only: [:index, :show, :destroy], path: "indents/approved", controller: "indents/approved_indents" do
         get :print, on: :member
       end
 
-      resources :rejected_indents, except: [:new, :create, :destroy], path: "indents/rejected" do
+      resources :rejected_indents, except: [:new, :create, :destroy], path: "indents/rejected", controller: "indents/rejected_indents" do
         member do
           get :print
           get :send_for_approval
         end
       end
 
-      resources :amended_indents, only: [:index, :show, :destroy], path: "indents/amended" do
+      resources :amended_indents, only: [:index, :show, :destroy], path: "indents/amended", controller: "indents/amended_indents" do
         get :print, on: :member
       end
 
-      resources :cancelled_indents, only: [:index, :show, :destroy], path: "indents/cancelled" do
+      resources :cancelled_indents, only: [:index, :show, :destroy], path: "indents/cancelled", controller: "indents/cancelled_indents" do
         get :print, on: :member
       end
 

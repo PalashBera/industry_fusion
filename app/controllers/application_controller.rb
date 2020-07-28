@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
   end
 
+  def active_sidebar_option(option)
+    @active_sidebar = option
+  end
+
   protected
 
   def after_sign_in_path_for(resource)

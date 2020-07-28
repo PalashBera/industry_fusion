@@ -21,7 +21,7 @@
           Procurement
         </li>
 
-        <li class="<%= active_class("indents") %>">
+        <li class="<%= active_sidebar("indents") %>">
           <%= link_to procurement_pending_indents_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-clipboard-text"></i>
             <span class="nav-text">Indents</span>
@@ -32,70 +32,70 @@
           Master
         </li>
 
-        <li class="<%= active_class("brands") %>">
+        <li class="<%= active_sidebar("brands") %>">
           <%= link_to master_brands_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-puzzle"></i>
             <span class="nav-text">Brands</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("cost_centers") %>">
+        <li class="<%= active_sidebar("cost_centers") %>">
           <%= link_to master_cost_centers_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-cash-multiple"></i>
             <span class="nav-text">Cost Centers</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("item_groups") %>">
+        <li class="<%= active_sidebar("item_groups") %>">
           <%= link_to master_item_groups_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-group"></i>
             <span class="nav-text">Item Groups</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("uoms") %>">
+        <li class="<%= active_sidebar("uoms") %>">
           <%= link_to master_uoms_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-scale-balance"></i>
             <span class="nav-text">Unit Of Measurement</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("vendors") %>">
+        <li class="<%= active_sidebar("vendors") %>">
           <%= link_to master_vendors_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-account-supervisor"></i>
             <span class="nav-text">Vendors</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("items") %>">
+        <li class="<%= active_sidebar("items") %>">
           <%= link_to master_items_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-ballot"></i>
             <span class="nav-text">Items</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("makes") %>">
+        <li class="<%= active_sidebar("makes") %>">
           <%= link_to master_makes_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-hexagon-multiple"></i>
             <span class="nav-text">Makes</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("indentors") %>">
+        <li class="<%= active_sidebar("indentors") %>">
           <%= link_to master_indentors_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-account-tie"></i>
             <span class="nav-text">Indentors</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("warehouse_locations") %>">
+        <li class="<%= active_sidebar("warehouse_locations") %>">
           <%= link_to master_warehouse_locations_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-map-marker"></i>
             <span class="nav-text">Warehouse Locations</span>
           <% end %>
         </li>
 
-        <li class="<%= active_class("reorder_levels") %>">
+        <li class="<%= active_sidebar("reorder_levels") %>">
           <%= link_to master_reorder_levels_path, class: "sidenav-item-link" do %>
             <i class="mdi mdi-reorder-horizontal"></i>
             <span class="nav-text">Reorder Levels</span>
@@ -107,21 +107,21 @@
             Admin
           </li>
 
-          <li class="<%= active_class("users") %>">
+          <li class="<%= active_sidebar("users") %>">
             <%= link_to admin_users_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-account-group"></i>
               <span class="nav-text">Users</span>
             <% end %>
           </li>
 
-          <li class="<%= active_class("companies") %>">
+          <li class="<%= active_sidebar("companies") %>">
             <%= link_to admin_companies_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-factory"></i>
               <span class="nav-text">Companies</span>
             <% end %>
           </li>
 
-          <li class="<%= active_class("warehouses") %>">
+          <li class="<%= active_sidebar("warehouses") %>">
             <%= link_to admin_warehouses_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-office-building"></i>
               <span class="nav-text">Warehouses</span>

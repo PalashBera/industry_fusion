@@ -21,7 +21,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
   describe "#show_action_link" do
     it "create a show link for record" do
-      link = Nokogiri::HTML(helper.show_action_link("procurement/pending_indents", indent)).children.children.children[0]
+      link = Nokogiri::HTML(helper.show_action_link("procurement/indents/pending_indents", indent)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent.id}")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
@@ -81,7 +81,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:indent_item) { indent.indent_items.first }
 
     it "create a print link for indent" do
-      link = Nokogiri::HTML(helper.print_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
+      link = Nokogiri::HTML(helper.print_action_link("procurement/indents/pending_indents", indent_item)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/print")
       expect(link.attributes["title"].value).to eq("Print")
       expect(link.attributes["class"].value).to eq("dropdown-item")
@@ -92,7 +92,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:indent_item) { indent.indent_items.first }
 
     it "create a send for approval link for indent item" do
-      link = Nokogiri::HTML(helper.send_approval_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
+      link = Nokogiri::HTML(helper.send_approval_action_link("procurement/indents/pending_indents", indent_item)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/send_for_approval")
       expect(link.attributes["title"].value).to eq("Send for Approval")
       expect(link.attributes["class"].value).to eq("dropdown-item")
@@ -103,7 +103,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:indent_item) { indent.indent_items.first }
 
     it "creates a restore link for indent item" do
-      link = Nokogiri::HTML(helper.restore_action_link("procurement/amended_indents", indent_item)).children.children.children[0]
+      link = Nokogiri::HTML(helper.restore_action_link("procurement/indents/amended_indents", indent_item)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/amended/#{indent_item.id}")
       expect(link.attributes["data-method"].value).to eq("delete")
       expect(link.attributes["data-confirm"].value).to eq("Do you want to restore this indent?")
@@ -116,7 +116,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:indent_item) { indent.indent_items.first }
 
     it "creates a amended link for indent item" do
-      link = Nokogiri::HTML(helper.amended_action_link("procurement/amended_indents", indent_item)).children.children.children[0]
+      link = Nokogiri::HTML(helper.amended_action_link("procurement/indents/amended_indents", indent_item)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/amended/#{indent_item.id}")
       expect(link.attributes["data-method"].value).to eq("delete")
       expect(link.attributes["data-confirm"].value).to eq("Do you want to amend this indent?")
@@ -129,7 +129,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
     let(:indent_item) { indent.indent_items.first }
 
     it "creates a cancel link for indent item" do
-      link = Nokogiri::HTML(helper.cancelled_action_link("procurement/pending_indents", indent_item)).children.children.children[0]
+      link = Nokogiri::HTML(helper.cancelled_action_link("procurement/indents/pending_indents", indent_item)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}")
       expect(link.attributes["data-method"].value).to eq("delete")
       expect(link.attributes["data-confirm"].value).to eq("Do you want to cancel this indent?")

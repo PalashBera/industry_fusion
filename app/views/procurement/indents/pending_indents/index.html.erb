@@ -1,14 +1,15 @@
-<% provide(:title, "Amended Indents") %>
-<% provide(:page_title, "Amended Indents") %>
+<% provide(:title, "Pending Indents") %>
+<% provide(:page_title, "Pending Indents") %>
 
 <%= render "shared/page_help" %>
 
 <div class="card">
   <div class="card-body">
-    <%= render partial: "procurement/shared/status_tab", locals: { current_tab: "amended" } %>
+    <%= render partial: "procurement/indents/shared/status_tab", locals: { current_tab: "pending" } %>
 
     <section class="mb-4 d-flex justify-content-between">
       <h3 class="text-muted">Total Count: <%= @total_count %></h3>
+      <%= new_link_btn(controller_name) %>
     </section>
 
     <% if @indent_items.present? %>
@@ -19,7 +20,7 @@
           <% if params[:q].present? %>
             No result found. Please search with proper keywords.
           <% else %>
-            No indent has been added yet. <%= new_link("pending_indents") %>
+            No indent has been added yet. <%= new_link(controller_name) %>
           <% end %>
         </div>
       </div>

@@ -1,11 +1,10 @@
-class Procurement::PendingIndentsController < Procurement::IndentsController
+class Procurement::Indents::PendingIndentsController < Procurement::Indents::HomeController
   def index
     super
   end
 
   def new
-    @indent = Indent.new
-    @indent_item = @indent.indent_items.build
+    super
   end
 
   def show
@@ -13,13 +12,7 @@ class Procurement::PendingIndentsController < Procurement::IndentsController
   end
 
   def create
-    @indent = Indent.new(indent_params)
-
-    if @indent.save
-      redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.created", name: "Indent") }
-    else
-      render "new"
-    end
+    super
   end
 
   def edit
@@ -31,9 +24,7 @@ class Procurement::PendingIndentsController < Procurement::IndentsController
   end
 
   def destroy
-    indent_item = IndentItem.find(params[:id])
-    indent_item.mark_as_cancelled
-    redirect_to procurement_pending_indents_path, flash: { success: t("flash_messages.cancelled", name: "Item item") }
+    super
   end
 
   def print
@@ -62,20 +53,20 @@ class Procurement::PendingIndentsController < Procurement::IndentsController
 
   private
 
-  def indent
-    super
-  end
-
-  def indent_params
-    super
-  end
-
-  def redirect
-    redirect_to procurement_pending_indents_path
+  def redirect_path
+    procurement_pending_indents_path
   end
 
   def scope_method
     "pending"
+  end
+
+  def delete_method
+    "mark_as_cancelled"
+  end
+
+  def destroy_flash_message
+    t("flash_messages.cancelled", name: "Indent")
   end
 
   def auth_verified?

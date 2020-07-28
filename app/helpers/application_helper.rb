@@ -37,8 +37,8 @@ module ApplicationHelper
     end
   end
 
-  def active_class(str)
-    str == controller_name ? t("active") : ""
+  def active_sidebar(str)
+    str == @active_sidebar ? t("active") : ""
   end
 
   def page_help_needed?
@@ -48,10 +48,6 @@ module ApplicationHelper
 
   def approval_active_class(str)
     controller_name.include?(str) ? t("active") : ""
-  end
-
-  def approval_level_type
-    controller_name.split("_")[0]
   end
 
   def set_active_class(menu_item, current_tab)

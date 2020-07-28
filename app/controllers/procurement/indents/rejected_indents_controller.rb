@@ -1,4 +1,4 @@
-class Procurement::RejectedIndentsController < Procurement::IndentsController
+class Procurement::Indents::RejectedIndentsController < Procurement::Indents::HomeController
   def index
     super
   end
@@ -25,16 +25,8 @@ class Procurement::RejectedIndentsController < Procurement::IndentsController
 
   private
 
-  def indent
-    super
-  end
-
-  def indent_params
-    super
-  end
-
-  def redirect
-    redirect_to procurement_rejected_indents_path
+  def redirect_path
+    procurement_rejected_indents_path
   end
 
   def scope_method

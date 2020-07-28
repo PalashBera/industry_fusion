@@ -42,10 +42,10 @@
       <div class="col-lg-2"><label>Note</label></div>
     </section>
 
-    <%= render "procurement/shared/indent_item_fields", f: builder %>
+    <%= render "procurement/indents/shared/indent_item_fields", f: builder %>
   <% end %>
 
-  <%= link_to_add_fields f, :indent_items, "procurement/shared/indent_item_fields" %>
+  <%= link_to_add_fields f, :indent_items, "procurement/indents/shared/indent_item_fields" %>
 
   <div class="form-group mt-3">
     <%= f.submit yield(:button_title), class: "btn btn-primary", data: { disable_with: "Saving..." } %>
