@@ -82,18 +82,18 @@ RSpec.describe ApplicationHelper, type: :helper do
     end
   end
 
-  describe "#active_class" do
-    let(:controller_name) { "brands" }
-
+  describe "#active_sidebar" do
     context "when controller name is same as parameter" do
       it "should return active" do
-        expect(active_class("brands")).to eq(t("active"))
+        @active_sidebar = "brands"
+        expect(active_sidebar("brands")).to eq(t("active"))
       end
     end
 
     context "when controller name is not same as parameter" do
       it "should return blank string" do
-        expect(active_class("home")).to eq("")
+        @active_sidebar = "brands"
+        expect(active_sidebar("home")).to eq("")
       end
     end
   end
@@ -152,14 +152,6 @@ RSpec.describe ApplicationHelper, type: :helper do
       it "should return blank string" do
         expect(approval_active_class("grn")).to eq("")
       end
-    end
-  end
-
-  describe "#approval_level_type" do
-    let(:controller_name) { "indent_approval" }
-
-    it "should return type of controller" do
-      expect(approval_level_type).to eq("indent")
     end
   end
 end

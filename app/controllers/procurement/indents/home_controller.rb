@@ -1,8 +1,9 @@
 require "auth"
 
-class Procurement::IndentsController < Procurement::HomeController
+class Procurement::Indents::HomeController < Procurement::HomeController
   layout "print", only: :print
 
+  before_action { active_sidebar_option("indents") }
   skip_before_action :authenticate_user!, only: %i[email_approval email_rejection]
 
   protected
@@ -20,17 +21,37 @@ class Procurement::IndentsController < Procurement::HomeController
     render "procurement/shared/show"
   end
 
+  def new
+    @indent = Indent.new
+    @indent_item = @indent.indent_items.build
+  end
+
+  def create
+    @indent = Indent.new(indent_params)
+
+    if @indent.save
+      redirect_to redirect_path, flash: { success: t("flash_messages.created", name: "Indent") }
+    else
+      render "new"
+    end
+  end
+
   def edit
     indent
   end
 
   def update
     if indent.update(indent_params)
-      flash[:success] = t("flash_messages.updated", name: "Indent")
-      redirect
+      redirect_to redirect_path, flash: { success: t("flash_messages.updated", name: "Indent") }
     else
       render "edit"
     end
+  end
+
+  def destroy
+    indent_item = IndentItem.find(params[:id])
+    indent_item.public_send(delete_method)
+    redirect_to redirect_path, flash: { success: destroy_flash_message }
   end
 
   def print
@@ -41,8 +62,7 @@ class Procurement::IndentsController < Procurement::HomeController
   def send_for_approval
     item = IndentItem.find(params[:id])
     item.create_approvals && item.send_for_approval
-    flash[:success] = t("flash_messages.created", name: "Approval request")
-    redirect
+    redirect_to redirect_path, flash: { success: t("flash_messages.created", name: "Approval request") }
   end
 
   def indent
@@ -54,11 +74,19 @@ class Procurement::IndentsController < Procurement::HomeController
                                    indent_items_attributes: %i[id item_id cost_center_id make_id uom_id quantity priority note _destroy])
   end
 
-  def redirect
+  def redirect_path
     raise NotImplementedError
   end
 
   def scope_method
+    raise NotImplementedError
+  end
+
+  def delete_method
+    raise NotImplementedError
+  end
+
+  def destroy_flash_message
     raise NotImplementedError
   end
 end
