@@ -8,7 +8,20 @@
     <%= render partial: "procurement/indents/shared/status_tab", locals: { current_tab: "approved" } %>
 
     <section class="mb-4 d-flex justify-content-between">
-      <h3 class="text-muted">Total Count: <%= @total_count %></h3>
+      <h3 class="text-muted mt-2">Total Count: <%= @total_count %></h3>
+
+      <div class="btn-group bulk-action-dropdown hide">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Bulk Actions
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Separated link</a>
+        </div>
+      </div>
     </section>
 
     <% if @indent_items.present? %>
