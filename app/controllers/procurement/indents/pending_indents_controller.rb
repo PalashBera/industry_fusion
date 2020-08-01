@@ -35,22 +35,6 @@ class Procurement::Indents::PendingIndentsController < Procurement::Indents::Hom
     super
   end
 
-  def email_approval
-    if auth_verified?
-      @message = @approval.approve(@user.id)
-    else
-      @message = "Invaid access. Please try again using application."
-    end
-  end
-
-  def email_rejection
-    if auth_verified?
-      @message = @approval.reject(@user.id)
-    else
-      @message = "Invaid access. Please try again using application."
-    end
-  end
-
   private
 
   def redirect_path
@@ -58,7 +42,7 @@ class Procurement::Indents::PendingIndentsController < Procurement::Indents::Hom
   end
 
   def scope_method
-    "pending"
+    "pending_indents"
   end
 
   def delete_method
@@ -67,12 +51,5 @@ class Procurement::Indents::PendingIndentsController < Procurement::Indents::Hom
 
   def destroy_flash_message
     t("flash_messages.cancelled", name: "Indent")
-  end
-
-  def auth_verified?
-    auth = Auth.decode(params[:token])
-    @approval = Approval.find_by(id: auth.first["approval"])
-    @user = User.find_by(id: auth.first["user"])
-    @approval && @user && @approval.user_ids.include?(@user.id.to_s)
   end
 end

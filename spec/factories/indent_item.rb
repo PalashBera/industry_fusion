@@ -4,8 +4,6 @@ FactoryBot.define do
     priority      { IndentItem::PRIORITY_LIST.sample }
     locked        { false }
     status        { "pending" }
-    current_level { 0 }
-    approval_ids  { [] }
     indent
     item
     make

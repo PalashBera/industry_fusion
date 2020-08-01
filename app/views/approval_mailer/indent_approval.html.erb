@@ -1,9 +1,8 @@
 <% provide(:title, "Indent Approval") %>
 <% provide(:company_name, @indent_item.indent.company.name) %>
 
-<% approve_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/procurement/indents/pending/email_approval?token=#{@jwt_token}" %>
-<% reject_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/procurement/indents/pending/email_rejection?token=#{@jwt_token}" %>
-<% details_link = "http://#{@indent_item.organization.subdomain}.lvh.me:3000/procurement/indents/pending/#{@indent_item.indent_id}" %>
+<% approve_link = "http://app.lvh.me:3000/procurement/approval_requests/email_approvals/#{@jwt_token}" %>
+<% reject_link = "http://app.lvh.me:3000/procurement/approval_requests/email_rejections/#{@jwt_token}" %>
 
 <tr>
   <td class="body-title" style="color: #153643; font-family: sans-serif; padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;">
@@ -55,24 +54,6 @@
 
         <td>
           <a href="<%= reject_link %>" target="_blank" class="danger-button" style="background-color: #44525f; color: #FFFFFF; text-decoration: none; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 12px 30px;">Reject</a>
-        </td>
-      </tr>
-    </table>
-  </td>
-</tr>
-
-<tr>
-  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
-    <p>Click on the bellow link to see indent details.</p>
-  </td>
-</tr>
-
-<tr>
-  <td style="padding: 20px 0 20px 0;">
-    <table border="0" cellspacing="0" cellpadding="0">
-      <tr height="45">
-        <td>
-          <a href="<%= details_link %>" target="_blank" class="secondary-button" style="background-color: #97a973; color: #FFFFFF; text-decoration: none; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 12px 30px;">Show Details</a>
         </td>
       </tr>
     </table>

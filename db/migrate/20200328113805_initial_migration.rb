@@ -1,5 +1,19 @@
 class InitialMigration < ActiveRecord::Migration[6.0]
   def change
+    create_table :organizations do |t|
+      t.string   :name,                     null: false
+      t.string   :subdomain,                null: false
+      t.bigint   :fy_start_month,           null: false
+      t.bigint   :fy_end_month,             null: false
+      t.boolean  :archive,                  null: false, default: false
+      t.boolean  :page_help_needed,         null: false, default: true
+      t.boolean  :send_master_notification, null: false, default: true
+      t.bigint   :created_by_id,                         index: true
+      t.bigint   :updated_by_id,                         index: true
+
+      t.timestamps
+    end
+
     create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -62,9 +76,9 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     create_table :vendors do |t|
       ## User Information
-      t.string :first_name,        null: false, default: ""
-      t.string :last_name,         null: false, default: ""
-      t.string :mobile_number,     null: false, default: ""
+      t.string :first_name,    null: false, default: ""
+      t.string :last_name,     null: false, default: ""
+      t.string :mobile_number, null: false, default: ""
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""
@@ -130,242 +144,234 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-  end
 
-  create_table :store_informations do |t|
-    t.bigint   :vendor_id,     index: true,    null: false, foreign_key: true
-    t.string   :name,                          null: false
-    t.string   :address1,                      null: false
-    t.string   :address2,      default: ""
-    t.string   :city,                          null: false
-    t.string   :state,                         null: false
-    t.string   :country,                       null: false
-    t.string   :pin_code,      limit: 6,       null: false
-    t.string   :phone_number,  default: ""
-    t.string   :pan_number,    limit: 10,      null: false
-    t.string   :gstn,          limit: 15,      null: false
+    create_table :store_informations do |t|
+      t.bigint   :vendor_id,     index: true,    null: false, foreign_key: true
+      t.string   :name,                          null: false
+      t.string   :address1,                      null: false
+      t.string   :address2,      default: ""
+      t.string   :city,                          null: false
+      t.string   :state,                         null: false
+      t.string   :country,                       null: false
+      t.string   :pin_code,      limit: 6,       null: false
+      t.string   :phone_number,  default: ""
+      t.string   :pan_number,    limit: 10,      null: false
+      t.string   :gstn,          limit: 15,      null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :organizations do |t|
-    t.string   :name,                                     null: false
-    t.string   :subdomain,                                null: false
-    t.bigint   :fy_start_month,                           null: false
-    t.bigint   :fy_end_month,                             null: false
-    t.boolean  :archive,                  default: false, null: false
-    t.boolean  :page_help_needed,         default: true,  null: false
-    t.boolean  :send_master_notification, default: true,  null: false
-    t.bigint   :created_by_id,            index: true
-    t.bigint   :updated_by_id,            index: true
+    create_table :brands do |t|
+      t.string     :name,                             null: false
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :brands do |t|
-    t.string     :name,                             null: false
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true, null: false
+    create_table :companies do |t|
+      t.string     :name,                             null: false
+      t.string     :short_name,    limit: 3,          null: false
+      t.string     :address1,                         null: false
+      t.string     :address2,      default: ""
+      t.attachment :logo
+      t.string     :city,                             null: false
+      t.string     :state,                            null: false
+      t.string     :country,                          null: false
+      t.string     :pin_code,      limit: 6,          null: false
+      t.string     :phone_number,  default: ""
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :companies do |t|
-    t.string     :name,                             null: false
-    t.string     :short_name,    limit: 3,          null: false
-    t.string     :address1,                         null: false
-    t.string     :address2,      default: ""
-    t.attachment :logo
-    t.string     :city,                             null: false
-    t.string     :state,                            null: false
-    t.string     :country,                          null: false
-    t.string     :pin_code,      limit: 6,          null: false
-    t.string     :phone_number,  default: ""
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true, null: false
+    create_table :warehouses do |t|
+      t.references :company,       foreign_key: true, null: false
+      t.string     :name,                             null: false
+      t.string     :short_name,    limit: 3,          null: false
+      t.string     :address1,                         null: false
+      t.string     :address2,      default: ""
+      t.string     :city,                             null: false
+      t.string     :state,                            null: false
+      t.string     :country,                          null: false
+      t.string     :pin_code,      limit: 6,          null: false
+      t.string     :phone_number,  default: ""
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :warehouses do |t|
-    t.references :company,       foreign_key: true, null: false
-    t.string     :name,                             null: false
-    t.string     :short_name,    limit: 3,          null: false
-    t.string     :address1,                         null: false
-    t.string     :address2,      default: ""
-    t.string     :city,                             null: false
-    t.string     :state,                            null: false
-    t.string     :country,                          null: false
-    t.string     :pin_code,      limit: 6,          null: false
-    t.string     :phone_number,  default: ""
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true, null: false
+    create_table :uoms do |t|
+      t.string     :name,                             null: false
+      t.string     :short_name,    limit: 4,          null: false
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :uoms do |t|
-    t.string     :name,                             null: false
-    t.string     :short_name,    limit: 4,          null: false
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true, null: false
+    create_table :item_groups do |t|
+      t.string     :name,                             null: false
+      t.text       :description,   default: ""
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.string     :hsn_code,      limit: 8
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :item_groups do |t|
-    t.string     :name,                             null: false
-    t.text       :description,   default: ""
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.string     :hsn_code,      limit: 8
-    t.references :organization,  foreign_key: true, null: false
+    create_table :cost_centers do |t|
+      t.string     :name,                             null: false
+      t.text       :description,   default: ""
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :cost_centers do |t|
-    t.string     :name,                             null: false
-    t.text       :description,   default: ""
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true, null: false
+    create_table :items do |t|
+      t.references :item_group,    foreign_key: true,            null: false
+      t.references :uom,           foreign_key: true,            null: false
+      t.references :secondary_uom, foreign_key: { to_table: :uoms }
+      t.string     :name,                                        null: false
+      t.decimal    :primary_quantity,   precision: 10, scale: 2
+      t.decimal    :secondary_quantity, precision: 10, scale: 2
+      t.boolean    :archive,       default: false,               null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true,            null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :items do |t|
-    t.references :item_group,    foreign_key: true,            null: false
-    t.references :uom,           foreign_key: true,            null: false
-    t.references :secondary_uom, foreign_key: { to_table: :uoms }
-    t.string     :name,                                        null: false
-    t.decimal    :primary_quantity,   precision: 10, scale: 2
-    t.decimal    :secondary_quantity, precision: 10, scale: 2
-    t.boolean    :archive,       default: false,               null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true,            null: false
+    create_table :makes do |t|
+      t.references :brand,         foreign_key: true, null: false
+      t.references :item,          foreign_key: true, null: false
+      t.string     :cat_no,        default: ""
+      t.boolean    :archive,       default: false,    null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+      t.references :organization,  foreign_key: true, null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :makes do |t|
-    t.references :brand,         foreign_key: true, null: false
-    t.references :item,          foreign_key: true, null: false
-    t.string     :cat_no,        default: ""
-    t.boolean    :archive,       default: false,    null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
-    t.references :organization,  foreign_key: true, null: false
+    create_table :indentors do |t|
+      t.string :name, null: false
+      t.boolean :archive, default: false, null: false
+      t.references :organization, foreign_key: true, null: false
+      t.bigint  :created_by_id, index: true
+      t.bigint  :updated_by_id, index: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :indentors do |t|
-    t.string :name, null: false
-    t.boolean :archive, default: false, null: false
-    t.references :organization, foreign_key: true, null: false
-    t.bigint  :created_by_id, index: true
-    t.bigint  :updated_by_id, index: true
+    create_table :indents do |t|
+      t.references :company,          foreign_key: true, null: false
+      t.references :warehouse,        foreign_key: true, null: false
+      t.bigint     :serial,                          null: false
+      t.date       :requirement_date,                null: false
+      t.references :indentor,         foreign_key: true
+      t.references :organization, foreign_key: true, null: false
+      t.bigint     :created_by_id,    index: true
+      t.bigint     :updated_by_id,    index: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :indents do |t|
-    t.references :company,          foreign_key: true, null: false
-    t.references :warehouse,        foreign_key: true, null: false
-    t.bigint     :serial,                          null: false
-    t.date       :requirement_date,                null: false
-    t.references :indentor,         foreign_key: true
-    t.references :organization, foreign_key: true, null: false
-    t.bigint     :created_by_id,    index: true
-    t.bigint     :updated_by_id,    index: true
+    create_table :approval_requests do |t|
+      t.bigint   :approval_requestable_id, null: false
+      t.string   :approval_requestable_type, null: false
+      t.string   :action_type
+      t.datetime :action_taken_at
+      t.bigint   :action_taken_by_id
+      t.bigint   :next_approval_request_id
+      t.bigint   :created_by_id, index: true
+      t.bigint   :updated_by_id, index: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :indent_items do |t|
-    t.references :indent,        foreign_key: true,  null: false
-    t.references :item,          foreign_key: true,  null: false
-    t.references :uom,           foreign_key: true,  null: false
-    t.references :cost_center,   foreign_key: true,  null: false
-    t.decimal    :quantity,                          null: false, precision: 12, scale: 2
-    t.string     :priority,      default: "default", null: false
-    t.references :make,          foreign_key: true
-    t.string     :note,          default: ""
-    t.boolean    :locked,        default: false,     null: false
-    t.string     :status,        default: "pending", null: false
-    t.integer    :current_level, default: 0,         null: false
-    t.text       :approval_ids,  array: true, default: []
-    t.references :organization,  foreign_key: true,  null: false
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
+    create_table :approval_request_users do |t|
+      t.references :approval_request, null: false, foreign_key: true
+      t.references :user,             null: false, foreign_key: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :warehouse_locations do |t|
-    t.references :warehouse,     null: false,    foreign_key: true
-    t.string     :name,          null: false
-    t.boolean    :archive,       default: false, null: false
-    t.references :organization,  null: false,    foreign_key: true
-    t.bigint     :updated_by_id, index: true
-    t.bigint     :created_by_id, index: true
+    create_table :indent_items do |t|
+      t.references :indent,           foreign_key: true,  null: false
+      t.references :item,             foreign_key: true,  null: false
+      t.references :uom,              foreign_key: true,  null: false
+      t.references :cost_center,      foreign_key: true,  null: false
+      t.decimal    :quantity,                             null: false, precision: 12, scale: 2
+      t.string     :priority,         default: "default", null: false
+      t.references :make,             foreign_key: true
+      t.string     :note,             default: ""
+      t.boolean    :locked,           default: false,     null: false
+      t.string     :status,           default: "pending", null: false
+      t.references :approval_request, foreign_key: true
+      t.references :organization,     foreign_key: true,  null: false
+      t.bigint     :created_by_id,    index: true
+      t.bigint     :updated_by_id,    index: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :reorder_levels do |t|
-    t.references :item,          null: false,    foreign_key: true
-    t.references :warehouse,     null: false,    foreign_key: true
-    t.decimal    :quantity,      null: false,    precision: 10, scale: 2
-    t.string     :priority,      null: false,    default: "default"
-    t.boolean    :archive,       default: false, null: false
-    t.references :organization,  null: false,    foreign_key: true
-    t.bigint     :updated_by_id, index: true
-    t.bigint     :created_by_id, index: true
+    create_table :warehouse_locations do |t|
+      t.references :warehouse,     null: false,    foreign_key: true
+      t.string     :name,          null: false
+      t.boolean    :archive,       default: false, null: false
+      t.references :organization,  null: false,    foreign_key: true
+      t.bigint     :updated_by_id, index: true
+      t.bigint     :created_by_id, index: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :page_helps do |t|
-    t.string :controller_name, null: false
-    t.string :action_name,     null: false
-    t.string :help_text,       null: false
-    t.string :help_type,       null: false
+    create_table :reorder_levels do |t|
+      t.references :item,          null: false,    foreign_key: true
+      t.references :warehouse,     null: false,    foreign_key: true
+      t.decimal    :quantity,      null: false,    precision: 10, scale: 2
+      t.string     :priority,      null: false,    default: "default"
+      t.boolean    :archive,       default: false, null: false
+      t.references :organization,  null: false,    foreign_key: true
+      t.bigint     :updated_by_id, index: true
+      t.bigint     :created_by_id, index: true
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :approvals do |t|
-    t.references :indent_item, null: false, foreign_key: true
-    t.integer    :level,       null: false
-    t.text       :user_ids,    array: true, default: []
-    t.string     :action_type
-    t.datetime   :action_taken_at
-    t.bigint     :action_taken_by_id
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
+    create_table :page_helps do |t|
+      t.string :controller_name, null: false
+      t.string :action_name,     null: false
+      t.string :help_text,       null: false
+      t.string :help_type,       null: false
 
-    t.timestamps
-  end
+      t.timestamps
+    end
 
-  create_table :item_images do |t|
-    t.references :item,          null: false, foreign_key: true
-    t.attachment :image
-    t.bigint     :created_by_id, index: true
-    t.bigint     :updated_by_id, index: true
+    create_table :item_images do |t|
+      t.references :item,          null: false, foreign_key: true
+      t.attachment :image
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
 
-    t.timestamps
+      t.timestamps
+    end
   end
 end

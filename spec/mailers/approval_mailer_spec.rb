@@ -1,7 +1,10 @@
 require "rails_helper"
 
 RSpec.describe ApprovalMailer, type: :mailer do
-  let(:user) { create(:user) }
+  let(:user)                  { create(:user) }
+  let(:indent_item)           { create(:indent_item) }
+  let(:approval_request)      { create(:approval_request, approval_requestable_id: indent_item.id) }
+  let(:approval_request_user) { create(:approval_request_user, approval_request_id: approval_request.id, user_id: user.id) }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -9,8 +12,7 @@ RSpec.describe ApprovalMailer, type: :mailer do
   end
 
   describe "#indent_approval" do
-    let(:indent_item) { create(:indent_item) }
-    let(:mail)        { ApprovalMailer.indent_approval(indent_item.id, 1, user.id, user.id) }
+    let(:mail) { ApprovalMailer.indent_approval(approval_request_user.id, user.id) }
 
     it "renders the headers" do
       expect(mail.subject).to eq(I18n.t("mail.indent_approval.subject", serial: indent_item.indent_serial_number))

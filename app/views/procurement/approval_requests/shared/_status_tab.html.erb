@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs mb-5">
+  <li class="nav-item">
+    <%= link_to "Indents", procurement_approval_requests_indents_path, class: "nav-link #{set_active_class("indents", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Quotation Comparison", "#", class: "nav-link #{set_active_class("qcs", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Purchase Orders", "#", class: "nav-link #{set_active_class("pos", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "Good Receive Notes", "#", class: "nav-link #{set_active_class("grns", current_tab)}" %>
+  </li>
+</ul>
