@@ -23,7 +23,7 @@ RSpec.describe ApprovalLevel, type: :model do
   end
 
   describe "#enums" do
-    it { should define_enum_for(:approval_type).with_values(indent: "indent", qc: "qc", po: "po", grn: "grn").backed_by_column_of_type(:string) }
+    it { should define_enum_for(:approval_type).with_values(indents: "indents", qcs: "qcs", pos: "pos", grns: "grns").backed_by_column_of_type(:string) }
   end
 
   describe "#associations" do

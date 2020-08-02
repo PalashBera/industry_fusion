@@ -61,10 +61,10 @@ RSpec.describe LinksHelper, type: :helper do
 
   describe "#delete_link" do
     it "creates a button link for delete records" do
-      link = Nokogiri::HTML(helper.delete_link("admin/indent_approval_levels", approval_level)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/admin/indent_approval_levels/#{approval_level.id}")
+      link = Nokogiri::HTML(helper.delete_link("admin/approval_levels/indents", approval_level)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/admin/approval_levels/indents/#{approval_level.id}")
       expect(link.attributes["data-method"].value).to eq("delete")
-      expect(link.attributes["data-confirm"].value).to eq("Are you sure?")
+      expect(link.attributes["data-confirm"].value).to eq("Are you sure you want to delete?")
       expect(link.attributes["class"].value).to eq("text-danger")
     end
   end

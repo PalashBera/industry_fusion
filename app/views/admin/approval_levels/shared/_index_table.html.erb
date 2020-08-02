@@ -1,0 +1,12 @@
+<% @approval_levels.each.with_index(1) do |approval_level, index| %>
+  <section class="d-flex justify-content-between">
+    <h5 class="mb-3"><%= "#{index.ordinalize} Approval Level" %></h5>
+
+    <section>
+      <%= edit_link(controller_name, approval_level) %> |
+      <%= delete_link(controller_name, approval_level) %>
+    </section>
+  </section>
+
+  <%= render "admin/approval_levels/shared/level_users_table", approval_level: approval_level %>
+<% end %>

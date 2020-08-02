@@ -109,7 +109,7 @@ RSpec.describe IndentItem, type: :model do
     end
 
     context "when approval is present" do
-      let!(:approval_level) { create(:approval_level, approval_type: "indent") }
+      let!(:approval_level) { create(:approval_level, approval_type: "indents") }
 
       it "should send approval request mail" do
         indent_item.create_approvals
@@ -133,7 +133,7 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#create_approvals" do
-    let!(:approval_level) { create(:approval_level, approval_type: "indent") }
+    let!(:approval_level) { create(:approval_level, approval_type: "indents") }
 
     it "should update approval_ids" do
       indent_item.create_approvals

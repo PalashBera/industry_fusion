@@ -1,8 +1,6 @@
 class LevelUser < ApplicationRecord
   include UserTrackingModule
 
-  acts_as_tenant(:organization)
-
   belongs_to :approval_level
   belongs_to :user
 

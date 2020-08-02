@@ -2,7 +2,7 @@ class ApprovalLevel < ApplicationRecord
   include UserTrackingModule
   include ModalFormModule
 
-  APPROVAL_TYPES = %w[indent qc po grn].freeze
+  APPROVAL_TYPES = %w[indents qcs pos grns].freeze
   enum approval_type: Hash[APPROVAL_TYPES.map { |item| [item, item] }]
 
   acts_as_tenant(:organization)

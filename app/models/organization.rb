@@ -22,7 +22,6 @@ class Organization < ApplicationRecord
   has_many :warehouse_locations
   has_many :reorder_levels
   has_many :approval_levels
-  has_many :level_users
   has_many :vendors, through: :vendorships
 
   validates :name, presence: true, length: { maximum: 255 }

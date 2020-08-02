@@ -10,7 +10,6 @@ RSpec.describe LevelUser, type: :model do
   end
 
   it_behaves_like "user_tracking_module"
-  it_behaves_like "organization_association_module"
   it_behaves_like "timestamp_module"
 
   describe "#active_record_columns" do

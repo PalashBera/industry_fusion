@@ -225,14 +225,12 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   create_table "level_users", force: :cascade do |t|
     t.bigint "approval_level_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "organization_id", null: false
     t.bigint "updated_by_id"
     t.bigint "created_by_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["approval_level_id"], name: "index_level_users_on_approval_level_id"
     t.index ["created_by_id"], name: "index_level_users_on_created_by_id"
-    t.index ["organization_id"], name: "index_level_users_on_organization_id"
     t.index ["updated_by_id"], name: "index_level_users_on_updated_by_id"
     t.index ["user_id"], name: "index_level_users_on_user_id"
   end
@@ -496,7 +494,6 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "items", "uoms"
   add_foreign_key "items", "uoms", column: "secondary_uom_id"
   add_foreign_key "level_users", "approval_levels"
-  add_foreign_key "level_users", "organizations"
   add_foreign_key "level_users", "users"
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"

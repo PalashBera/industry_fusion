@@ -68,7 +68,7 @@ class IndentItem < ApplicationRecord
   def create_approvals
     approval_items = []
 
-    ApprovalLevel.indent.each.with_index(1) do |level, index|
+    ApprovalLevel.indents.each.with_index(1) do |level, index|
       approval_items << approvals.create(level: index, user_ids: level.user_ids)
     end
 

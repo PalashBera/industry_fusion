@@ -128,8 +128,8 @@
             <% end %>
           </li>
 
-          <li class="<%= approval_active_class("approval_levels") %>">
-            <%= link_to admin_indent_approval_levels_path, class: "sidenav-item-link" do %>
+          <li class="<%= active_sidebar("approval_levels") %>">
+            <%= link_to admin_approval_levels_indents_path, class: "sidenav-item-link" do %>
               <i class="mdi mdi-check-decagram"></i>
               <span class="nav-text">Approval Levels</span>
             <% end %>
