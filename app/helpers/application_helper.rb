@@ -46,10 +46,6 @@ module ApplicationHelper
     [current_organization.page_help_needed? && help_message.present?, help_message]
   end
 
-  def approval_active_class(str)
-    controller_name.include?(str) ? t("active") : ""
-  end
-
   def set_active_class(menu_item, current_tab)
     current_tab == menu_item ? t("active") : ""
   end

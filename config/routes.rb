@@ -139,10 +139,12 @@ Rails.application.routes.draw do
 
       resources :organizations, only: [:edit, :update]
 
-      resources :indent_approval_levels, except: :show
-      resources :qc_approval_levels,     except: :show
-      resources :po_approval_levels,     except: :show
-      resources :grn_approval_levels,    except: :show
+      namespace :approval_levels do
+        resources :indents, except: :show
+        resources :qcs, except: :show
+        resources :pos, except: :show
+        resources :grns, except: :show
+      end
     end
 
     namespace :procurement do

@@ -48,7 +48,7 @@ module LinksHelper
     link_to raw('<i class="mdi mdi-delete"></i> Delete'),
             url_for(controller: controller_name, action: "destroy", id: resource.id),
             method: :delete,
-            data: { confirm: "Are you sure?" },
+            data: { confirm: "Are you sure you want to delete?" },
             title: "Delete #{controller_name.singularize.humanize.titleize}",
             class: "text-danger"
   end

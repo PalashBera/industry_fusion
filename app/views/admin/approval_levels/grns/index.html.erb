@@ -1,0 +1,22 @@
+<% provide(:title, "GRN Approval Levels") %>
+<% provide(:page_title, "GRN Approval Levels") %>
+
+<div class="card">
+  <div class="card-body">
+    <%= render partial: "admin/approval_levels/shared/status_tab", locals: { current_tab: "grns" } %>
+
+    <div class="text-md-right mb-3">
+      <%= new_link_btn(controller_name) %>
+    </div>
+
+    <% if @approval_levels.present? %>
+      <%= render "admin/approval_levels/shared/index_table" %>
+    <% else %>
+      <div class="card">
+        <div class="card-body text-center">
+          No <%= controller_name.singularize %> approval level has been added yet. <%= new_link(controller_name) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

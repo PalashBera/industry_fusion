@@ -69,7 +69,7 @@ class User < ApplicationRecord
         organization_id: organization_id,
         created_by_id: id,
         level_users_attributes: [
-          { user_id: id, organization_id: organization_id, created_by_id: id }
+          { user_id: id, created_by_id: id }
         ]
       )
     end

@@ -125,7 +125,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     create_table :level_users do |t|
       t.references :approval_level, null: false, foreign_key: true
       t.references :user,           null: false, foreign_key: true
-      t.references :organization,   null: false, foreign_key: true
       t.bigint     :updated_by_id,  index: true
       t.bigint     :created_by_id,  index: true
 

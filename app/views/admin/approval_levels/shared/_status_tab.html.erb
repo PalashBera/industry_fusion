@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs mb-5">
+  <li class="nav-item">
+    <%= link_to "Indent", admin_approval_levels_indents_path, class: "nav-link #{set_active_class("indents", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "QC", admin_approval_levels_qcs_path, class: "nav-link #{set_active_class("qcs", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "PO", admin_approval_levels_pos_path, class: "nav-link #{set_active_class("pos", current_tab)}" %>
+  </li>
+
+  <li class="nav-item">
+    <%= link_to "GRN", admin_approval_levels_grns_path, class: "nav-link #{set_active_class("grns", current_tab)}" %>
+  </li>
+</ul>
