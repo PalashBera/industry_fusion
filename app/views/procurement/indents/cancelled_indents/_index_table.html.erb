@@ -2,13 +2,13 @@
   <table id="records_table" class="table table-hover indent-table" width="100%">
     <thead>
       <tr>
-        <th scope="col">Serial</th>
-        <th scope="col">Item</th>
-        <th scope="col">Make</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Cost&nbsp;Center</th>
-        <th scope="col">Requirement&nbsp;Date</th>
-        <th scope="col">Priority</th>
+        <th scope="col"><%= sort_link @search, :indent_serial, "Serial" %></th>
+        <th scope="col"><%= sort_link @search, :item_name, "Item" %></th>
+        <th scope="col"><%= sort_link @search, :make_brand_name, "Make" %></th>
+        <th scope="col"><%= sort_link @search, :quantity, "Quantity" %></th>
+        <th scope="col"><%= sort_link @search, :cost_center_name, raw("Cost&nbsp;Center") %></th>
+        <th scope="col"><%= sort_link @search, :indent_requirement_date, raw("Requirement&nbsp;Date") %></th>
+        <th scope="col"><%= sort_link @search, :priority, "Priority" %></th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
