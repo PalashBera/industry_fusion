@@ -27,7 +27,11 @@ class IndentItem < ApplicationRecord
   delegate :requirement_date,  to: :indent,      prefix: :indent
   delegate :name,              to: :item,        prefix: :item
   delegate :short_name,        to: :uom,         prefix: :uom
+  delegate :brand_name,        to: :make,        prefix: true
   delegate :name,              to: :cost_center, prefix: :cost_center
+  delegate :company_name,      to: :indent
+  delegate :warehouse_name,    to: :indent
+  delegate :indentor_name,     to: :indent
 
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
   validates :priority, presence: true
@@ -39,7 +43,7 @@ class IndentItem < ApplicationRecord
   has_paper_trail ignore: %i[created_at updated_at locked]
 
   def self.included_resources
-    includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)
+    includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)
   end
 
   def quantity_with_uom

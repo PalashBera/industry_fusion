@@ -1,5 +1,6 @@
 class Procurement::Indents::HomeController < Procurement::HomeController
   layout "print", only: :print
+  include IndentExportable
 
   before_action { active_sidebar_option("indents") }
 

@@ -1,0 +1,29 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  header_style = style.add_style(bg_color: "EFC376", border: Axlsx::STYLE_THIN_BORDER, alignment: { horizontal: :center })
+  row_style = style.add_style(border: Axlsx::STYLE_THIN_BORDER)
+  bg_red = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "FF0000", alignment: { horizontal: :center })
+  bg_green = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "00FF00", alignment: { horizontal: :center })
+
+  wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
+    sheet.add_row %w[Serial Company Warehouse Indentor Item Maker Quantity RequirementDate CostCenter Priority Note Status], style: header_style
+
+    @resources.each do |resource|
+      sheet.add_row [
+        resource.indent_serial_number,
+        resource.company_name,
+        resource.warehouse_name,
+        resource.indentor_name,
+        resource.item_name,
+        resource.make_brand_name,
+        resource.quantity_with_uom,
+        I18n.l(resource.indent_requirement_date),
+        resource.cost_center_name,
+        resource.display_priority,
+        resource.note,
+        resource.display_status
+      ]
+    end
+  end
+end
