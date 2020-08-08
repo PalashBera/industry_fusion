@@ -6,6 +6,7 @@
     <td><%= item.quantity_with_uom %></td>
     <td><%= item.cost_center_name %></td>
     <td><%= I18n.l(item.indent_requirement_date) %></td>
+    <td><%= note_display_link(controller_name, item, item.indent.id) %></td>
     <td><%= item.display_priority %></td>
     <td class="text-center">
       <div class="dropdown">

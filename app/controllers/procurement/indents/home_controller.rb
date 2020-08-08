@@ -14,8 +14,9 @@ class Procurement::Indents::HomeController < Procurement::HomeController
   end
 
   def show
-    indent
-    render "procurement/shared/show"
+    indent unless params[:indent_item_id]
+    @indent_item = IndentItem.find_by(id: params[:indent_item_id]) if params[:indent_item_id]
+    render "procurement/indents/shared/show" unless request.xhr?
   end
 
   def new
