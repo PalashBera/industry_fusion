@@ -7,7 +7,7 @@ wb.styles do |style|
   bg_green = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "00FF00", alignment: { horizontal: :center })
 
   wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
-    sheet.add_row %w[Serial Company Warehouse Indentor Item Maker Quantity RequirementDate CostCenter Priority Note Status], style: header_style
+    sheet.add_row %w[Serial Company Warehouse Indentor Item Maker Quantity Requirement\ Date Cost\ Center Priority Note Status], style: header_style
 
     @resources.each do |resource|
       sheet.add_row [
