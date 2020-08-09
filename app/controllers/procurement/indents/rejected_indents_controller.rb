@@ -23,6 +23,10 @@ class Procurement::Indents::RejectedIndentsController < Procurement::Indents::Ho
     super
   end
 
+  def export
+    super
+  end
+
   private
 
   def redirect_path

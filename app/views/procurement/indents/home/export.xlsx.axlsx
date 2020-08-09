@@ -9,20 +9,20 @@ wb.styles do |style|
   wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
     sheet.add_row %w[Serial Company Warehouse Indentor Item Maker Quantity Requirement\ Date Cost\ Center Priority Note Status], style: header_style
 
-    @resources.each do |resource|
+    @indent_items.each do |indent_item|
       sheet.add_row [
-        resource.indent_serial_number,
-        resource.company_name,
-        resource.warehouse_name,
-        resource.indentor_name,
-        resource.item_name,
-        resource.make_brand_name,
-        resource.quantity_with_uom,
-        I18n.l(resource.indent_requirement_date),
-        resource.cost_center_name,
-        resource.display_priority,
-        resource.note,
-        resource.display_status
+        indent_item.indent_serial_number,
+        indent_item.company_name,
+        indent_item.warehouse_name,
+        indent_item.indentor_name,
+        indent_item.item_name,
+        indent_item.brand_details,
+        indent_item.quantity_with_uom,
+        I18n.l(indent_item.indent_requirement_date),
+        indent_item.cost_center_name,
+        indent_item.display_priority,
+        indent_item.note,
+        indent_item.display_status
       ]
     end
   end

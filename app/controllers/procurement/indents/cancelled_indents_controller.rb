@@ -15,6 +15,10 @@ class Procurement::Indents::CancelledIndentsController < Procurement::Indents::H
     super
   end
 
+  def export
+    super
+  end
+
   private
 
   def scope_method

@@ -1,7 +1,7 @@
 module LinksHelper
   def excel_export_btn(controller_name)
     link_to raw('<i class="fas fa-file-export"></i><span class="d-none d-md-inline-block ml-1">Export</span>'),
-            url_for(controller: controller_name, action: "export", format: "xlsx", params: params.to_unsafe_h),
+            url_for(controller: controller_name, action: "export", format: "xlsx", params: { q: params[:q]&.to_unsafe_h.to_h }),
             title: "Export #{controller_name.humanize.titleize}",
             class: "btn btn-dark"
   end

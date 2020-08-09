@@ -1,6 +1,5 @@
 class Procurement::Indents::HomeController < Procurement::HomeController
   layout "print", only: :print
-  include IndentExportable
 
   before_action { active_sidebar_option("indents") }
 
@@ -63,6 +62,17 @@ class Procurement::Indents::HomeController < Procurement::HomeController
     item.send_approval_request_mails
     item.mark_as_approval_pending
     redirect_to redirect_path, flash: { success: t("flash_messages.created", name: "Approval request") }
+  end
+
+  def export
+    @search = IndentItem.ransack(params[:q])
+    @indent_items = @search.result.public_send(scope_method).included_resources
+
+    respond_to do |format|
+      format.xlsx do
+        render xlsx: "export", filename: "#{controller_name.underscore}_#{I18n.l(Date.today)}.xlsx", xlsx_created_at: Time.now, xlsx_author: current_user.full_name
+      end
+    end
   end
 
   def indent

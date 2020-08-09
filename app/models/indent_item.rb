@@ -27,7 +27,6 @@ class IndentItem < ApplicationRecord
   delegate :requirement_date,  to: :indent,      prefix: :indent
   delegate :name,              to: :item,        prefix: :item
   delegate :short_name,        to: :uom,         prefix: :uom
-  delegate :brand_name,        to: :make,        prefix: true
   delegate :name,              to: :cost_center, prefix: :cost_center
   delegate :company_name,      to: :indent
   delegate :warehouse_name,    to: :indent

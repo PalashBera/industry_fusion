@@ -15,6 +15,10 @@ class Procurement::Indents::ApprovedIndentsController < Procurement::Indents::Ho
     super
   end
 
+  def export
+    super
+  end
+
   private
 
   def scope_method
