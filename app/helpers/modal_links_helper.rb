@@ -47,11 +47,19 @@ module ModalLinksHelper
             class: "ml-1"
   end
 
-  def note_display_link(controller_name, item, indent_id)
-    link_to item.note.present? ? raw('<i class="mdi mdi-note" style="color: #FF0000;"></i>') : raw('<i class="mdi mdi-note-outline" style="color: #742ed3;"></i>'),
-            url_for(controller: controller_name, action: "show", indent_item_id: item.id, id: indent_id),
+  def active_note_display_link(item)
+    link_to raw('<i class="mdi mdi-note"></i>'),
+            procurement_indent_item_path(item),
             remote: true,
             title: "Show Note",
-            class: "ml-1"
+            class: "ml-1 active-note-link"
+  end
+
+  def disabled_note_display_link(item)
+    link_to raw('<i class="mdi mdi-note"></i>'),
+            procurement_indent_item_path(item),
+            remote: true,
+            title: "No note",
+            class: "ml-1 disabled-note-link"
   end
 end

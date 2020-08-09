@@ -74,6 +74,15 @@ table.table {
   }
 }
 
+.disabled-note-link {
+  color: #555555;
+  pointer-events: none;
+}
+
+.active-note-link {
+  color: #FF0000;
+}
+
 .delete-image-btn {
   position: absolute;
   right: 0px;
