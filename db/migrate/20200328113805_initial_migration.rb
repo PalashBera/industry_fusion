@@ -373,5 +373,55 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    create_table :rfqs do |t|
+      t.references :organization,  null: false, foreign_key: true
+      t.references :company,       null: false, foreign_key: true
+      t.references :warehouse,     null: false, foreign_key: true
+      t.integer    :serial,        null: false
+      t.string     :serial_number, null: false
+      t.string     :status,        null: false, default: "pending"
+      t.text       :note,          default: ""
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+
+      t.timestamps
+    end
+
+    create_table :rfq_items do |t|
+      t.references :rfq,               null: false, foreign_key: true
+      t.references :indent_item,       null: false, foreign_key: true
+      t.string     :name,              null: false, default: ""
+      t.string     :brand_details,                  default: ""
+      t.decimal    :quantity,          null: false, precision: 10,    scale: 2
+      t.string     :note,                           default: ""
+      t.bigint     :created_by_id,                  index: true
+      t.bigint     :updated_by_id,                  index: true
+
+      t.timestamps
+    end
+
+    create_table :rfq_vendors do |t|
+      t.references :rfq,                      null: false, foreign_key: true
+      t.bigint     :vendor_id,                null: false, foreign_key: true, index: true
+      t.string     :email,                    null: false
+      t.string     :first_name,               null: false
+      t.string     :last_name,                null: false
+      t.string     :mobile_number,            null: false
+      t.string     :store_name,               null: false
+      t.string     :address1,                 null: false
+      t.string     :address2,     default: ""
+      t.string     :city,                     null: false
+      t.string     :state,                    null: false
+      t.string     :country,                  null: false
+      t.string     :pin_code,     limit: 6,   null: false
+      t.string     :phone_number, default: ""
+      t.string     :pan_number,   limit: 10,  null: false
+      t.string     :gstn,         limit: 15,  null: false
+      t.bigint     :created_by_id,                         index: true
+      t.bigint     :updated_by_id,                         index: true
+
+      t.timestamps
+    end
   end
 end

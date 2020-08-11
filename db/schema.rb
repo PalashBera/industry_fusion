@@ -303,6 +303,69 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["warehouse_id"], name: "index_reorder_levels_on_warehouse_id"
   end
 
+  create_table "rfq_items", force: :cascade do |t|
+    t.bigint "rfq_id", null: false
+    t.bigint "indent_item_id", null: false
+    t.string "name", default: "", null: false
+    t.string "brand_details", default: ""
+    t.decimal "quantity", precision: 10, scale: 2, null: false
+    t.string "note", default: ""
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_rfq_items_on_created_by_id"
+    t.index ["indent_item_id"], name: "index_rfq_items_on_indent_item_id"
+    t.index ["rfq_id"], name: "index_rfq_items_on_rfq_id"
+    t.index ["updated_by_id"], name: "index_rfq_items_on_updated_by_id"
+  end
+
+  create_table "rfq_vendors", force: :cascade do |t|
+    t.bigint "rfq_id", null: false
+    t.bigint "vendor_id", null: false
+    t.string "email", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "mobile_number", null: false
+    t.string "store_name", null: false
+    t.string "address1", null: false
+    t.string "address2", default: ""
+    t.string "city", null: false
+    t.string "state", null: false
+    t.string "country", null: false
+    t.string "pin_code", limit: 6, null: false
+    t.string "phone_number", default: ""
+    t.string "pan_number", limit: 10, null: false
+    t.string "gstn", limit: 15, null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_rfq_vendors_on_created_by_id"
+    t.index ["rfq_id"], name: "index_rfq_vendors_on_rfq_id"
+    t.index ["updated_by_id"], name: "index_rfq_vendors_on_updated_by_id"
+    t.index ["vendor_id"], name: "index_rfq_vendors_on_vendor_id"
+  end
+
+  create_table "rfqs", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.integer "serial", null: false
+    t.string "serial_number", null: false
+    t.string "status", default: "pending", null: false
+    t.text "note", default: ""
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_rfqs_on_company_id"
+    t.index ["created_by_id"], name: "index_rfqs_on_created_by_id"
+    t.index ["organization_id"], name: "index_rfqs_on_organization_id"
+    t.index ["updated_by_id"], name: "index_rfqs_on_updated_by_id"
+    t.index ["warehouse_id"], name: "index_rfqs_on_warehouse_id"
+  end
+
   create_table "store_informations", force: :cascade do |t|
     t.bigint "vendor_id", null: false
     t.string "name", null: false
@@ -511,6 +574,12 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "reorder_levels", "items"
   add_foreign_key "reorder_levels", "organizations"
   add_foreign_key "reorder_levels", "warehouses"
+  add_foreign_key "rfq_items", "indent_items"
+  add_foreign_key "rfq_items", "rfqs"
+  add_foreign_key "rfq_vendors", "rfqs"
+  add_foreign_key "rfqs", "companies"
+  add_foreign_key "rfqs", "organizations"
+  add_foreign_key "rfqs", "warehouses"
   add_foreign_key "uoms", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "vendorships", "organizations"

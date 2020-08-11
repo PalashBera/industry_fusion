@@ -22,6 +22,7 @@ class Organization < ApplicationRecord
   has_many :reorder_levels
   has_many :approval_levels
   has_many :vendors, through: :vendorships
+  has_many :rfqs
 
   validates :name, presence: true, length: { maximum: 255 }
   validates :subdomain, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }

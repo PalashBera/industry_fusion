@@ -31,6 +31,35 @@ user2 = User.create!(
 )
 
 5.times do |t|
+  vendor = Vendor.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    mobile_number: Faker::Number.number(digits: 10).to_s,
+    email: Faker::Internet.email,
+    password: "123456",
+    password_confirmation: "123456",
+    confirmation_sent_at: Time.current,
+    confirmed_at: Time.current + 5.minutes,
+    invitation_accepted_at: Time.now
+  )
+
+  StoreInformation.new(
+    vendor_id: vendor.id,
+    name: "Store ##{t}",
+    address1: Faker::Address.mail_box,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: Faker::Address.country,
+    pin_code: Faker::Number.number(digits: 6).to_s,
+    phone_number: Faker::PhoneNumber.phone_number_with_country_code,
+    pan_number: "TAVPR0507C",
+    gstn: "29AAFCC9980M1ZR"
+  ).save(validate: false)
+end
+
+organization.vendors << Vendor.last(5)
+
+5.times do |t|
   User.current_user = [user1, user2].sample
   company_name = Faker::Company.name + "+" + t.to_s
 
@@ -176,6 +205,65 @@ end
     warehouse_id: warehouse.id,
     indent_items_attributes: generate_indent_items_attributes
   )
+end
+
+IndentItem.limit(10).update_all(status: "approved")
+
+20.times do |t|
+  User.current_user = [user1, user2].sample
+  Organization.current_organization = organization
+  company = organization.companies.sample
+  warehouse = company.warehouses.sample
+
+  rfq = Rfq.new(
+    organization_id: organization.id,
+    company_id: company.id,
+    warehouse_id: warehouse.id,
+    serial: t + 1,
+    note: "It will be best if you can give the items free of cost"
+  )
+
+  rfq.serial_number = rfq.__send__(:generate_serial_number)
+  rfq.save(validate: false)
+
+  rfq = Rfq.last
+
+  [1, 2].sample.times do
+    indent_item = IndentItem.approved.sample
+
+    RfqItem.create!(
+      rfq_id: rfq.id,
+      indent_item_id: indent_item.id,
+      name: indent_item.item.name,
+      brand_details: indent_item.brand_details,
+      quantity: indent_item.quantity,
+      note: "Best quality"
+    )
+  end
+
+  [2, 3, 4].sample.times do
+    vendor = organization.vendors.sample
+    store = vendor.store_information
+
+    RfqVendor.create!(
+      rfq_id: rfq.id,
+      vendor_id: vendor.id,
+      email: vendor.email,
+      first_name: vendor.first_name,
+      last_name: vendor.last_name,
+      mobile_number: vendor.mobile_number,
+      store_name: store.name,
+      address1: store.address1,
+      address2: store.address2,
+      city: store.city,
+      state: store.state,
+      country: store.country,
+      pin_code: store.pin_code,
+      pan_number: store.pan_number,
+      gstn: store.gstn,
+      phone_number: store.phone_number
+    )
+  end
 end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)

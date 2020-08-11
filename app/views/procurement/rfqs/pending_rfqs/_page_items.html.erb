@@ -1,0 +1,9 @@
+<% @rfqs.each_with_index  do |rfq, index| %>
+  <tr>
+    <td><%= rfq.serial_number %></td>
+    <td><%= rfq.company.short_name %></td>
+    <td><%= rfq.warehouse.short_name %></td>
+    <td><%= rfq.created_by.full_name %></td>
+    <td><%= rfq.note %></td>
+  </tr>
+<% end %>

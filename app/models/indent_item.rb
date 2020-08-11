@@ -22,6 +22,7 @@ class IndentItem < ApplicationRecord
 
   has_many :approval_requests, as: :approval_requestable, dependent: :destroy
   has_many :approval_request_users, through: :approval_request
+  has_many :rfq_items, dependent: :destroy
 
   delegate :serial_number,     to: :indent,      prefix: :indent
   delegate :requirement_date,  to: :indent,      prefix: :indent
