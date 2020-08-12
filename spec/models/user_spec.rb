@@ -33,21 +33,12 @@ RSpec.describe User, type: :model do
     it { is_expected.to callback(:create_approval_levels).after(:create).if(:admin?) }
   end
 
-  describe "#admin?" do
-    let(:admin_user) { create(:admin_user) }
-
-    context "when user is admin" do
-      it "should return true" do
-        expect(admin_user.admin?).to eq(true)
-      end
-    end
-
-    context "when user is not admin" do
-      it "should return false" do
-        expect(user.admin?).to eq(false)
-      end
-    end
+  describe "#associations" do
+    it { should have_many(:level_users).dependent(:destroy) }
+    it { should have_many(:approval_request_users).dependent(:destroy) }
   end
+
+  # TODO: Add validation specs here
 
   describe "#non_admin?" do
     let(:admin_user) { create(:admin_user) }

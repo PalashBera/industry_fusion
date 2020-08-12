@@ -1,10 +1,7 @@
-require "auth"
-
 class Procurement::Indents::HomeController < Procurement::HomeController
   layout "print", only: :print
 
   before_action { active_sidebar_option("indents") }
-  skip_before_action :authenticate_user!, only: %i[email_approval email_rejection]
 
   protected
 
@@ -61,7 +58,9 @@ class Procurement::Indents::HomeController < Procurement::HomeController
 
   def send_for_approval
     item = IndentItem.find(params[:id])
-    item.create_approvals && item.send_for_approval
+    item.create_approval_requests
+    item.send_approval_request_mails
+    item.mark_as_approval_pending
     redirect_to redirect_path, flash: { success: t("flash_messages.created", name: "Approval request") }
   end
 

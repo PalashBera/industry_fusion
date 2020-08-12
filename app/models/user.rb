@@ -22,7 +22,8 @@ class User < ApplicationRecord
 
   belongs_to :organization
 
-  has_many :level_users
+  has_many :level_users,            dependent: :destroy
+  has_many :approval_request_users, dependent: :destroy
 
   validates :organization_id, presence: true, unless: proc { |f| f.subdomain.present? }
   validates :admin, inclusion: { in: [true, false] }
@@ -34,16 +35,16 @@ class User < ApplicationRecord
     !admin?
   end
 
+  def pending_acception?
+    invitation_accepted_at.nil?
+  end
+
   def toggle_sidebar_collapse
     update_column(:sidebar_collapse, !sidebar_collapse)
   end
 
   def toggle_activation
     update_column(:archive, !archive)
-  end
-
-  def pending_acception?
-    invitation_accepted_at.nil?
   end
 
   protected

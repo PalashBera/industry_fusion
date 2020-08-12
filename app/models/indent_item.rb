@@ -3,7 +3,7 @@ class IndentItem < ApplicationRecord
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   PRIORITY_LIST = %w[default high medium low].freeze
-  STATUS_LIST = %w[pending approved amended rejected cancelled].freeze
+  STATUS_LIST = %w[pending approved amended rejected cancelled approval_pending].freeze
 
   enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
   enum status: Hash[STATUS_LIST.map { |item| [item, item] }]
@@ -18,8 +18,10 @@ class IndentItem < ApplicationRecord
   belongs_to :make, optional: true
   belongs_to :uom
   belongs_to :cost_center
+  belongs_to :approval_request, optional: true
 
-  has_many :approvals, dependent: :destroy
+  has_many :approval_requests, as: :approval_requestable, dependent: :destroy
+  has_many :approval_request_users, through: :approval_request
 
   delegate :serial_number,     to: :indent,      prefix: :indent
   delegate :requirement_date,  to: :indent,      prefix: :indent
@@ -31,8 +33,10 @@ class IndentItem < ApplicationRecord
   validates :priority, presence: true
 
   default_scope { order(created_at: :desc) }
+  scope :pending_indents, -> { where(status: %w[pending approval_pending]) }
+  scope :pending_for_approval, ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
 
-  has_paper_trail ignore: %i[created_at updated_at current_level approval_ids locked approved]
+  has_paper_trail ignore: %i[created_at updated_at locked]
 
   def self.included_resources
     includes({ indent: %i[company warehouse] }, :item, { make: :brand }, :uom, :cost_center)
@@ -54,25 +58,26 @@ class IndentItem < ApplicationRecord
     end
   end
 
-  def send_for_approval(level = 1)
-    approval = Approval.find_by(id: approval_ids[level - 1].to_i)
-    mark_as_approved && return unless approval
-
-    approval.user_ids.each do |recipient_id|
-      ApprovalMailer.indent_approval(id, approval.id, recipient_id, User.current_user.id).deliver_later
+  def send_approval_request_mails
+    approval_request_users.each do |approval_request_user|
+      ApprovalMailer.indent_approval(approval_request_user.id, User.current_user.id).deliver_later
     end
-
-    update(locked: true, current_level: level)
   end
 
-  def create_approvals
-    approval_items = []
+  def create_approval_requests
+    prev_approval_request = nil
 
     ApprovalLevel.indents.each.with_index(1) do |level, index|
-      approval_items << approvals.create(level: index, user_ids: level.user_ids)
-    end
+      approval_request = ApprovalRequest.create(approval_requestable_id: id, approval_requestable_type: self.class.name)
+      prev_approval_request&.update(next_approval_request_id: approval_request.id)
+      update(approval_request_id: approval_request.id) if index == 1
 
-    update(approval_ids: approval_items.map(&:id))
+      level.level_users.each do |user|
+        approval_request.approval_request_users.create(user_id: user.user_id)
+      end
+
+      prev_approval_request = approval_request
+    end
   end
 
   def unlocked?
@@ -80,11 +85,11 @@ class IndentItem < ApplicationRecord
   end
 
   def mark_as_rejected
-    update(locked: false, status: "rejected")
+    update(locked: false, status: "rejected", approval_request_id: nil)
   end
 
   def mark_as_approved
-    update(locked: true, status: "approved")
+    update(locked: true, status: "approved", approval_request_id: nil)
   end
 
   def mark_as_amended
@@ -97,6 +102,19 @@ class IndentItem < ApplicationRecord
 
   def mark_as_pending
     update(locked: false, status: "pending")
+  end
+
+  def mark_as_approval_pending
+    update(locked: true, status: "approval_pending")
+  end
+
+  def send_approval_requests
+    if approval_request&.next_approval_request_id?
+      update(approval_request_id: approval_request.next_approval_request_id)
+      send_approval_request_mails
+    else
+      mark_as_approved
+    end
   end
 
   def display_status

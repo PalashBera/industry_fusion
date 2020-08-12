@@ -61,9 +61,9 @@ en:
   active:
     active
 
-  indent_approval:
-    action_taken: "Indent item has been successfully %{action}."
-    action_already_taken: "Indent item has already been %{action}."
+  approval_request:
+    action_taken: "%{name} has been successfully %{action}."
+    action_already_taken: "%{name} has already been %{action}."
 
   mail:
     indent_approval:

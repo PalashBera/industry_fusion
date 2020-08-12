@@ -33,7 +33,7 @@ class Organization < ApplicationRecord
   has_paper_trail ignore: %i[created_at updated_at]
 
   def self.subdomain_match(subdomain, _request)
-    subdomain == "app" || Organization.find_by_subdomain(subdomain)
+    subdomain == "app" || Organization.find_by(subdomain: subdomain)
   end
 
   private

@@ -28,6 +28,13 @@
           <% end %>
         </li>
 
+        <li class="<%= active_sidebar("approval_requests") %>">
+          <%= link_to procurement_approval_requests_indents_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-checkbox-marked-circle-outline"></i>
+            <span class="nav-text">Approval Requests</span>
+          <% end %>
+        </li>
+
         <li class="section-title">
           Master
         </li>

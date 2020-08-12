@@ -1,31 +1,35 @@
 Rails.application.routes.draw do
+  # Load all route files
+  Dir[Rails.root.join("config/routes/**/*.rb")].each { |r| load(r) }
+
   constraints(subdomain: SubdomainRouter::Config.default_subdomain) do
     mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+    mount DelayedJobWeb, at: "/delayed_job"
 
     root "home#index"
 
-    devise_for :users, skip: [:registrations, :invitations, :sessions]
-    devise_for :vendors, skip: [:registrations, :invitations]
+    devise_for :users, skip: %i[registrations invitations sessions]
+    devise_for :vendors, skip: %i[registrations invitations]
 
     devise_scope :user do
       resource :registration,
-        only: [:new, :create],
-        path: "users",
-        path_names: { new: "sign_up" },
-        controller: "users/registrations",
-        as: :user_registration
+               only: %i[new create],
+               path: "users",
+               path_names: { new: "sign_up" },
+               controller: "users/registrations",
+               as: :user_registration
 
       get  "/users",        to: "users/registrations#users"
       get  "users/sign_in", to: "users/sessions#new", as: :new_user_session
       post "users/sign_in", to: "users/sessions#create", as: :user_session
 
       resource :invitation,
-        only: [:update],
-        path: "users/invitation",
-        controller: "devise/invitations",
-        as: :user_invitation do
-          get "/accept", to: "devise/invitations#edit", as: :accept
-        end
+               only: [:update],
+               path: "users/invitation",
+               controller: "devise/invitations",
+               as: :user_invitation do
+                 get "/accept", to: "devise/invitations#edit", as: :accept
+               end
     end
   end
 
@@ -36,98 +40,20 @@ Rails.application.routes.draw do
       put "/users",             to: "users/registrations#update"
     end
 
-    resources :organizations, only: [:new, :create]
-
-    namespace :master do
-      resources :brands, except: [:show, :destroy] do
-        get :change_logs, on: :member
-
-        collection do
-          get  :export
-          post :import
-        end
-      end
-
-      resources :indentors, except: [:show, :destroy] do
-        get :change_logs, on: :member
-
-        collection do
-          get  :export
-          post :import
-        end
-      end
-
-      resources :uoms, except: [:show, :destroy] do
-        get :change_logs, on: :member
-
-        collection do
-          get  :export
-          post :import
-        end
-      end
-
-      resources :item_groups, except: [:show, :destroy] do
-        get :change_logs, on: :member
-
-        collection do
-          get  :export
-          post :import
-        end
-      end
-
-      resources :cost_centers, except: [:show, :destroy] do
-        get :change_logs, on: :member
-
-        collection do
-          get  :export
-          post :import
-        end
-      end
-
-      resources :items, except: [:show, :destroy] do
-        get :change_logs, on: :member
-        get :export, on: :collection
-      end
-
-      resources :item_images, only: [:index, :destroy]
-
-      resources :makes, except: [:show, :destroy] do
-        get :change_logs, on: :member
-        get :export, on: :collection
-      end
-
-      resources :vendors, only: [:index, :new, :create] do
-        put :resend_invitation, on: :member
-
-        collection do
-          get  :export
-          post :import
-        end
-      end
-
-      resources :warehouse_locations, except: [:show, :destroy] do
-        get :change_logs, on: :member
-        get :export, on: :collection
-      end
-
-      resources :reorder_levels, except: [:show, :destroy] do
-        get :change_logs, on: :member
-        get :export, on: :collection
-      end
-    end
+    resources :organizations, only: %i[new create]
 
     namespace :admin do
-      resources :companies, except: [:show, :destroy] do
+      resources :companies, except: %i[show destroy] do
         get :change_logs, on: :member
         get :export, on: :collection
       end
 
-      resources :warehouses, except: [:show, :destroy] do
+      resources :warehouses, except: %i[show destroy] do
         get :change_logs, on: :member
         get :export, on: :collection
       end
 
-      resources :users, except: [:show, :destroy] do
+      resources :users, except: %i[show destroy] do
         get :export, on: :collection
 
         member do
@@ -137,57 +63,13 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :organizations, only: [:edit, :update]
+      resources :organizations, only: %i[edit update]
 
       namespace :approval_levels do
         resources :indents, except: :show
         resources :qcs, except: :show
         resources :pos, except: :show
         resources :grns, except: :show
-      end
-    end
-
-    namespace :procurement do
-      resources :pending_indents, path: "indents/pending", controller: "indents/pending_indents" do
-        member do
-          get :print
-          get :send_for_approval
-        end
-
-        collection do
-          get :email_approval
-          get :email_rejection
-        end
-      end
-
-      resources :approved_indents, only: [:index, :show, :destroy], path: "indents/approved", controller: "indents/approved_indents" do
-        get :print, on: :member
-      end
-
-      resources :rejected_indents, except: [:new, :create, :destroy], path: "indents/rejected", controller: "indents/rejected_indents" do
-        member do
-          get :print
-          get :send_for_approval
-        end
-      end
-
-      resources :amended_indents, only: [:index, :show, :destroy], path: "indents/amended", controller: "indents/amended_indents" do
-        get :print, on: :member
-      end
-
-      resources :cancelled_indents, only: [:index, :show, :destroy], path: "indents/cancelled", controller: "indents/cancelled_indents" do
-        get :print, on: :member
-      end
-
-      resources :companies, only: [] do
-        get :warehouses, on: :member
-      end
-
-      resources :items, only: [] do
-        member do
-          get :makes
-          get :uoms
-        end
       end
     end
 

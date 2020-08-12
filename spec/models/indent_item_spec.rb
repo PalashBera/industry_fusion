@@ -22,6 +22,7 @@ RSpec.describe IndentItem, type: :model do
     it { should have_db_column(:quantity) }
     it { should have_db_column(:note) }
     it { should have_db_column(:priority) }
+    it { should have_db_column(:approval_request_id) }
   end
 
   describe "#active_record_index" do
@@ -34,7 +35,7 @@ RSpec.describe IndentItem, type: :model do
 
   describe "#enums" do
     it { should define_enum_for(:priority).with_values(default: "default", high: "high", medium: "medium", low: "low").backed_by_column_of_type(:string).with_suffix }
-    it { should define_enum_for(:status).with_values(pending: "pending", approved: "approved", amended: "amended", rejected: "rejected", cancelled: "cancelled").backed_by_column_of_type(:string) }
+    it { should define_enum_for(:status).with_values(pending: "pending", approved: "approved", amended: "amended", rejected: "rejected", cancelled: "cancelled", approval_pending: "approval_pending").backed_by_column_of_type(:string) }
   end
 
   describe "#callbacks" do
@@ -53,8 +54,10 @@ RSpec.describe IndentItem, type: :model do
     it { should belong_to(:make).optional }
     it { should belong_to(:uom) }
     it { should belong_to(:cost_center) }
+    it { should belong_to(:approval_request).optional }
 
-    it { should have_many(:approvals).dependent(:destroy) }
+    it { should have_many(:approval_requests).dependent(:destroy) }
+    it { should have_many(:approval_request_users).through(:approval_request) }
   end
 
   describe "#validations" do
@@ -100,46 +103,8 @@ RSpec.describe IndentItem, type: :model do
     end
   end
 
-  describe "#send_for_approval" do
-    context "when approval is not present" do
-      it "should marked as approved" do
-        indent_item.send_for_approval
-        expect(indent_item.approved?).to eq(true)
-      end
-    end
-
-    context "when approval is present" do
-      let!(:approval_level) { create(:approval_level, approval_type: "indents") }
-
-      it "should send approval request mail" do
-        indent_item.create_approvals
-        expect {
-          indent_item.send_for_approval
-        }.to enqueue_job(ActionMailer::MailDeliveryJob)
-      end
-
-      it "should locked the indent item" do
-        indent_item.create_approvals
-        indent_item.send_for_approval
-        expect(indent_item.locked).to eq(true)
-      end
-
-      it "should update current_level to 1" do
-        indent_item.create_approvals
-        indent_item.send_for_approval
-        expect(indent_item.current_level).to eq(1)
-      end
-    end
-  end
-
-  describe "#create_approvals" do
-    let!(:approval_level) { create(:approval_level, approval_type: "indents") }
-
-    it "should update approval_ids" do
-      indent_item.create_approvals
-      expect(indent_item.approval_ids.present?).to eq(true)
-    end
-  end
+  # TODO: add specs for send_approval_request_mails
+  # TODO: add specs for create_approval_requests
 
   describe "#unlocked?" do
     context "when indent item is locked" do
@@ -164,8 +129,9 @@ RSpec.describe IndentItem, type: :model do
 
     it "should update status of indent item" do
       indent_item.mark_as_rejected
-      expect(indent_item.status).to eq("rejected")
+      expect(indent_item.rejected?).to eq(true)
       expect(indent_item.locked).to eq(false)
+      expect(indent_item.approval_request_id).to eq(nil)
     end
   end
 
@@ -174,8 +140,9 @@ RSpec.describe IndentItem, type: :model do
 
     it "should update status of indent item" do
       indent_item.mark_as_approved
-      expect(indent_item.status).to eq("approved")
+      expect(indent_item.approved?).to eq(true)
       expect(indent_item.locked).to eq(true)
+      expect(indent_item.approval_request_id).to eq(nil)
     end
   end
 
@@ -184,7 +151,7 @@ RSpec.describe IndentItem, type: :model do
 
     it "should update status of indent item" do
       indent_item.mark_as_amended
-      expect(indent_item.status).to eq("amended")
+      expect(indent_item.amended?).to eq(true)
       expect(indent_item.locked).to eq(true)
     end
   end
@@ -194,7 +161,7 @@ RSpec.describe IndentItem, type: :model do
 
     it "should update status of indent item" do
       indent_item.mark_as_cancelled
-      expect(indent_item.status).to eq("cancelled")
+      expect(indent_item.cancelled?).to eq(true)
       expect(indent_item.locked).to eq(true)
     end
   end
@@ -204,8 +171,42 @@ RSpec.describe IndentItem, type: :model do
 
     it "should update status of indent item" do
       indent_item.mark_as_pending
-      expect(indent_item.status).to eq("pending")
+      expect(indent_item.pending?).to eq(true)
       expect(indent_item.locked).to eq(false)
+    end
+  end
+
+  describe "#mark_as_approval_pending" do
+    let!(:indent_item) { create(:indent_item, status: "cancelled") }
+
+    it "should update status of indent item" do
+      indent_item.mark_as_approval_pending
+      expect(indent_item.approval_pending?).to eq(true)
+      expect(indent_item.locked).to eq(true)
+    end
+  end
+
+  describe "#send_approval_requests" do
+    let!(:indent_item)           { create(:indent_item, status: "approval_pending") }
+    let!(:approval_request_1)    { create(:approval_request, approval_requestable_id: indent_item.id) }
+    let!(:approval_request_2)    { create(:approval_request, approval_requestable_id: indent_item.id, next_approval_request_id: approval_request_1.id) }
+    let!(:approval_request_user) { create(:approval_request_user, approval_request_id: approval_request_1.id) }
+
+    context "when indent item hasn't approval request" do
+      it "should mark indent item as approved" do
+        indent_item.update(approval_request_id: approval_request_1.id)
+        indent_item.send_approval_requests
+        expect(indent_item.approved?).to eq(true)
+      end
+    end
+
+    context "when indent item has approval request" do
+      it "should send approval request mail" do
+        indent_item.update(approval_request_id: approval_request_2.id)
+        indent_item.send_approval_requests
+        expect(indent_item.reload.approval_request_id).to eq(approval_request_1.id)
+        expect(indent_item.reload.approval_pending?).to eq(true)
+      end
     end
   end
 
