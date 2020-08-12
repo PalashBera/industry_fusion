@@ -74,13 +74,13 @@ table.table {
   }
 }
 
-.disabled-note-link {
-  color: #555555;
+.disabled-icon-link {
   pointer-events: none;
+  cursor: text;
 }
 
-.active-note-link {
-  color: #FF0000;
+.icon-link {
+  font-size: 16px;
 }
 
 .delete-image-btn {

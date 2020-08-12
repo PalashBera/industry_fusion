@@ -7,7 +7,7 @@
     <td><%= item.quantity_with_uom %></td>
     <td><%= item.cost_center_name %></td>
     <td><%= I18n.l(item.indent_requirement_date) %></td>
-    <td><%= item.note.present? ? active_note_display_link(item) : disabled_note_display_link(item) %></td>
+    <td><%= item.note.present? ? active_note_display_link(item) : disabled_note_display_link %></td>
     <td><%= item.display_priority %></td>
     <td class="text-center">
       <div class="dropdown">
