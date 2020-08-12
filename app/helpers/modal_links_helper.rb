@@ -46,4 +46,16 @@ module ModalLinksHelper
             title: "Add New #{controller_name.singularize.humanize.titleize}",
             class: "ml-1"
   end
+
+  def active_note_display_link(item)
+    link_to raw('<i class="mdi mdi-note"></i>'),
+            procurement_indent_item_path(item),
+            remote: true,
+            title: "Show Note",
+            class: "active-icon-link text-info icon-link"
+  end
+
+  def disabled_note_display_link
+    raw('<i class="mdi mdi-note disabled-icon-link icon-link" title="No note present"></i>')
+  end
 end

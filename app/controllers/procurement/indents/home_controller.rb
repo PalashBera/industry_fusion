@@ -15,7 +15,7 @@ class Procurement::Indents::HomeController < Procurement::HomeController
 
   def show
     indent
-    render "procurement/shared/show"
+    render "procurement/indents/shared/show"
   end
 
   def new
@@ -53,7 +53,7 @@ class Procurement::Indents::HomeController < Procurement::HomeController
 
   def print
     indent
-    render "procurement/shared/print"
+    render "procurement/indents/shared/print"
   end
 
   def send_for_approval

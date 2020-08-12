@@ -1,8 +1,9 @@
 require "rails_helper"
 
 RSpec.describe ModalLinksHelper, type: :helper do
-  let(:brand) { create(:brand) }
-  let(:user)  { create(:user) }
+  let(:brand)       { create(:brand) }
+  let(:user)        { create(:user) }
+  let(:indent_item) { create(:indent_item) }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -77,6 +78,24 @@ RSpec.describe ModalLinksHelper, type: :helper do
       expect(link.attributes["href"].value).to eq("/master/brands/new")
       expect(link.attributes["data-remote"].value).to eq("true")
       expect(link.attributes["class"].value).to eq("ml-1")
+    end
+  end
+
+  describe "#active_note_display_link" do
+    it "creates a link for show note" do
+      link = Nokogiri::HTML(helper.active_note_display_link(indent_item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/indent_items/#{indent_item.id}")
+      expect(link.attributes["data-remote"].value).to eq("true")
+      expect(link.attributes["title"].value).to eq("Show Note")
+      expect(link.attributes["class"].value).to eq("active-icon-link text-info icon-link")
+    end
+  end
+
+  describe "#disabled_note_display_link" do
+    it "creates a link for disabled note" do
+      link = Nokogiri::HTML(helper.disabled_note_display_link).children.children.children[0]
+      expect(link.attributes["title"].value).to eq("No note present")
+      expect(link.attributes["class"].value).to eq("mdi mdi-note disabled-icon-link icon-link")
     end
   end
 end
