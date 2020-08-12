@@ -35,6 +35,10 @@ class Procurement::Indents::PendingIndentsController < Procurement::Indents::Hom
     super
   end
 
+  def export
+    super
+  end
+
   private
 
   def redirect_path
