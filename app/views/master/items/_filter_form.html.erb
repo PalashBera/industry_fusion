@@ -1,18 +1,18 @@
 <%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Items" } do |f| %>
   <div class="form-row">
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :name_cont_any, "Name" %>
-      <%= f.search_field :name_cont_any, placeholder: "Name", title: "Type item name", class: "form-control", autocomplete: :off %>
+      <%= f.label :name_i_cont_any, "Name" %>
+      <%= f.search_field :name_i_cont_any, placeholder: "Name", title: "Type item name", class: "form-control", autocomplete: :off %>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :item_group_name_cont_any, "Item Group" %>
-      <%= f.search_field :item_group_name_cont_any, placeholder: "Item Group Name", title: "Type item group name", class: "form-control", autocomplete: :off %>
+      <%= f.label :item_group_name_i_cont_any, "Item Group" %>
+      <%= f.search_field :item_group_name_i_cont_any, placeholder: "Item Group Name", title: "Type item group name", class: "form-control", autocomplete: :off %>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :uom_short_name_cont_any, "UOM" %>
-      <%= f.search_field :uom_short_name_cont_any, placeholder: "UOM Short Name", title: "Type uom short name", class: "form-control", autocomplete: :off %>
+      <%= f.label :uom_short_name_i_cont_any, "UOM" %>
+      <%= f.search_field :uom_short_name_i_cont_any, placeholder: "UOM Short Name", title: "Type uom short name", class: "form-control", autocomplete: :off %>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">

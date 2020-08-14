@@ -1,13 +1,13 @@
 <%= render layout: "shared/filter_modal", locals: { resource: @search, namespace: "master", modal_header: "Search Item Groups" } do |f| %>
   <div class="form-row">
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :name_cont_any, "Name" %>
-      <%= f.search_field :name_cont_any, placeholder: "Name", title: "Type item group name", class: "form-control", autocomplete: :off %>
+      <%= f.label :name_i_cont_any, "Name" %>
+      <%= f.search_field :name_i_cont_any, placeholder: "Name", title: "Type item group name", class: "form-control", autocomplete: :off %>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
-      <%= f.label :hsn_code_cont_any, "HSN" %>
-      <%= f.search_field :hsn_code_cont_any, placeholder: "HSN", title: "Type HSN Code", class: "form-control", autocomplete: :off %>
+      <%= f.label :hsn_code_i_cont_any, "HSN" %>
+      <%= f.search_field :hsn_code_i_cont_any, placeholder: "HSN", title: "Type HSN Code", class: "form-control", autocomplete: :off %>
     </div>
 
     <div class="form-group col-md-6 col-sm-12">
