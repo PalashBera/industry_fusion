@@ -48,14 +48,14 @@ module ModalLinksHelper
   end
 
   def active_note_display_link(item)
-    link_to raw('<i class="mdi mdi-note"></i>'),
+    link_to raw('<i class="fas fa-sticky-note"></i>'),
             procurement_indent_item_path(item),
             remote: true,
             title: "Show Note",
-            class: "active-icon-link text-info icon-link"
+            class: "text-info"
   end
 
   def disabled_note_display_link
-    raw('<i class="mdi mdi-note disabled-icon-link icon-link" title="No note present"></i>')
+    raw('<i class="fas fa-sticky-note disabled-icon-link" title="No note present"></i>')
   end
 end

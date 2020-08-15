@@ -87,7 +87,7 @@ RSpec.describe ModalLinksHelper, type: :helper do
       expect(link.attributes["href"].value).to eq("/procurement/indents/indent_items/#{indent_item.id}")
       expect(link.attributes["data-remote"].value).to eq("true")
       expect(link.attributes["title"].value).to eq("Show Note")
-      expect(link.attributes["class"].value).to eq("active-icon-link text-info icon-link")
+      expect(link.attributes["class"].value).to eq("text-info")
     end
   end
 
@@ -95,7 +95,7 @@ RSpec.describe ModalLinksHelper, type: :helper do
     it "creates a link for disabled note" do
       link = Nokogiri::HTML(helper.disabled_note_display_link).children.children.children[0]
       expect(link.attributes["title"].value).to eq("No note present")
-      expect(link.attributes["class"].value).to eq("mdi mdi-note disabled-icon-link icon-link")
+      expect(link.attributes["class"].value).to eq("fas fa-sticky-note disabled-icon-link")
     end
   end
 end
