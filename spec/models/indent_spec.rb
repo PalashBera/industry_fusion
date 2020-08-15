@@ -56,7 +56,7 @@ RSpec.describe Indent, type: :model do
     let!(:organization) { create :organization, fy_start_month: 1 }
     let!(:indent_1) { create(:indent, created_at: Time.zone.now) }
     let!(:indent_2) { create(:indent, created_at: Time.zone.now + 1.days) }
-    let!(:indent_3) { create(:indent, created_at: Time.zone.now + 380.days) }
+    let!(:indent_3) { create(:indent, created_at: Time.zone.now - 380.days) }
 
     before do
       Organization.stub(:current_organization).and_return(organization)
@@ -82,9 +82,9 @@ RSpec.describe Indent, type: :model do
 
       it "should return the serial number of the indent" do
         user.organization.update(fy_start_month: 1)
-        serial_1 = "IND/20-20/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
+        serial_1 = "IND/20-21/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
         expect(indent.serial_number).to eq(serial_1)
-        serial_2 = "IND/20-20/#{indent_1.company.short_name}/#{indent_1.warehouse.short_name}/#{((indent.serial) + 1).to_s.rjust(4, "0")}"
+        serial_2 = "IND/20-21/#{indent_1.company.short_name}/#{indent_1.warehouse.short_name}/#{((indent.serial) + 1).to_s.rjust(4, "0")}"
         expect(indent_1.serial_number).to eq(serial_2)
       end
     end

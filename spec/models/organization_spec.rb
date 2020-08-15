@@ -82,7 +82,7 @@ RSpec.describe Organization, type: :model do
 
     context "when we want to get fy_start_month & fy_end_month" do
       it "it should return fy_start_month and fy_end_month as an array" do
-        fy_date_range = [Date.new(Time.zone.now.year, organization.fy_start_month, 1), Date.civil(Time.zone.now.year, 12, -1)]
+        fy_date_range = [Date.new(Time.zone.now.year, organization.fy_start_month, 1), Date.civil(Time.zone.now.year + 1, 12, -1)]
         expect(organization.fy_date_range).to eq(fy_date_range)
       end
       it "it should return fy_start_month and fy_end_month as an array" do

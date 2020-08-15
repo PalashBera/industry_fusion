@@ -36,15 +36,16 @@ class Organization < ApplicationRecord
   end
 
   def fy_date_range
-    fy_end_month = 0
-    date_range = []
+    start_year = Time.current.year
+    end_year = start_year + 1
+    fy_start_month == 1 ? fy_end_month = 12 : fy_end_month = fy_start_month - 1
+    current_month = Time.current.month
 
-    if fy_start_month == 1
-      date_range = [Date.new(Time.zone.now.year, fy_start_month, 1), Date.civil(Time.zone.now.year, 12, -1)]
-    elsif fy_start_month.to_i.between?(2, 12)
-      date_range = [Date.new(Time.zone.now.year, fy_start_month, 1), Date.civil(Time.zone.now.year + 1, fy_start_month - 1, -1)]
+    if current_month < fy_start_month
+      end_year = start_year
+      start_year -= 1
     end
 
-    date_range
+    [Date.new(start_year, fy_start_month, 1), Date.civil(end_year, fy_end_month, -1)]
   end
 end
