@@ -265,4 +265,64 @@ RSpec.describe IndentsHelper, type: :helper do
       end
     end
   end
+
+  describe "#add_active_class" do
+    context "when indent item has note" do
+      let(:indent_item) { create(:indent_item, note: "Hello") }
+
+      it "should return active class" do
+        expect(add_active_class(indent_item)).to eq("text-info")
+      end
+    end
+
+    context "when indent item hasn't note" do
+      let(:indent_item) { create(:indent_item, note: "") }
+
+      it "should return nil" do
+        expect(add_active_class(indent_item)).to eq(nil)
+      end
+    end
+  end
+
+  describe "#note_input_title" do
+    context "when indent item has note" do
+      let(:indent_item) { create(:indent_item, note: "Hello") }
+
+      it "should return edit tile" do
+        expect(note_input_title(indent_item)).to eq("Edit note")
+      end
+    end
+
+    context "when indent item hasn't note" do
+      let(:indent_item) { create(:indent_item, note: "") }
+
+      it "should return add title" do
+        expect(note_input_title(indent_item)).to eq("Add note")
+      end
+    end
+  end
+
+  describe "#indenx_note_link" do
+    context "when indent item has note" do
+      let(:indent_item) { create(:indent_item, note: "Hello") }
+
+      it "should return modal link" do
+        link = Nokogiri::HTML(helper.indenx_note_link(indent_item)).children.children.children[0]
+        expect(link.attributes["href"].value).to eq("/procurement/indents/indent_items/#{indent_item.id}")
+        expect(link.attributes["data-remote"].value).to eq("true")
+        expect(link.attributes["title"].value).to eq("Show Note")
+        expect(link.attributes["class"].value).to eq("text-info")
+      end
+    end
+
+    context "when indent item hasn't note" do
+      let(:indent_item) { create(:indent_item, note: "") }
+
+      it "should return no link" do
+        link = Nokogiri::HTML(helper.indenx_note_link(indent_item)).children.children.children[0]
+        expect(link.attributes["title"].value).to eq("No note present")
+        expect(link.attributes["class"].value).to eq("fas fa-sticky-note disabled-icon-link")
+      end
+    end
+  end
 end

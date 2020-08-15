@@ -32,15 +32,17 @@
   <h4 class="mb-4">Indent Item Details:</h4>
 
   <%= f.fields_for :indent_items do |builder| %>
-    <section class="form-row d-none d-lg-flex">
-      <div class="col-lg-2"><label>Item</label></div>
-      <div class="col-lg-1"><label>Make</label></div>
-      <div class="col-lg-2"><label>Quantity</label></div>
-      <div class="col-lg-1"><label>UOM</label></div>
-      <div class="col-lg-2"><label>Cost Center</label></div>
-      <div class="col-lg-1"><label>Priority</label></div>
-      <div class="col-lg-2"><label>Note</label></div>
-    </section>
+    <% if f.object.indent_items.first == builder.object %>
+      <section class="form-row d-none d-lg-flex">
+        <div class="col-lg-2"><label>Item</label></div>
+        <div class="col-lg-1"><label>Make</label></div>
+        <div class="col-lg-2"><label>Quantity</label></div>
+        <div class="col-lg-1"><label>UOM</label></div>
+        <div class="col-lg-2"><label>Cost Center</label></div>
+        <div class="col-lg-1"><label>Priority</label></div>
+        <div class="col-lg-2"><label>Note</label></div>
+      </section>
+    <% end %>
 
     <%= render "procurement/indents/shared/indent_item_fields", f: builder %>
   <% end %>
@@ -51,6 +53,30 @@
     <%= f.submit yield(:button_title), class: "btn btn-primary", data: { disable_with: "Saving..." } %>
   </div>
 <% end %>
+
+<div id="note_modal_block"></div>
+
+<div class="modal fade" id="note_form_modal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">Indent Item Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <%= text_area_tag "indent_note", nil, class: "form-control", rows: 4, placeholder: "Write note here...", disabled: false, data: { id: "note_form_modal" } %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Close">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" title="Close" id="add_indent_note">Add Note</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   $('#indent_requirement_date').daterangepicker({
@@ -68,5 +94,24 @@
 
   $('#indent_requirement_date').on('cancel.daterangepicker', function (ev, picker) {
     $(this).val('');
+  });
+
+  $('.indent-note i').click(function(e) {
+    var noteInput = $(this).closest('div').parent().find('input[type=hidden]');
+    $('#note_form_modal #indent_note').data('id', noteInput.attr('id'));
+    $('#note_form_modal #indent_note').val(noteInput.val());
+    $('#note_form_modal').modal('show');
+  });
+
+  $('#add_indent_note').click(function() {
+    var note = $('#note_form_modal #indent_note').val();
+    var inputId = $('#note_form_modal #indent_note').data('id');
+    $('#' + inputId).val(note);
+
+    if (note.length > 0) {
+      $('#' + inputId).closest('div').find('.indent-note i').addClass('text-info');
+    } else {
+      $('#' + inputId).closest('div').find('.indent-note i').removeClass('text-info');
+    }
   });
 </script>

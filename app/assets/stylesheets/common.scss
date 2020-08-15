@@ -25,6 +25,10 @@ table.table {
   .icon-burger-mini {
     font-size: 16px;
   }
+
+  tbody tr:hover {
+    background-color: #808080 !important;
+  }
 }
 
 .sidebar-left {
@@ -75,18 +79,29 @@ table.table {
 }
 
 .disabled-icon-link {
-  pointer-events: none;
   cursor: text;
-}
-
-.icon-link {
-  font-size: 16px;
 }
 
 .delete-image-btn {
   position: absolute;
   right: 0px;
   z-index: 99999;
+}
+
+.icon-form-group {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.icon-form-field {
+  height: 42.41px;
+  font-size: 24px;
+  width: 44px;
+  text-align: center;
+
+  i {
+    cursor: pointer;
+  }
 }
 
 @media (min-width: 768px) {

@@ -88,4 +88,16 @@ module IndentsHelper
   def border_bottom_attached?(item_ids, item_id)
     item_ids.include?(item_id) && item_ids.last != item_id
   end
+
+  def add_active_class(indent_item)
+    "text-info" if indent_item.note?
+  end
+
+  def note_input_title(indent_item)
+    indent_item.note? ? "Edit note" : "Add note"
+  end
+
+  def indenx_note_link(indent_item)
+    indent_item.note? ? active_note_display_link(indent_item) : disabled_note_display_link
+  end
 end
