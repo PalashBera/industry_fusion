@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::HomeController
   include Exportable
 
   def index
-    @search = current_organization.users.ransack(params[:q]) # current_organization will be removed after adding act as tenant
+    @search = User.ransack(params[:q])
     @search.sorts = "first_name asc" if @search.sorts.empty?
     @pagy, @users = pagy(@search.result, items: 20)
   end
