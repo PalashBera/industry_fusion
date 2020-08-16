@@ -1,0 +1,46 @@
+version: '3.7'
+services:
+  app: &app
+    build: .
+    volumes:
+      - .:/app
+    network_mode: "host"
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    <<: *app
+    tty: true
+    stdin_open: true
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - webpacker
+      - delayed_job
+
+  webpacker:
+    <<: *app
+    command: ./bin/webpack-dev-server
+    ports:
+      - '3035:3035'
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  delayed_job:
+    <<: *app
+    command: bundle exec rails jobs:work
+    volumes:
+      - .:/app
+    depends_on:
+      - db
