@@ -37,6 +37,7 @@ group :development do
   gem "letter_opener_web", "~> 1.4"
   gem "listen", "~> 3.2", ">= 3.2.1"
   gem "overcommit", "~> 0.52.1"
+  gem "pgreset", "~> 0.1.1"
   gem "rack-mini-profiler", "~> 2.0", ">= 2.0.1"
   gem "rubocop", "~> 0.80.1"
   gem "rubocop-performance", "~> 1.5", ">= 1.5.2"
