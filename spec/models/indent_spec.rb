@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe Indent, type: :model do
-  let(:user)   { create :user }
+  let(:user)   { create(:user) }
   let(:indent) { create(:indent, requirement_date: Time.zone.now + 10.day) }
 
   before(:each) do
@@ -27,7 +27,7 @@ RSpec.describe Indent, type: :model do
   end
 
   describe "#callbacks" do
-    it { is_expected.to callback(:set_serial).before(:validation).on(:create) }
+    it { is_expected.to callback(:set_serial_number).before(:validation).on(:create) }
   end
 
   describe "#associations" do
@@ -52,58 +52,30 @@ RSpec.describe Indent, type: :model do
     end
   end
 
-  describe "#in_current_org_date_range" do
-    let!(:organization) { create :organization, fy_start_month: 1 }
+  describe "#date_range_filter" do
     let!(:indent_1) { create(:indent, created_at: Time.zone.now) }
     let!(:indent_2) { create(:indent, created_at: Time.zone.now + 1.days) }
     let!(:indent_3) { create(:indent, created_at: Time.zone.now - 380.days) }
 
-    before do
-      Organization.stub(:current_organization).and_return(organization)
-    end
-
     it "should return records filtered in a specific date range" do
-      start_date, end_date = Organization.current_organization.fy_date_range
-      filtered_records = Indent.in_current_org_date_range(start_date, end_date).order_by_serial
+      start_date, end_date = indent_1.organization.fy_date_range
+      filtered_records = Indent.date_range_filter(start_date, end_date)
       expect(filtered_records.include?(indent_1)).to eq(true)
       expect(filtered_records.include?(indent_2)).to eq(true)
       expect(filtered_records.include?(indent_3)).to eq(false)
     end
   end
 
-  describe "#serial_number" do
-    context "When Organization FY start month is January" do
-      let!(:indent)   { create(:indent, created_at: Time.zone.now + 10.days, organization_id: user.organization_id) }
-      let!(:indent_1) { create(:indent, created_at: Time.zone.now + 11.days, organization_id: user.organization_id) }
+  describe "#warehouse_filter" do
+    let!(:warehouse_1)  { create(:warehouse) }
+    let!(:warehouse_2)  { create(:warehouse) }
+    let!(:indent_1)     { create(:indent, warehouse_id: warehouse_1.id) }
+    let!(:indent_2)     { create(:indent, warehouse_id: warehouse_2.id) }
 
-      before do
-        Organization.stub(:current_organization).and_return(user.organization)
-      end
-
-      it "should return the serial number of the indent" do
-        user.organization.update(fy_start_month: 1)
-        serial_1 = "IND/20-20/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
-        expect(indent.serial_number).to eq(serial_1)
-        serial_2 = "IND/20-20/#{indent_1.company.short_name}/#{indent_1.warehouse.short_name}/#{((indent.serial) + 1).to_s.rjust(4, "0")}"
-        expect(indent_1.serial_number).to eq(serial_2)
-      end
-    end
-
-    context "When Organization FY start month is April" do
-      let!(:indent)   { create(:indent, created_at: Time.zone.now + 10.days, organization_id: user.organization_id) }
-      let!(:indent_1) { create(:indent, created_at: Time.zone.now + 11.days, organization_id: user.organization_id) }
-
-      before do
-        Organization.stub(:current_organization).and_return(user.organization)
-      end
-
-      it "should return the serial number of the indent" do
-        user.organization.update(fy_start_month: 4)
-        serial_1 = "IND/20-21/#{indent.company.short_name}/#{indent.warehouse.short_name}/#{indent.serial.to_s.rjust(4, "0")}"
-        expect(indent.serial_number).to eq(serial_1)
-        serial_2 = "IND/20-21/#{indent_1.company.short_name}/#{indent_1.warehouse.short_name}/#{((indent.serial) + 1).to_s.rjust(4, "0")}"
-        expect(indent_1.serial_number).to eq(serial_2)
-      end
+    it "should return records filtered with warehouse" do
+      filtered_records = Indent.warehouse_filter(warehouse_1.id)
+      expect(filtered_records.include?(indent_1)).to eq(true)
+      expect(filtered_records.include?(indent_2)).to eq(false)
     end
   end
 end

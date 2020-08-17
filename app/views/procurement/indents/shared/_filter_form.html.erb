@@ -12,6 +12,11 @@
         <div class="modal-body">
           <div class="form-row">
             <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :indent_serial_number_i_cont_any, "Serial Number" %>
+              <%= f.search_field :indent_serial_number_i_cont_any, placeholder: "Serial Number", title: "Type serial number", class: "form-control", autocomplete: :off %>
+            </div>
+
+            <div class="form-group col-md-6 col-sm-12">
               <%= f.label :indent_company_name_i_cont_any, "Company Name" %>
               <%= f.search_field :indent_company_name_i_cont_any, placeholder: "Company Name", title: "Type company name", class: "form-control", autocomplete: :off %>
             </div>

@@ -147,39 +147,35 @@ end
   )
 end
 
+def generate_indent_items_attributes
+  attribute_hash = []
+
+  [2, 3, 4].sample.times do
+    organization = Organization.first
+    item = organization.items.sample
+    make = item.makes.sample && uom = item.uom
+
+    attribute_hash.push({ item_id: item.id, make_id: make.id, uom_id: uom.id, cost_center_id: organization.cost_centers.sample.id,
+                          quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2), priority: IndentItem::PRIORITY_LIST.sample, organization_id: organization.id })
+  end
+
+  attribute_hash
+end
+
 20.times do |t|
   User.current_user = [user1, user2].sample
   company = organization.companies.sample
   warehouse = company.warehouses.sample
   indentors = (1..20).to_a
 
-  Indent.new(
+  Indent.create!(
     requirement_date: Date.today + t.days,
     organization_id: organization.id,
     indentor_id: indentors[t],
     company_id: company.id,
     warehouse_id: warehouse.id,
-    serial: t + 1
-  ).save(validate: false)
-
-  indent = Indent.last
-
-  [2, 3, 4].sample.times do
-    item = organization.items.sample
-    make = item.makes.sample
-    uom = item.uom
-
-    IndentItem.create!(
-      indent_id: indent.id,
-      item_id: item.id,
-      make_id: make.id,
-      uom_id: uom.id,
-      cost_center_id: organization.cost_centers.sample.id,
-      quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2),
-      priority: IndentItem::PRIORITY_LIST.sample,
-      organization_id: organization.id
-    )
-  end
+    indent_items_attributes: generate_indent_items_attributes
+  )
 end
 
 Organization.update_all(created_by_id: [user1, user2].sample.id)
