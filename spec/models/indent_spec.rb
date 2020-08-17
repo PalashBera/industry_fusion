@@ -78,4 +78,67 @@ RSpec.describe Indent, type: :model do
       expect(filtered_records.include?(indent_2)).to eq(false)
     end
   end
+
+  describe "#indent_item_vs_item" do
+    let(:non_current_user)  { create :user }
+    let!(:diff_warehouse)   { create :warehouse }
+    let!(:diff_item)        { create :item }
+    let!(:diff_indent)      { create :indent, warehouse_id: diff_warehouse.id}
+    let!(:diff_indent_item) { create :indent_item, indent_id: diff_indent.id, item_id: diff_item.id }
+
+    let!(:warehouse)   { create :warehouse }
+    let!(:item)        { create :item }
+    let!(:indent_item) { create :indent_item, indent_id: indent.id, item_id: item.id }
+
+    before do
+      indent.update!(warehouse_id: warehouse.id)
+      user.update!(warehouse_ids: [warehouse.id])
+      non_current_user.update!(warehouse_ids: [diff_warehouse.id])
+    end
+
+    it "should return indent item & item as result" do
+      item_names, indent_items_count = Indent.indent_item_vs_item
+
+      expect(item_names).to include(item.name)
+      expect(indent_items_count).to include(1)
+    end
+
+    it "should not return indent item & item which are associated with different warehouse & user as result" do
+      item_names, indent_items_count = Indent.indent_item_vs_item
+
+      expect(item_names).not_to include(diff_item.name)
+    end
+  end
+
+
+  describe "#indent_item_vs_cost_center" do
+    let(:non_current_user)  { create :user }
+    let!(:diff_warehouse)   { create :warehouse }
+    let!(:diff_cost_center) { create :cost_center }
+    let!(:diff_indent)      { create :indent, warehouse_id: diff_warehouse.id}
+    let!(:diff_indent_item) { create :indent_item, indent_id: diff_indent.id, cost_center_id: diff_cost_center.id }
+
+    let!(:warehouse)   { create :warehouse }
+    let!(:cost_center) { create :cost_center }
+    let!(:indent_item) { create :indent_item, indent_id: indent.id, cost_center_id: cost_center.id }
+
+    before do
+      indent.update!(warehouse_id: warehouse.id)
+      user.update!(warehouse_ids: [warehouse.id])
+      non_current_user.update!(warehouse_ids: [diff_warehouse.id])
+    end
+
+    it "should return indent item & cost center as result" do
+      cost_center_names, indent_items_count = Indent.indent_item_vs_cost_center
+
+      expect(cost_center_names).to include(cost_center.name)
+      expect(indent_items_count).to include(1)
+    end
+
+    it "should not return indent item & cost center which are associated with different warehouse & user as result" do
+      cost_center_names, indent_items_count = Indent.indent_item_vs_cost_center
+
+      expect(cost_center_names).not_to include(diff_cost_center.name)
+    end
+  end
 end

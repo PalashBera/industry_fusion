@@ -35,6 +35,13 @@
           <% end %>
         </li>
 
+        <li class="<%= active_sidebar("reports") %>">
+          <%= link_to procurement_reports_indents_path, class: "sidenav-item-link" do %>
+            <i class="mdi mdi-chart-bar"></i>
+            <span class="nav-text">Reports</span>
+          <% end %>
+        </li>
+
         <li class="section-title">
           Master
         </li>
