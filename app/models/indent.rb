@@ -27,6 +27,36 @@ class Indent < ApplicationRecord
 
   has_paper_trail ignore: %i[created_at]
 
+  def self.indent_item_vs_item
+    indent_item_count_plot = IndentItem.joins({ indent: :warehouse }, :item)
+                                       .includes(:item)
+                                       .where(warehouses: { id: User.current_user.accessible_warehouse_ids })
+                                       .group_by(&:item_name).map { |k, v| [k, v.size] }
+                                       .sort_by(&:last)
+                                       .reverse
+                                       .first(15)
+
+    item_names = indent_item_count_plot.map(&:first)
+    indent_items_count = indent_item_count_plot.map(&:last)
+
+    [item_names, indent_items_count]
+  end
+
+  def self.indent_item_vs_cost_center
+    indent_item_count_plot = IndentItem.joins({ indent: :warehouse }, :cost_center)
+                                       .includes(:cost_center)
+                                       .where(warehouses: { id: User.current_user.accessible_warehouse_ids })
+                                       .group_by(&:cost_center_name).map { |k, v| [k, v.size] }
+                                       .sort_by(&:last)
+                                       .reverse
+                                       .first(15)
+
+    cost_center_names = indent_item_count_plot.map(&:first)
+    indent_items_count = indent_item_count_plot.map(&:last)
+
+    [cost_center_names, indent_items_count]
+  end
+
   private
 
   def set_serial_number

@@ -47,6 +47,14 @@ class User < ApplicationRecord
     update_column(:archive, !archive)
   end
 
+  def accessible_warehouse_ids
+    if admin?
+      @accessible_warehouse_ids ||= Warehouse.all.pluck(:id)
+    else
+      @accessible_warehouse_ids ||= warehouse_ids.map(&:to_i)
+    end
+  end
+
   protected
 
   def send_confirmation_instructions

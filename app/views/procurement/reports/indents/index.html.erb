@@ -1,0 +1,212 @@
+<% provide(:title, "Indents Report") %>
+<% provide(:page_title, "Indents Report") %>
+
+<%= render "shared/page_help" %>
+
+<div class="card">
+  <div class="card-body">
+    <%= render partial: "procurement/reports/shared/status_tab" %>
+
+    <div class="row">
+      <div class="col-sm-12 col-md-6">
+        <div class="card card-default">
+          <div class="card-header">
+            <h2>Item Wise</h2>
+          </div>
+
+          <div class="card-body">
+            <div id="item_wise_chart"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-12 col-md-6">
+        <div class="card card-default">
+          <div class="card-header">
+            <h2>Cost Center Wise</h2>
+          </div>
+
+          <div class="card-body">
+            <div class="chart-wrapper">
+              <div id="cost_center_wise_chart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+  var itemWiseChartOptions = {
+    chart: {
+      height: 370,
+      type: 'bar',
+      toolbar: {
+        show: true,
+      }
+    },
+    colors: ['#9E6DE0'],
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'right',
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '40%',
+        height: 380,
+        distributed: false
+      }
+    },
+
+    responsive: [
+      {
+        breakpoint: 992,
+        options: {
+          plotOptions: {
+            bar: {
+              columnWidth: '40%',
+              horizontal: true
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    ],
+    series: [
+      {
+        name: 'Indent Count',
+        type: 'column',
+        data: <%= @item_wise_indent_items %>
+      }
+    ],
+    xaxis: {
+      categories: <%= raw @item_names %>,
+      tickPlacement: 'between',
+      axisBorder: {
+        show: false
+      }
+    },
+    grid: {
+      padding: {
+        left: 50,
+        right: 50
+      }
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+      followCursor: true,
+      theme: 'dark',
+      fixed: {
+        enabled: false
+      },
+      y: {
+        title: {
+          formatter: function (seriesName) {
+            return seriesName
+          }
+        },
+      },
+    }
+
+  }
+
+  var itemChartDOM = document.querySelector("#item_wise_chart");
+  var itemChart = new ApexCharts(itemChartDOM, itemWiseChartOptions);
+  itemChart.render();
+
+  var costCenterWiseChartOptions = {
+    chart: {
+      height: 370,
+      type: 'bar',
+      toolbar: {
+        show: true,
+      }
+    },
+    colors: ['#9E6DE0'],
+    legend: {
+      show: true,
+      position: 'top',
+      horizontalAlign: 'right',
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '40%',
+        height: 380,
+        distributed: false
+      }
+    },
+
+    responsive: [
+      {
+        breakpoint: 992,
+        options: {
+          plotOptions: {
+            bar: {
+              columnWidth: '40%',
+              horizontal: true
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    ],
+
+    series: [
+      {
+        name: 'Indent Count',
+        type: 'column',
+        data: <%= @cost_center_wise_indent_items %>
+      }
+    ],
+
+    xaxis: {
+      categories: <%= raw @cost_center_names %>,
+      tickPlacement: 'between',
+
+      axisBorder: {
+        show: false,
+      },
+    },
+
+    grid: {
+      padding: {
+        left: 50,
+        right: 50
+      }
+    },
+
+    tooltip: {
+      shared: true,
+      intersect: false,
+      followCursor: true,
+      theme: 'dark',
+      fixed: {
+        enabled: false
+      },
+      y: {
+        title: {
+          formatter: function (seriesName) {
+            return seriesName
+          }
+        },
+      },
+    }
+
+  }
+
+  var costCenterChartDOM = document.querySelector("#cost_center_wise_chart");
+  var costCenterChart = new ApexCharts(costCenterChartDOM, costCenterWiseChartOptions);
+  costCenterChart.render();
+</script>
