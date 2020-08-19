@@ -16,7 +16,7 @@ class Procurement::ApprovalRequests::EmailRejectionsController < Procurement::Ap
   private
 
   def auth_verified?
-    auth = Auth.decode(params[:id])
+    auth = Auth.decode(params[:token])
     @approval_request_user = ApprovalRequestUser.find_by(id: auth.first["approval_request_user"])
   end
 end

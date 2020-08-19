@@ -39,24 +39,6 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :subdomain %>
-
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1">https://</span>
-              </div>
-
-              <%= f.text_field :subdomain, class: "form-control", required: true, placeholder: "subdomain", maxlength: 255 %>
-
-              <div class="input-group-append">
-                <span class="input-group-text" id="basic-addon2">.industryfusion.com</span>
-              </div>
-            </div>
-
-            <small class="form-text text-muted">Customize your URL by entering your subdomain name. It cannot be changed, so please choose carefully!</small>
-          </div>
-
-          <div class="form-group">
             <%= f.label :fy_start_month, "Financial Year Start Month" %>
             <%= f.select :fy_start_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control", required: true } %>
           </div>

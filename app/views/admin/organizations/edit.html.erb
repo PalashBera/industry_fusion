@@ -18,11 +18,6 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :subdomain %>
-            <%= f.text_field :subdomain, class: "form-control", disabled: true %>
-          </div>
-
-          <div class="form-group">
             <%= f.label :fy_start_month, "Financial Year Start Month" %>
             <%= f.select :fy_start_month, month_selection, { prompt: "-- Select Month --" }, { class: "form-control", required: true } %>
           </div>

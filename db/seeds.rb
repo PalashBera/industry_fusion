@@ -1,7 +1,6 @@
 organization = Organization.create!(
   name: "Industry Fusion Pvt. Ltd.",
-  fy_start_month: 4,
-  subdomain: "industryfuision"
+  fy_start_month: 4
 )
 
 user1 = User.create!(

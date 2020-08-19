@@ -2,7 +2,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
   def change
     create_table :organizations do |t|
       t.string   :name,                                     null: false
-      t.string   :subdomain,                                null: false
       t.bigint   :fy_start_month,                           null: false
       t.boolean  :archive,                  default: false, null: false
       t.boolean  :page_help_needed,         default: true,  null: false

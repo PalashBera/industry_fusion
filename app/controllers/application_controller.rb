@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  include SubdomainRouter::Controller
   include Pagy::Backend
   include SessionsHelper
 
@@ -11,7 +10,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_paper_trail_whodunnit, :set_current_user, :set_current_organization
   before_action :remove_empty_parameters, only: :index
-  before_action :redirect_to_subdomain, unless: :devise_controller?
 
   def route_not_found
     render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
@@ -24,7 +22,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    generate_stored_url(resource) || dashboard_url(subdomain: current_organization.subdomain)
+    stored_location_for(resource) || dashboard_path
   end
 
   def find_and_set_current_tenant
@@ -74,18 +72,5 @@ class ApplicationController < ActionController::Base
     else
       "basic"
     end
-  end
-
-  def redirect_to_subdomain
-    return unless current_user && request.subdomain != current_organization.subdomain
-
-    redirect_to generate_stored_url(current_user) || dashboard_url(subdomain: current_organization.subdomain)
-  end
-
-  def generate_stored_url(resource)
-    location = stored_location_for(resource)
-    return if location.blank?
-
-    "http://#{current_organization.subdomain}.#{request.domain}:#{request.port}#{location}"
   end
 end

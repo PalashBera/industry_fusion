@@ -22,7 +22,6 @@ gem "puma", "~> 4.3", ">= 4.3.3"
 gem "rails", "~> 6.0", ">= 6.0.2.2"
 gem "ransack", "~> 2.3", ">= 2.3.2"
 gem "sass-rails", "~> 6.0"
-gem "subdomain_router", "~> 1.0", ">= 1.0.1"
 gem "turbolinks", "~> 5.2", ">= 5.2.1"
 gem "webpacker", "~> 5.0", ">= 5.0.1"
 
