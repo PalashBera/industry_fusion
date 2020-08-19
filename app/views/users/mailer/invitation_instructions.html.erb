@@ -1,6 +1,6 @@
 <% provide(:title, "Account Invitation") %>
 <% provide(:company_name, "Industry Fusion") %>
-<% invitation_url = "http://app.lvh.me:3000/users/invitation/accept?invitation_token=#{ @token }" %>
+<% invitation_url = accept_user_invitation_url(invitation_token: @token) %>
 
 <tr>
   <td class="body-title" style="color: #153643; font-family: sans-serif; padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold; text-transform: uppercase;">
@@ -11,7 +11,7 @@
 <tr>
   <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
     <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %>,</p>
-    <p><%= @resource.invited_by.full_name %> has invited you to <a href="http://app.lvh.me:3000" target="_blank">http://app.lvh.me:3000</a>, you can accept it through the link below.</p>
+    <p><%= @resource.invited_by.full_name %> has invited you to <a href="<%= root_url %>" target="_blank">Industry_Fusion</a>, you can accept it through the link below.</p>
   </td>
 </tr>
 

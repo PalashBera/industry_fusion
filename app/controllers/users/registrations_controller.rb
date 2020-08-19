@@ -26,17 +26,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :name, :subdomain, :fy_start_month)
+    params.require(:user).permit(:first_name, :last_name, :mobile_number, :email, :password, :password_confirmation, :name, :fy_start_month)
   end
 
   def organization_params
-    params.require(:user).permit(:name, :subdomain, :fy_start_month)
+    params.require(:user).permit(:name, :fy_start_month)
   end
 
   def build_and_validate_user
     user = User.new(user_params.merge(admin: true))
     user.valid?
-    user.errors.messages.delete(:organization)
+    user.errors.messages.reject! { |k, _v| k.to_s.include?("organization") }
     user
   end
 

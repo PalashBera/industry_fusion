@@ -16,7 +16,7 @@ module IndustryFusion
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     config.active_job.queue_adapter = :delayed_job
-    config.session_store :cookie_store, domain: ".#{SubdomainRouter::Config.domain}", expire_after: 2.weeks, key: "industry_fusion_magic_session"
+    config.session_store :cookie_store, domain: "all", expire_after: 2.weeks, key: "industry_fusion_magic_session"
     # This is important for subdomain to work.
   end
 end
