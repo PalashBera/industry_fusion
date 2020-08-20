@@ -5,7 +5,7 @@ RSpec.describe Master::ItemImagesController, type: :controller do
   let(:item) { create(:item) }
 
   before(:each) do
-    @request.host = "#{user.organization.subdomain}.example.com"
+
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end

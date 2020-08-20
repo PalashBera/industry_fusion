@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe Organization, type: :model do
-  let(:user)         { create(:user) }
   let(:organization) { create(:organization) }
+  let(:user)         { create(:user, organization_id: organization.id) }
 
   before(:each) do
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
@@ -53,16 +53,6 @@ RSpec.describe Organization, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_length_of(:name).is_at_most(255) }
     it { should validate_presence_of(:fy_start_month) }
-
-    context "when same subdomain present for an organization" do
-      let!(:organization) { create(:organization, subdomain: "Nokia") }
-
-      it "should not save this organization" do
-        new_organization = build(:organization, subdomain: "Nokia")
-        new_organization.valid?
-        expect(new_organization.errors[:subdomain]).to include("has already been taken")
-      end
-    end
   end
 
   describe "#scopes" do
