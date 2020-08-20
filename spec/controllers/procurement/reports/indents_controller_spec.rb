@@ -4,7 +4,7 @@ RSpec.describe Procurement::Reports::IndentsController, type: :controller do
   let(:user)      { create(:user) }
 
   before(:each) do
-    @request.host = "#{user.organization.subdomain}.example.com"
+
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end

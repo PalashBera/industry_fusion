@@ -5,7 +5,6 @@ shared_examples_for "export_module" do
   let(:example) { create(described_class.to_s.split("::")[1].gsub("Controller", "").singularize.underscore.downcase.to_sym, archive: true) }
 
   before(:each) do
-    @request.host = "#{user.organization.subdomain}.example.com"
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end

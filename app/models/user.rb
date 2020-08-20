@@ -4,7 +4,7 @@ class User < ApplicationRecord
   include UserInformationModule
   include ModalFormModule
 
-  acts_as_tenant(:organization)
+  # acts_as_tenant(:organization)
 
   cattr_accessor :current_user
   attr_accessor  :name

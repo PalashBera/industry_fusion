@@ -5,7 +5,7 @@ RSpec.describe Master::IndentorsController, type: :controller do
   let(:indentor) { create(:indentor) }
 
   before(:each) do
-    @request.host = "#{user.organization.subdomain}.example.com"
+
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end

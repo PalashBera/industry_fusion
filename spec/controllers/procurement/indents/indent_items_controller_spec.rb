@@ -5,7 +5,7 @@ RSpec.describe Procurement::Indents::IndentItemsController, type: :controller do
   let(:indent_item) { create(:indent_item) }
 
   before(:each) do
-    @request.host = "#{user.organization.subdomain}.example.com"
+
     ActsAsTenant.stub(:current_tenant).and_return(user.organization)
     User.stub(:current_user).and_return(user)
   end
