@@ -5,8 +5,8 @@ RSpec.describe ItemGroup, type: :model do
   let(:item_group) { create(:item_group) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archive_module"

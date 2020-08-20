@@ -5,9 +5,7 @@ RSpec.describe Admin::ApprovalLevels::QcsController, type: :controller do
   let(:qc_approval_level) { create(:approval_level, approval_type: "qcs") }
 
   before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
   end
 
   describe "GET index" do

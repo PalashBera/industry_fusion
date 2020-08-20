@@ -5,8 +5,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
   let(:approval_request) { create(:approval_request) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   describe "#approve_action_link" do

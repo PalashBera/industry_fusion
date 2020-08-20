@@ -4,11 +4,6 @@ shared_examples_for "export_module" do
   let(:user)    { create(:admin_user) }
   let(:example) { create(described_class.to_s.split("::")[1].gsub("Controller", "").singularize.underscore.downcase.to_sym, archive: true) }
 
-  before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   describe "GET export" do
     it "should return proper response header" do
       get :export, params: { q: { archive_eq: "true"} }, format: "xlsx"

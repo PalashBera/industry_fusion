@@ -1,12 +1,11 @@
 require "rails_helper"
 
 RSpec.describe Organization, type: :model do
-  let(:organization) { create(:organization) }
-  let(:user)         { create(:user, organization_id: organization.id) }
+  let(:user)         { create(:user) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archive_module"

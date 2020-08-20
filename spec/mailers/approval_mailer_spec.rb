@@ -7,8 +7,8 @@ RSpec.describe ApprovalMailer, type: :mailer do
   let(:approval_request_user) { create(:approval_request_user, approval_request_id: approval_request.id, user_id: user.id) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   describe "#indent_approval" do

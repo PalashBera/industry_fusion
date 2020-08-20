@@ -5,12 +5,6 @@ RSpec.describe Admin::WarehousesController, type: :controller do
   let(:company)   { create(:company) }
   let(:warehouse) { create(:warehouse) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   it_behaves_like "export_module"
 
   describe "GET index" do

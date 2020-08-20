@@ -5,9 +5,7 @@ RSpec.describe Admin::ApprovalLevels::PosController, type: :controller do
   let(:po_approval_level) { create(:approval_level, approval_type: "pos") }
 
   before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
   end
 
   describe "GET index" do

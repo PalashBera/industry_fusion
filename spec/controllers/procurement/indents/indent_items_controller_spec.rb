@@ -4,15 +4,10 @@ RSpec.describe Procurement::Indents::IndentItemsController, type: :controller do
   let(:user)        { create(:user) }
   let(:indent_item) { create(:indent_item) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   describe "GET show" do
     it "requires login" do
       sign_out user
+      User.current_user = user
       get :show, xhr: true, format: :js, params: { id: indent_item.id }
       expect(response).to have_http_status(:unauthorized)
     end

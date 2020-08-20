@@ -7,8 +7,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
   let(:indent) { create(:indent) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   describe "#edit_action_link" do

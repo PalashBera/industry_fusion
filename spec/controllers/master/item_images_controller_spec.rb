@@ -4,12 +4,6 @@ RSpec.describe Master::ItemImagesController, type: :controller do
   let(:user) { create(:user) }
   let(:item) { create(:item) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   describe "GET index" do
     let(:image) { fixture_file_upload(Rails.root.join("spec", "fixtures", "images", "missing_image.jpg"), "image/jpg") }
     let!(:item_image) { create :item_image, image: image, item_id: item.id }

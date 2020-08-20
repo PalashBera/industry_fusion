@@ -4,12 +4,6 @@ RSpec.describe Admin::OrganizationsController, type: :controller do
   let(:user)                 { create(:admin_user) }
   let(:current_organization) { user.organization }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   describe "GET #edit" do
     it "requires login" do
       sign_out user

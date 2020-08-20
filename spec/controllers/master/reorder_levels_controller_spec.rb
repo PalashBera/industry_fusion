@@ -6,12 +6,6 @@ RSpec.describe Master::ReorderLevelsController, type: :controller do
   let(:item)          { create(:item) }
   let(:reorder_level) { create(:reorder_level) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   it_behaves_like "export_module"
 
   describe "GET index" do
