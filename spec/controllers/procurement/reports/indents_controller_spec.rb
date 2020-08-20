@@ -3,12 +3,6 @@ require "rails_helper"
 RSpec.describe Procurement::Reports::IndentsController, type: :controller do
   let(:user)      { create(:user) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   describe "GET index" do
     it "requires login" do
       sign_out user

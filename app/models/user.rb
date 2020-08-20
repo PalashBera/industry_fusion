@@ -4,18 +4,14 @@ class User < ApplicationRecord
   include UserInformationModule
   include ModalFormModule
 
-  # acts_as_tenant(:organization)
+  acts_as_tenant(:organization)
 
   cattr_accessor :current_user
   attr_accessor  :name
   attr_accessor  :fy_start_month
-  attr_accessor  :subdomain
-
-  SUBDOMAIN_REGEX = /\A([a-z][a-z\d]*(-[a-z\d]+)*|xn--[\-a-z\d]+)\z/i.freeze
 
   before_validation do
     self.name = name.to_s.squish
-    self.subdomain = subdomain.to_s.squish.downcase
   end
 
   after_create :create_approval_levels, if: :admin?
@@ -27,9 +23,8 @@ class User < ApplicationRecord
   has_many :level_users,            dependent: :destroy
   has_many :approval_request_users, dependent: :destroy
 
-  validates :organization_id, presence: true, unless: proc { |f| f.subdomain.present? }
+  validates :organization_id, presence: true
   validates :admin, inclusion: { in: [true, false] }
-  validate :organizaion_details, if: proc { |f| f.subdomain.present? }
 
   has_paper_trail only: %i[archive warehouse_ids]
 
@@ -64,14 +59,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def organizaion_details
-    if !subdomain.match(SUBDOMAIN_REGEX)
-      errors.add(:subdomain, "is not valid. Spaces and special characters (like $,!,% etc) are not allowed")
-    elsif %w[app www vendor account admin superadmin].include?(subdomain) || Organization.find_by(subdomain: subdomain)
-      errors.add(:subdomain, "has already been taken")
-    end
-  end
 
   def create_approval_levels
     ApprovalLevel::APPROVAL_TYPES.each do |type|

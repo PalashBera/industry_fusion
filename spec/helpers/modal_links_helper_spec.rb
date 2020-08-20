@@ -6,8 +6,8 @@ RSpec.describe ModalLinksHelper, type: :helper do
   let(:indent_item) { create(:indent_item) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   describe "#new_link_using_modal" do

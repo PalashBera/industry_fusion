@@ -1,8 +1,12 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:user)         { create(:user) }
-  let(:organization) { create(:organization) }
+  let(:user) { create(:user) }
+
+  before(:each) do
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
+  end
 
   it_behaves_like "user_information_module"
   it_behaves_like "modal_form_module"

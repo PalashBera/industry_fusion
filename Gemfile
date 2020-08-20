@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "2.6.6"
 
-gem "acts_as_tenant", "~> 0.4.4"
+gem "acts_as_tenant", git: "https://github.com/ErwinM/acts_as_tenant", branch: "master"
 gem "bootsnap", "~> 1.4", ">= 1.4.6"
 gem "caxlsx_rails", "~> 0.6.2"
 gem "delayed_job_active_record", "~> 4.1", ">= 4.1.4"

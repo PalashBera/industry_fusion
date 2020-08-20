@@ -5,9 +5,7 @@ RSpec.describe Admin::ApprovalLevels::IndentsController, type: :controller do
   let(:indent_approval_level) { create(:approval_level, approval_type: "indents") }
 
   before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
   end
 
   describe "GET index" do

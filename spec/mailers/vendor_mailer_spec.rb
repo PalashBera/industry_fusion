@@ -4,8 +4,8 @@ RSpec.describe VendorMailer, type: :mailer do
   let(:user) { create(:user) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   describe "#organization_acknowledgement" do

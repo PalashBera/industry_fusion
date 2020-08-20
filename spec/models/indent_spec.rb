@@ -5,8 +5,8 @@ RSpec.describe Indent, type: :model do
   let(:indent) { create(:indent, requirement_date: Time.zone.now + 10.day) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
     Organization.stub(:current_organization).and_return(user.organization)
   end
 

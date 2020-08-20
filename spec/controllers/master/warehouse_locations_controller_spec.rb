@@ -5,12 +5,6 @@ RSpec.describe Master::WarehouseLocationsController, type: :controller do
   let(:warehouse)          { create(:warehouse) }
   let(:warehouse_location) { create(:warehouse_location) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   it_behaves_like "export_module"
 
   describe "GET index" do

@@ -6,12 +6,6 @@ RSpec.describe Master::ItemsController, type: :controller do
   let(:item_group) { create(:item_group) }
   let(:item)       { create(:item) }
 
-  before(:each) do
-
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
-  end
-
   it_behaves_like "export_module"
 
   describe "GET index" do

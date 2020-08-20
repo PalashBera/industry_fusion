@@ -5,8 +5,8 @@ RSpec.describe Brand, type: :model do
   let(:brand) { create(:brand) }
 
   before(:each) do
-    ActsAsTenant.stub(:current_tenant).and_return(user.organization)
-    User.stub(:current_user).and_return(user)
+    ActsAsTenant.current_tenant = user.organization
+    User.current_user = user
   end
 
   it_behaves_like "archive_module"

@@ -2,10 +2,11 @@
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
+require_dependency "acts_as_tenant/test_tenant_middleware"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.middleware.use ActsAsTenant::TestTenantMiddleware
   config.cache_classes = false
 
   # Do not eager load code on boot. This avoids loading your whole application
