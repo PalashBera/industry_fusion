@@ -68,7 +68,7 @@ class IndentItem < ApplicationRecord
 
   def send_approval_request_mails
     approval_request_users.each do |approval_request_user|
-      ApprovalMailer.indent_approval(approval_request_user.id, User.current_user.id).deliver_later
+      ApprovalMailer.indent_approval(approval_request_user.id, User.current_user&.id || approval_request.created_by_id).deliver_later
     end
   end
 
