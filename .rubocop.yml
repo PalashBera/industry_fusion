@@ -1243,7 +1243,7 @@ Metrics/ClassLength:
   Description: 'Avoid classes longer than 100 lines of code.'
   Enabled: true
   CountComments: false  # count full line comments?
-  Max: 100
+  Max: 120
 
 # Avoid complex methods.
 Metrics/CyclomaticComplexity:
