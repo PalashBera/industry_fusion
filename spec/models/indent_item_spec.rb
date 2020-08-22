@@ -67,6 +67,8 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#scopes" do
+    # TODO: add spec for pending_indents scope
+    # TODO: add spec for pending_for_approval scope
     context "brand_with_cat_no_search" do
       let(:brand)       { create :brand, name: "Lakme" }
       let(:make)        { create :make, brand_id: brand.id }
