@@ -66,18 +66,15 @@ RSpec.describe IndentItem, type: :model do
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
   end
 
-  describe "#brand_with_cat_no_search" do
-    let(:brand)                { create :brand, name: "Lakme" }
-    let(:brand_with_no_indent) { create :brand, name: "Layer" }
-    let(:make)                 { create :make, brand_id: brand.id }
-    let(:indent_item)          { create :indent_item, make_id: make.id }
+  describe "#scopes" do
+    context "brand_with_cat_no_search" do
+      let(:brand)       { create :brand, name: "Lakme" }
+      let(:make)        { create :make, brand_id: brand.id }
+      let(:indent_item) { create :indent_item, make_id: make.id }
 
-    it "should return item with specific brand name or category number" do
-      expect(IndentItem.brand_and_cat_no_filter("LAkme").include?(indent_item)).to eq(true)
-    end
-
-    it "should not return item not associated with specific brand name or category number" do
-      expect(IndentItem.brand_and_cat_no_filter("Layer  ")).to eq([])
+      it "should return item with specific brand name or category number" do
+        expect(IndentItem.brand_and_cat_no_filter("LAkme").include?(indent_item)).to eq(true)
+      end
     end
   end
 
