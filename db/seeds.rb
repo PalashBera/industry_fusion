@@ -129,6 +129,13 @@ end
     organization_id: organization.id
   )
 
+  PaymentTerm.create!(
+    name: Faker::Name.name + Time.zone.now.to_s,
+    description: Faker::Lorem.sentence(word_count: 6, supplemental: true, random_words_to_add: 3),
+    archive: Faker::Boolean.boolean,
+    organization_id: organization.id
+  )
+
   ReorderLevel.create!(
     item_id: item.id,
     warehouse_id: User.current_user.organization.warehouses.non_archived.sample.id,

@@ -15,14 +15,6 @@ module ModalLinksHelper
             class: "dropdown-item"
   end
 
-  def show_modal_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-information-outline"></i> Show'),
-            url_for(controller: controller_name, action: "show", id: resource.id),
-            title: "Show #{resource.class.name}",
-            class: "dropdown-item",
-            remote: true
-  end
-
   def change_logs_link_using_modal(controller_name, resource)
     link_to raw('<i class="mdi mdi-history mr-1"></i> Change Log'),
             url_for(controller: controller_name, action: "change_logs", id: resource.id),

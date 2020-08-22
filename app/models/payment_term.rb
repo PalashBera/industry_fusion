@@ -8,7 +8,7 @@ class PaymentTerm < ApplicationRecord
 
   belongs_to :organization
 
-  validates :description, presence: true
+  validates :description, presence: true, length: { maximum: 255 }
 
   has_paper_trail ignore: %i[created_at updated_at]
 end

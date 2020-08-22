@@ -6,11 +6,7 @@ class Master::PaymentTermsController < Master::HomeController
   def index
     @search = PaymentTerm.ransack(params[:q])
     @search.sorts = "name asc" if @search.sorts.empty?
-    @pagy, @payment_terms = pagy(@search.result(distinct: true), items: 20)
-  end
-
-  def show
-    payment_term
+    @pagy, @payment_terms = pagy(@search.result, items: 20)
   end
 
   def new
@@ -21,7 +17,7 @@ class Master::PaymentTermsController < Master::HomeController
     @payment_term = PaymentTerm.new(payment_term_params)
 
     if @payment_term.save
-      redirect_to master_payment_terms_path, flash: { success: t("flash_messages.created", name: "Payment Term") }
+      redirect_to master_payment_terms_path, flash: { success: t("flash_messages.created", name: "Payment term") }
     else
       render "new"
     end
@@ -33,7 +29,7 @@ class Master::PaymentTermsController < Master::HomeController
 
   def update
     if payment_term.update(payment_term_params)
-      redirect_to master_payment_terms_path, flash: { success: t("flash_messages.updated", name: "Payment Term") }
+      redirect_to master_payment_terms_path, flash: { success: t("flash_messages.updated", name: "Payment term") }
     else
       render "edit"
     end

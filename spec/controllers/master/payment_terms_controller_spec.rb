@@ -37,32 +37,6 @@ RSpec.describe Master::PaymentTermsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    it "requires login" do
-      sign_out user
-      get :show, xhr: true, format: :js, params: { id: payment_term.id }
-      expect(response).to have_http_status(:unauthorized)
-    end
-
-    it "returns http status 200" do
-      sign_in user
-      get :show, xhr: true, format: :js, params: { id: payment_term.id }
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "assigns the requested payment_term to an instance variable" do
-      sign_in user
-      get :show, xhr: true, format: :js, params: { id: payment_term.id }
-      expect(assigns(:payment_term)).to eq(payment_term)
-    end
-
-    it "render show template" do
-      sign_in user
-      get :show, xhr: true, format: :js, params: { id: payment_term.id }
-      expect(response).to render_template(:show)
-    end
-  end
-
   describe "GET #new" do
     it "requires login" do
       sign_out user
@@ -146,7 +120,7 @@ RSpec.describe Master::PaymentTermsController, type: :controller do
       it "have success flash message" do
         sign_in user
         post :create, xhr: true, format: :js, params: { payment_term: { name: "Payment Term 1", description: "abcd" }}
-        expect(flash[:success]).to eq(I18n.t("flash_messages.created", name: "Payment Term"))
+        expect(flash[:success]).to eq(I18n.t("flash_messages.created", name: "Payment term"))
       end
 
       it "redirects to payment_terms index page" do
@@ -214,7 +188,7 @@ RSpec.describe Master::PaymentTermsController, type: :controller do
       it "have success flash message" do
         sign_in user
         patch :update, xhr: true, format: :js, params: { id: payment_term.id, payment_term: { name: "Payment Term ZARA" }}
-        expect(flash[:success]).to eq(I18n.t("flash_messages.updated", name: "Payment Term"))
+        expect(flash[:success]).to eq(I18n.t("flash_messages.updated", name: "Payment term"))
       end
 
       it "redirects to payment_term show page" do
