@@ -9,7 +9,7 @@ class ApprovalRequestUser < ApplicationRecord
       action_already_taken_message
     else
       approval_request.update(action_type: "approved", action_taken_at: Time.now, action_taken_by_id: user_id)
-      approval_request.approval_requestable.send_approval_requests
+      approval_request.approval_requestable.send_approval_requests(user_id)
       I18n.t("approval_request.action_taken", name: "Indent item", action: "approved")
     end
   end

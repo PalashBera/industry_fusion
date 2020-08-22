@@ -66,9 +66,11 @@ class IndentItem < ApplicationRecord
     end
   end
 
-  def send_approval_request_mails
+  def send_approval_request_mails(sender_id = nil)
+    sender_id ||= User.current_user.id
+
     approval_request_users.each do |approval_request_user|
-      ApprovalMailer.indent_approval(approval_request_user.id, User.current_user&.id || approval_request.created_by_id).deliver_later
+      ApprovalMailer.indent_approval(approval_request_user.id, sender_id).deliver_later
     end
   end
 
@@ -116,10 +118,12 @@ class IndentItem < ApplicationRecord
     update(locked: true, status: "approval_pending")
   end
 
-  def send_approval_requests
+  def send_approval_requests(user_id = nil)
+    user_id ||= User.current_user.id
+
     if approval_request&.next_approval_request_id?
       update(approval_request_id: approval_request.next_approval_request_id)
-      send_approval_request_mails
+      send_approval_request_mails(user_id)
     else
       mark_as_approved
     end

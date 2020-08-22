@@ -11,8 +11,6 @@ class Procurement::ApprovalRequests::EmailRejectionsController < Procurement::Ap
     else
       @message = "Opps! Invaid access. Please try again using application."
     end
-
-    render "procurement/approval_requests/shared/email_approval_request.html.erb"
   end
 
   private
