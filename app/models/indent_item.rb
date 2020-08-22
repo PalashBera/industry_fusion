@@ -20,8 +20,6 @@ class IndentItem < ApplicationRecord
   belongs_to :cost_center
   belongs_to :approval_request, optional: true
 
-  has_one :brand, through: :make
-
   has_many :approval_requests, as: :approval_requestable, dependent: :destroy
   has_many :approval_request_users, through: :approval_request
 
@@ -38,9 +36,9 @@ class IndentItem < ApplicationRecord
   validates :priority, presence: true
 
   default_scope { order(created_at: :desc) }
-  scope :pending_indents,          -> { where(status: %w[pending approval_pending]) }
-  scope :pending_for_approval,     ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
-  scope :brand_with_cat_no_search, ->(query) { joins({ make: :brand }).where("brands.name ILIKE ? OR makes.cat_no ILIKE ?", "%#{query.squish}%", "%#{query.squish}%") }
+  scope :pending_indents,         -> { where(status: %w[pending approval_pending]) }
+  scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
+  scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
 
   has_paper_trail ignore: %i[created_at updated_at locked]
 
@@ -48,8 +46,8 @@ class IndentItem < ApplicationRecord
     includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)
   end
 
-  def self.ransackable_scopes(auth_object = nil)
-    [:brand_with_cat_no_search]
+  def self.ransackable_scopes(_auth_object = nil)
+    [:brand_and_cat_no_filter]
   end
 
   def quantity_with_uom

@@ -38,7 +38,7 @@ RSpec.describe IndentItem, type: :model do
     it { should define_enum_for(:status).with_values(pending: "pending", approved: "approved", amended: "amended", rejected: "rejected", cancelled: "cancelled", approval_pending: "approval_pending").backed_by_column_of_type(:string) }
   end
 
-  context "callbacks" do
+  describe "#callbacks" do
     context "when note contains extra space" do
       it "should remove extra space" do
         new_indent_item = build(:indent_item, note: " sachin ")
@@ -48,7 +48,7 @@ RSpec.describe IndentItem, type: :model do
     end
   end
 
-  context "associations" do
+  describe "#associations" do
     it { should belong_to(:indent) }
     it { should belong_to(:item) }
     it { should belong_to(:make).optional }
@@ -60,24 +60,24 @@ RSpec.describe IndentItem, type: :model do
     it { should have_many(:approval_request_users).through(:approval_request) }
   end
 
-  context "validations" do
+  describe "#validations" do
     it { should validate_presence_of(:quantity) }
     it { should validate_presence_of(:priority) }
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
   end
 
-  describe ".brand_with_cat_no_search" do
+  describe "#brand_with_cat_no_search" do
     let(:brand)                { create :brand, name: "Lakme" }
     let(:brand_with_no_indent) { create :brand, name: "Layer" }
     let(:make)                 { create :make, brand_id: brand.id }
     let(:indent_item)          { create :indent_item, make_id: make.id }
 
     it "should return item with specific brand name or category number" do
-      expect(IndentItem.brand_with_cat_no_search("LAkme")).to eq([indent_item])
+      expect(IndentItem.brand_and_cat_no_filter("LAkme").include?(indent_item)).to eq(true)
     end
 
     it "should not return item not associated with specific brand name or category number" do
-      expect(IndentItem.brand_with_cat_no_search("Layer  ")).to eq([])
+      expect(IndentItem.brand_and_cat_no_filter("Layer  ")).to eq([])
     end
   end
 
