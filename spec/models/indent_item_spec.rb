@@ -66,6 +66,20 @@ RSpec.describe IndentItem, type: :model do
     it { should validate_numericality_of(:quantity).is_greater_than(0) }
   end
 
+  describe "#scopes" do
+    # TODO: add spec for pending_indents scope
+    # TODO: add spec for pending_for_approval scope
+    context "brand_with_cat_no_search" do
+      let(:brand)       { create :brand, name: "Lakme" }
+      let(:make)        { create :make, brand_id: brand.id }
+      let(:indent_item) { create :indent_item, make_id: make.id }
+
+      it "should return item with specific brand name or category number" do
+        expect(IndentItem.brand_and_cat_no_filter("LAkme").include?(indent_item)).to eq(true)
+      end
+    end
+  end
+
   describe "#quantity_with_uom" do
     let!(:indent_item) { create(:indent_item) }
 
