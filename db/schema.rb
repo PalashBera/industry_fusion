@@ -80,9 +80,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "pin_code", limit: 6, null: false
     t.string "phone_number", default: ""
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_companies_on_created_by_id"
@@ -94,9 +94,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "name", null: false
     t.text "description", default: ""
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_cost_centers_on_created_by_id"
@@ -182,12 +182,12 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
 
   create_table "item_groups", force: :cascade do |t|
     t.string "name", null: false
+    t.string "hsn_code", limit: 8
     t.text "description", default: ""
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.string "hsn_code", limit: 8
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_item_groups_on_created_by_id"
@@ -218,9 +218,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.decimal "primary_quantity", precision: 10, scale: 2
     t.decimal "secondary_quantity", precision: 10, scale: 2
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_items_on_created_by_id"
@@ -249,9 +249,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.bigint "item_id", null: false
     t.string "cat_no", default: ""
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand_id"], name: "index_makes_on_brand_id"
@@ -282,6 +282,20 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "help_type", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "payment_terms", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_payment_terms_on_created_by_id"
+    t.index ["organization_id"], name: "index_payment_terms_on_organization_id"
+    t.index ["updated_by_id"], name: "index_payment_terms_on_updated_by_id"
   end
 
   create_table "reorder_levels", force: :cascade do |t|
@@ -323,9 +337,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "name", null: false
     t.string "short_name", limit: 4, null: false
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["created_by_id"], name: "index_uoms_on_created_by_id"
@@ -467,9 +481,9 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.string "pin_code", limit: 6, null: false
     t.string "phone_number", default: ""
     t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
-    t.bigint "organization_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_warehouses_on_company_id"
@@ -507,6 +521,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
+  add_foreign_key "payment_terms", "organizations"
   add_foreign_key "reorder_levels", "items"
   add_foreign_key "reorder_levels", "organizations"
   add_foreign_key "reorder_levels", "warehouses"

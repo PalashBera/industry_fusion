@@ -116,6 +116,13 @@
           <% end %>
         </li>
 
+        <li class="<%= active_sidebar("payment_terms") %>">
+          <%= link_to master_payment_terms_path, class: "sidenav-item-link" do %>
+            <i class="fas fa-money-check-alt"></i>
+            <span class="nav-text">Payment Terms</span>
+          <% end %>
+        </li>
+
         <% if current_user.admin? %>
           <li class="section-title">
             Admin

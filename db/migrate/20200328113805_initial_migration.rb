@@ -169,6 +169,17 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
+    create_table :payment_terms do |t|
+      t.string     :name,                             null: false
+      t.string     :description,   null: false
+      t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+
+      t.timestamps
+    end
+
     create_table :companies do |t|
       t.string     :name,                             null: false
       t.string     :short_name,    limit: 3,          null: false
@@ -181,9 +192,9 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string     :pin_code,      limit: 6,          null: false
       t.string     :phone_number,  default: ""
       t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
-      t.references :organization,  foreign_key: true, null: false
 
       t.timestamps
     end
@@ -200,9 +211,9 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string     :pin_code,      limit: 6,          null: false
       t.string     :phone_number,  default: ""
       t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
-      t.references :organization,  foreign_key: true, null: false
 
       t.timestamps
     end
@@ -211,21 +222,21 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string     :name,                             null: false
       t.string     :short_name,    limit: 4,          null: false
       t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
-      t.references :organization,  foreign_key: true, null: false
 
       t.timestamps
     end
 
     create_table :item_groups do |t|
       t.string     :name,                             null: false
+      t.string     :hsn_code,      limit: 8
       t.text       :description,   default: ""
       t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
-      t.string     :hsn_code,      limit: 8
-      t.references :organization,  foreign_key: true, null: false
 
       t.timestamps
     end
@@ -234,24 +245,24 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string     :name,                             null: false
       t.text       :description,   default: ""
       t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
-      t.references :organization,  foreign_key: true, null: false
 
       t.timestamps
     end
 
     create_table :items do |t|
-      t.references :item_group,    foreign_key: true,            null: false
-      t.references :uom,           foreign_key: true,            null: false
-      t.references :secondary_uom, foreign_key: { to_table: :uoms }
-      t.string     :name,                                        null: false
+      t.references :item_group,         foreign_key: true,      null: false
+      t.references :uom,                foreign_key: true,      null: false
+      t.references :secondary_uom,      foreign_key: { to_table: :uoms }
+      t.string     :name,                                       null: false
       t.decimal    :primary_quantity,   precision: 10, scale: 2
       t.decimal    :secondary_quantity, precision: 10, scale: 2
-      t.boolean    :archive,       default: false,               null: false
-      t.bigint     :created_by_id, index: true
-      t.bigint     :updated_by_id, index: true
-      t.references :organization,  foreign_key: true,            null: false
+      t.boolean    :archive,            default: false,         null: false
+      t.references :organization,       foreign_key: true,      null: false
+      t.bigint     :created_by_id,      index: true
+      t.bigint     :updated_by_id,      index: true
 
       t.timestamps
     end
@@ -261,19 +272,19 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.references :item,          foreign_key: true, null: false
       t.string     :cat_no,        default: ""
       t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
-      t.references :organization,  foreign_key: true, null: false
 
       t.timestamps
     end
 
     create_table :indentors do |t|
-      t.string :name, null: false
-      t.boolean :archive, default: false, null: false
-      t.references :organization, foreign_key: true, null: false
-      t.bigint  :created_by_id, index: true
-      t.bigint  :updated_by_id, index: true
+      t.string     :name,                             null: false
+      t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
 
       t.timestamps
     end
@@ -332,10 +343,10 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     end
 
     create_table :warehouse_locations do |t|
-      t.references :warehouse,     null: false,    foreign_key: true
+      t.references :warehouse,     null: false, foreign_key: true
       t.string     :name,          null: false
-      t.boolean    :archive,       default: false, null: false
-      t.references :organization,  null: false,    foreign_key: true
+      t.boolean    :archive,       null: false, default: false
+      t.references :organization,  null: false, foreign_key: true
       t.bigint     :updated_by_id, index: true
       t.bigint     :created_by_id, index: true
 
@@ -343,12 +354,12 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     end
 
     create_table :reorder_levels do |t|
-      t.references :item,          null: false,    foreign_key: true
-      t.references :warehouse,     null: false,    foreign_key: true
-      t.decimal    :quantity,      null: false,    precision: 10, scale: 2
-      t.string     :priority,      null: false,    default: "default"
-      t.boolean    :archive,       default: false, null: false
-      t.references :organization,  null: false,    foreign_key: true
+      t.references :item,          null: false, foreign_key: true
+      t.references :warehouse,     null: false, foreign_key: true
+      t.decimal    :quantity,      null: false, precision: 10, scale: 2
+      t.string     :priority,      null: false, default: "default"
+      t.boolean    :archive,       null: false, default: false
+      t.references :organization,  null: false, foreign_key: true
       t.bigint     :updated_by_id, index: true
       t.bigint     :created_by_id, index: true
 

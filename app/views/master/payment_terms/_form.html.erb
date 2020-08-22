@@ -1,0 +1,16 @@
+<%= render layout: "shared/form_modal_layout", locals: { resource: @payment_term, namespace: "master" } do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :details %>
+    <%= f.text_field :description, required: true, class: "form-control", placeholder: "Description", autocomplete: :off, maxlength: 255 %>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <%= f.check_box :archive, class: "custom-control-input" %>
+    <%= f.label :archive, class: "custom-control-label" %>
+  </div>
+<% end %>
