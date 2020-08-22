@@ -284,6 +284,20 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "payment_terms", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "archive", default: false, null: false
+    t.text "description", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_payment_terms_on_created_by_id"
+    t.index ["organization_id"], name: "index_payment_terms_on_organization_id"
+    t.index ["updated_by_id"], name: "index_payment_terms_on_updated_by_id"
+  end
+
   create_table "reorder_levels", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.bigint "warehouse_id", null: false
@@ -507,6 +521,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "makes", "brands"
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
+  add_foreign_key "payment_terms", "organizations"
   add_foreign_key "reorder_levels", "items"
   add_foreign_key "reorder_levels", "organizations"
   add_foreign_key "reorder_levels", "warehouses"
