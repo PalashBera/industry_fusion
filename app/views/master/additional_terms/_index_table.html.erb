@@ -1,0 +1,27 @@
+<div class="table-responsive">
+  <table class="table" width="100%">
+    <thead>
+      <tr>
+        <th scope="col"><%= sort_link @search, :name, "Name" %></th>
+        <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
+        <th scope="col" class="text-center">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @additional_terms.each do |term| %>
+        <tr>
+          <td scope="row"><%= term.name %></td>
+          <td><%= term.archived_status %></td>
+          <td class="text-center">
+            <%= edit_link_using_modal(controller_name, term) %>
+            <%= show_link_modal_link(controller_name, term) %>
+            <%= history_link_using_modal(controller_name, term) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render "shared/pagy" %>

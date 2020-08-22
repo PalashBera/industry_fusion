@@ -46,6 +46,14 @@ module ModalLinksHelper
             title: "Add New #{controller_name.singularize.humanize.titleize}"
   end
 
+  def show_link_modal_link(controller_name, resource)
+    link_to "Show",
+            url_for(controller: controller_name, action: "show", id: resource.id),
+            remote: true,
+            title: "Show #{resource.class.name}",
+            class: "btn btn-sm btn-secondary"
+  end
+
   def active_note_display_link(item)
     link_to raw('<i class="fas fa-sticky-note"></i>'),
             procurement_indent_path(item),

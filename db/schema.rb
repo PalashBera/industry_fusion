@@ -15,6 +15,20 @@ ActiveRecord::Schema.define(version: 2020_09_09_183526) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "additional_terms", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "conditions", null: false
+    t.boolean "archive", default: false, null: false
+    t.bigint "organization_id", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_additional_terms_on_created_by_id"
+    t.index ["organization_id"], name: "index_additional_terms_on_organization_id"
+    t.index ["updated_by_id"], name: "index_additional_terms_on_updated_by_id"
+  end
+
   create_table "approval_levels", force: :cascade do |t|
     t.string "approval_type", null: false
     t.bigint "organization_id", null: false
@@ -537,6 +551,7 @@ ActiveRecord::Schema.define(version: 2020_09_09_183526) do
     t.index ["updated_by_id"], name: "index_warehouses_on_updated_by_id"
   end
 
+  add_foreign_key "additional_terms", "organizations"
   add_foreign_key "approval_levels", "organizations"
   add_foreign_key "approval_request_users", "approval_requests"
   add_foreign_key "approval_request_users", "users"

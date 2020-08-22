@@ -1,0 +1,30 @@
+<% provide(:title, "Additional Terms") %>
+
+<h1>Additional Terms</h1>
+
+<section class="mb-4">
+  <%= new_link_using_modal(controller_name) %>
+  <%= filter_link_using_modal(params[:q]) %>
+</section>
+
+<% if @additional_terms.present? %>
+  <%= render "index_table" %>
+<% else %>
+  <div class="well">
+    <% if params[:q].present? %>
+      No record has been found. Please search with proper keywords.
+    <% else %>
+      No additional term has been added yet. <%= new_modal_link(controller_name) %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= render "filter_form" %>
+<%= render "shared/form_modal_container" %>
+
+<div class="modal fade" id="show_modal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>
