@@ -62,8 +62,8 @@ class Indent < ApplicationRecord
   def set_serial_number
     start_date, end_date = User.current_user.organization.fy_date_range
     current_fy_indents = Indent.date_range_filter(start_date, end_date).warehouse_filter(warehouse_id).order_by_serial
-    last_indent_serial_number = current_fy_indents.last&.serial || 0
-    self.serial = last_indent_serial_number + 1
+    last_indent_serial = current_fy_indents.last&.serial || 0
+    self.serial = last_indent_serial + 1
     self.serial_number = "IND/#{start_date.strftime("%y")}-#{end_date.strftime("%y")}/#{warehouse&.short_name}/#{serial.to_s.rjust(4, "0")}"
   end
 end
