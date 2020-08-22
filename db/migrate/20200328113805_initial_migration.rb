@@ -172,7 +172,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     create_table :payment_terms do |t|
       t.string     :name,                             null: false
       t.boolean    :archive,       default: false,    null: false
-      t.text       :description,   null: false
+      t.string     :description,   null: false
       t.bigint     :created_by_id, index: true
       t.bigint     :updated_by_id, index: true
       t.references :organization,  foreign_key: true, null: false

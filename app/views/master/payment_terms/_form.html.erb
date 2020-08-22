@@ -6,8 +6,7 @@
 
   <div class="form-group">
     <%= f.label :details %>
-    <%= f.hidden_field :description, id: :payment_term_descriptions %>
-    <trix-editor input="payment_term_descriptions" class="conditions" required="true"></trix-editor>
+    <%= f.text_field :description, required: true, class: "form-control", placeholder: "Name", autocomplete: :off, maxlength: 255 %>
   </div>
 
   <div class="custom-control custom-checkbox">
