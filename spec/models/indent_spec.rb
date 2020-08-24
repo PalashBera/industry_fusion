@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Indent, type: :model do
   let(:user)   { create(:user) }
-  let(:indent) { create(:indent, requirement_date: Time.zone.now + 10.day) }
+  let(:indent) { create(:indent) }
 
   before(:each) do
     ActsAsTenant.current_tenant = user.organization
@@ -18,7 +18,7 @@ RSpec.describe Indent, type: :model do
     it { should have_db_column(:company_id) }
     it { should have_db_column(:warehouse_id) }
     it { should have_db_column(:serial) }
-    it { should have_db_column(:requirement_date) }
+    it { should have_db_column(:serial_number) }
   end
 
   describe "#active_record_index" do
@@ -43,9 +43,9 @@ RSpec.describe Indent, type: :model do
   end
 
   describe "#order_by_serial" do
-    let!(:indent_1) { create(:indent, requirement_date: Time.zone.now) }
-    let!(:indent_2) { create(:indent, requirement_date: Time.zone.now + 1.days) }
-    let!(:indent_3) { create(:indent, requirement_date: Time.zone.now + 2.days) }
+    let!(:indent_1) { create(:indent) }
+    let!(:indent_2) { create(:indent) }
+    let!(:indent_3) { create(:indent) }
 
     it "should return records ordered by serial" do
       expect(Indent.order_by_serial).to eq([indent_1, indent_2, indent_3])

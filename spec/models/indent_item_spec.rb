@@ -22,6 +22,7 @@ RSpec.describe IndentItem, type: :model do
     it { should have_db_column(:quantity) }
     it { should have_db_column(:note) }
     it { should have_db_column(:priority) }
+    it { should have_db_column(:requirement_date) }
     it { should have_db_column(:approval_request_id) }
   end
 
