@@ -6,24 +6,19 @@
   <h4 class="mb-4">Indent Details:</h4>
 
   <div class="form-row">
-    <div class="form-group col-sm-12 col-lg-3">
+    <div class="form-group col-sm-12 col-lg-4">
       <%= f.label :company_id %>
       <%= f.select :company_id, company_dropdown_list(f.object), { prompt: "-- Select Company --" }, { required: true, class: "form-control", disabled: @locked } %>
     </div>
 
-    <div class="form-group col-sm-12 col-lg-3">
+    <div class="form-group col-sm-12 col-lg-4">
       <%= f.label :warehouse_id %>
       <%= f.select :warehouse_id, warehouse_dropdown_list(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control", disabled: @locked } %>
     </div>
 
-    <div class="form-group col-sm-12 col-lg-3">
+    <div class="form-group col-sm-12 col-lg-4">
       <%= f.label :indentor_id %>
       <%= f.select :indentor_id, indentor_dropdown_list(f.object), { prompt: "-- Select Indentor --" }, { class: "form-control", disabled: @locked } %>
-    </div>
-
-    <div class="form-group col-sm-12 col-lg-3">
-      <%= f.label :requirement_date %>
-      <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control", disabled: @locked, autocomplete: :off %>
     </div>
   </div>
 
@@ -40,7 +35,8 @@
         <div class="col-lg-1"><label>UOM</label></div>
         <div class="col-lg-2"><label>Cost Center</label></div>
         <div class="col-lg-1"><label>Priority</label></div>
-        <div class="col-lg-2"><label>Note</label></div>
+        <div class="col-lg-2"><label>Req. Date</label></div>
+        <div class="col-lg-1"><label>Note</label></div>
       </section>
     <% end %>
 
@@ -77,41 +73,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $('#indent_requirement_date').daterangepicker({
-    autoUpdateInput: false,
-    singleDatePicker: true,
-    locale: {
-      format: 'DD/MM/YYYY',
-      cancelLabel: 'Clear'
-    }
-  });
-
-  $('#indent_requirement_date').on('apply.daterangepicker', function (ev, picker) {
-    $(this).val(picker.startDate.format('DD/MM/YYYY'));
-  });
-
-  $('#indent_requirement_date').on('cancel.daterangepicker', function (ev, picker) {
-    $(this).val('');
-  });
-
-  $('.indent-note i').click(function(e) {
-    var noteInput = $(this).closest('div').parent().find('input[type=hidden]');
-    $('#note_form_modal #indent_note').data('id', noteInput.attr('id'));
-    $('#note_form_modal #indent_note').val(noteInput.val());
-    $('#note_form_modal').modal('show');
-  });
-
-  $('#add_indent_note').click(function() {
-    var note = $('#note_form_modal #indent_note').val();
-    var inputId = $('#note_form_modal #indent_note').data('id');
-    $('#' + inputId).val(note);
-
-    if (note.length > 0) {
-      $('#' + inputId).closest('div').find('.indent-note i').addClass('text-info');
-    } else {
-      $('#' + inputId).closest('div').find('.indent-note i').removeClass('text-info');
-    }
-  });
-</script>

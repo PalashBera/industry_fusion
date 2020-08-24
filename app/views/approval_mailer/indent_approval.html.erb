@@ -28,13 +28,13 @@
       <p style="margin: 0;"><span style="display: inline-block; min-width: 160px; font-weight: 800;">Indentor Name:</span><%= @indent_item.indent.indentor_name %></p>
     <% end %>
 
-    <p style="margin: 0;"><span style="display: inline-block; min-width: 160px; font-weight: 800;">Requirement Date:</span><%= I18n.l(@indent_item.indent_requirement_date) %></p>
     <br>
     <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Item:</span><%= @indent_item.item_name %></p>
     <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Make:</span><%= @indent_item.brand_details %></p>
     <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Quantity:</span><%= @indent_item.quantity_with_uom %></p>
     <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Cost Center:</span><%= @indent_item.cost_center_name %></p>
     <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Priority:</span><%= @indent_item.display_priority %></p>
+    <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Req. Date:</span><%= @indent_item.requirement_date %></p>
 
     <% if @indent_item.note.present? %>
       <p style="margin: 0;"><span style="display: inline-block; min-width: 120px; font-weight: 800;">Note:</span><%= @indent_item.note %></p>

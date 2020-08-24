@@ -80,8 +80,8 @@ class Procurement::Indents::HomeController < Procurement::HomeController
   end
 
   def indent_params
-    params.require(:indent).permit(:requirement_date, :company_id, :warehouse_id, :indentor_id,
-                                   indent_items_attributes: %i[id item_id cost_center_id make_id uom_id quantity priority note _destroy])
+    params.require(:indent).permit(:company_id, :warehouse_id, :indentor_id,
+                                   indent_items_attributes: %i[id item_id cost_center_id make_id uom_id quantity priority requirement_date note _destroy])
   end
 
   def redirect_path

@@ -24,11 +24,6 @@
           </div>
 
           <div>
-            <label>Requirement Date:</label>
-            <span><%= I18n.l(@indent.requirement_date) %></span>
-          </div>
-
-          <div>
             <label>Indentor:</label>
             <span><%= @indent.indentor&.name %></span>
           </div>
@@ -60,6 +55,7 @@
             <th scope="col">Quantity</th>
             <th scope="col">Cost&nbsp;Center</th>
             <th scope="col">Priority</th>
+            <th scope="col">Req. Date</th>
             <th scope="col">Note</th>
             <th scope="col">Status</th>
           </tr>
@@ -74,6 +70,7 @@
               <td><%= item.quantity_with_uom %></td>
               <td><%= item.cost_center_name %></td>
               <td><%= item.display_priority %></td>
+              <td><%= I18n.l(item.requirement_date) %></td>
               <td><%= item.note %></td>
               <td><%= item.display_status %></td>
             </tr>

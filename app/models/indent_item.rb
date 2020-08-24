@@ -24,7 +24,6 @@ class IndentItem < ApplicationRecord
   has_many :approval_request_users, through: :approval_request
 
   delegate :serial_number,     to: :indent,      prefix: :indent
-  delegate :requirement_date,  to: :indent,      prefix: :indent
   delegate :name,              to: :item,        prefix: :item
   delegate :short_name,        to: :uom,         prefix: :uom
   delegate :name,              to: :cost_center, prefix: :cost_center
