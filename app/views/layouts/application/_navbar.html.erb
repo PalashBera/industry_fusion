@@ -1,30 +1,25 @@
 <header class="main-header" id="header">
   <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-    <button id="sidebar-toggler" class="sidebar-toggle">
-      <span class="sr-only">Toggle navigation</span>
-    </button>
-
-    <span class="page-title"><%= yield(:page_title) %></span>
+    <%= image_tag "hamburger-icon.png", alt: "hamburger icon", id: "sidebar-toggler", class: "sidebar-toggle" %>
+    <h6 class="page-title"><%= current_organization.name %></h6>
 
     <div class="navbar-right">
       <ul class="nav navbar-nav">
         <li class="dropdown user-menu">
-          <button class="dropdown-toggle nav-link" data-toggle="dropdown">
-            <span class="user-image rounded-circle user-initial"><%= current_user.initial %></span>
-            <span class="d-none d-lg-inline-block"><%= current_user.full_name %></span>
-          </button>
+          <div class="dropdown-toggle nav-link" data-toggle="dropdown">
+            <span class="user-image"><%= current_user.initial %></span>
+            <span class="d-none d-sm-inline-block"><%= current_user.full_name %></span>
+          </div>
 
           <ul class="dropdown-menu dropdown-menu-right">
             <li>
-              <%= link_to edit_user_registration_path, class: "dropdown-link-item" do %>
-                <i class="mdi mdi-settings"></i>
+              <%= link_to edit_user_registration_path do %>
                 <span class="nav-text">Setting</span>
               <% end %>
             </li>
 
             <li class="dropdown-footer">
-              <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-link-item" do %>
-                <i class="mdi mdi-logout"></i>
+              <%= link_to destroy_user_session_path, method: :delete do %>
                 <span class="nav-text">Log Out</span>
               <% end %>
             </li>

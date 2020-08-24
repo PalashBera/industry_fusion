@@ -1,0 +1,15 @@
+.content-wrapper {
+  min-height: calc(100vh - 134px);
+}
+
+.content {
+  padding: 32px 10px 32px 10px;
+
+  @include media-breakpoint-up(md) {
+    padding: 32px 15px 32px 15px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding: 32px 20px 32px 20px;
+  }
+}

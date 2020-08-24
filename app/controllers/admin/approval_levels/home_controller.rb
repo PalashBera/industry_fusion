@@ -1,5 +1,5 @@
 class Admin::ApprovalLevels::HomeController < Admin::HomeController
-  before_action { active_sidebar_option("approval_levels") }
+  before_action { active_sidebar_sub_menu_option("approval_levels") }
 
   protected
 

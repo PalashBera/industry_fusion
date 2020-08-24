@@ -1,0 +1,55 @@
+<% provide(:title, "Indents") %>
+
+<h1>Indents</h1>
+
+<section class="mb-4 d-flex justify-content-between">
+  <section>
+    <%= new_link_btn(controller_name) %>
+    <%= filter_link_using_modal(params[:q]) %>
+  </section>
+
+  <section>
+    <%= excel_export_btn(controller_name) %>
+  </section>
+</section>
+
+<% if @indent_items.present? %>
+  <%= render "index_table" %>
+<% else %>
+  <div class="card">
+    <div class="card-body text-center">
+      <% if params[:q].present? %>
+        No result found. Please search with proper keywords.
+      <% else %>
+        No indent has been added yet. <%= new_link(controller_name) %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div id="note_modal_block"></div>
+
+<div id="auto_next_link">
+  <%= render "shared/auto_incremental_pagy" %>
+</div>
+
+<%= render "filter_form" %>
+
+<script>
+  var loadNextPage = function () {
+    if ($('#records_table').height() === undefined || $('#next_link').data("loading")) { return }  // prevent multiple loading
+    var wBottom = $(window).scrollTop() + $(window).height();
+    var elBottom = $('#records_table').offset().top + $('#records_table').height();
+
+    if (wBottom > elBottom) {
+      if ($('#next_link')[0] !== undefined) {    // checking next page link is available or not
+        $('#next_link')[0].click();
+        $('#next_link').data("loading", true);
+      }
+    }
+  };
+
+  window.addEventListener('resize', loadNextPage);
+  window.addEventListener('scroll', loadNextPage);
+  window.addEventListener('load', loadNextPage);
+</script>

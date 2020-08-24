@@ -71,29 +71,45 @@ RSpec.describe ApplicationHelper, type: :helper do
   describe "#archive_status" do
     context "when record is archived" do
       it "should return archived badge" do
-        expect(archive_status(true)).to eq('<span class="badge badge-danger" title="Archived">Archived</span>')
+        expect(archive_status(true)).to eq(t("status.archived"))
       end
     end
 
     context "when record is not archived" do
       it "should return active badge" do
-        expect(archive_status(false)).to eq('<span class="badge badge-success" title="Active">Active</span>')
+        expect(archive_status(false)).to eq(t("status.active"))
       end
     end
   end
 
-  describe "#active_sidebar" do
+  describe "#active_sidebar_menu" do
     context "when controller name is same as parameter" do
       it "should return active" do
-        @active_sidebar = "brands"
-        expect(active_sidebar("brands")).to eq(t("active"))
+        @active_sidebar_menu = "brands"
+        expect(active_sidebar_menu("brands")).to eq(t("active"))
       end
     end
 
     context "when controller name is not same as parameter" do
       it "should return blank string" do
-        @active_sidebar = "brands"
-        expect(active_sidebar("home")).to eq("")
+        @active_sidebar_menu = "brands"
+        expect(active_sidebar_menu("home")).to eq("")
+      end
+    end
+  end
+
+  describe "#active_sidebar_sub_menu" do
+    context "when controller name is same as parameter" do
+      it "should return active" do
+        @active_sidebar_sub_menu = "brands"
+        expect(active_sidebar_sub_menu("brands")).to eq(t("active"))
+      end
+    end
+
+    context "when controller name is not same as parameter" do
+      it "should return blank string" do
+        @active_sidebar_sub_menu = "brands"
+        expect(active_sidebar_sub_menu("home")).to eq("")
       end
     end
   end

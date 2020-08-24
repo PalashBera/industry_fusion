@@ -308,7 +308,7 @@ RSpec.describe IndentsHelper, type: :helper do
 
       it "should return modal link" do
         link = Nokogiri::HTML(helper.indenx_note_link(indent_item)).children.children.children[0]
-        expect(link.attributes["href"].value).to eq("/procurement/indents/indent_items/#{indent_item.id}")
+        expect(link.attributes["href"].value).to eq("/procurement/indents/#{indent_item.id}")
         expect(link.attributes["data-remote"].value).to eq("true")
         expect(link.attributes["title"].value).to eq("Show Note")
         expect(link.attributes["class"].value).to eq("text-info")

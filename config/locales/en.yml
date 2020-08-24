@@ -47,7 +47,7 @@ en:
     danger: "Oh snap!"
 
   message_type:
-    notice: "info"
+    notice: "success"
     alert: "danger"
 
   flash_messages:
@@ -70,3 +70,7 @@ en:
       subject: "Indent Approval Request for – #%{serial}"
     new_vendorship:
       subject: "New Vendorship – %{name}"
+
+  status:
+    archived: "Archived"
+    active: "Active" 

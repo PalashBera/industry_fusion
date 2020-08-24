@@ -1,0 +1,171 @@
+<% company = @indent.company %>
+<% warehouse = @indent.warehouse %>
+<% items = @indent.indent_items.included_resources %>
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title><%= full_title("Indent – #{@indent.serial_number}") %></title>
+
+    <link href="//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+
+    <style>
+      body { width: 210mm; margin: 15px auto; font-family: 'Roboto'; }
+      table { width: 100%; }
+      p { margin: 0; }
+      table.print-table { page-break-after: always; }
+      thead.page-header { display:table-header-group; }
+      tfoot.page-footer { display:table-footer-group; }
+      table.print-table div.page-content { page-break-inside: avoid; }
+      .width-50 { width: 50%; }
+      .width-4 { width: 4%; }
+      .width-5 { width: 5%; }
+      .width-7 { width: 7%; }
+      .width-12 { width: 12%; }
+      .width-15 { width: 15%; }
+      .width-35 { width: 35%; }
+      .page-header th { text-align: left; font-weight: normal; }
+      .company-details { display: flex; justify-content: space-between; margin-bottom: 15px; }
+      .company-name { letter-spacing: 1.5px; font-size: 32px; font-weight: 800; margin-bottom: 15px; line-height: 32px; }
+      .company-logo { height: 90px; }
+      .details-title { padding: 6px 8px; background-color: #A9A9A9; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 800; font-size: 18px; }
+      .details-block { display: flex; justify-content: space-between; margin: 15px 0; }
+      .details-block:not(.sub-title) { font-size: 12px; }
+      .sub-title { text-transform: uppercase; font-size: 16px; line-height: 16px; letter-spacing: 1.5px; opacity: 0.5; font-weight: bolder; margin-bottom: 5px; }
+      .item-table, .item-table td { border-collapse: collapse; }
+      .item-table td, .item-table-title-row th { border: 1px solid black; padding: 3px 2px; }
+      .item-table td { vertical-align: top; font-size: 12px; }
+      .item-table .details-title-col { padding: 0; }
+      .item-table .details-title { margin-bottom: 15px; text-align: left; }
+      .signature-block { display: flex; justify-content: space-between; margin-top: 35px; }
+      .footer-content { margin-top: 10px; text-align: center; border-top: 2px solid #A9A9A9; }
+    </style>
+  </head>
+  <body>
+    <table class="print-table">
+      <thead class="page-header">
+        <tr>
+          <th>
+            <div class="company-details">
+              <div class="company-info">
+                <p class="company-name"><%= company.name %></p>
+                <p><%= company.address1 %></p>
+
+                <% if company.address2.present? %>
+                  <p><%= company.address2 %></p>
+                <% end %>
+
+                <p><%= "#{company.city}, #{company.state}" %></p>
+                <p><%= "#{company.country}, #{company.pin_code}" %></p>
+
+                <% if company.phone_number.present? %>
+                  <p><%= "Phone: #{company.phone_number}" %></p>
+                <% end %>
+              </div>
+
+              <div>
+                <%= image_tag company.logo.url, alt: "logo", class: "company-logo" %>
+              </div>
+            </div>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <div class="page-content">
+              <p class="details-title">Indent Details</p>
+
+              <div class="details-block">
+                <div class="width-50">
+                  <p class="sub-title">Warehouse Detials</p>
+                  <p><b><%= warehouse.name %></b></p>
+                  <p><%= warehouse.address1 %></p>
+
+                  <% if warehouse.address2.present? %>
+                    <p><%= warehouse.address2 %></p>
+                  <% end %>
+
+                  <p><%= "#{warehouse.city}, #{warehouse.state}" %></p>
+                  <p><%= "#{warehouse.country}, #{warehouse.pin_code}" %></p>
+
+                  <% if warehouse.phone_number.present? %>
+                    <p><%= "Phone: #{warehouse.phone_number}" %></p>
+                  <% end %>
+                </div>
+
+                <div class="width-50">
+                  <p class="sub-title">Indent Details</p>
+                  <p>Indent NO: <b><%= @indent.serial_number %></b></p>
+                  <p>Requirement Date: <%= I18n.l(@indent.requirement_date) %></p>
+
+                  <% if @indent.indentor.present? %>
+                    <p>Requested By: <%= @indent.indentor.name %></p>
+                  <% end %>
+
+                  <br>
+
+                  <p>Created At: <%= I18n.l(@indent.created_at) %></p>
+                  <p>Created By: <%= @indent.created_by.full_name %></p>
+                </div>
+              </div>
+
+              <table class="item-table">
+                <thead>
+                  <tr>
+                    <th colspan="8" class="details-title-col">
+                      <p class="details-title">Item Details</p>
+                    </th>
+                  </tr>
+
+                  <tr class="item-table-title-row">
+                    <th class="width-4">#</th>
+                    <th class="width-35">Item Description</th>
+                    <th class="width-15">Make</th>
+                    <th class="width-7">Quantity</th>
+                    <th class="width-5">UOM</th>
+                    <th class="width-15">Cost Center</th>
+                    <th class="width-7">Priority</th>
+                    <th class="width-12">Note</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <% items.each.with_index(1) do |item, index| %>
+                    <tr>
+                      <td><%= index %>.</td>
+                      <td><%= item.item_name %></td>
+                      <td><%= item.brand_details %></td>
+                      <td><%= item.quantity %></td>
+                      <td><%= item.uom_short_name %></td>
+                      <td><%= item.cost_center_name %></td>
+                      <td><%= item.priority.display %></td>
+                      <td><%= item.note %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+      <tfoot class="page-footer">
+        <tr>
+          <td>
+            <div class="signature-block">
+              <p>Date:</p>
+              <p>Approved By: ___________________________________</p>
+            </div>
+            <div class="footer-content">
+              <p><small>This is computer generated document. No seal & signature required.</small></p>
+              <p>Powered By <small><a href="#">Indistry Fusion</a></small></p>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </body>
+</html>

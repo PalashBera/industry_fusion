@@ -1,0 +1,41 @@
+.alert {
+  border-radius: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 5px;
+  padding-left: 6px;
+  vertical-align: center;
+  border: 0;
+  margin-bottom: 0;
+
+  @include media-breakpoint-up(md) {
+    padding-right: 10px;
+    padding-left: 11px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    padding-right: 15px;
+    padding-left: 21px;
+  }
+
+  .close {
+    height: 16px;
+    cursor: pointer;
+    padding: 0;
+    opacity: 1;
+    position: inherit;
+    margin-top: 4px;
+  }
+}
+
+.alert-success {
+  color: #257558;
+  border-left: 4px solid #45DBA5;
+  background-color: #ECFBF6;
+}
+
+.alert-danger {
+  color: #75252B;
+  border-left: 4px solid #DB4551;
+  background-color: #FBECEE;
+}

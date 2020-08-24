@@ -15,17 +15,6 @@ $(document).on('ready turbolinks:load', function() {
     });
   }
 
-  /*======== SIDEBAR MENU ========*/
-  $(".sidebar .nav > .has-sub > a").click(function(){
-    $(this).parent().siblings().removeClass('expand')
-    $(this).parent().toggleClass('expand')
-  })
-
-  $(".sidebar .nav > .has-sub .has-sub > a").click(function(){
-    $(this).parent().toggleClass('expand')
-  })
-
-
   /*======== SIDEBAR TOGGLE FOR MOBILE ========*/
   if ($(window).width() < 768) {
     $(".sidebar-toggle").click(function(e) {

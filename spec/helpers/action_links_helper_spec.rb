@@ -21,8 +21,8 @@ RSpec.describe ActionLinksHelper, type: :helper do
 
   describe "#show_action_link" do
     it "create a show link for record" do
-      link = Nokogiri::HTML(helper.show_action_link("procurement/indents/pending_indents", indent)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent.id}")
+      link = Nokogiri::HTML(helper.show_action_link("procurement/indents", indent)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/#{indent.id}")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end
@@ -73,67 +73,6 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["href"].value).to eq("/master/vendors/#{vendor.id}/resend_invitation")
       expect(link.attributes["data-method"].value).to eq("put")
       expect(link.attributes["title"].value).to eq("Resend Invitation")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
-    end
-  end
-
-  describe "#print_action_link" do
-    let(:indent_item) { indent.indent_items.first }
-
-    it "create a print link for indent" do
-      link = Nokogiri::HTML(helper.print_action_link("procurement/indents/pending_indents", indent_item)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/print")
-      expect(link.attributes["title"].value).to eq("Print")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
-    end
-  end
-
-  describe "#send_approval_action_link" do
-    let(:indent_item) { indent.indent_items.first }
-
-    it "create a send for approval link for indent item" do
-      link = Nokogiri::HTML(helper.send_approval_action_link("procurement/indents/pending_indents", indent_item)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}/send_for_approval")
-      expect(link.attributes["title"].value).to eq("Send for Approval")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
-    end
-  end
-
-  describe "#restore_action_link" do
-    let(:indent_item) { indent.indent_items.first }
-
-    it "creates a restore link for indent item" do
-      link = Nokogiri::HTML(helper.restore_action_link("procurement/indents/amended_indents", indent_item)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/procurement/indents/amended/#{indent_item.id}")
-      expect(link.attributes["data-method"].value).to eq("delete")
-      expect(link.attributes["data-confirm"].value).to eq("Do you want to restore this indent?")
-      expect(link.attributes["title"].value).to eq("Restore")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
-    end
-  end
-
-  describe "#amended_action_link" do
-    let(:indent_item) { indent.indent_items.first }
-
-    it "creates a amended link for indent item" do
-      link = Nokogiri::HTML(helper.amended_action_link("procurement/indents/amended_indents", indent_item)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/procurement/indents/amended/#{indent_item.id}")
-      expect(link.attributes["data-method"].value).to eq("delete")
-      expect(link.attributes["data-confirm"].value).to eq("Do you want to amend this indent?")
-      expect(link.attributes["title"].value).to eq("Amend")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
-    end
-  end
-
-  describe "#cancelled_action_link" do
-    let(:indent_item) { indent.indent_items.first }
-
-    it "creates a cancel link for indent item" do
-      link = Nokogiri::HTML(helper.cancelled_action_link("procurement/indents/pending_indents", indent_item)).children.children.children[0]
-      expect(link.attributes["href"].value).to eq("/procurement/indents/pending/#{indent_item.id}")
-      expect(link.attributes["data-method"].value).to eq("delete")
-      expect(link.attributes["data-confirm"].value).to eq("Do you want to cancel this indent?")
-      expect(link.attributes["title"].value).to eq("Cancel")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end

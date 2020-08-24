@@ -90,14 +90,6 @@ RSpec.describe IndentItem, type: :model do
     end
   end
 
-  describe "#display_priority" do
-    let!(:indent_item) { create(:indent_item, priority: "high") }
-
-    it "should return High" do
-      expect(indent_item.display_priority).to eq("High")
-    end
-  end
-
   describe "#brand_details" do
     context "when make not present" do
       let!(:indent_item) { create(:indent_item, make_id: nil) }
@@ -222,14 +214,6 @@ RSpec.describe IndentItem, type: :model do
         expect(indent_item.reload.approval_request_id).to eq(approval_request_1.id)
         expect(indent_item.reload.approval_pending?).to eq(true)
       end
-    end
-  end
-
-  describe "#display_status" do
-    let!(:indent_item) { create(:indent_item, status: "pending") }
-
-    it "should return status with proper format" do
-      expect(indent_item.display_status).to eq("Pending")
     end
   end
 end

@@ -1,5 +1,5 @@
 class Procurement::Reports::IndentsController < Procurement::HomeController
-  before_action { active_sidebar_option("reports") }
+  before_action { active_sidebar_sub_menu_option("reports") }
 
   def index
     @item_names, @item_wise_indent_items = Indent.indent_item_vs_item

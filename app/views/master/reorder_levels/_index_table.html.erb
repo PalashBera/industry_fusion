@@ -1,10 +1,9 @@
 <div class="table-responsive">
-  <table class="table table-hover" width="100%">
+  <table class="table" width="100%">
     <thead class="thead">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col"><%= sort_link @search, :item_name, "Item".html_safe %></th>
-        <th scope="col"><%= sort_link @search, :warehouse_name, "Warehouse".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :item_name, "Item" %></th>
+        <th scope="col"><%= sort_link @search, :warehouse_name, "Warehouse" %></th>
         <th scope="col"><%= sort_link @search, :quantity, "Quantity" %></th>
         <th scope="col"><%= sort_link @search, :priority, "Priority" %></th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
@@ -13,23 +12,16 @@
     </thead>
 
     <tbody>
-      <% @reorder_levels.each.with_index(1) do |level, index| %>
+      <% @reorder_levels.each do |level| %>
         <tr>
-          <td scope="row"><%= index %></td>
-          <td><%= level.item_name %></td>
+          <td scope="row"><%= level.item_name %></td>
           <td><%= level.warehouse_name %></td>
           <td><%= level.quantity_with_uom %></td>
-          <td><%= level.priority.humanize.titleize %></td>
-          <td><%= archive_status(level.archive).html_safe %></td>
+          <td><%= level.priority.display %></td>
+          <td><%= archive_status(level) %></td>
           <td class="text-center">
-            <div class="dropdown">
-              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
-
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <%= edit_link_using_modal(controller_name, level) %>
-                <%= change_logs_link_using_modal(controller_name, level) %>
-              </div>
-            </div>
+            <%= edit_link_using_modal(controller_name, level) %>
+            <%= history_link_using_modal(controller_name, level) %>
           </td>
         </tr>
       <% end %>

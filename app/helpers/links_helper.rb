@@ -1,9 +1,9 @@
 module LinksHelper
   def excel_export_btn(controller_name)
-    link_to raw('<i class="fas fa-file-export"></i><span class="d-none d-md-inline-block ml-1">Export</span>'),
+    link_to raw('<i class="fas fa-file-export"></i><span class="d-none d-sm-inline-block ml-1">Export</span>'),
             url_for(controller: controller_name, action: "export", format: "xlsx", params: { q: params[:q]&.to_unsafe_h.to_h }),
             title: "Export #{controller_name.humanize.titleize}",
-            class: "btn btn-dark"
+            class: "btn btn-secondary"
   end
 
   def remove_filter_btn(controller_name)
@@ -26,7 +26,7 @@ module LinksHelper
   end
 
   def new_link_btn(controller_name)
-    link_to raw('<i class="fas fa-plus-circle"></i><span class="d-none d-md-inline-block ml-1">Add New</span>'),
+    link_to raw('<i class="fas fa-plus-circle"></i><span class="d-none d-sm-inline-block ml-1">Add New</span>'),
             url_for(controller: controller_name, action: "new"),
             title: "Add New #{controller_name.singularize.humanize.titleize}",
             class: "btn btn-primary"

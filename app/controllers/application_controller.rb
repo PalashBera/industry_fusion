@@ -15,8 +15,12 @@ class ApplicationController < ActionController::Base
     render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
   end
 
-  def active_sidebar_option(option)
-    @active_sidebar = option
+  def active_sidebar_sub_menu_option(option)
+    @active_sidebar_sub_menu = option
+  end
+
+  def active_sidebar_menu_option(option)
+    @active_sidebar_menu = option
   end
 
   protected
