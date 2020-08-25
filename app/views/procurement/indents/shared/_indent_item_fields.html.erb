@@ -29,6 +29,11 @@
     <%= f.select :priority, indent_item_priority_selection, { prompt: "-- Priority --" }, { required: true, class: "form-control", disabled: f.object.locked? } %>
   </div>
 
+  <div class="form-group col-sm-12 col-lg-2">
+    <%= f.label :requirement_date, class: "d-lg-none" %>
+    <%= f.text_field :requirement_date, value: I18n.l(f.object.requirement_date, default: ""), required: true, class: "form-control indent-item-requirement-date", disabled: @locked, autocomplete: :off %>
+  </div>
+
   <div class="form-group icon-form-group">
     <%= f.label :note, class: "d-lg-none" %>
 
@@ -53,3 +58,41 @@
 </section>
 
 <hr class="d-md-none">
+
+<script>
+  $('.indent-item-requirement-date').daterangepicker({
+    autoUpdateInput: false,
+    singleDatePicker: true,
+    locale: {
+      format: 'DD/MM/YYYY',
+      cancelLabel: 'Clear'
+    }
+  });
+
+  $('.indent-item-requirement-date').on('apply.daterangepicker', function (ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY'));
+  });
+
+  $('.indent-item-requirement-date').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+  });
+
+  $('.indent-note i').click(function(e) {
+    var noteInput = $(this).closest('div').parent().find('input[type=hidden]');
+    $('#note_form_modal #indent_note').data('id', noteInput.attr('id'));
+    $('#note_form_modal #indent_note').val(noteInput.val());
+    $('#note_form_modal').modal('show');
+  });
+
+  $('#add_indent_note').click(function() {
+    var note = $('#note_form_modal #indent_note').val();
+    var inputId = $('#note_form_modal #indent_note').data('id');
+    $('#' + inputId).val(note);
+
+    if (note.length > 0) {
+      $('#' + inputId).closest('div').find('.indent-note i').addClass('text-info');
+    } else {
+      $('#' + inputId).closest('div').find('.indent-note i').removeClass('text-info');
+    }
+  });
+</script>

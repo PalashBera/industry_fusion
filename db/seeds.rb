@@ -161,7 +161,7 @@ def generate_indent_items_attributes
     item = organization.items.sample
     make = item.makes.sample && uom = item.uom
 
-    attribute_hash.push({ item_id: item.id, make_id: make.id, uom_id: uom.id, cost_center_id: organization.cost_centers.sample.id,
+    attribute_hash.push({ requirement_date: Date.today + rand(1..10).days, item_id: item.id, make_id: make.id, uom_id: uom.id, cost_center_id: organization.cost_centers.sample.id,
                           quantity: Faker::Number.decimal(l_digits: 5, r_digits: 2), priority: IndentItem::PRIORITY_LIST.sample, organization_id: organization.id })
   end
 
@@ -175,7 +175,6 @@ end
   indentors = (1..20).to_a
 
   Indent.create!(
-    requirement_date: Date.today + t.days,
     organization_id: organization.id,
     indentor_id: indentors[t],
     company_id: company.id,

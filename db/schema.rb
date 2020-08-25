@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
 
   create_table "indent_items", force: :cascade do |t|
     t.bigint "indent_id", null: false
+    t.date "requirement_date", null: false
     t.bigint "item_id", null: false
     t.bigint "uom_id", null: false
     t.bigint "cost_center_id", null: false
@@ -163,7 +164,6 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   create_table "indents", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "warehouse_id", null: false
-    t.date "requirement_date", null: false
     t.string "serial_number", null: false
     t.bigint "serial", null: false
     t.bigint "indentor_id"

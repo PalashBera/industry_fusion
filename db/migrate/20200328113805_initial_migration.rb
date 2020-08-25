@@ -292,7 +292,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
     create_table :indents do |t|
       t.references :company,          foreign_key: true, null: false
       t.references :warehouse,        foreign_key: true, null: false
-      t.date       :requirement_date,                    null: false
       t.string     :serial_number,                       null: false
       t.bigint     :serial,                              null: false
       t.references :indentor,         foreign_key: true
@@ -325,6 +324,7 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     create_table :indent_items do |t|
       t.references :indent,           foreign_key: true,  null: false
+      t.date       :requirement_date,                     null: false
       t.references :item,             foreign_key: true,  null: false
       t.references :uom,              foreign_key: true,  null: false
       t.references :cost_center,      foreign_key: true,  null: false
