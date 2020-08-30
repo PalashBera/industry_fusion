@@ -100,4 +100,12 @@ module IndentsHelper
   def indenx_note_link(indent_item)
     indent_item.note? ? active_note_display_link(indent_item) : disabled_note_display_link
   end
+
+  def req_date_gt
+    params[:q][:requirement_date_gteq]&.to_date if params[:q].present?
+  end
+
+  def req_date_lt
+    params[:q][:requirement_date_lteq]&.to_date if params[:q].present?
+  end
 end

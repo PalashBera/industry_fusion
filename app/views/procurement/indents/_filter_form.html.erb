@@ -33,7 +33,12 @@
 
             <div class="form-group col-md-6 col-sm-12">
               <%= f.label :requirement_date_gteq, "Req. Date >" %>
-              <%= f.search_field :requirement_date_gteq, placeholder: "Req. Date greater than", title: "Insert Date", class: "form-control", autocomplete: :off %>
+              <%= f.search_field :requirement_date_gteq, value: I18n.l(req_date_gt, default: ""), placeholder: "Req. Date greater than", title: "Insert Date", class: "form-control indent-item-requirement-date", autocomplete: :off %>
+            </div>
+
+            <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :requirement_date_lteq, "Req. Date <" %>
+              <%= f.search_field :requirement_date_lteq, value: I18n.l(req_date_lt, default: ""), placeholder: "Req. Date less than", title: "Insert Date", class: "form-control indent-item-requirement-date", autocomplete: :off %>
             </div>
 
             <div class="form-group col-md-6 col-sm-12">
@@ -81,3 +86,22 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('.indent-item-requirement-date').daterangepicker({
+    autoUpdateInput: false,
+    singleDatePicker: true,
+    locale: {
+      format: 'DD/MM/YYYY',
+      cancelLabel: 'Clear'
+    }
+  });
+
+  $('.indent-item-requirement-date').on('apply.daterangepicker', function (ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY'));
+  });
+
+  $('.indent-item-requirement-date').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+  });
+</script>
