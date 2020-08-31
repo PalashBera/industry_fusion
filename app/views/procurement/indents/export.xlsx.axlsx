@@ -16,7 +16,7 @@ wb.styles do |style|
         item.item_name,
         item.brand_details,
         item.quantity_with_uom,
-        I18n.l(item.indent_requirement_date),
+        I18n.l(item.requirement_date),
         item.cost_center_name,
         item.priority.display,
         item.note,
