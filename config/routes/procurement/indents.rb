@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :procurement do
     resources :indents do
       member do
+        get :change_logs
         get :print
         get :send_for_approval
       end

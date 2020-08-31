@@ -1,0 +1,5 @@
+<% partial = "procurement/indents/shared/change_logs" %>
+
+$('body').find('#change_logs_modal').remove();
+$('body').append('<%= j (render partial) %>');
+$('#change_logs_modal').modal();
