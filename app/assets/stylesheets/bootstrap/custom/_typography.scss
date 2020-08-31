@@ -4,9 +4,13 @@ h1 {
   font-family: "AribauGroteskMedium";
   letter-spacing: 0.005em;
   color: $text-color;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 500;
   line-height: 40px;
+
+  @include media-breakpoint-up(sm) {
+    font-size: 32px;
+  }
 }
 
 h6 {
