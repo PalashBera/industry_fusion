@@ -12,7 +12,7 @@ class ItemGroup < ApplicationRecord
 
   has_many :items
 
-  has_paper_trail ignore: %i[created_at updated_at]
-
   validates :hsn_code, length: { minimum: 6, maximum: 8 }
+
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 end
