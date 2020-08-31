@@ -1,0 +1,22 @@
+h1 {
+  margin: 0;
+  margin-bottom: 32px;
+  font-family: "AribauGroteskMedium";
+  letter-spacing: 0.005em;
+  color: $text-color;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 40px;
+}
+
+h6 {
+  font-family: "AribauGroteskMedium";
+  letter-spacing: 0.03px;
+  color: $text-color;
+}
+
+body {
+  font-weight: normal;
+  color: rgb(26, 26, 26);
+  font-family: "AribauGroteskRegular";
+}

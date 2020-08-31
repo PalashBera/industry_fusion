@@ -1,8 +1,7 @@
 <div class="table-responsive">
-  <table class="table table-hover" width="100%">
+  <table class="table" width="100%">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col"><%= sort_link @search, :name, "Name" %></th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col" class="text-center">Actions</th>
@@ -10,20 +9,13 @@
     </thead>
 
     <tbody>
-      <% @indentors.each.with_index(1) do |indentor, index| %>
+      <% @indentors.each do |indentor| %>
         <tr>
-          <td scope="row"><%= index %></td>
-          <td><%= indentor.name %></td>
-          <td><%= archive_status(indentor.archive).html_safe %></td>
+          <td scope="row"><%= indentor.name %></td>
+          <td><%= archive_status(indentor) %></td>
           <td class="text-center">
-            <div class="dropdown">
-              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
-
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <%= edit_link_using_modal(controller_name, indentor) %>
-                <%= change_logs_link_using_modal(controller_name, indentor) %>
-              </div>
-            </div>
+            <%= edit_link_using_modal(controller_name, indentor) %>
+            <%= history_link_using_modal(controller_name, indentor) %>
           </td>
         </tr>
       <% end %>

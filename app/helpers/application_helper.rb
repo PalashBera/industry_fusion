@@ -31,14 +31,18 @@ module ApplicationHelper
 
   def archive_status(archived)
     if archived
-      '<span class="badge badge-danger" title="Archived">Archived</span>'
+      t("status.archived")
     else
-      '<span class="badge badge-success" title="Active">Active</span>'
+      t("status.active")
     end
   end
 
-  def active_sidebar(str)
-    str == @active_sidebar ? t("active") : ""
+  def active_sidebar_menu(str)
+    str == @active_sidebar_menu ? t("active") : ""
+  end
+
+  def active_sidebar_sub_menu(str)
+    str == @active_sidebar_sub_menu ? t("active") : ""
   end
 
   def page_help_needed?

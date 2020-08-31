@@ -1,37 +1,32 @@
 <% provide(:title, "Cost Centers") %>
-<% provide(:page_title, "Cost Centers") %>
 
-<%= render "shared/page_help" %>
+<h1>Cost Centers</h1>
 
-<div class="card">
-  <div class="card-body">
-    <section class="mb-4 d-flex justify-content-between">
-      <section>
-        <%= new_link_using_modal(controller_name) %>
-        <%= filter_link_using_modal(params[:q]) %>
-      </section>
+<section class="mb-4 d-flex justify-content-between">
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_link_using_modal(params[:q]) %>
+  </section>
 
-      <section>
-        <%= import_link_using_modal(controller_name) %>
-        <%= excel_export_btn(controller_name) %>
-      </section>
-    </section>
+  <section>
+    <%= import_link_using_modal(controller_name) %>
+    <%= excel_export_btn(controller_name) %>
+  </section>
+</section>
 
-    <% if @cost_centers.present? %>
-      <%= render "index_table" %>
-    <% else %>
-      <div class="card">
-        <div class="card-body text-center">
-          <% if params[:q].present? %>
-            No result found. Please search with proper keywords.
-          <% else %>
-            No cost center has been added yet. <%= new_modal_link(controller_name) %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+<% if @cost_centers.present? %>
+  <%= render "index_table" %>
+<% else %>
+  <div class="card">
+    <div class="card-body text-center">
+      <% if params[:q].present? %>
+        No result found. Please search with proper keywords.
+      <% else %>
+        No cost center has been added yet. <%= new_modal_link(controller_name) %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <%= render "filter_form" %>
 <%= render "shared/import_modal" %>

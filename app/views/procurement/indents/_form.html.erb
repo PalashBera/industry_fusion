@@ -1,0 +1,75 @@
+<% @locked = @indent.indent_items.any? { |item| item.locked? } %>
+
+<%= form_for [:procurement, @indent] do |f| %>
+  <%= render "shared/error_messages", resource: @indent %>
+
+  <h4 class="mb-4">Indent Details:</h4>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-lg-4">
+      <%= f.label :company_id %>
+      <%= f.select :company_id, company_dropdown_list(f.object), { prompt: "-- Select Company --" }, { required: true, class: "form-control", disabled: @locked } %>
+    </div>
+
+    <div class="form-group col-sm-12 col-lg-4">
+      <%= f.label :warehouse_id %>
+      <%= f.select :warehouse_id, warehouse_dropdown_list(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control", disabled: @locked } %>
+    </div>
+
+    <div class="form-group col-sm-12 col-lg-4">
+      <%= f.label :indentor_id %>
+      <%= f.select :indentor_id, indentor_dropdown_list(f.object), { prompt: "-- Select Indentor --" }, { class: "form-control", disabled: @locked } %>
+    </div>
+  </div>
+
+  <hr>
+
+  <h4 class="mb-4">Indent Item Details:</h4>
+
+  <%= f.fields_for :indent_items do |builder| %>
+    <% if f.object.indent_items.first == builder.object %>
+      <section class="form-row d-none d-lg-flex">
+        <div class="col-lg-2"><label>Item</label></div>
+        <div class="col-lg-1"><label>Make</label></div>
+        <div class="col-lg-2"><label>Quantity</label></div>
+        <div class="col-lg-1"><label>UOM</label></div>
+        <div class="col-lg-2"><label>Cost Center</label></div>
+        <div class="col-lg-1"><label>Priority</label></div>
+        <div class="col-lg-2"><label>Req. Date</label></div>
+        <div class="col-lg-1"><label>Note</label></div>
+      </section>
+    <% end %>
+
+    <%= render "indent_item_fields", f: builder %>
+  <% end %>
+
+  <%= link_to_add_fields f, :indent_items %>
+
+  <div class="form-group mt-3">
+    <%= f.submit yield(:button_title), class: "btn btn-primary", data: { disable_with: "Saving..." } %>
+  </div>
+<% end %>
+
+<div id="note_modal_block"></div>
+
+<div class="modal fade" id="note_form_modal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">Indent Item Note</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <%= text_area_tag "indent_note", nil, class: "form-control", rows: 4, placeholder: "Write note here...", disabled: false, data: { id: "note_form_modal" } %>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" title="Close">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" title="Close" id="add_indent_note">Add Note</button>
+      </div>
+    </div>
+  </div>
+</div>

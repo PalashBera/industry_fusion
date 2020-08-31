@@ -53,10 +53,6 @@ class IndentItem < ApplicationRecord
     "#{quantity} #{uom.short_name}"
   end
 
-  def display_priority
-    priority.humanize.titleize
-  end
-
   def brand_details
     if make_id
       [make.brand_name, make.cat_no].reject(&:blank?).join(" – ")
@@ -126,9 +122,5 @@ class IndentItem < ApplicationRecord
     else
       mark_as_approved
     end
-  end
-
-  def display_status
-    status.humanize.titleize
   end
 end

@@ -1,0 +1,32 @@
+.pagination {
+  padding: 18px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  span {
+    padding: 8px 12px;
+    margin-right: 4px;
+    margin-bottom: 10px;
+    color: #052329;
+    background-color: #E6EBEC;
+    border-radius: 4px;
+  }
+
+  a {
+    color: #052329;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .active {
+    color: #FFFFFF;
+    background-color: $primary-color;
+  }
+
+  .disabled {
+    opacity: 0.7;
+  }
+}

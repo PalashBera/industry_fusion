@@ -16,7 +16,7 @@ RSpec.describe LinksHelper, type: :helper do
     it "creates a button link for excel export" do
       link = Nokogiri::HTML(helper.excel_export_btn("master/brands")).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/master/brands/export.xlsx")
-      expect(link.attributes["class"].value).to eq("btn btn-dark")
+      expect(link.attributes["class"].value).to eq("btn btn-secondary")
     end
   end
 
