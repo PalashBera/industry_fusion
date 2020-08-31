@@ -34,7 +34,7 @@
   flex-direction: column;
   overflow: hidden;
   height: 100%;
-  z-index: 1050;
+  z-index: 1030;
   min-height: 100vh;
   position: relative;
 
@@ -171,7 +171,7 @@
 .sidebar-mobile-in {
   .left-sidebar {
     transform: translateX(0px) !important;
-    z-index: 1050;
+    z-index: 1030;
     transition: transform .3s ease-in-out;
     @include media-breakpoint-up(md){
       transform: translateX(-250px) !important;
@@ -182,7 +182,7 @@
 .sidebar-mobile-out {
   .left-sidebar {
     transform: translateX(-250px) !important;
-    z-index: 1050;
+    z-index: 1030;
     @include media-breakpoint-up(md){
       transform: translateX(0px) !important;
     }
@@ -191,7 +191,7 @@
 
 .sidebar-minified .left-sidebar {
   width: 250px;
-  z-index: 1050;
+  z-index: 1030;
   transform: translateX(0);
   transition: transform .3s ease-in-out;
   @include media-breakpoint-up(md) {
@@ -387,7 +387,7 @@
       left: 0;
       bottom: 0;
       right: 0;
-      z-index: 1050;
+      z-index: 1030;
     }
   }
   .page-wrapper {
