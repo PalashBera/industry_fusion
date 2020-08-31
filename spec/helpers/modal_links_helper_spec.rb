@@ -29,7 +29,7 @@ RSpec.describe ModalLinksHelper, type: :helper do
   end
 
   describe "#history_link_using_modal" do
-    it "creates a button link for change log modal" do
+    it "creates a button link for history modal" do
       link = Nokogiri::HTML(helper.history_link_using_modal("master/brands", brand)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/master/brands/#{brand.id}/change_logs")
       expect(link.attributes["data-remote"].value).to eq("true")
