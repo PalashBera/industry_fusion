@@ -12,7 +12,7 @@
       <% @indentors.each do |indentor| %>
         <tr>
           <td scope="row"><%= indentor.name %></td>
-          <td><%= archive_status(indentor) %></td>
+          <td><%= indentor.archived_status %></td>
           <td class="text-center">
             <%= edit_link_using_modal(controller_name, indentor) %>
             <%= history_link_using_modal(controller_name, indentor) %>
