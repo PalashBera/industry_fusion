@@ -20,7 +20,7 @@ services:
     <<: *app
     tty: true
     stdin_open: true
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "sleep 3 && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     ports:
       - "3000:3000"
     depends_on:
@@ -30,7 +30,7 @@ services:
 
   webpacker:
     <<: *app
-    command: ./bin/webpack-dev-server
+    command: bash -c "bundle install && yarn install && rails db:create && rails db:migrate && ./bin/webpack-dev-server"
     ports:
       - '3035:3035'
     volumes:
@@ -41,8 +41,9 @@ services:
     <<: *app
     tty: true
     stdin_open: true
-    command: bundle exec rails jobs:work
+    command: bash -c "sleep 3 && bundle exec rails jobs:work"
     volumes:
       - .:/app
     depends_on:
       - db
+      - webpacker
