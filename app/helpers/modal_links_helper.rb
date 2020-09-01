@@ -23,6 +23,14 @@ module ModalLinksHelper
             class: "btn btn-sm btn-secondary"
   end
 
+  def procurement_history_link_using_modal(controller_name, resource)
+    link_to raw('<i class="mdi mdi-history"></i> History'),
+            url_for(controller: controller_name, action: "change_logs", id: resource.id),
+            data: { remote: true },
+            title: "Show History",
+            class: "dropdown-item"
+  end
+
   def filter_link_using_modal(params)
     link_to raw('<i class="fas fa-filter"></i><span class="d-none d-sm-inline-block ml-1">Filter</span>'),
             "#",

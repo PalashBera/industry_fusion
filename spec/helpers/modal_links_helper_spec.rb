@@ -38,6 +38,16 @@ RSpec.describe ModalLinksHelper, type: :helper do
     end
   end
 
+  describe "#procurement_history_link_using_modal" do
+    it "creates a link for history modal" do
+      link = Nokogiri::HTML(helper.procurement_history_link_using_modal("procurement/indents", indent_item)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/#{indent_item.id}/change_logs")
+      expect(link.attributes["data-remote"].value).to eq("true")
+      expect(link.attributes["title"].value).to eq("Show History")
+      expect(link.attributes["class"].value).to eq("dropdown-item")
+    end
+  end
+
   describe "#filter_link_using_modal" do
     it "creates a button link with filter form modal" do
       link = Nokogiri::HTML(helper.filter_link_using_modal(nil)).children.children.children[0]

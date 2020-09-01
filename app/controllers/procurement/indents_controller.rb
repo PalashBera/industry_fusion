@@ -75,7 +75,7 @@ class Procurement::IndentsController < Procurement::HomeController
   def change_logs
     @resource = IndentItem.find(params[:id])
     @versions = @resource.versions.reverse
-    render "procurement/indents/shared/change_logs.js.erb"
+    render "shared/change_logs.js.erb"
   end
 
   def indent

@@ -18,7 +18,7 @@
           <%= cancelled_action_link(controller_name, item.indent) %>
           <%= print_action_link(controller_name, item.indent) %>
           <%= send_approval_action_link(controller_name, item) if item.unlocked? %>
-          <%= change_logs_link_using_modal(controller_name, item) %>
+          <%= procurement_history_link_using_modal(controller_name, item) %>
         </div>
       </div>
     </td>
