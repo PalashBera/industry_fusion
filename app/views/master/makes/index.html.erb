@@ -16,14 +16,12 @@
 <% if @makes.present? %>
   <%= render "index_table" %>
 <% else %>
-  <div class="card">
-    <div class="card-body text-center">
-      <% if params[:q].present? %>
-        No result found. Please search with proper keywords.
-      <% else %>
-        No makes been added yet. <%= new_modal_link(controller_name) %>
-      <% end %>
-    </div>
+  <div class="well">
+    <% if params[:q].present? %>
+      No result found. Please search with proper keywords.
+    <% else %>
+      No makes been added yet. <%= new_modal_link(controller_name) %>
+    <% end %>
   </div>
 <% end %>
 
