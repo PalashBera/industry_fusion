@@ -7,13 +7,13 @@ wb.styles do |style|
   bg_green = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "00FF00", alignment: { horizontal: :center })
 
   wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
-    sheet.add_row ["Company", "Name", "Short Name", "Address 1", "Address 2", "City", "State", "County", "PIN Code", "Phone Number", "Status"], style: header_style
+    sheet.add_row ["Name", "Short Name", "Company", "Address 1", "Address 2", "City", "State", "County", "PIN Code", "Phone Number", "Status"], style: header_style
 
     @resources.each do |resource|
       sheet.add_row [
-        resource.company.name,
         resource.name,
         resource.short_name,
+        resource.company_name,
         resource.address1,
         resource.address2,
         resource.city,
