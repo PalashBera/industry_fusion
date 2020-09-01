@@ -7,7 +7,7 @@ wb.styles do |style|
   bg_green = style.add_style(border: Axlsx::STYLE_THIN_BORDER, bg_color: "00FF00", alignment: { horizontal: :center })
 
   wb.add_worksheet(name: controller_name.underscore.humanize.titleize) do |sheet|
-    sheet.add_row ["Name", "Item Group", "UOM", "Secondary UOM", "Primary Qty", "Secondary Qty", "Status"], style: header_style
+    sheet.add_row ["Name", "Item Group", "UOM", "Secondary UOM", "Primary Qty", "Secondary Qty", "Convertion Ratio", "Status"], style: header_style
 
     @resources.each do |resource|
       sheet.add_row [
@@ -17,8 +17,9 @@ wb.styles do |style|
         resource.secondary_uom&.short_name,
         resource.primary_quantity,
         resource.secondary_quantity,
+        resource.convertion_ratio,
         resource.archived_status
-      ], style: [row_style, row_style, row_style, row_style, row_style, row_style, resource.archived? ? bg_red : bg_green]
+      ], style: [row_style, row_style, row_style, row_style, row_style, row_style, row_style, resource.archived? ? bg_red : bg_green]
     end
   end
 end

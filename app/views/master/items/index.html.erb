@@ -1,36 +1,29 @@
 <% provide(:title, "Items") %>
-<% provide(:page_title, "Items") %>
 
-<%= render "shared/page_help" %>
+<h1>Items</h1>
 
-<div class="card">
-  <div class="card-body">
-    <section class="mb-4 d-flex justify-content-between">
-      <section>
-        <%= new_link_using_modal(controller_name) %>
-        <%= filter_link_using_modal(params[:q]) %>
-      </section>
+<section class="mb-4 d-flex justify-content-between">
+  <section>
+    <%= new_link_using_modal(controller_name) %>
+    <%= filter_link_using_modal(params[:q]) %>
+  </section>
 
-      <section>
-        <%= excel_export_btn(controller_name) %>
-      </section>
-    </section>
+  <section>
+    <%= excel_export_btn(controller_name) %>
+  </section>
+</section>
 
-    <% if @items.present? %>
-      <%= render "index_table" %>
+<% if @items.present? %>
+  <%= render "index_table" %>
+<% else %>
+  <div class="well">
+    <% if params[:q].present? %>
+      No result found. Please search with proper keywords.
     <% else %>
-      <div class="card">
-        <div class="card-body text-center">
-          <% if params[:q].present? %>
-            No result found. Please search with proper keywords.
-          <% else %>
-            No item has been added yet. <%= new_modal_link(controller_name) %>
-          <% end %>
-        </div>
-      </div>
+      No item has been added yet. <%= new_modal_link(controller_name) %>
     <% end %>
   </div>
-</div>
+<% end %>
 
 <%= render "filter_form" %>
 <%= render "shared/form_modal_container" %>

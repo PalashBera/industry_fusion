@@ -20,6 +20,10 @@ class Item < ApplicationRecord
 
   accepts_nested_attributes_for :makes, reject_if: :all_blank, allow_destroy: true
 
+  delegate :name,       to: :item_group,    prefix: true
+  delegate :short_name, to: :uom,           prefix: true
+  delegate :short_name, to: :secondary_uom, prefix: true, allow_nil: true
+
   validates :primary_quantity, :secondary_quantity, presence: true, numericality: { greater_than: 0 }, if: :secondary_uom
   validate :check_secondary_uom_equality
 
@@ -33,7 +37,7 @@ class Item < ApplicationRecord
     [uom, secondary_uom].compact
   end
 
-  def convertion_equation
+  def convertion_ratio
     "#{primary_quantity} #{uom.short_name} = #{secondary_quantity} #{secondary_uom.short_name}" if secondary_uom
   end
 
