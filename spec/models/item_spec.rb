@@ -96,10 +96,10 @@ RSpec.describe Item, type: :model do
     end
   end
 
-  describe "#convertion_equation" do
+  describe "#convertion_ratio" do
     context "if secondary uom is present" do
       it "should return conversion equation with secondary uom" do
-        expect(item.convertion_equation).to eq("#{item.primary_quantity} #{item.uom.short_name} = #{item.secondary_quantity} #{item.secondary_uom.short_name}")
+        expect(item.convertion_ratio).to eq("#{item.primary_quantity} #{item.uom.short_name} = #{item.secondary_quantity} #{item.secondary_uom.short_name}")
       end
     end
 
@@ -107,7 +107,7 @@ RSpec.describe Item, type: :model do
       before { Item.any_instance.stub(:secondary_uom).and_return(false)  }
 
       it "should return null" do
-        expect(item.convertion_equation).to eq(nil)
+        expect(item.convertion_ratio).to eq(nil)
       end
     end
   end

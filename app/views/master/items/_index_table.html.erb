@@ -1,13 +1,12 @@
 <div class="table-responsive">
-  <table class="table table-hover" width="100%">
+  <table class="table" width="100%">
     <thead class="thead">
       <tr>
-        <th scope="col">#</th>
         <th scope="col"><%= sort_link @search, :name, "Name" %></th>
-        <th scope="col"><%= sort_link @search, :item_group_name, "Item&nbsp;Group".html_safe %></th>
-        <th scope="col">UOM</th>
-        <th scope="col">Secondary&nbsp;UOM</th>
-        <th scope="col">Convertion&nbsp;Equation</th>
+        <th scope="col"><%= sort_link @search, :item_group_name, "Item Group" %></th>
+        <th scope="col"><%= sort_link @search, :uom_short_name, "UOM" %></th>
+        <th scope="col"><%= sort_link @search, :secondary_uom_short_name, "Secondary UOM" %></th>
+        <th scope="col">Convertion Ratio</th>
         <th scope="col">Images</th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col" class="text-center">Actions</th>
@@ -15,25 +14,18 @@
     </thead>
 
     <tbody>
-      <% @items.each.with_index(1) do |item, index| %>
+      <% @items.each do |item| %>
         <tr>
-          <td scope="row"><%= index %></td>
-          <td><%= item.name %></td>
-          <td><%= item.item_group.name %></td>
-          <td><%= item.uom.short_name %></td>
-          <td><%= item.secondary_uom&.short_name %></td>
-          <td><%= item.convertion_equation %></td>
+          <td scope="row"><%= item.name %></td>
+          <td><%= item.item_group_name %></td>
+          <td><%= item.uom_short_name %></td>
+          <td><%= item.secondary_uom_short_name %></td>
+          <td><%= item.convertion_ratio %></td>
           <td><%= show_images_link(item) if item.image_attached? %></td>
-          <td><%= archive_status(item.archive).html_safe %></td>
+          <td><%= item.archived_status %></td>
           <td class="text-center">
-            <div class="dropdown">
-              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
-
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <%= edit_link_using_modal(controller_name, item) %>
-                <%= history_link_using_modal(controller_name, item) %>
-              </div>
-            </div>
+            <%= edit_link_using_modal(controller_name, item) %>
+            <%= history_link_using_modal(controller_name, item) %>
           </td>
         </tr>
       <% end %>
