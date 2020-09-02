@@ -10,9 +10,19 @@ class Vendor < ApplicationRecord
 
   delegate :name, to: :store_information, allow_nil: true
 
+  scope :active, -> { where.not(invitation_accepted_at: nil) }
+
   def self.import(file)
     CSV.foreach(file.path, headers: true, header_converters: :symbol) do |row|
       invite_vendor(row.to_h[:email])
+    end
+  end
+
+  def status
+    if invitation_accepted_at.nil?
+      "Pending"
+    else
+      "Active"
     end
   end
 
