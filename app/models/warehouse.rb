@@ -15,6 +15,8 @@ class Warehouse < ApplicationRecord
   has_many :warehouse_locations
   has_many :reorder_levels
 
+  delegate :name, to: :company, prefix: true
+
   scope :id_filter,      ->(ids) { where(id: ids) }
   scope :company_filter, ->(company_id) { where(company_id: company_id) }
 

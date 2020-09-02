@@ -1,37 +1,29 @@
 <div class="table-responsive">
-  <table class="table table-hover" width="100%">
-    <thead class="thead-light">
+  <table class="table" width="100%">
+    <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col"><%= sort_link @search, :name, "Name" %></th>
-        <th scope="col"><%= sort_link @search, :short_name, "Short&nbsp;Name".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :short_name, "Short Name" %></th>
         <th scope="col"><%= sort_link @search, :company_name, "Company" %></th>
         <th scope="col">Address</th>
-        <th scope="col"><%= sort_link @search, :phone_number, "Phone&nbsp;Number".html_safe %></th>
+        <th scope="col"><%= sort_link @search, :phone_number, "Phone Number" %></th>
         <th scope="col"><%= sort_link @search, :archive, "Status" %></th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      <% @warehouses.each.with_index(1) do |warehouse, index| %>
+      <% @warehouses.each do |warehouse| %>
         <tr>
-          <td scope="row"><%= index %></td>
-          <td><%= warehouse.name %></td>
+          <td scope="row"><%= warehouse.name %></td>
           <td><%= warehouse.short_name %></td>
-          <td><%= warehouse.company.name %></td>
+          <td><%= warehouse.company_name %></td>
           <td><%= warehouse.address %></td>
           <td><%= warehouse.phone_number %></td>
-          <td><%= archive_status(warehouse.archive).html_safe %></td>
+          <td><%= warehouse.archived_status %></td>
           <td class="text-center">
-            <div class="dropdown">
-              <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
-
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
-                <%= edit_link_using_modal(controller_name, warehouse) %>
-                <%= history_link_using_modal(controller_name, warehouse) %>
-              </div>
-            </div>
+            <%= edit_link_using_modal(controller_name, warehouse) %>
+            <%= history_link_using_modal(controller_name, warehouse) %>
           </td>
         </tr>
       <% end %>
