@@ -1,11 +1,50 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<% provide(:title, "Vendor Invitation") %>
+<% provide(:company_name, "Industry Fusion") %>
 
-<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", { invitor_name: @resource.invited_by.full_name, url: "Industry Fusion Vendors" }) %></p>
+<% invitation_link = "http://localhost:4000/vendors/invitation/accept?invitation_token=#{@token}" %>
 
-<p><a href="http://localhost:4000/vendors/invitation/accept?invitation_token=<%= @token %>">Accept Invitation</a></p>
+<tr>
+  <td class="body-title" style="color: #153643; font-family: sans-serif; padding: 0 0 15px 0; font-size: 24px; line-height: 28px; font-weight: bold;">
+    <span style="text-transform: uppercase; letter-spacing: 1px;">Vendor Invitation</span>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %>,</p>
+    <p><%= t("devise.mailer.invitation_instructions.someone_invited_you") %></p>
+  </td>
+</tr>
+​
+<tr>
+  <td style="padding: 20px 0 20px 0;">
+    <table border="0" cellspacing="0" cellpadding="0">
+      <tr height="45">
+        <td>
+          <a href="<%= invitation_link %>" target="_blank" class="primary-button" style="background-color: #e05443; color: #FFFFFF; text-decoration: none; text-align: center; font-size: 18px; font-family: sans-serif; font-weight: bold; padding: 12px 30px;">Accept invitation</a>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
 
 <% if @resource.invitation_due_at %>
-  <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
+  <tr>
+    <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+      <p><%= t("devise.mailer.invitation_instructions.accept_until", due_date: l(@resource.invitation_due_at, format: :'devise.mailer.invitation_instructions.accept_until_format')) %></p>
+    </td>
+  </tr>
 <% end %>
 
-<p><%= t("devise.mailer.invitation_instructions.ignore") %></p>
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p><%= t("devise.mailer.invitation_instructions.ignore") %></p>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Thanks,</p>
+    <p>Team Industry Fusion</p>
+  </td>
+</tr>

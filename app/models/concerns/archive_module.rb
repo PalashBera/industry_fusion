@@ -17,6 +17,6 @@ module ArchiveModule
   end
 
   def archived_status
-    archived? ? "Archived" : "Active"
+    archived? ? I18n.t("status.archived") : I18n.t("status.active")
   end
 end

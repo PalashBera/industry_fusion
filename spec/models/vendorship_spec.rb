@@ -25,13 +25,64 @@ RSpec.describe Vendorship, type: :model do
   end
 
   describe "#associations" do
-    it { should belong_to(:organization) }
     it { should belong_to(:vendor) }
   end
 
   describe "#validations" do
+    context "when same vendor for an organization" do
+      let!(:vendorship) { create(:vendorship) }
+
+      it "should not save this uom" do
+        new_vendorship = build(:vendorship, vendor_id: vendorship.vendor_id)
+        new_vendorship.valid?
+        expect(new_vendorship.errors[:vendor_id]).to include("has already been taken")
+      end
+    end
+  end
+
+  describe "#status" do
     let!(:vendorship) { create(:vendorship) }
 
-    it { should validate_uniqueness_of(:vendor_id).scoped_to(:organization_id) }
+    context "when vendor invitation is pending" do
+      it "should return pending" do
+        expect(vendorship.status).to eq(I18n.t("status.pending"))
+      end
+    end
+
+    context "when vendor invitation is not pending and vendor is archived" do
+      it "should return archived" do
+        vendorship.update(archive: true)
+        vendorship.vendor.update(invitation_accepted_at: DateTime.now)
+        expect(vendorship.status).to eq(I18n.t("status.archived"))
+      end
+    end
+
+    context "when vendor invitation is not pending and vendor is not archived" do
+      it "should return active" do
+        vendorship.update(archive: false)
+        vendorship.vendor.update(invitation_accepted_at: DateTime.now)
+        expect(vendorship.status).to eq(I18n.t("status.active"))
+      end
+    end
+  end
+
+  describe "#toggle_activation" do
+    context "when archive is true" do
+      let(:user) { create(:user, archive: true) }
+
+      it "should set archive as false" do
+        user.toggle_activation
+        expect(user.archive).to eq(false)
+      end
+    end
+
+    context "when archive is false" do
+      let(:user) { create(:user, archive: false) }
+
+      it "should set archive as true" do
+        user.toggle_activation
+        expect(user.archive).to eq(true)
+      end
+    end
   end
 end
