@@ -76,6 +76,9 @@ GEM
     bootsnap (1.4.6-java)
       msgpack (~> 1.0)
     builder (3.2.4)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     caxlsx (3.0.1)
       htmlentities (~> 4.3, >= 4.3.4)
       mimemagic (~> 0.3)
@@ -355,6 +358,7 @@ GEM
     tzinfo-data (1.2020.1)
       tzinfo (>= 1.0.0)
     unicode-display_width (1.6.1)
+    uniform_notifier (1.13.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.3)
@@ -384,6 +388,7 @@ PLATFORMS
 DEPENDENCIES
   acts_as_tenant!
   bootsnap (~> 1.4, >= 1.4.6)
+  bullet (~> 6.1)
   caxlsx_rails (~> 0.6.2)
   database_cleaner (~> 1.8, >= 1.8.3)
   delayed_job_active_record (~> 4.1, >= 4.1.4)
