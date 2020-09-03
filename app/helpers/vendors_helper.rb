@@ -22,7 +22,7 @@ module VendorsHelper
             resend_invitation_master_vendor_path(vendor),
             method: :put,
             data: { confirm: "Are you sure do you want to resend invitation?" },
-            title: "Resend invitation",
+            title: "Resend Invitation",
             class: "btn btn-sm btn-secondary"
   end
 

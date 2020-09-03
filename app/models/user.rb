@@ -32,7 +32,7 @@ class User < ApplicationRecord
     !admin?
   end
 
-  def pending_acception?
+  def pending_invitation?
     invitation_accepted_at.nil?
   end
 

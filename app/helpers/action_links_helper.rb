@@ -13,38 +13,6 @@ module ActionLinksHelper
             class: "dropdown-item"
   end
 
-  def activation_action_link(controller_name, user)
-    link_to raw('<i class="mdi mdi-check-decagram mr-1"></i> Activate'),
-            url_for(controller: controller_name, action: "toggle_activation", id: user.id),
-            data: { confirm: "Are you sure do you want to deactivate?" },
-            title: "Activate",
-            class: "dropdown-item"
-  end
-
-  def deactivation_action_link(controller_name, user)
-    link_to raw('<i class="mdi mdi-block-helper mr-1"></i> Deactivate'),
-            url_for(controller: controller_name, action: "toggle_activation", id: user.id),
-            data: { confirm: "Are you sure do you want to activate?" },
-            title: "Deactivate",
-            class: "dropdown-item"
-  end
-
-  def assign_warehouse_action_link(controller_name, user)
-    link_to raw('<i class="mdi mdi-office-building mr-1"></i> Assign Warehouse'),
-            url_for(controller: controller_name, action: "edit", id: user.id),
-            data: { remote: true },
-            title: "Assign Warehouses",
-            class: "dropdown-item"
-  end
-
-  def resend_user_invitation_action_link(user)
-    link_to raw('<i class="mdi mdi-send mr-1"></i> Resend Invitation'),
-            resend_invitation_admin_user_path(user),
-            method: :put,
-            title: "Resend Invitation",
-            class: "dropdown-item"
-  end
-
   def print_action_link(controller_name, resource)
     link_to raw('<i class="mdi mdi-printer"></i> Print'),
             url_for(controller: controller_name, action: "print", id: resource.id),

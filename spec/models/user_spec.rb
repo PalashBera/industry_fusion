@@ -60,11 +60,11 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#pending_acception?" do
+  describe "#pending_invitation?" do
     let(:pending_user) { create(:user, invitation_accepted_at: nil) }
 
     it "should return pending" do
-      expect(pending_user.pending_acception?).to eq(true)
+      expect(pending_user.pending_invitation?).to eq(true)
     end
   end
 
