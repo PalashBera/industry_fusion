@@ -10,5 +10,5 @@ class Indentor < ApplicationRecord
 
   has_many :indents
 
-  has_paper_trail ignore: %i[created_at updated_at]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 end

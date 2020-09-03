@@ -19,7 +19,7 @@ class ReorderLevel < ApplicationRecord
   validates :quantity, presence: true, format: { with: VALID_DECIMAL_REGEX }, numericality: { greater_than: 0 }
   validates :priority, presence: true
 
-  has_paper_trail ignore: %i[created_at updated_at]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 
   def self.included_resources
     includes(:warehouse, { item: :uom })

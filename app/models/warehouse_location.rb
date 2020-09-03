@@ -14,7 +14,7 @@ class WarehouseLocation < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false, scope: %i[organization_id warehouse_id] }
 
-  has_paper_trail ignore: %i[created_at updated_at]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 
   scope :order_by_name, -> { order(:name) }
 

@@ -27,7 +27,7 @@ class Item < ApplicationRecord
   validates :primary_quantity, :secondary_quantity, presence: true, numericality: { greater_than: 0 }, if: :secondary_uom
   validate :check_secondary_uom_equality
 
-  has_paper_trail ignore: %i[created_at updated_at]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 
   def self.included_resources
     includes(:item_group, :uom, :secondary_uom, :item_images)
