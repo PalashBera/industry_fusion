@@ -20,7 +20,7 @@ class Warehouse < ApplicationRecord
   scope :id_filter,      ->(ids) { where(id: ids) }
   scope :company_filter, ->(company_id) { where(company_id: company_id) }
 
-  has_paper_trail ignore: %i[created_at updated_at]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 
   def self.included_resources
     includes(:company)
