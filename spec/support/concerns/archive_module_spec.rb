@@ -41,13 +41,13 @@ shared_examples_for "archive_module" do
   describe "#archived_status" do
     context "when record is archived" do
       it "should return Archived" do
-        expect(archived_resource.archived_status).to eq("Archived")
+        expect(archived_resource.archived_status).to eq(I18n.t("status.archived"))
       end
     end
 
     context "when record is non-archived" do
       it "should return Active" do
-        expect(non_archived_resource.archived_status).to eq("Active")
+        expect(non_archived_resource.archived_status).to eq(I18n.t("status.active"))
       end
     end
   end

@@ -2,21 +2,25 @@
   <table class="table" width="100%">
     <thead>
       <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
+        <th scope="col">Store Name</th>
+        <th scope="col">Contact Person</th>
+        <th scope="col">Contact Email</th>
+        <th scope="col">Contact Number</th>
         <th scope="col">Status</th>
         <th scope="col" class="text-center">Actions</th>
       </tr>
     </thead>
 
     <tbody>
-      <% @vendors.each do |vendor| %>
+      <% @vendorships.each do |vendorship| %>
         <tr>
-          <td scope="row"><%= vendor.name %></td>
-          <td><%= vendor.email %></td>
-          <td><%= vendor.status %></td>
+          <td scope="row"><%= vendorship.vendor_name %></td>
+          <td><%= vendorship.vendor_contact_person %></td>
+          <td><%= vendorship.vendor_email %></td>
+          <td><%= vendorship.vendor_mobile_number %></td>
+          <td><%= vendorship.status %></td>
           <td class="text-center">
-            <%= resend_vendor_invitation_action_link(vendor) %>
+            <%= vendorship_action_btn(vendorship) %>
           </td>
         </tr>
       <% end %>

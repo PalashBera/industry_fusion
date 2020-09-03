@@ -18,12 +18,12 @@ class Vendor < ApplicationRecord
     end
   end
 
-  def status
-    if invitation_accepted_at.nil?
-      "Pending"
-    else
-      "Active"
-    end
+  def pending?
+    invitation_accepted_at.nil?
+  end
+
+  def contact_person
+    "#{first_name} #{last_name}"
   end
 
   protected

@@ -78,11 +78,22 @@ RSpec.describe User, type: :model do
   end
 
   describe "#toggle_activation" do
-    it "should toggle archive value" do
-      previous_value = user.archive
-      user.toggle_activation
-      expect(user.archive).to eq(!previous_value)
-      expect(user.archive).not_to eq(previous_value)
+    context "when archive is true" do
+      let(:user) { create(:user, archive: true) }
+
+      it "should set archive as false" do
+        user.toggle_activation
+        expect(user.archive).to eq(false)
+      end
+    end
+
+    context "when archive is false" do
+      let(:user) { create(:user, archive: false) }
+
+      it "should set archive as true" do
+        user.toggle_activation
+        expect(user.archive).to eq(true)
+      end
     end
   end
 end

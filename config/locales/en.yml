@@ -73,4 +73,5 @@ en:
 
   status:
     archived: "Archived"
-    active: "Active" 
+    active: "Active"
+    pending: "Pending"
