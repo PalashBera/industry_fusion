@@ -32,7 +32,7 @@ RSpec.describe VendorsHelper, type: :helper do
       expect(link.attributes["href"].value).to eq("/master/vendors/#{vendor.id}/resend_invitation")
       expect(link.attributes["data-method"].value).to eq("put")
       expect(link.attributes["data-confirm"].value).to eq("Are you sure do you want to resend invitation?")
-      expect(link.attributes["title"].value).to eq("Resend invitation")
+      expect(link.attributes["title"].value).to eq("Resend Invitation")
       expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe VendorsHelper, type: :helper do
         expect(link.attributes["href"].value).to eq("/master/vendors/#{vendorship.vendor.id}/resend_invitation")
         expect(link.attributes["data-method"].value).to eq("put")
         expect(link.attributes["data-confirm"].value).to eq("Are you sure do you want to resend invitation?")
-        expect(link.attributes["title"].value).to eq("Resend invitation")
+        expect(link.attributes["title"].value).to eq("Resend Invitation")
         expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
       end
     end
