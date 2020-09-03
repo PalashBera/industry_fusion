@@ -42,8 +42,8 @@
 
               <% if key == "archive" %>
                 <td>Status</td>
-                <td><%= archive_status(value[0]).html_safe %></td>
-                <td><%= archive_status(value[1]).html_safe %></td>
+                <td><%= archive_status(value[0]) %></td>
+                <td><%= archive_status(value[1]) %></td>
               <% end %>
             </tr>
           <% end %>
