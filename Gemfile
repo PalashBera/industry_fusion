@@ -32,6 +32,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "bullet", "~> 6.1"
   gem "letter_opener", "~> 1.7"
   gem "letter_opener_web", "~> 1.4"
   gem "listen", "~> 3.2", ">= 3.2.1"
