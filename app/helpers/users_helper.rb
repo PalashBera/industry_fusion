@@ -7,7 +7,7 @@ module UsersHelper
     elsif user.pending_invitation?
       "Pending"
     else
-      "Active"
+      "Actived"
     end
   end
 
@@ -25,22 +25,6 @@ module UsersHelper
             method: :put,
             data: { confirm: "Are you sure do you want to resend invitation?" },
             title: "Resend Invitation",
-            class: "btn btn-sm btn-secondary"
-  end
-
-  def activation_action_link(controller_name, user)
-    link_to "Activate",
-            url_for(controller: controller_name, action: "toggle_activation", id: user.id),
-            data: { confirm: "Are you sure do you want to deactivate?" },
-            title: "Activate",
-            class: "btn btn-sm btn-secondary"
-  end
-
-  def deactivation_action_link(controller_name, user)
-    link_to "Deactivate",
-            url_for(controller: controller_name, action: "toggle_activation", id: user.id),
-            data: { confirm: "Are you sure do you want to activate?" },
-            title: "Deactivate",
             class: "btn btn-sm btn-secondary"
   end
 

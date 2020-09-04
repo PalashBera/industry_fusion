@@ -40,8 +40,8 @@ class User < ApplicationRecord
     update_column(:sidebar_collapse, !sidebar_collapse)
   end
 
-  def toggle_activation
-    update_column(:archive, !archive)
+  def toggle_archive
+    update(archive: !archive)
   end
 
   def accessible_warehouse_ids

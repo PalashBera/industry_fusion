@@ -57,6 +57,9 @@ en:
     restored: "%{name} has been successfully restored."
     amended: "%{name} has been successfully amended."
     cancelled: "%{name} has been successfully cancelled."
+    archived: "%{name} has been successfully archived."
+    activated: "%{name} has been successfully activated."
+    invitation_resent: "%{name} will receive invitation mail shortly."
 
   active:
     active

@@ -54,4 +54,20 @@ module ActionLinksHelper
             title: "Cancel",
             class: "dropdown-item"
   end
+
+  def activation_action_link(controller_name, resource)
+    link_to "Activate",
+            url_for(controller: controller_name, action: "toggle_archive", id: resource.id),
+            data: { confirm: "Are you sure do you want to activate?" },
+            title: "Activate",
+            class: "btn btn-sm btn-secondary"
+  end
+
+  def archive_action_link(controller_name, resource)
+    link_to "Archive",
+            url_for(controller: controller_name, action: "toggle_archive", id: resource.id),
+            data: { confirm: "Are you sure do you want to archive?" },
+            title: "Archive",
+            class: "btn btn-sm btn-secondary"
+  end
 end

@@ -77,12 +77,12 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe "#toggle_activation" do
+  describe "#toggle_archive" do
     context "when archive is true" do
       let(:user) { create(:user, archive: true) }
 
       it "should set archive as false" do
-        user.toggle_activation
+        user.toggle_archive
         expect(user.archive).to eq(false)
       end
     end
@@ -91,7 +91,7 @@ RSpec.describe User, type: :model do
       let(:user) { create(:user, archive: false) }
 
       it "should set archive as true" do
-        user.toggle_activation
+        user.toggle_archive
         expect(user.archive).to eq(true)
       end
     end

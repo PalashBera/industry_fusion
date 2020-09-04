@@ -39,12 +39,17 @@ class Admin::UsersController < Admin::HomeController
   def resend_invitation
     user = User.find(params[:id])
     User.invite!({ email: user.email, organization_id: current_organization.id }, current_user).deliver_invitation
-    redirect_to admin_users_path, flash: { success: "User will receive invitation mail shortly." }
+    redirect_to admin_users_path, flash: { success: t("flash_messages.invitation_resent", name: "User") }
   end
 
-  def toggle_activation
-    user.toggle_activation
-    redirect_to admin_users_path
+  def toggle_archive
+    user.toggle_archive
+
+    if user.archive?
+      redirect_to admin_users_path, flash: { danger: t("flash_messages.archived", name: "User") }
+    else
+      redirect_to admin_users_path, flash: { success: t("flash_messages.activated", name: "User") }
+    end
   end
 
   private
@@ -58,6 +63,6 @@ class Admin::UsersController < Admin::HomeController
   end
 
   def user_update_params
-    params.require(:user).permit(:archive, warehouse_ids: [])
+    params.require(:user).permit(warehouse_ids: [])
   end
 end

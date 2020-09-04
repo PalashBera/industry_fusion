@@ -20,7 +20,13 @@
           <td><%= vendorship.vendor_mobile_number %></td>
           <td><%= vendorship.status %></td>
           <td class="text-center">
-            <%= vendorship_action_btn(vendorship) %>
+            <% if vendorship.vendor.pending? %>
+              <%= resend_vendor_invitation_action_link(vendorship.vendor) %>
+            <% elsif vendorship.archive? %>
+              <%= activation_action_link(controller_name, vendorship) %>
+            <% else %>
+              <%= archive_action_link(controller_name, vendorship) %>
+            <% end %>
           </td>
         </tr>
       <% end %>

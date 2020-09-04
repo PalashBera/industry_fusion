@@ -26,7 +26,7 @@
               <% elsif user.pending_invitation? %>
                 <%= resend_user_invitation_action_link(user) %>
               <% else %>
-                <%= deactivation_action_link(controller_name, user) %>
+                <%= archive_action_link(controller_name, user) %>
                 <%= assign_warehouse_action_link(controller_name, user) %>
               <% end %>
 
