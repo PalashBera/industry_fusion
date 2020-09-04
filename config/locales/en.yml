@@ -71,8 +71,13 @@ en:
   mail:
     indent_approval:
       subject: "Indent Approval Request for – #%{serial}"
-    new_vendorship:
-      subject: "New Vendorship – %{name}"
+    vendorship:
+      new:
+        subject: "New Vendorship Added – %{name}"
+      activate:
+        subject: "Vendorship Activated – %{name}"
+      archive:
+        subject: "Vendorship Deactivated – %{name}"
 
   status:
     archived: "Archived"

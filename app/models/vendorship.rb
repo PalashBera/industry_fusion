@@ -27,5 +27,11 @@ class Vendorship < ApplicationRecord
 
   def toggle_archive
     update(archive: !archive)
+
+    if archive?
+      VendorMailer.vendorship_deactivation_acknowledgement(vendor.id, User.current_user.id).deliver_later
+    else
+      VendorMailer.vendorship_activation_acknowledgement(vendor.id, User.current_user.id).deliver_later
+    end
   end
 end
