@@ -1,0 +1,19 @@
+<% provide(:title, "Vendorship Deactivation") %>
+<% provide(:company_name, @user.organization.name) %>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Hey <%= @vendor.full_name %>,</p>
+    <p>We are really sorry to say you that your vendorship has been deactivated for <%= @user.organization.name %>.</p>
+    <p><b>We'd love to see you again.</b> Please contact with bellow person for activation.</p>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Thanks,</p>
+    <p style="margin-bottom: 3px;"><%= @user.full_name %></p>
+    <p style="margin: 0;"><b>Email:</b> <a href="mailto:<%= @user.email %>"><%= @user.email %></a></p>
+    <p style="margin: 0;"><b>Mobile Number:</b> <a href="tel:<%= @user.mobile_number %>"><%= @user.mobile_number %></a></p>
+  </td>
+</tr>

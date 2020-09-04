@@ -1,10 +1,11 @@
-<% provide(:title, "New Vendorship") %>
+<% provide(:title, "Vendorship Activation") %>
 <% provide(:company_name, @user.organization.name) %>
 
 <tr>
   <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
     <p>Hey <%= @vendor.full_name %>,</p>
-    <p>Congratulation!! You have been added as a vendor for <%= @user.organization.name %>.</p>
+    <p>Congratulation!! Your vendorship has been activated for <%= @user.organization.name %>.</p>
+    <p><b>We're glad to see you again.</b></p>
   </td>
 </tr>
 
