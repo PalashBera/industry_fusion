@@ -26,4 +26,24 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end
+
+  describe "#activation_action_link" do
+    it "create a activation link for user" do
+      link = Nokogiri::HTML(helper.activation_action_link("admin/users", user)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/admin/users/#{user.id}/toggle_archive")
+      expect(link.attributes["data-confirm"].value).to eq("Are you sure do you want to activate?")
+      expect(link.attributes["title"].value).to eq("Activate")
+      expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
+    end
+  end
+
+  describe "#archive_action_link" do
+    it "create a archive link for user" do
+      link = Nokogiri::HTML(helper.archive_action_link("admin/users", user)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/admin/users/#{user.id}/toggle_archive")
+      expect(link.attributes["data-confirm"].value).to eq("Are you sure do you want to archive?")
+      expect(link.attributes["title"].value).to eq("Archive")
+      expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
+    end
+  end
 end

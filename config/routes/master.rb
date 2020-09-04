@@ -24,8 +24,11 @@ Rails.application.routes.draw do
     resources :payment_terms,       except: %i[show destroy], concerns: %i[exportable importable change_logable]
     resources :item_images,         only: %i[index destroy]
 
-    resources :vendors, only: %i[index new create update], concerns: %i[exportable importable] do
-      put :resend_invitation, on: :member
+    resources :vendors, only: %i[index new create], concerns: %i[exportable importable] do
+      member do
+        put :resend_invitation
+        get :toggle_archive
+      end
     end
   end
 end

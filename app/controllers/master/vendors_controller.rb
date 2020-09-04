@@ -24,21 +24,21 @@ class Master::VendorsController < Master::HomeController
     end
   end
 
-  def update
+  def toggle_archive
     vendorship = Vendorship.find(params[:id])
-    vendorship.toggle_activation
+    vendorship.toggle_archive
 
     if vendorship.archive?
-      redirect_to master_vendors_path, flash: { danger: "Vendor has been successfully archived." }
+      redirect_to master_vendors_path, flash: { danger: t("flash_messages.archived", name: "Vendor") }
     else
-      redirect_to master_vendors_path, flash: { success: "Vendor has been successfully activated." }
+      redirect_to master_vendors_path, flash: { success: t("flash_messages.activated", name: "Vendor") }
     end
   end
 
   def resend_invitation
     vendor = Vendor.find(params[:id])
     Vendor.invite!({ email: vendor.email }, current_user).deliver_invitation
-    redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
+    redirect_to master_vendors_path, flash: { success: t("flash_messages.invitation_resent", name: "Vendor") }
   end
 
   private

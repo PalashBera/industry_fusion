@@ -25,7 +25,7 @@ class Vendorship < ApplicationRecord
     end
   end
 
-  def toggle_activation
+  def toggle_archive
     update(archive: !archive)
   end
 end
