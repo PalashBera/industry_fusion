@@ -78,6 +78,11 @@ en:
         subject: "Vendorship Activated – %{name}"
       archive:
         subject: "Vendorship Deactivated – %{name}"
+    account:
+      activate:
+        subject: "Account Activated – %{name}"
+      archive:
+        subject: "Account Deactivated – %{name}"
 
   status:
     archived: "Archived"
