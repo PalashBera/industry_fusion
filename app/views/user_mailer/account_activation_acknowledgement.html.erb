@@ -1,0 +1,17 @@
+<% provide(:title, "Account Activation") %>
+<% provide(:company_name, @sender.organization.name) %>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Hey <%= @receiver.full_name %>,</p>
+    <p>Congratulation!! Your account has been activated for <%= @sender.organization.name %>.</p>
+    <p><b>We're glad to see you again.</b></p>
+  </td>
+</tr>
+
+<tr>
+  <td style="color: #153643; font-family: sans-serif; font-size: 16px; line-height: 22px;">
+    <p>Thanks,</p>
+    <p><%= @sender.full_name %></p>
+  </td>
+</tr>

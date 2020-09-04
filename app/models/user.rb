@@ -42,6 +42,12 @@ class User < ApplicationRecord
 
   def toggle_archive
     update(archive: !archive)
+
+    if archive?
+      UserMailer.account_deactivation_acknowledgement(id, User.current_user.id).deliver_later
+    else
+      UserMailer.account_activation_acknowledgement(id, User.current_user.id).deliver_later
+    end
   end
 
   def accessible_warehouse_ids
