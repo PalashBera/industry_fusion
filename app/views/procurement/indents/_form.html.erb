@@ -8,17 +8,17 @@
   <div class="form-row">
     <div class="form-group col-sm-12 col-lg-4">
       <%= f.label :company_id %>
-      <%= f.select :company_id, company_dropdown_list(f.object), { prompt: "-- Select Company --" }, { required: true, class: "form-control", disabled: @locked } %>
+      <%= f.select :company_id, dropdown_list_company(f.object, "name"), { prompt: "-- Select Company --" }, { required: true, class: "form-control", disabled: @locked } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-4">
       <%= f.label :warehouse_id %>
-      <%= f.select :warehouse_id, warehouse_dropdown_list(f.object), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control", disabled: @locked } %>
+      <%= f.select :warehouse_id, dropdown_list_warehouse(f.object, "name"), { prompt: "-- Select Warehouse --" }, { required: true, class: "form-control", disabled: @locked } %>
     </div>
 
     <div class="form-group col-sm-12 col-lg-4">
       <%= f.label :indentor_id %>
-      <%= f.select :indentor_id, indentor_dropdown_list(f.object), { prompt: "-- Select Indentor --" }, { class: "form-control", disabled: @locked } %>
+      <%= f.select :indentor_id, dropdown_list_indentor(f.object, "name"), { prompt: "-- Select Indentor --" }, { class: "form-control", disabled: @locked } %>
     </div>
   </div>
 
