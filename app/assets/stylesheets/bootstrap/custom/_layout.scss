@@ -2,6 +2,17 @@
   min-height: calc(100vh - 134px);
 }
 
+.custom-control-input {
+  z-index: 9999 !important;
+  left: 10px;
+}
+
+.table tbody tr > td:first-child {
+  padding-left: 39px;
+  padding-top: 35px;
+}
+
+
 .content {
   padding: 32px 10px 32px 10px;
 

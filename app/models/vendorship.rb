@@ -8,6 +8,8 @@ class Vendorship < ApplicationRecord
   belongs_to :organization
   belongs_to :vendor
 
+  has_many :quotation_request_vendors
+
   delegate :name,           to: :vendor, prefix: true
   delegate :contact_person, to: :vendor, prefix: true
   delegate :email,          to: :vendor, prefix: true

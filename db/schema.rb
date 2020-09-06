@@ -298,6 +298,51 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.index ["updated_by_id"], name: "index_payment_terms_on_updated_by_id"
   end
 
+  create_table "quotation_request_items", force: :cascade do |t|
+    t.bigint "quotation_request_id", null: false
+    t.bigint "indent_item_id", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_quotation_request_items_on_created_by_id"
+    t.index ["indent_item_id"], name: "index_quotation_request_items_on_indent_item_id"
+    t.index ["quotation_request_id"], name: "index_quotation_request_items_on_quotation_request_id"
+    t.index ["updated_by_id"], name: "index_quotation_request_items_on_updated_by_id"
+  end
+
+  create_table "quotation_request_vendors", force: :cascade do |t|
+    t.bigint "quotation_request_id", null: false
+    t.bigint "vendorship_id", null: false
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_by_id"], name: "index_quotation_request_vendors_on_created_by_id"
+    t.index ["quotation_request_id"], name: "index_quotation_request_vendors_on_quotation_request_id"
+    t.index ["updated_by_id"], name: "index_quotation_request_vendors_on_updated_by_id"
+    t.index ["vendorship_id"], name: "index_quotation_request_vendors_on_vendorship_id"
+  end
+
+  create_table "quotation_requests", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "company_id", null: false
+    t.bigint "warehouse_id", null: false
+    t.integer "serial", null: false
+    t.string "serial_number", null: false
+    t.string "status", default: "pending", null: false
+    t.text "note", default: ""
+    t.bigint "created_by_id"
+    t.bigint "updated_by_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_quotation_requests_on_company_id"
+    t.index ["created_by_id"], name: "index_quotation_requests_on_created_by_id"
+    t.index ["organization_id"], name: "index_quotation_requests_on_organization_id"
+    t.index ["updated_by_id"], name: "index_quotation_requests_on_updated_by_id"
+    t.index ["warehouse_id"], name: "index_quotation_requests_on_warehouse_id"
+  end
+
   create_table "reorder_levels", force: :cascade do |t|
     t.bigint "item_id", null: false
     t.bigint "warehouse_id", null: false
@@ -522,6 +567,13 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
   add_foreign_key "makes", "items"
   add_foreign_key "makes", "organizations"
   add_foreign_key "payment_terms", "organizations"
+  add_foreign_key "quotation_request_items", "indent_items"
+  add_foreign_key "quotation_request_items", "quotation_requests"
+  add_foreign_key "quotation_request_vendors", "quotation_requests"
+  add_foreign_key "quotation_request_vendors", "vendorships"
+  add_foreign_key "quotation_requests", "companies"
+  add_foreign_key "quotation_requests", "organizations"
+  add_foreign_key "quotation_requests", "warehouses"
   add_foreign_key "reorder_levels", "items"
   add_foreign_key "reorder_levels", "organizations"
   add_foreign_key "reorder_levels", "warehouses"

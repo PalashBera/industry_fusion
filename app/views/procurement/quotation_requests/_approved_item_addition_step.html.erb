@@ -1,0 +1,40 @@
+<table id="records_table" class="table table-hover indent-table" width="100%">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Serial</th>
+      <th scope="col">Item</th>
+      <th scope="col">Make</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Cost Center</th>
+      <th scope="col">Warehouse</th>
+      <th scope="col">Company</th>
+      <th scope="col">Req. Date</th>
+      <th scope="col" class="text-center">Note</th>
+      <th scope="col">Priority</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @indent_items.each_with_index  do |item, index| %>
+      <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
+        <td class="custom-control custom-checkbox">
+          <%= check_box_tag "quotation_request[indent_item_ids][]", item.id, item_selection(params, item), class: "custom-control-input" %>
+          <label class="custom-control-label"></label>
+        </td>
+        <td><%= item.indent_serial_number %></td>
+        <td><%= item.item_name %></td>
+        <td><%= item.brand_details %></td>
+        <td><%= item.quantity_with_uom %></td>
+        <td><%= item.cost_center_name %></td>
+        <td><%= item.warehouse_name %></td>
+        <td><%= item.company_name %></td>
+        <td><%= I18n.l(item.requirement_date) %></td>
+        <td class="text-center"><%= indenx_note_link(item) %></td>
+        <td><%= item.priority.display %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render "indent_item_filter_form" %>

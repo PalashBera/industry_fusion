@@ -37,6 +37,13 @@
               <% end %>
             </li>
 
+            <li class="<%= active_sidebar_sub_menu("quotation_requests") %>">
+              <span class="indicator"></span>
+              <%= link_to procurement_quotation_requests_path, class: "sidenav-item-link" do %>
+                <span class="nav-text">Quotation Requests</span>
+              <% end %>
+            </li>
+
             <li class="<%= active_sidebar_sub_menu("reports") %>">
               <span class="indicator"></span>
               <%= link_to procurement_reports_indents_path, class: "sidenav-item-link" do %>

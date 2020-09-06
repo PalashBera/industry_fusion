@@ -1,0 +1,52 @@
+<div class="modal fade" id="filter_modal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">Search Indents</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <%= search_form_for @search_items, url: new_procurement_quotation_request_path do |f|  %>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :indent_serial_number_i_cont_any, "Serial Number" %>
+              <%= f.search_field :indent_serial_number_i_cont_any, placeholder: "Serial Number", title: "Type serial number", class: "form-control", autocomplete: :off %>
+            </div>
+
+            <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :quotation_request_indent_item_indent_company_name_i_cont_any, "Company Name" %>
+              <%= f.search_field :indent_company_name_i_cont_any, placeholder: "Company Name", title: "Type company name", class: "form-control", autocomplete: :off %>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <%= link_to "Remove Filter", new_procurement_quotation_request_path, class: "btn btn-secondary" %>
+          <%= f.submit "Filter", data: { disable_with: "Please wait..." }, class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $('.indent-item-requirement-date').daterangepicker({
+    autoUpdateInput: false,
+    singleDatePicker: true,
+    locale: {
+      format: 'DD/MM/YYYY',
+      cancelLabel: 'Clear'
+    }
+  });
+
+  $('.indent-item-requirement-date').on('apply.daterangepicker', function (ev, picker) {
+    $(this).val(picker.startDate.format('DD/MM/YYYY'));
+  });
+
+  $('.indent-item-requirement-date').on('cancel.daterangepicker', function (ev, picker) {
+    $(this).val('');
+  });
+</script>

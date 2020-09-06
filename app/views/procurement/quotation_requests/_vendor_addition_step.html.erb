@@ -1,0 +1,26 @@
+<table id="records_table" class="table table-hover indent-table" width="100%">
+  <thead>
+    <tr>
+      <th></th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vendors.each do |vendor| %>
+    <tr>
+      <td class="custom-control custom-checkbox">
+        <%= check_box_tag "quotation_request[vendorship_ids][]", vendor.id, vendor_selection(params, vendor), class: "custom-control-input" %>
+        <label class="custom-control-label"></label>
+      </td>
+      <td><%= vendor.full_name %></td>
+      <td><%= vendor.email %></td>
+      <td><%= vendor_status(vendor) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= render "vendor_filter_form" %>

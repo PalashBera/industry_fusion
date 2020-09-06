@@ -1,0 +1,12 @@
+<section class="mb-4 d-flex justify-content-between">
+  <%= filter_link_using_modal(params[:q]) %>
+  <section>
+    <%= submit_tag "Back", name: "back_button", class: "btn btn-primary", form: "new_quotation_request" unless @quotation_request.first_step? %>
+    <%= submit_tag "Continue", name: "step_submit", form: "new_quotation_request", class: "btn btn-primary" %>
+  </section>
+</section>
+
+<%= form_for [:procurement, @quotation_request] do |form| %>
+  <%= render "shared/error_messages", resource: @quotation_request %>
+  <%= render "#{@quotation_request.current_step}_step", form: form %>
+<% end %>

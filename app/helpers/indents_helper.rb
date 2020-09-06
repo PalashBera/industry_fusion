@@ -85,6 +85,22 @@ module IndentsHelper
     dropdown_list
   end
 
+  def item_selection(params, item)
+    if session[:quotation_request_params] && session[:quotation_request_params]["indent_item_ids"].present?
+      session[:quotation_request_params]["indent_item_ids"].include?(item.id.to_s)
+    else
+      params[:quotation_request] && params[:quotation_request][:indent_item_ids].present? ? params[:quotation_request][:indent_item_ids].include?(item.id.to_s) : nil
+    end
+  end
+
+  def vendor_selection(params, vendor)
+    if session[:quotation_request_params] && session[:quotation_request_params]["vendorship_ids"].present?
+      session[:quotation_request_params]["vendorship_ids"].include?(vendor.id.to_s)
+    else
+      params[:quotation_request] && params[:quotation_request][:vendorship_ids].present? ? params[:quotation_request][:vendorship_ids].include?(vendor.id.to_s) : nil
+    end
+  end
+
   def border_bottom_attached?(item_ids, item_id)
     item_ids.include?(item_id) && item_ids.last != item_id
   end
