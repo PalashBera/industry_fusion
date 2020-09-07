@@ -3,7 +3,9 @@ services:
   app: &app
     build: .
     volumes:
+      - bundle_cache:/bundle
       - .:/app
+      - node_modules_cache:/app/node_modules
     network_mode: "host"
 
   db:
@@ -20,7 +22,8 @@ services:
     <<: *app
     tty: true
     stdin_open: true
-    command: bash -c "sleep 3 && rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    container_name: "ifd_web"
     ports:
       - "3000:3000"
     depends_on:
@@ -30,20 +33,21 @@ services:
 
   webpacker:
     <<: *app
-    command: bash -c "bundle install && yarn install && rails db:create && rails db:migrate && ./bin/webpack-dev-server"
+    command: ./bin/webpack-dev-server
+    container_name: "webpacker"
     ports:
       - '3035:3035'
-    volumes:
-      - .:/app
-      - /app/node_modules
 
   delayed_job:
     <<: *app
     tty: true
     stdin_open: true
-    command: bash -c "sleep 3 && bundle exec rails jobs:work"
-    volumes:
-      - .:/app
+    command: bundle exec rails jobs:work
+    container_name: "ifd_job"
     depends_on:
       - db
       - webpacker
+
+volumes:
+  bundle_cache:
+  node_modules_cache:
