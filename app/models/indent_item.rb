@@ -3,7 +3,7 @@ class IndentItem < ApplicationRecord
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   PRIORITY_LIST = %w[default high medium low].freeze
-  STATUS_LIST = %w[pending approved amended rejected cancelled approval_pending].freeze
+  STATUS_LIST = %w[created approved amended rejected cancelled approval_pending].freeze
 
   enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
   enum status: Hash[STATUS_LIST.map { |item| [item, item] }]
@@ -35,11 +35,10 @@ class IndentItem < ApplicationRecord
   validates :priority, presence: true
 
   default_scope { order(created_at: :desc) }
-  scope :pending_indents,         -> { where(status: %w[pending approval_pending]) }
   scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
   scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
 
-  has_paper_trail ignore: %i[created_at updated_at locked]
+  has_paper_trail ignore: %i[created_at updated_at locked updated_by_id]
 
   def self.included_resources
     includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)
@@ -105,8 +104,8 @@ class IndentItem < ApplicationRecord
     update(locked: true, status: "cancelled")
   end
 
-  def mark_as_pending
-    update(locked: false, status: "pending")
+  def mark_as_created
+    update(locked: false, status: "created")
   end
 
   def mark_as_approval_pending
