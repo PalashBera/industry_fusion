@@ -3,7 +3,7 @@ FactoryBot.define do
     quantity         { rand(1..100) }
     priority         { IndentItem::PRIORITY_LIST.sample }
     locked           { false }
-    status           { "pending" }
+    status           { "created" }
     requirement_date { Faker::Date.forward(days: 14) }
     indent
     item

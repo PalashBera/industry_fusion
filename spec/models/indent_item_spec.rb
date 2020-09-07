@@ -36,7 +36,7 @@ RSpec.describe IndentItem, type: :model do
 
   describe "#enums" do
     it { should define_enum_for(:priority).with_values(default: "default", high: "high", medium: "medium", low: "low").backed_by_column_of_type(:string).with_suffix }
-    it { should define_enum_for(:status).with_values(pending: "pending", approved: "approved", amended: "amended", rejected: "rejected", cancelled: "cancelled", approval_pending: "approval_pending").backed_by_column_of_type(:string) }
+    it { should define_enum_for(:status).with_values(created: "created", approved: "approved", amended: "amended", rejected: "rejected", cancelled: "cancelled", approval_pending: "approval_pending").backed_by_column_of_type(:string) }
   end
 
   describe "#callbacks" do
@@ -68,7 +68,6 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#scopes" do
-    # TODO: add spec for pending_indents scope
     # TODO: add spec for pending_for_approval scope
     context "brand_with_cat_no_search" do
       let(:brand)       { create :brand, name: "Lakme" }
@@ -132,7 +131,7 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#mark_as_rejected" do
-    let!(:indent_item) { create(:indent_item, status: "pending") }
+    let!(:indent_item) { create(:indent_item, status: "created") }
 
     it "should update status of indent item" do
       indent_item.mark_as_rejected
@@ -143,7 +142,7 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#mark_as_approved" do
-    let!(:indent_item) { create(:indent_item, status: "pending") }
+    let!(:indent_item) { create(:indent_item, status: "created") }
 
     it "should update status of indent item" do
       indent_item.mark_as_approved
@@ -154,7 +153,7 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#mark_as_amended" do
-    let!(:indent_item) { create(:indent_item, status: "pending") }
+    let!(:indent_item) { create(:indent_item, status: "created") }
 
     it "should update status of indent item" do
       indent_item.mark_as_amended
@@ -164,7 +163,7 @@ RSpec.describe IndentItem, type: :model do
   end
 
   describe "#mark_as_cancelled" do
-    let!(:indent_item) { create(:indent_item, status: "pending") }
+    let!(:indent_item) { create(:indent_item, status: "created") }
 
     it "should update status of indent item" do
       indent_item.mark_as_cancelled
@@ -173,12 +172,12 @@ RSpec.describe IndentItem, type: :model do
     end
   end
 
-  describe "#mark_as_pending" do
+  describe "#mark_as_created" do
     let!(:indent_item) { create(:indent_item, status: "cancelled") }
 
     it "should update status of indent item" do
-      indent_item.mark_as_pending
-      expect(indent_item.pending?).to eq(true)
+      indent_item.mark_as_created
+      expect(indent_item.created?).to eq(true)
       expect(indent_item.locked).to eq(false)
     end
   end

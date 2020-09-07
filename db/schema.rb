@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 2020_05_11_142440) do
     t.bigint "make_id"
     t.string "note", default: ""
     t.boolean "locked", default: false, null: false
-    t.string "status", default: "pending", null: false
+    t.string "status", default: "created", null: false
     t.bigint "approval_request_id"
     t.bigint "organization_id", null: false
     t.bigint "created_by_id"
