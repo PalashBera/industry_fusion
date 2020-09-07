@@ -1,20 +1,20 @@
 module ActionLinksHelper
   def edit_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-square-edit-outline"></i> Edit'),
+    link_to "Edit",
             url_for(controller: controller_name, action: "edit", id: resource.id),
             title: "Edit #{controller_name.singularize.humanize.titleize}",
             class: "dropdown-item"
   end
 
   def show_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-information-outline"></i> Show'),
+    link_to "Show",
             url_for(controller: controller_name, action: "show", id: resource.id),
             title: "Show #{resource.class.name}",
             class: "dropdown-item"
   end
 
   def print_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-printer"></i> Print'),
+    link_to "Print",
             url_for(controller: controller_name, action: "print", id: resource.id),
             title: "Print",
             class: "dropdown-item",
@@ -22,14 +22,14 @@ module ActionLinksHelper
   end
 
   def send_approval_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-account-check-outline"></i> Send for Approval'),
+    link_to "Send for Approval",
             url_for(controller: controller_name, action: "send_for_approval", id: resource.id),
             title: "Send for Approval",
             class: "dropdown-item"
   end
 
   def restore_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-backup-restore"></i> Restore'),
+    link_to "Restore",
             url_for(controller: controller_name, action: "destroy", id: resource.id),
             method: :delete,
             data: { confirm: "Do you want to restore this indent?" },
@@ -38,7 +38,7 @@ module ActionLinksHelper
   end
 
   def amended_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-cancel"></i> Amend'),
+    link_to "Amend",
             url_for(controller: controller_name, action: "destroy", id: resource.id),
             method: :delete,
             data: { confirm: "Do you want to amend this indent?" },
@@ -47,7 +47,7 @@ module ActionLinksHelper
   end
 
   def cancelled_action_link(controller_name, resource)
-    link_to raw('<i class="mdi mdi-cancel"></i> Cancel'),
+    link_to "Cancel",
             url_for(controller: controller_name, action: "destroy", id: resource.id),
             method: :delete,
             data: { confirm: "Do you want to cancel this indent?" },
