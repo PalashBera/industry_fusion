@@ -15,10 +15,28 @@
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
           <%= show_action_link(controller_name, item.indent) %>
-          <%= edit_action_link(controller_name, item.indent) %>
-          <%= cancelled_action_link(controller_name, item.indent) %>
+
+          <% if item.created? || item.amended? %>
+            <%= edit_action_link(controller_name, item.indent) %>
+          <% end %>
+
+          <% if item.created? || item.amended? || item.rejected? %>
+            <%= send_approval_action_link(controller_name, item) %>
+          <% end %>
+
+          <% if item.approved? || item.rejected? %>
+            <%= amended_action_link(controller_name, item) %>
+          <% end %>
+
+          <% if item.created? || item.approval_pending? || item.amended? %>
+            <%= cancelled_action_link(controller_name, item) %>
+          <% end %>
+
+          <% if item.cancelled? %>
+            <%= restore_action_link(controller_name, item) %>
+          <% end %>
+
           <%= print_action_link(controller_name, item.indent) %>
-          <%= send_approval_action_link(controller_name, item) if item.unlocked? %>
         </div>
       </div>
     </td>

@@ -3,7 +3,10 @@ Rails.application.routes.draw do
     resources :indents do
       member do
         get :print
-        get :send_for_approval
+        put :restore
+        put :cancel
+        put :amend
+        put :send_for_approval
       end
 
       get :export, on: :collection

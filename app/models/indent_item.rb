@@ -89,7 +89,7 @@ class IndentItem < ApplicationRecord
   end
 
   def mark_as_rejected
-    update(locked: false, status: "rejected", approval_request_id: nil)
+    update(locked: true, status: "rejected", approval_request_id: nil)
   end
 
   def mark_as_approved
@@ -97,11 +97,11 @@ class IndentItem < ApplicationRecord
   end
 
   def mark_as_amended
-    update(locked: true, status: "amended")
+    update(locked: false, status: "amended")
   end
 
   def mark_as_cancelled
-    update(locked: true, status: "cancelled")
+    update(locked: true, status: "cancelled", approval_request_id: nil)
   end
 
   def mark_as_created
