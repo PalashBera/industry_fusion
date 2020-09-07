@@ -48,6 +48,24 @@ class Procurement::IndentsController < Procurement::HomeController
     redirect_to procurement_indents_path, flash: { success: destroy_flash_message }
   end
 
+  def cancel
+    indent_item = IndentItem.find(params[:id])
+    indent_item.mark_as_cancelled
+    redirect_to procurement_indents_path, flash: { success: t("flash_messages.cancelled", name: "Indent") }
+  end
+
+  def amend
+    indent_item = IndentItem.find(params[:id])
+    indent_item.mark_as_amended
+    redirect_to procurement_indents_path, flash: { success: t("flash_messages.amended", name: "Indent") }
+  end
+
+  def restore
+    indent_item = IndentItem.find(params[:id])
+    indent_item.mark_as_created
+    redirect_to procurement_indents_path, flash: { success: t("flash_messages.restored", name: "Indent") }
+  end
+
   def print
     indent
     render "print"

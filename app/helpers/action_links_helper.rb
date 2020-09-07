@@ -9,7 +9,7 @@ module ActionLinksHelper
   def show_action_link(controller_name, resource)
     link_to "Show",
             url_for(controller: controller_name, action: "show", id: resource.id),
-            title: "Show #{resource.class.name}",
+            title: "Show #{controller_name.singularize.humanize.titleize}",
             class: "dropdown-item"
   end
 
@@ -24,14 +24,16 @@ module ActionLinksHelper
   def send_approval_action_link(controller_name, resource)
     link_to "Send for Approval",
             url_for(controller: controller_name, action: "send_for_approval", id: resource.id),
+            method: :put,
+            data: { confirm: "Do you want to send for approval this indent?" },
             title: "Send for Approval",
             class: "dropdown-item"
   end
 
   def restore_action_link(controller_name, resource)
     link_to "Restore",
-            url_for(controller: controller_name, action: "destroy", id: resource.id),
-            method: :delete,
+            url_for(controller: controller_name, action: "restore", id: resource.id),
+            method: :put,
             data: { confirm: "Do you want to restore this indent?" },
             title: "Restore",
             class: "dropdown-item"
@@ -39,8 +41,8 @@ module ActionLinksHelper
 
   def amended_action_link(controller_name, resource)
     link_to "Amend",
-            url_for(controller: controller_name, action: "destroy", id: resource.id),
-            method: :delete,
+            url_for(controller: controller_name, action: "amend", id: resource.id),
+            method: :put,
             data: { confirm: "Do you want to amend this indent?" },
             title: "Amend",
             class: "dropdown-item"
@@ -48,8 +50,8 @@ module ActionLinksHelper
 
   def cancelled_action_link(controller_name, resource)
     link_to "Cancel",
-            url_for(controller: controller_name, action: "destroy", id: resource.id),
-            method: :delete,
+            url_for(controller: controller_name, action: "cancel", id: resource.id),
+            method: :put,
             data: { confirm: "Do you want to cancel this indent?" },
             title: "Cancel",
             class: "dropdown-item"

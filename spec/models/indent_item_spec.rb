@@ -136,7 +136,7 @@ RSpec.describe IndentItem, type: :model do
     it "should update status of indent item" do
       indent_item.mark_as_rejected
       expect(indent_item.rejected?).to eq(true)
-      expect(indent_item.locked).to eq(false)
+      expect(indent_item.locked?).to eq(true)
       expect(indent_item.approval_request_id).to eq(nil)
     end
   end
@@ -147,7 +147,7 @@ RSpec.describe IndentItem, type: :model do
     it "should update status of indent item" do
       indent_item.mark_as_approved
       expect(indent_item.approved?).to eq(true)
-      expect(indent_item.locked).to eq(true)
+      expect(indent_item.locked?).to eq(true)
       expect(indent_item.approval_request_id).to eq(nil)
     end
   end
@@ -158,7 +158,8 @@ RSpec.describe IndentItem, type: :model do
     it "should update status of indent item" do
       indent_item.mark_as_amended
       expect(indent_item.amended?).to eq(true)
-      expect(indent_item.locked).to eq(true)
+      expect(indent_item.locked?).to eq(false)
+      expect(indent_item.approval_request_id).to eq(nil)
     end
   end
 
@@ -168,7 +169,8 @@ RSpec.describe IndentItem, type: :model do
     it "should update status of indent item" do
       indent_item.mark_as_cancelled
       expect(indent_item.cancelled?).to eq(true)
-      expect(indent_item.locked).to eq(true)
+      expect(indent_item.locked?).to eq(true)
+      expect(indent_item.approval_request_id).to eq(nil)
     end
   end
 
@@ -178,7 +180,8 @@ RSpec.describe IndentItem, type: :model do
     it "should update status of indent item" do
       indent_item.mark_as_created
       expect(indent_item.created?).to eq(true)
-      expect(indent_item.locked).to eq(false)
+      expect(indent_item.locked?).to eq(false)
+      expect(indent_item.approval_request_id).to eq(nil)
     end
   end
 
@@ -188,7 +191,7 @@ RSpec.describe IndentItem, type: :model do
     it "should update status of indent item" do
       indent_item.mark_as_approval_pending
       expect(indent_item.approval_pending?).to eq(true)
-      expect(indent_item.locked).to eq(true)
+      expect(indent_item.locked?).to eq(true)
     end
   end
 
