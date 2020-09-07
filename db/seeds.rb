@@ -183,6 +183,35 @@ end
   )
 end
 
+50.times do |t|
+  vendor = Vendor.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    mobile_number: Faker::Number.number(digits: 10).to_s,
+    email: Faker::Internet.email,
+    password: "123456",
+    password_confirmation: "123456",
+    confirmation_sent_at: Time.current,
+    confirmed_at: Time.current + 5.minutes,
+    invitation_accepted_at: Time.now
+  )
+
+  StoreInformation.new(
+    vendor_id: vendor.id,
+    name: "Store ##{t}",
+    address1: Faker::Address.mail_box,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: Faker::Address.country,
+    pin_code: Faker::Number.number(digits: 6).to_s,
+    phone_number: Faker::PhoneNumber.phone_number_with_country_code,
+    pan_number: "TAVPR0507C",
+    gstn: "29AAFCC9980M1ZR"
+  ).save(validate: false)
+end
+
+organization.vendors << Vendor.last(50)
+
 Organization.update_all(created_by_id: [user1, user2].sample.id)
 
 PageHelp.create!(
