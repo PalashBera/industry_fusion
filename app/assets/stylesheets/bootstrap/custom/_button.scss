@@ -5,17 +5,17 @@
 // }
 
 .btn-primary {
-  color: #FFFFFF;
+  color: $white;
   background-color: $primary-color;
   border: 0;
 
   &:hover {
-    color: #FFFFFF;
+    color: $white;
     background-color: $primary-color;
   }
 
   &:focus {
-    color: #FFFFFF;
+    color: $white;
     background-color: $primary-color;
     border: none;
     box-shadow: none;
