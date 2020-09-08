@@ -112,20 +112,102 @@ RSpec.describe IndentItem, type: :model do
   # TODO: add specs for send_approval_request_mails
   # TODO: add specs for create_approval_requests
 
+  describe "#locked?" do
+    context "when indent item is in created status" do
+      let!(:indent_item) { create(:indent_item, status: "created") }
+
+      it "should return false" do
+        expect(indent_item.locked?).to eq(false)
+      end
+    end
+
+    context "when indent item is in approval pending status" do
+      let!(:indent_item) { create(:indent_item, status: "approval_pending") }
+
+      it "should return true" do
+        expect(indent_item.locked?).to eq(true)
+      end
+    end
+
+    context "when indent item is in approved status" do
+      let!(:indent_item) { create(:indent_item, status: "approved") }
+
+      it "should return true" do
+        expect(indent_item.locked?).to eq(true)
+      end
+    end
+
+    context "when indent item is in rejected status" do
+      let!(:indent_item) { create(:indent_item, status: "rejected") }
+
+      it "should return true" do
+        expect(indent_item.locked?).to eq(true)
+      end
+    end
+
+    context "when indent item is in amended status" do
+      let!(:indent_item) { create(:indent_item, status: "amended") }
+
+      it "should return false" do
+        expect(indent_item.locked?).to eq(false)
+      end
+    end
+
+    context "when indent item is in cancelled status" do
+      let!(:indent_item) { create(:indent_item, status: "cancelled") }
+
+      it "should return true" do
+        expect(indent_item.locked?).to eq(true)
+      end
+    end
+  end
+
   describe "#unlocked?" do
-    context "when indent item is locked" do
-      let!(:indent_item) { create(:indent_item, locked: true) }
+    context "when indent item is in created status" do
+      let!(:indent_item) { create(:indent_item, status: "created") }
+
+      it "should return true" do
+        expect(indent_item.unlocked?).to eq(true)
+      end
+    end
+
+    context "when indent item is in approval pending status" do
+      let!(:indent_item) { create(:indent_item, status: "approval_pending") }
 
       it "should return false" do
         expect(indent_item.unlocked?).to eq(false)
       end
     end
 
-    context "when indent item is unlocked" do
-      let!(:indent_item) { create(:indent_item, locked: false) }
+    context "when indent item is in approved status" do
+      let!(:indent_item) { create(:indent_item, status: "approved") }
+
+      it "should return false" do
+        expect(indent_item.unlocked?).to eq(false)
+      end
+    end
+
+    context "when indent item is in rejected status" do
+      let!(:indent_item) { create(:indent_item, status: "rejected") }
+
+      it "should return false" do
+        expect(indent_item.unlocked?).to eq(false)
+      end
+    end
+
+    context "when indent item is in amended status" do
+      let!(:indent_item) { create(:indent_item, status: "amended") }
 
       it "should return true" do
         expect(indent_item.unlocked?).to eq(true)
+      end
+    end
+
+    context "when indent item is in cancelled status" do
+      let!(:indent_item) { create(:indent_item, status: "cancelled") }
+
+      it "should return false" do
+        expect(indent_item.unlocked?).to eq(false)
       end
     end
   end
