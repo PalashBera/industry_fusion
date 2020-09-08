@@ -97,4 +97,14 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
     end
   end
+
+  describe "#history_action_link_using_modal" do
+    it "creates a link for history modal" do
+      link = Nokogiri::HTML(helper.history_action_link_using_modal("procurement/indents", indent)).children.children.children[0]
+      expect(link.attributes["href"].value).to eq("/procurement/indents/#{indent.id}/change_logs")
+      expect(link.attributes["data-remote"].value).to eq("true")
+      expect(link.attributes["title"].value).to eq("Show History")
+      expect(link.attributes["class"].value).to eq("dropdown-item")
+    end
+  end
 end

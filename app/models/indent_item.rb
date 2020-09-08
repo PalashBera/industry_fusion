@@ -1,5 +1,6 @@
 class IndentItem < ApplicationRecord
   include UserTrackingModule
+  include ModalFormModule
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   PRIORITY_LIST = %w[default high medium low].freeze
@@ -38,7 +39,7 @@ class IndentItem < ApplicationRecord
   scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
   scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
 
-  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id approval_request_id]
 
   def self.included_resources
     includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)

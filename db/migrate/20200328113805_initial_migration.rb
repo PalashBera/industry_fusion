@@ -324,15 +324,15 @@ class InitialMigration < ActiveRecord::Migration[6.0]
 
     create_table :indent_items do |t|
       t.references :indent,           foreign_key: true,  null: false
-      t.date       :requirement_date,                     null: false
       t.references :item,             foreign_key: true,  null: false
       t.references :uom,              foreign_key: true,  null: false
       t.references :cost_center,      foreign_key: true,  null: false
       t.decimal    :quantity,                             null: false, precision: 12, scale: 2
+      t.date       :requirement_date,                     null: false
       t.string     :priority,         default: "default", null: false
+      t.string     :status,           default: "created", null: false
       t.references :make,             foreign_key: true
       t.string     :note,             default: ""
-      t.string     :status,           default: "created", null: false
       t.references :approval_request, foreign_key: true
       t.references :organization,     foreign_key: true,  null: false
       t.bigint     :created_by_id,    index: true

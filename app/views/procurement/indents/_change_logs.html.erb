@@ -1,0 +1,78 @@
+<%= render layout: "shared/change_logs_modal", locals: { resource: @resource, attr: "indent_serial_number" } do %>
+  <% @versions.each_with_index do |version, index| %>
+    <hr>
+    <h6 class="mb-2 text-muted">Change Log <%= @versions.size - index %> – Done by <strong><%= version.whodunnit %></strong> at <%= I18n.l(version.created_at) %>.</h6>
+
+    <% changeset = version.changeset %>
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th>Field Name</th>
+          <th>Previous Value</th>
+          <th>Current Value</th>
+        </thead>
+
+        <tbody>
+          <% changeset.each do |key, value| %>
+            <tr>
+              <% if key == "item_id" %>
+                <td>Item</td>
+                <td><%= display_item_name(value[0]) %></td>
+                <td><%= display_item_name(value[1]) %></td>
+              <% end %>
+
+              <% if key == "quantity" %>
+                <td>Quantity</td>
+                <td><%= value[0] %></td>
+                <td><%= value[1] %></td>
+              <% end %>
+
+              <% if key == "uom_id" %>
+                <td>UOM</td>
+                <td><%= display_uom_name(value[0]) %></td>
+                <td><%= display_uom_name(value[1]) %></td>
+              <% end %>
+
+              <% if key == "make_id" %>
+                <td>Make</td>
+                <td><%= display_make(value[0]) %></td>
+                <td><%= display_make(value[1]) %></td>
+              <% end %>
+
+              <% if key == "cost_center_id" %>
+                <td>Cost Center</td>
+                <td><%= display_cost_center_name(value[0]) %></td>
+                <td><%= display_cost_center_name(value[1]) %></td>
+              <% end %>
+
+              <% if key == "requirement_date" %>
+                <td>Requirement Date</td>
+                <td><%= value[0] %></td>
+                <td><%= value[1] %></td>
+              <% end %>
+
+              <% if key == "note" %>
+                <td>Note</td>
+                <td><%= value[0] %></td>
+                <td><%= value[1] %></td>
+              <% end %>
+
+              <% if key == "priority" %>
+                <td>Priority</td>
+                <td><%= value[0].display %></td>
+                <td><%= value[1].display %></td>
+              <% end %>
+
+              <% if key == "status" %>
+                <td>Status</td>
+                <td><%= value[0] %></td>
+                <td><%= value[1] %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>

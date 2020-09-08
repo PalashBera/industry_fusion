@@ -2,8 +2,8 @@
   <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
     <td><%= item.indent_serial_number %></td>
     <td><%= item.item_name %></td>
-    <td><%= item.brand_details %></td>
     <td><%= item.quantity_with_uom %></td>
+    <td><%= item.brand_details %></td>
     <td><%= item.cost_center_name %></td>
     <td><%= I18n.l(item.requirement_date) %></td>
     <td class="text-center"><%= indenx_note_link(item) %></td>
@@ -37,6 +37,7 @@
           <% end %>
 
           <%= print_action_link(controller_name, item.indent) %>
+          <%= history_action_link_using_modal(controller_name, item) %>
         </div>
       </div>
     </td>
