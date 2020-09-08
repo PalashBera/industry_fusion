@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         put :cancel
         put :amend
         put :send_for_approval
+        get :change_logs
       end
 
       get :export, on: :collection

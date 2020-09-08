@@ -72,4 +72,12 @@ module ActionLinksHelper
             title: "Archive",
             class: "btn btn-sm btn-secondary"
   end
+
+  def history_action_link_using_modal(controller_name, resource)
+    link_to "History",
+            url_for(controller: controller_name, action: "change_logs", id: resource.id),
+            data: { remote: true },
+            title: "Show History",
+            class: "dropdown-item"
+  end
 end
