@@ -38,7 +38,7 @@ class IndentItem < ApplicationRecord
   scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
   scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
 
-  has_paper_trail ignore: %i[created_at updated_at locked updated_by_id]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id]
 
   def self.included_resources
     includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)
@@ -84,32 +84,36 @@ class IndentItem < ApplicationRecord
     end
   end
 
+  def locked?
+    rejected? || approved? || cancelled? || approval_pending?
+  end
+
   def unlocked?
-    !locked
+    amended? || created?
   end
 
   def mark_as_rejected
-    update(locked: true, status: "rejected", approval_request_id: nil)
+    update(status: "rejected", approval_request_id: nil)
   end
 
   def mark_as_approved
-    update(locked: true, status: "approved", approval_request_id: nil)
+    update(status: "approved", approval_request_id: nil)
   end
 
   def mark_as_amended
-    update(locked: false, status: "amended")
+    update(status: "amended")
   end
 
   def mark_as_cancelled
-    update(locked: true, status: "cancelled", approval_request_id: nil)
+    update(status: "cancelled", approval_request_id: nil)
   end
 
   def mark_as_created
-    update(locked: false, status: "created")
+    update(status: "created")
   end
 
   def mark_as_approval_pending
-    update(locked: true, status: "approval_pending")
+    update(status: "approval_pending")
   end
 
   def send_approval_requests(user_id = nil)

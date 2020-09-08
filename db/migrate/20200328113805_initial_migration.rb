@@ -332,7 +332,6 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.string     :priority,         default: "default", null: false
       t.references :make,             foreign_key: true
       t.string     :note,             default: ""
-      t.boolean    :locked,           default: false,     null: false
       t.string     :status,           default: "created", null: false
       t.references :approval_request, foreign_key: true
       t.references :organization,     foreign_key: true,  null: false
