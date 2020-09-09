@@ -42,10 +42,19 @@ class Procurement::IndentsController < Procurement::HomeController
     end
   end
 
-  def destroy
-    indent_item = IndentItem.find(params[:id])
-    indent_item.public_send(delete_method)
-    redirect_to procurement_indents_path, flash: { success: destroy_flash_message }
+  def cancel
+    indent_item.mark_as_cancelled
+    redirect_to procurement_indents_path, flash: { success: t("flash_messages.cancelled", name: "Indent") }
+  end
+
+  def amend
+    indent_item.mark_as_amended
+    redirect_to procurement_indents_path, flash: { success: t("flash_messages.amended", name: "Indent") }
+  end
+
+  def restore
+    indent_item.mark_as_created
+    redirect_to procurement_indents_path, flash: { success: t("flash_messages.restored", name: "Indent") }
   end
 
   def print
@@ -54,10 +63,9 @@ class Procurement::IndentsController < Procurement::HomeController
   end
 
   def send_for_approval
-    item = IndentItem.find(params[:id])
-    item.create_approval_requests
-    item.send_approval_request_mails
-    item.mark_as_approval_pending
+    indent_item.create_approval_requests
+    indent_item.send_approval_request_mails
+    indent_item.mark_as_approval_pending
     redirect_to procurement_indents_path, flash: { success: t("flash_messages.created", name: "Approval request") }
   end
 
@@ -72,8 +80,20 @@ class Procurement::IndentsController < Procurement::HomeController
     end
   end
 
+  def change_logs
+    @resource = IndentItem.find(params[:id])
+    @versions = @resource.versions.reverse
+    render "shared/change_logs"
+  end
+
+  private
+
   def indent
     @indent ||= Indent.find(params[:id])
+  end
+
+  def indent_item
+    @indent_item ||= IndentItem.find(params[:id])
   end
 
   def indent_params

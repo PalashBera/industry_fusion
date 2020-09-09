@@ -1,9 +1,10 @@
 class IndentItem < ApplicationRecord
   include UserTrackingModule
+  include ModalFormModule
 
   VALID_DECIMAL_REGEX = /\A\d+(?:\.\d{0,2})?\z/.freeze
   PRIORITY_LIST = %w[default high medium low].freeze
-  STATUS_LIST = %w[pending approved amended rejected cancelled approval_pending].freeze
+  STATUS_LIST = %w[created approved amended rejected cancelled approval_pending].freeze
 
   enum priority: Hash[PRIORITY_LIST.map { |item| [item, item] }], _suffix: true
   enum status: Hash[STATUS_LIST.map { |item| [item, item] }]
@@ -36,12 +37,10 @@ class IndentItem < ApplicationRecord
   validates :priority, presence: true
 
   default_scope { order(created_at: :desc) }
-  scope :approved,                -> { where(status: "approved") }
-  scope :pending_indents,         -> { where(status: %w[pending approval_pending]) }
   scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
   scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
 
-  has_paper_trail ignore: %i[created_at updated_at locked]
+  has_paper_trail ignore: %i[created_at updated_at updated_by_id approval_request_id]
 
   def self.included_resources
     includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)
@@ -87,32 +86,36 @@ class IndentItem < ApplicationRecord
     end
   end
 
+  def locked?
+    rejected? || approved? || cancelled? || approval_pending?
+  end
+
   def unlocked?
-    !locked
+    amended? || created?
   end
 
   def mark_as_rejected
-    update(locked: false, status: "rejected", approval_request_id: nil)
+    update(status: "rejected", approval_request_id: nil)
   end
 
   def mark_as_approved
-    update(locked: true, status: "approved", approval_request_id: nil)
+    update(status: "approved", approval_request_id: nil)
   end
 
   def mark_as_amended
-    update(locked: true, status: "amended")
+    update(status: "amended")
   end
 
   def mark_as_cancelled
-    update(locked: true, status: "cancelled")
+    update(status: "cancelled", approval_request_id: nil)
   end
 
-  def mark_as_pending
-    update(locked: false, status: "pending")
+  def mark_as_created
+    update(status: "created")
   end
 
   def mark_as_approval_pending
-    update(locked: true, status: "approval_pending")
+    update(status: "approval_pending")
   end
 
   def send_approval_requests(user_id = nil)

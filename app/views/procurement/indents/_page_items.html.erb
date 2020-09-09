@@ -2,22 +2,42 @@
   <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
     <td><%= item.indent_serial_number %></td>
     <td><%= item.item_name %></td>
-    <td><%= item.brand_details %></td>
     <td><%= item.quantity_with_uom %></td>
+    <td><%= item.brand_details %></td>
     <td><%= item.cost_center_name %></td>
     <td><%= I18n.l(item.requirement_date) %></td>
     <td class="text-center"><%= indenx_note_link(item) %></td>
     <td><%= item.priority.display %></td>
+    <td><%= item.status.display %></td>
     <td class="text-center">
       <div class="dropdown">
-        <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"></a>
+        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"><i class="fas fa-ellipsis-v"></i></a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
           <%= show_action_link(controller_name, item.indent) %>
-          <%= edit_action_link(controller_name, item.indent) %>
-          <%= cancelled_action_link(controller_name, item.indent) %>
+
+          <% if item.created? || item.amended? %>
+            <%= edit_action_link(controller_name, item.indent) %>
+          <% end %>
+
+          <% if item.created? || item.amended? || item.rejected? %>
+            <%= send_approval_action_link(controller_name, item) %>
+          <% end %>
+
+          <% if item.approved? || item.rejected? %>
+            <%= amended_action_link(controller_name, item) %>
+          <% end %>
+
+          <% if item.created? || item.approval_pending? || item.amended? %>
+            <%= cancelled_action_link(controller_name, item) %>
+          <% end %>
+
+          <% if item.cancelled? %>
+            <%= restore_action_link(controller_name, item) %>
+          <% end %>
+
           <%= print_action_link(controller_name, item.indent) %>
-          <%= send_approval_action_link(controller_name, item) if item.unlocked? %>
+          <%= history_action_link_using_modal(controller_name, item) %>
         </div>
       </div>
     </td>

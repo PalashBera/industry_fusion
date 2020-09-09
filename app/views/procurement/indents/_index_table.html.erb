@@ -4,13 +4,14 @@
       <tr>
         <th scope="col"><%= sort_link @search, :indent_serial_number, "Serial" %></th>
         <th scope="col"><%= sort_link @search, :item_name, "Item" %></th>
-        <th scope="col"><%= sort_link @search, :make_brand_name, "Make" %></th>
         <th scope="col"><%= sort_link @search, :quantity, "Quantity" %></th>
+        <th scope="col"><%= sort_link @search, :make_brand_name, "Make" %></th>
         <th scope="col"><%= sort_link @search, :cost_center_name, "Cost Center" %></th>
         <th scope="col"><%= sort_link @search, :requirement_date, "Req. Date" %></th>
         <th scope="col" class="text-center">Note</th>
         <th scope="col"><%= sort_link @search, :priority, "Priority" %></th>
-        <th scope="col">Actions</th>
+        <th scope="col"><%= sort_link @search, :status, "Status" %></th>
+        <th scope="col" class="text-center">Actions</th>
       </tr>
     </thead>
 
