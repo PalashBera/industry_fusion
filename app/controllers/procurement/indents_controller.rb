@@ -6,7 +6,6 @@ class Procurement::IndentsController < Procurement::HomeController
   def index
     @search = IndentItem.joins(:indent).ransack(params[:q])
     indent_items = @search.result.where(indents: { warehouse_id: accessible_warehouse_ids })
-    @total_count = indent_items.count
     @bordered_item_ids = indent_items.group_by(&:indent_id).map { |_k, v| v.last.id }
     @pagy, @indent_items = pagy_countless(indent_items.included_resources, link_extra: 'data-remote="true"')
   end

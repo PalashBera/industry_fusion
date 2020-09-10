@@ -23,6 +23,7 @@ class IndentItem < ApplicationRecord
 
   has_many :approval_requests, as: :approval_requestable, dependent: :destroy
   has_many :approval_request_users, through: :approval_request
+  has_many :quotation_request_items, dependent: :destroy
 
   delegate :serial_number,     to: :indent,      prefix: :indent
   delegate :name,              to: :item,        prefix: :item
@@ -42,7 +43,7 @@ class IndentItem < ApplicationRecord
   has_paper_trail ignore: %i[created_at updated_at updated_by_id approval_request_id]
 
   def self.included_resources
-    includes({ indent: %i[company warehouse indentor] }, :item, { make: :brand }, :uom, :cost_center)
+    includes(:indent, :item, { make: :brand }, :uom, :cost_center)
   end
 
   def self.ransackable_scopes(_auth_object = nil)
