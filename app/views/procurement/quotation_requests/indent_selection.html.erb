@@ -1,0 +1,61 @@
+<% provide(:title, "Indent Selection") %>
+
+<h1>Indent Selection</h1>
+
+<section class="mb-4 d-flex justify-content-between">
+  <section>
+    <%= filter_link_using_modal(params[:q]) %>
+  </section>
+
+  <section>
+    <%= new_link_btn(controller_name) %>
+  </section>
+</section>
+
+<% if @indent_items.present? %>
+  <%= render "indent_table" %>
+<% else %>
+  <div class="well">
+    <% if params[:q].present? %>
+      No record has been found. Please search with proper keywords.
+    <% else %>
+      Approved indents are not present.
+    <% end %>
+  </div>
+<% end %>
+
+<%= render "indent_item_filter" %>
+
+<div id="auto_next_link">
+  <%= render "shared/auto_incremental_pagy" %>
+</div>
+
+<script>
+  $('.indent-selection').change(function() {
+    var clickedId = $(this).val();
+
+    $.ajax({
+      method: 'PUT',
+      url: '/procurement/quotation_requests/store_indent_item',
+      dataType: 'json',
+      data: { indent_item_id: clickedId }
+    });
+  });
+
+  var loadNextPage = function () {
+    if ($('#records_table').height() === undefined || $('#next_link').data("loading")) { return }  // prevent multiple loading
+    var wBottom = $(window).scrollTop() + $(window).height();
+    var elBottom = $('#records_table').offset().top + $('#records_table').height();
+
+    if (wBottom > elBottom) {
+      if ($('#next_link')[0] !== undefined) {    // checking next page link is available or not
+        $('#next_link')[0].click();
+        $('#next_link').data("loading", true);
+      }
+    }
+  };
+
+  window.addEventListener('resize', loadNextPage);
+  window.addEventListener('scroll', loadNextPage);
+  window.addEventListener('load', loadNextPage);
+</script>

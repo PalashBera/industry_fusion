@@ -51,10 +51,6 @@ table.table {
   font-size: 18px !important;
 }
 
-.indent-table .border-bottom {
-  border-bottom: 2px solid #9e6de0 !important;
-}
-
 .input-group {
   & > .field_with_errors:not(:first-child) {
     border-top-left-radius: 0;

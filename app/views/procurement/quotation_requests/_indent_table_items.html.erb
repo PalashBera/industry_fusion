@@ -1,0 +1,23 @@
+<% @indent_items.each_with_index  do |item, index| %>
+  <tr class="<%= "border-bottom" if border_bottom_attached?(@bordered_item_ids, item.id) %>">
+    <td scope="row">
+      <div class="custom-control custom-checkbox">
+        <% if @selected_ids.include?(item.id.to_s) %>
+          <input class="custom-control-input indent-selection" type="checkbox" value="<%= item.id %>" id="indent_item_<%= item.id %>" checked>
+        <% else %>
+          <input class="custom-control-input indent-selection" type="checkbox" value="<%= item.id %>" id="indent_item_<%= item.id %>">
+        <% end %>
+        <label class="custom-control-label" for="indent_item_<%= item.id %>"></label>
+      </div>
+    </td>
+    <td><%= item.indent_serial_number %></td>
+    <td><%= item.item_name %></td>
+    <td><%= item.quantity_with_uom %></td>
+    <td><%= item.brand_details %></td>
+    <td><%= item.cost_center_name %></td>
+    <td><%= I18n.l(item.requirement_date) %></td>
+    <td class="text-center"><%= indenx_note_link(item) %></td>
+    <td><%= item.priority.display %></td>
+    <td><%= item.status.display %></td>
+  </tr>
+<% end %>

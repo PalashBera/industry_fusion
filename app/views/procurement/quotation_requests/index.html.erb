@@ -1,0 +1,25 @@
+<% provide(:title, "Quotation Requests") %>
+
+<h1>Quotation Requests</h1>
+
+<section class="mb-4 d-flex justify-content-between">
+  <section>
+    <%= indent_selection_link_btn(controller_name) %>
+  </section>
+
+  <section>
+    <%= new_link_btn(controller_name) %>
+  </section>
+</section>
+
+<% if @quotation_requests.present? %>
+  <%= render "index_table" %>
+<% else %>
+  <div class="well">
+    <% if params[:q].present? %>
+      No record has been found. Please search with proper keywords.
+    <% else %>
+      No quotation request has been added yet. <%= indent_selection_link(controller_name) %>
+    <% end %>
+  </div>
+<% end %>
