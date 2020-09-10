@@ -1,6 +1,6 @@
-<% provide(:title, "Indent Selection") %>
+<% provide(:title, "Vendor Selection") %>
 
-<h1>Indent Selection</h1>
+<h1>Vendor Selection</h1>
 
 <section class="mb-4 d-flex justify-content-between">
   <section>
@@ -8,37 +8,35 @@
   </section>
 
   <section>
-    <%= vendor_selection_link_btn(controller_name) %>
+    <%= indent_selection_back_link_btn(controller_name) %>
   </section>
 </section>
 
-<% if @indent_items.present? %>
-  <%= render "indent_table" %>
+<% if @vendorships.present? %>
+  <%= render "vendor_table" %>
 <% else %>
   <div class="well">
     <% if params[:q].present? %>
       No record has been found. Please search with proper keywords.
     <% else %>
-      Approved indents are not present.
+      Active vendors are not present.
     <% end %>
   </div>
 <% end %>
-
-<%= render "indent_item_filter" %>
 
 <div id="auto_next_link">
   <%= render "shared/auto_incremental_pagy" %>
 </div>
 
 <script>
-  $('.indent-selection').change(function() {
+  $('.vendorship-selection').change(function() {
     var clickedId = $(this).val();
 
     $.ajax({
       method: 'PUT',
-      url: '/procurement/quotation_requests/store_indent_item',
+      url: '/procurement/quotation_requests/store_vendorship',
       dataType: 'json',
-      data: { indent_item_id: clickedId }
+      data: { vendorship_id: clickedId }
     });
   });
 
