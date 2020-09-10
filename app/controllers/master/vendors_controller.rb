@@ -57,6 +57,6 @@ class Master::VendorsController < Master::HomeController
   end
 
   def included_resources
-    { vendor: :store_information }
+    [vendor: :store_information]
   end
 end

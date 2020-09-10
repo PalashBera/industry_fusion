@@ -1,0 +1,18 @@
+<% @vendorships.each do |vendorship| %>
+  <tr>
+    <td scope="row">
+      <div class="custom-control custom-checkbox">
+        <% if @selected_ids.include?(vendorship.id.to_s) %>
+          <input class="custom-control-input vendorship-selection" type="checkbox" value="<%= vendorship.id %>" id="vendorship_<%= vendorship.id %>" checked>
+        <% else %>
+          <input class="custom-control-input vendorship-selection" type="checkbox" value="<%= vendorship.id %>" id="vendorship_<%= vendorship.id %>">
+        <% end %>
+        <label class="custom-control-label" for="vendorship_<%= vendorship.id %>"></label>
+      </div>
+    </td>
+    <td><%= vendorship.vendor_name %></td>
+    <td><%= vendorship.vendor_contact_person %></td>
+    <td><%= vendorship.vendor_email %></td>
+    <td><%= vendorship.vendor_mobile_number %></td>
+  </tr>
+<% end %>
