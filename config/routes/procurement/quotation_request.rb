@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   namespace :procurement do
     resources :quotation_requests do
+      get :indent_selection, on: :new
+      get :vendor_selection, on: :new
+      get :preview,          on: :new
+
       collection do
-        get :indent_selection
         put :store_indent_item
-        get :vendor_selection
         put :store_vendorship
       end
     end

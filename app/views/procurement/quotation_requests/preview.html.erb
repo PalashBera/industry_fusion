@@ -1,0 +1,81 @@
+<% provide(:title, "Quotation Request Preview") %>
+
+<h1>Quotation Request Preview</h1>
+
+<section class="mb-4">
+  <%= vendorship_selection_back_link_btn %>
+</section>
+
+<%= form_for [:procurement, @quotation_request] do |f| %>
+  <%= render "shared/error_messages", resource: @quotation_request %>
+
+  <h4 class="mt-4 mb-3">Selected Indents</h4>
+
+  <div class="table-responsive">
+    <table id="records_table" class="table" width="100%">
+      <thead>
+        <tr>
+          <th scope="col">Serial</th>
+          <th scope="col">Item</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Make</th>
+          <th scope="col">Cost Center</th>
+          <th scope="col">Req. Date</th>
+          <th scope="col">Priority</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @indent_items.each  do |item| %>
+          <tr>
+            <td><%= item.indent_serial_number %></td>
+            <td><%= item.item_name %></td>
+            <td><%= item.quantity_with_uom %></td>
+            <td><%= item.brand_details %></td>
+            <td><%= item.cost_center_name %></td>
+            <td><%= I18n.l(item.requirement_date) %></td>
+            <td><%= item.priority.display %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+  <h4 class="mt-4 mb-3">Selected Vendors</h4>
+
+  <div class="table-responsive">
+    <table id="records_table" class="table" width="100%">
+      <thead>
+        <tr>
+          <th scope="col">Store Name</th>
+          <th scope="col">Contact Person</th>
+          <th scope="col">Contact Email</th>
+          <th scope="col">Contact Number</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @vendorships.each do |vendorship| %>
+          <tr>
+            <td><%= vendorship.vendor_name %></td>
+            <td><%= vendorship.vendor_contact_person %></td>
+            <td><%= vendorship.vendor_email %></td>
+            <td><%= vendorship.vendor_mobile_number %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+
+  <div class="form-row">
+    <div class="form-group col-sm-12 col-md-6">
+      <%= f.label :note, "Note to Vendor" %>
+      <%= f.text_area :note, class: "form-control", row: 4 %>
+    </div>
+  </div>
+
+  <%= f.submit "Save Quotation Request", class: "btn btn-primary", data: { disable_with: "Saving..." } %>
+<% end %>

@@ -88,3 +88,7 @@ en:
     archived: "Archived"
     active: "Active"
     pending: "Pending"
+
+  quotation_request:
+    no_indent_selection: "Please select indents before previewing new quotation request."
+    no_vendorship_selection: "Please select vendors before previewing new quotation request."
