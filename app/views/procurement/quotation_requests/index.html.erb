@@ -4,7 +4,7 @@
 
 <section class="mb-4 d-flex justify-content-between">
   <section>
-    <%= indent_selection_link_btn(controller_name) %>
+    <%= indent_selection_link_btn %>
   </section>
 
   <section>
@@ -19,7 +19,7 @@
     <% if params[:q].present? %>
       No record has been found. Please search with proper keywords.
     <% else %>
-      No quotation request has been added yet. <%= indent_selection_link(controller_name) %>
+      No quotation request has been added yet. <%= indent_selection_link %>
     <% end %>
   </div>
 <% end %>

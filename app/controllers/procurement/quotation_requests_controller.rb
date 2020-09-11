@@ -1,9 +1,24 @@
 class Procurement::QuotationRequestsController < Procurement::HomeController
   before_action { active_sidebar_sub_menu_option("quotation_requests") }
+  before_action :set_selected_records, only: %i[preview create]
 
   def index
     @search = QuotationRequest.ransack(params[:q])
     @pagy, @quotation_requests = pagy_countless(@search.result, link_extra: 'data-remote="true"')
+  end
+
+  def create
+    @quotation_request = QuotationRequest.new(quotation_request_params)
+    @quotation_request.warehouse_id = @indent_items.first.indent.warehouse_id
+    @quotation_request.company_id = @indent_items.first.indent.company_id
+
+    if @quotation_request.save
+      @quotation_request.create_quotation_request_items(@indent_items)
+      @quotation_request.create_quotation_request_vendors(@vendorships)
+      redirect_to procurement_quotation_requests_path, flash: { success: t("flash_messages.created", name: "Quotation request") }
+    else
+      render "preview"
+    end
   end
 
   def indent_selection
@@ -34,7 +49,29 @@ class Procurement::QuotationRequestsController < Procurement::HomeController
     session[:selected_vendorship_ids] = selected_ids
   end
 
+  def preview
+    @quotation_request = QuotationRequest.new
+  end
+
   private
+
+  def quotation_request_params
+    params.require(:quotation_request).permit(:note)
+  end
+
+  def set_selected_records
+    selected_indent_item_ids = session[:selected_indent_item_ids]
+    selected_vendorship_ids = session[:selected_vendorship_ids]
+
+    if selected_indent_item_ids.blank?
+      redirect_to indent_selection_new_procurement_quotation_request_path, flash: { danger: t("quotation_request.no_indent_selection") }
+    elsif selected_vendorship_ids.blank?
+      redirect_to vendor_selection_new_procurement_quotation_request_path, flash: { danger: t("quotation_request.no_vendorship_selection") }
+    else
+      @indent_items = IndentItem.where(id: selected_indent_item_ids).includes(indent_item_included_resources)
+      @vendorships = Vendorship.where(id: selected_vendorship_ids).includes(vendorship_included_resources)
+    end
+  end
 
   def vendorship_included_resources
     [vendor: :store_information]

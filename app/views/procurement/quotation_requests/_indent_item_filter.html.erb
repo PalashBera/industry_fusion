@@ -8,7 +8,7 @@
         </button>
       </div>
 
-      <%= search_form_for @search, url: indent_selection_procurement_quotation_requests_path do |f|  %>
+      <%= search_form_for @search, url: indent_selection_new_procurement_quotation_request_path do |f|  %>
         <div class="modal-body">
           <div class="form-row">
             <div class="form-group col-md-6 col-sm-12">
@@ -79,7 +79,7 @@
         </div>
 
         <div class="modal-footer">
-          <%= link_to "Remove Filter", indent_selection_procurement_quotation_requests_path, class: "btn btn-secondary" %>
+          <%= link_to "Remove Filter", indent_selection_new_procurement_quotation_request_path, class: "btn btn-secondary" %>
           <%= f.submit "Filter", data: { disable_with: "Please wait..." }, class: "btn btn-primary" %>
         </div>
       </div>
