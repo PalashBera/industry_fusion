@@ -3,7 +3,7 @@ class Master::VendorsController < Master::HomeController
   include Importable
 
   def index
-    @search = Vendorship.ransack(params[:q])
+    @search = Vendorship.joins(vendor: :store_information).ransack(params[:q])
     @pagy, @vendorships = pagy(@search.result.includes(included_resources), items: 20)
   end
 
