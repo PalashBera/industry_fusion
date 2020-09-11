@@ -13,6 +13,8 @@ class QuotationRequest < ApplicationRecord
   has_many :indent_items, through: :quotation_request_items
   has_many :vendorships, through: :quotation_request_vendors
 
+  delegate :name, to: :warehouse, prefix: true
+
   validates :serial, :serial_number, presence: true, uniqueness: { scope: :warehouse_id }
 
   scope :order_by_serial,   -> { order(:serial) }
