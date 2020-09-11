@@ -4,7 +4,7 @@ class Procurement::QuotationRequestsController < Procurement::HomeController
 
   def index
     @search = QuotationRequest.ransack(params[:q])
-    @pagy, @quotation_requests = pagy_countless(@search.result, link_extra: 'data-remote="true"')
+    @pagy, @quotation_requests = pagy_countless(@search.result.includes(included_resources), link_extra: 'data-remote="true"')
   end
 
   def create
@@ -79,5 +79,9 @@ class Procurement::QuotationRequestsController < Procurement::HomeController
 
   def indent_item_included_resources
     [:indent, :item, { make: :brand }, :uom, :cost_center]
+  end
+
+  def included_resources
+    %i[warehouse quotation_request_items quotation_request_vendors]
   end
 end

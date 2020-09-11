@@ -1,0 +1,10 @@
+<% @quotation_requests.each do |quotation_request| %>
+  <tr>
+    <td scope="row"><%= quotation_request.serial_number %></td>
+    <td><%= quotation_request.warehouse_name %></td>
+    <td><%= quotation_request.quotation_request_items.size %></td>
+    <td><%= quotation_request.quotation_request_vendors.size %></td>
+    <td></td>
+    <td><%= quotation_request.status.display %></td>
+  </tr>
+<% end %>
