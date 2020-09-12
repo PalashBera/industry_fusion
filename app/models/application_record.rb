@@ -1,5 +1,6 @@
 require "csv"
 require "string"
+require "array"
 
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true

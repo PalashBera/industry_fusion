@@ -92,3 +92,4 @@ en:
   quotation_request:
     no_indent_selection: "Please select indents before previewing new quotation request."
     no_vendorship_selection: "Please select vendors before previewing new quotation request."
+    non_uniq_indent_selection: "You have selected multiple warehouse's indents. Please select indents from only one warehouse."

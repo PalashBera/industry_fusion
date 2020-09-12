@@ -17,6 +17,8 @@ class Vendorship < ApplicationRecord
 
   validates :vendor_id, uniqueness: { scope: :organization_id }
 
+  scope :id_filter, ->(ids) { where(id: ids) }
+
   def status
     if vendor.pending?
       I18n.t("status.pending")
