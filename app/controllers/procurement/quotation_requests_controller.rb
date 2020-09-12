@@ -60,16 +60,15 @@ class Procurement::QuotationRequestsController < Procurement::HomeController
   end
 
   def set_selected_records
-    selected_indent_item_ids = session[:selected_indent_item_ids]
-    selected_vendorship_ids = session[:selected_vendorship_ids]
-
-    if selected_indent_item_ids.blank?
+    if session[:selected_indent_item_ids].blank?
       redirect_to indent_selection_new_procurement_quotation_request_path, flash: { danger: t("quotation_request.no_indent_selection") }
-    elsif selected_vendorship_ids.blank?
+    elsif session[:selected_vendorship_ids].blank?
       redirect_to vendor_selection_new_procurement_quotation_request_path, flash: { danger: t("quotation_request.no_vendorship_selection") }
     else
-      @indent_items = IndentItem.where(id: selected_indent_item_ids).includes(indent_item_included_resources)
-      @vendorships = Vendorship.where(id: selected_vendorship_ids).includes(vendorship_included_resources)
+      @indent_items = IndentItem.id_filter(session[:selected_indent_item_ids]).includes(indent_item_included_resources)
+      warehouse_ids = @indent_items.map { |t| t.indent.warehouse_id }
+      redirect_to indent_selection_new_procurement_quotation_request_path, flash: { danger: t("quotation_request.non_uniq_indent_selection") } unless warehouse_ids.uniq?
+      @vendorships = Vendorship.id_filter(session[:selected_vendorship_ids]).includes(vendorship_included_resources)
     end
   end
 

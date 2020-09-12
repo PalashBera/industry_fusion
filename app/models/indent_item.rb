@@ -39,6 +39,7 @@ class IndentItem < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
   scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
+  scope :id_filter,               ->(ids) { where(id: ids) }
 
   has_paper_trail ignore: %i[created_at updated_at updated_by_id approval_request_id]
 
