@@ -21,7 +21,7 @@ module VendorsHelper
   def change_class_title(vendorship)
     class << vendorship
       def class_title
-        "vendor"
+        "Vendor"
       end
     end
   end

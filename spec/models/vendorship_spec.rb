@@ -17,6 +17,7 @@ RSpec.describe Vendorship, type: :model do
 
   describe "#active_record_columns" do
     it { should have_db_column(:vendor_id) }
+    it { should have_db_column(:invitation_sent_at) }
   end
 
   describe "#active_record_index" do
