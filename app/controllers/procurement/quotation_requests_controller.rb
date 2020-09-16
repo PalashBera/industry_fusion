@@ -22,7 +22,7 @@ class Procurement::QuotationRequestsController < Procurement::HomeController
   end
 
   def indent_selection
-    @search = IndentItem.approved.ransack(params[:q])
+    @search = IndentItem.approved.available_for_qr.ransack(params[:q])
     indent_items = @search.result
     @bordered_item_ids = indent_items.group_by(&:indent_id).map { |_k, v| v.last.id }
     @pagy, @indent_items = pagy_countless(indent_items.includes(indent_item_included_resources), link_extra: 'data-remote="true"')

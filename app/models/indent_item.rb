@@ -21,6 +21,8 @@ class IndentItem < ApplicationRecord
   belongs_to :cost_center
   belongs_to :approval_request, optional: true
 
+  has_one :quotation_request_item, dependent: :destroy
+
   has_many :approval_requests, as: :approval_requestable, dependent: :destroy
   has_many :approval_request_users, through: :approval_request
   has_many :quotation_request_items, dependent: :destroy
@@ -40,6 +42,7 @@ class IndentItem < ApplicationRecord
   scope :pending_for_approval,    ->(user_id) { joins({ approval_request: :approval_request_users }).where(approval_requests: { action_taken_at: nil }, approval_request_users: { user_id: user_id }) }
   scope :brand_and_cat_no_filter, ->(query) { joins({ make: :brand }).where("brands.name ILIKE :q OR makes.cat_no ILIKE :q", q: "%#{query.squish}%") }
   scope :id_filter,               ->(ids) { where(id: ids) }
+  scope :available_for_qr,        -> { joins("LEFT JOIN quotation_request_items ON indent_items.id = quotation_request_items.indent_item_id").where(quotation_request_items: { id: nil }) }
 
   has_paper_trail ignore: %i[created_at updated_at updated_by_id approval_request_id]
 
