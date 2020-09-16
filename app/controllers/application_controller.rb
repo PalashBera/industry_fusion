@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_paper_trail_whodunnit, :set_current_user, :set_current_organization
   before_action :remove_empty_parameters, only: :index
+  before_action :destroy_selected_records_session
 
   def route_not_found
     render file: Rails.public_path.join("404.html"), status: :not_found, layout: false
@@ -76,5 +77,12 @@ class ApplicationController < ActionController::Base
     else
       "basic"
     end
+  end
+
+  def destroy_selected_records_session
+    return if controller_name == "quotation_requests" && %w[create indent_selection store_indent_item vendor_selection store_vendorship preview].include?(action_name)
+
+    session[:selected_indent_item_ids] = nil
+    session[:selected_vendorship_ids] = nil
   end
 end
