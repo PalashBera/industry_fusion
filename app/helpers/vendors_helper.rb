@@ -17,4 +17,12 @@ module VendorsHelper
       archive_link(vendorship)
     end
   end
+
+  def change_class_title(vendorship)
+    class << vendorship
+      def class_title
+        "vendor"
+      end
+    end
+  end
 end

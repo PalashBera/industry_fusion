@@ -4,6 +4,7 @@ class Master::VendorsController < Master::HomeController
 
   def index
     @search = Vendorship.joins(vendor: :store_information).ransack(params[:q])
+    @search.sorts = "vendor_store_information_name asc" if @search.sorts.empty?
     @pagy, @vendorships = pagy(@search.result.includes(included_resources), items: 20)
   end
 
@@ -19,7 +20,7 @@ class Master::VendorsController < Master::HomeController
       render "new"
     else
       invite_vendor
-      @vendor.vendorships.create(organization_id: current_organization.id)
+      @vendor.vendorships.create(organization_id: current_organization.id, invitation_sent_at: Time.current)
       redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
     end
   end
@@ -37,8 +38,14 @@ class Master::VendorsController < Master::HomeController
 
   def resend_invitation
     vendor = Vendor.find(params[:id])
-    Vendor.invite!({ email: vendor.email }, current_user).deliver_invitation
+    vendor.resend_invitation
     redirect_to master_vendors_path, flash: { success: t("flash_messages.invitation_resent", name: "Vendor") }
+  end
+
+  def change_logs
+    @resource = Vendorship.find(params[:id])
+    @versions = @resource.versions.reverse
+    render "shared/change_logs"
   end
 
   private

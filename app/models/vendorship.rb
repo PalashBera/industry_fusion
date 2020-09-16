@@ -19,6 +19,8 @@ class Vendorship < ApplicationRecord
 
   scope :id_filter, ->(ids) { where(id: ids) }
 
+  has_paper_trail only: %i[archive invitation_sent_at]
+
   def status
     if vendor.pending?
       I18n.t("status.pending")
