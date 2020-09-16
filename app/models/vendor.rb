@@ -28,7 +28,7 @@ class Vendor < ApplicationRecord
 
   def resend_invitation
     vendorship = Vendorship.find_by(vendor_id: id)
-    vendorship.update(invitation_sent_at: Time.current) if vendorship
+    vendorship&.update(invitation_sent_at: Time.current)
     Vendor.invite!({ email: email }, User.current_user).deliver_invitation
   end
 

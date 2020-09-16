@@ -3,7 +3,7 @@ class Master::VendorsController < Master::HomeController
   include Importable
 
   def index
-    @search = Vendorship.joins(vendor: :store_information).ransack(params[:q])
+    @search = Vendorship.ransack(params[:q])
     @search.sorts = "vendor_store_information_name asc" if @search.sorts.empty?
     @pagy, @vendorships = pagy(@search.result.includes(included_resources), items: 20)
   end
@@ -20,7 +20,7 @@ class Master::VendorsController < Master::HomeController
       render "new"
     else
       invite_vendor
-      @vendor.vendorships.create(organization_id: current_organization.id, invitation_sent_at: Time.current)
+      @vendor.vendorships.create(organization_id: current_organization.id)
       redirect_to master_vendors_path, flash: { success: "Vendor will receive invitation mail shortly." }
     end
   end
