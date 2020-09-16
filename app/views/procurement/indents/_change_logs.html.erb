@@ -48,8 +48,8 @@
 
               <% if key == "requirement_date" %>
                 <td>Requirement Date</td>
-                <td><%= value[0] %></td>
-                <td><%= value[1] %></td>
+                <td><%= I18n.l(value[0]) %></td>
+                <td><%= I18n.l(value[1]) %></td>
               <% end %>
 
               <% if key == "note" %>

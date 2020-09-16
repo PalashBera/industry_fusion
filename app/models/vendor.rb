@@ -26,6 +26,12 @@ class Vendor < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def resend_invitation
+    vendorship = Vendorship.find_by(vendor_id: id)
+    vendorship&.update(invitation_sent_at: Time.current)
+    Vendor.invite!({ email: email }, User.current_user).deliver_invitation
+  end
+
   protected
 
   def send_confirmation_instructions

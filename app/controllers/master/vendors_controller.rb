@@ -3,7 +3,8 @@ class Master::VendorsController < Master::HomeController
   include Importable
 
   def index
-    @search = Vendorship.joins(vendor: :store_information).ransack(params[:q])
+    @search = Vendorship.ransack(params[:q])
+    @search.sorts = "vendor_store_information_name asc" if @search.sorts.empty?
     @pagy, @vendorships = pagy(@search.result.includes(included_resources), items: 20)
   end
 
@@ -37,8 +38,14 @@ class Master::VendorsController < Master::HomeController
 
   def resend_invitation
     vendor = Vendor.find(params[:id])
-    Vendor.invite!({ email: vendor.email }, current_user).deliver_invitation
+    vendor.resend_invitation
     redirect_to master_vendors_path, flash: { success: t("flash_messages.invitation_resent", name: "Vendor") }
+  end
+
+  def change_logs
+    @resource = Vendorship.find(params[:id])
+    @versions = @resource.versions.reverse
+    render "shared/change_logs"
   end
 
   private

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       member do
         put :resend_invitation
         get :toggle_archive
+        get :change_logs
       end
     end
   end

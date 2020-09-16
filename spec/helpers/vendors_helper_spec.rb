@@ -14,4 +14,14 @@ RSpec.describe VendorsHelper, type: :helper do
       expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
     end
   end
+
+  describe "#change_class_title" do
+    let!(:vendorship_1) { create :vendorship }
+
+    it "should return vendor as class title for vendorship_1" do
+      change_class_title(vendorship_1)
+      expect(vendorship_1.class_title).to eq("Vendor")
+      expect(vendorship.class_title).to eq("Vendorship")
+    end
+  end
 end

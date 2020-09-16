@@ -477,6 +477,7 @@ ActiveRecord::Schema.define(version: 2020_09_09_183526) do
     t.bigint "organization_id", null: false
     t.bigint "vendor_id", null: false
     t.boolean "archive", default: false, null: false
+    t.datetime "invitation_sent_at"
     t.bigint "created_by_id"
     t.bigint "updated_by_id"
     t.datetime "created_at", precision: 6, null: false
