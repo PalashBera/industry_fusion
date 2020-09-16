@@ -136,6 +136,13 @@
                 <span class="nav-text">Payment Terms</span>
               <% end %>
             </li>
+
+            <li class="<%= active_sidebar_sub_menu("additional_terms") %>">
+              <span class="indicator"></span>
+              <%= link_to master_additional_terms_path, class: "sidenav-item-link" do %>
+                <span class="nav-text">PO Additional Terms</span>
+              <% end %>
+            </li>
           </ul>
         </li>
 

@@ -252,6 +252,17 @@ class InitialMigration < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
+    create_table :additional_terms do |t|
+      t.string     :name,                             null: false
+      t.text       :conditions,                       null: false
+      t.boolean    :archive,       default: false,    null: false
+      t.references :organization,  foreign_key: true, null: false
+      t.bigint     :created_by_id, index: true
+      t.bigint     :updated_by_id, index: true
+
+      t.timestamps
+    end
+
     create_table :items do |t|
       t.references :item_group,         foreign_key: true,      null: false
       t.references :uom,                foreign_key: true,      null: false

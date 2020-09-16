@@ -22,7 +22,8 @@ Rails.application.routes.draw do
     resources :warehouse_locations, except: %i[show destroy], concerns: %i[exportable change_logable]
     resources :reorder_levels,      except: %i[show destroy], concerns: %i[exportable change_logable]
     resources :payment_terms,       except: %i[show destroy], concerns: %i[exportable importable change_logable]
-    resources :item_images,         only: %i[index destroy]
+    resources :additional_terms,    except: %i[destroy],      concerns: %i[exportable change_logable]
+    resources :item_images,         only:   %i[index destroy]
 
     resources :vendors, only: %i[index new create], concerns: %i[exportable importable] do
       member do
