@@ -20,6 +20,21 @@
               <%= f.label :vendor_email_i_cont_any, "Email" %>
               <%= f.search_field :vendor_email_i_cont_any, placeholder: "Email", title: "Type vendor email", class: "form-control", autocomplete: :off %>
             </div>
+
+            <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :vendor_first_name_or_vendor_last_name_i_cont_any, "Contact Person" %>
+              <%= f.search_field :vendor_first_name_or_vendor_last_name_i_cont_any, placeholder: "Contact Person", title: "Type Contact Person Name", class: "form-control", autocomplete: :off %>
+            </div>
+
+            <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :vendor_mobile_number_i_cont_any, "Contact Number" %>
+              <%= f.search_field :vendor_mobile_number_i_cont_any, placeholder: "Contact Number", title: "Type Contact Number", class: "form-control", autocomplete: :off %>
+            </div>
+
+            <div class="form-group col-md-6 col-sm-12">
+              <%= f.label :archive_eq, "Status" %>
+              <%= f.select :archive_eq, status_selection, { include_blank: true }, { class: "form-control" } %>
+            </div>
           </div>
         </div>
 
