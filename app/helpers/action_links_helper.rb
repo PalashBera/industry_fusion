@@ -80,4 +80,12 @@ module ActionLinksHelper
             title: "Show History",
             class: "dropdown-item"
   end
+
+  def approval_history_action_using_modal(controller_name, resource)
+    link_to "Approval History",
+            url_for(controller: controller_name, action: "approval_history", id: resource.id),
+            remote: true,
+            title: "Click to view Approval Roadmap",
+            class: "dropdown-item"
+  end
 end

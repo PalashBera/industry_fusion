@@ -1,0 +1,21 @@
+<%= render layout: "shared/approval_history_modal", locals: { resource: @resource, attr: "indent_serial_number" } do %>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <th>Action</th>
+          <th>Taken By</th>
+          <th>Timestamp</th>
+        </thead>
+
+        <tbody>
+          <% @histories.each do |approval_request| %>
+            <tr>
+              <td><%= approval_request.action_type %></td>
+              <td><%= approval_request.action_taken_by&.full_name %></td>
+              <td><%= I18n.l(approval_request.action_taken_at) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+<% end %>

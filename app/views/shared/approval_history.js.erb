@@ -1,0 +1,5 @@
+<% partial = "#{params[:controller]}/approval_history" %>
+
+$('body').find('#approval_history_modal').remove();
+$('body').append('<%= j (render partial) %>');
+$('#approval_history_modal').modal();
