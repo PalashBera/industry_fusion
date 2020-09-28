@@ -16,4 +16,20 @@ module ApprovalRequestsHelper
             title: "Reject",
             class: "dropdown-item"
   end
+
+  def arrange_histories(approval_requests)
+    rearranged_histories = []
+    current_group = []
+
+    approval_requests.each do |approval_request|
+      current_group << approval_request
+
+      if approval_request.next_approval_request_id.nil?
+        rearranged_histories.unshift(current_group)
+        current_group = []
+      end
+    end
+
+    rearranged_histories
+  end
 end

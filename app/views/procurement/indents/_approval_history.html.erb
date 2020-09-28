@@ -1,21 +1,35 @@
+<% @appr_history_groups = arrange_histories(@approval_requests) %>
+
 <%= render layout: "shared/approval_history_modal", locals: { resource: @resource, attr: "indent_serial_number" } do %>
+  <% offset = @appr_history_groups.length %>
+
+  <% @appr_history_groups.each.with_index do |approval_requests, index| %>
+    <h6 class="mb-2 text-muted">Approval History - <%= offset - index %></h6>
+
     <div class="table-responsive">
       <table class="table table-bordered">
         <thead>
           <th>Action</th>
           <th>Taken By</th>
-          <th>Timestamp</th>
+          <th>Taken At</th>
         </thead>
 
         <tbody>
-          <% @histories.each do |approval_request| %>
+          <% approval_requests.each do |approval_request| %>
             <tr>
-              <td><%= approval_request.action_type %></td>
-              <td><%= approval_request.action_taken_by&.full_name %></td>
-              <td><%= I18n.l(approval_request.action_taken_at) %></td>
+              <% if approval_request.action_taken_by.present? %>
+                <td><%= approval_request.action_type&.titleize %></td>
+                <td><%= approval_request.action_taken_by&.full_name %></td>
+                <td><%= I18n.l(approval_request.action_taken_at, default: "") %></td>
+              <% else %>
+                <td colspan="3" class="text-center text-muted">Pending</td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
+
+    <hr>
+  <% end %>
 <% end %>
