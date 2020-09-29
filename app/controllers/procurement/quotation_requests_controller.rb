@@ -38,6 +38,7 @@ class Procurement::QuotationRequestsController < Procurement::HomeController
 
   def vendor_selection
     @search = Vendorship.ransack(params[:q])
+    @search.sorts = "vendor_store_information_name asc" if @search.sorts.empty?
     @pagy, @vendorships = pagy(@search.result.includes(vendorship_included_resources), link_extra: 'data-remote="true"')
     @selected_ids = session[:selected_vendorship_ids] || []
   end
