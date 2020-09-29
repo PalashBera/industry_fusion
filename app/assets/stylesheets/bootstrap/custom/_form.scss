@@ -1,0 +1,40 @@
+.form-group {
+  label {
+    font-family: "AribauGroteskRegularLight";
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+    font-size: 14px;
+  }
+
+  .form-control {
+    border-radius: 4px;
+    border-color: rgba(8, 55, 65, 0.5);
+    color: $text-color;
+    height: 50px;
+
+    &:focus {
+      box-shadow: none;
+      border-color: $primary-color;
+    }
+
+    &:hover {
+      border-color: $primary-color;
+    }
+
+    &::-webkit-input-placeholder {
+      font-family: "AribauGroteskRegularLight";
+    }
+
+    &:-ms-input-placeholder {
+      font-family: "AribauGroteskRegularLight";
+    }
+
+    &:-moz-placeholder {
+      font-family: "AribauGroteskRegularLight";
+    }
+
+    &::-moz-placeholder {
+      font-family: "AribauGroteskRegularLight";
+    }
+  }
+}
