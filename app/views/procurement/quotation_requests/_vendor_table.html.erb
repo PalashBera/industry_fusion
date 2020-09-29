@@ -3,10 +3,10 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Store Name</th>
-        <th scope="col">Contact Person</th>
-        <th scope="col">Contact Email</th>
-        <th scope="col">Contact Number</th>
+        <th scope="col"><%= sort_link @search, :vendor_store_information_name, "Store Name" %></th>
+        <th scope="col"><%= sort_link @search, :vendor_first_name, "Contact Person" %></th>
+        <th scope="col"><%= sort_link @search, :vendor_email, "Contact Email" %></th>
+        <th scope="col"><%= sort_link @search, :vendor_mobile_number, "Contact Number" %></th>
       </tr>
     </thead>
 
