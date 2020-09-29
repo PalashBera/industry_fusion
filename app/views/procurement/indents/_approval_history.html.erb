@@ -18,8 +18,8 @@
           <% approval_requests.each do |approval_request| %>
             <tr>
               <% if approval_request.action_taken_by.present? %>
-                <td><%= approval_request.action_type&.titleize %></td>
-                <td><%= approval_request.action_taken_by&.full_name %></td>
+                <td><%= approval_request.action_type.display %></td>
+                <td><%= approval_request.action_taken_by.full_name %></td>
                 <td><%= I18n.l(approval_request.action_taken_at, default: "") %></td>
               <% else %>
                 <td colspan="3" class="text-center text-muted">Pending</td>
@@ -29,7 +29,5 @@
         </tbody>
       </table>
     </div>
-
-    <hr>
   <% end %>
 <% end %>

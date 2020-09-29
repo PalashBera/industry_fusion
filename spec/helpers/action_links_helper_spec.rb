@@ -108,12 +108,12 @@ RSpec.describe ActionLinksHelper, type: :helper do
     end
   end
 
-  describe "#approval_history_action_using_modal" do
+  describe "#approval_history_action_link_using_modal" do
     it "creates a link for approval history modal" do
-      link = Nokogiri::HTML(helper.approval_history_action_using_modal("procurement/indents", indent)).children.children.children[0]
+      link = Nokogiri::HTML(helper.approval_history_action_link_using_modal("procurement/indents", indent)).children.children.children[0]
       expect(link.attributes["href"].value).to eq("/procurement/indents/#{indent.id}/approval_history")
       expect(link.attributes["data-remote"].value).to eq("true")
-      expect(link.attributes["title"].value).to eq("Click to view Approval Roadmap")
+      expect(link.attributes["title"].value).to eq("Show Approval History")
       expect(link.attributes["class"].value).to eq("dropdown-item")
     end
   end
