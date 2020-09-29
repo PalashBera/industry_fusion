@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         put :amend
         put :send_for_approval
         get :change_logs
+        get :approval_history
       end
 
       get :export, on: :collection

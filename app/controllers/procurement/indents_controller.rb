@@ -85,6 +85,12 @@ class Procurement::IndentsController < Procurement::HomeController
     render "shared/change_logs"
   end
 
+  def approval_history
+    @resource = IndentItem.find(params[:id])
+    @approval_requests = @resource.approval_requests.order(:id).includes(:action_taken_by)
+    render "shared/approval_history"
+  end
+
   private
 
   def indent
