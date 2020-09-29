@@ -3,9 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="filterModalLabel"><%= modal_header %></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <%= image_tag "cancel.svg", class: "close", "data-dismiss": "modal", "aria-label":"Close" %>
       </div>
 
       <%= search_form_for [namespace.to_sym, resource] do |f|  %>

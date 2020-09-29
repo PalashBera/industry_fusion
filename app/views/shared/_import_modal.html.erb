@@ -3,9 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="filterModalLabel">Import <%= controller_name.humanize.titleize %></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <%= image_tag "cancel.svg", class: "close", "data-dismiss": "modal", "aria-label":"Close" %>
       </div>
 
       <%= form_tag url_for(controller: controller_name, action: "import"), multipart: true do %>

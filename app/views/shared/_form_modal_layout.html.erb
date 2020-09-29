@@ -1,8 +1,6 @@
 <div class="modal-header">
   <h5 class="modal-title" id="formModal"><%= resource.modal_header %></h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
+  <%= image_tag "cancel.svg", class: "close", "data-dismiss": "modal", "aria-label":"Close" %>
 </div>
 
 <%= form_for [namespace.to_sym, resource], remote: true, html: { multipart: true } do |f| %>
