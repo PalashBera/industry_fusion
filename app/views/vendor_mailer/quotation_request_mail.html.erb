@@ -1,0 +1,6 @@
+<% provide(:title, "New Quotation Request - #{@quotation_request.serial_number}") %>
+<% provide(:company_name, @quotation_request.company.name) %>
+
+<p>Hello <%= @vendor.name %>,</p>
+
+<p>You have received a new quotation request.</p>
