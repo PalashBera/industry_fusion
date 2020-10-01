@@ -45,6 +45,6 @@ class QuotationRequest < ApplicationRecord
   end
 
   def notify_vendor(vendor_id)
-    VendorMailer.quotation_request_mail(vendor_id, id).deliver_later
+    VendorMailer.quotation_request_notification(vendor_id, id).deliver_later
   end
 end
