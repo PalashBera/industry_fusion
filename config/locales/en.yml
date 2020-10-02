@@ -85,7 +85,7 @@ en:
         subject: "Account Deactivated – %{name}"
     vendor:
       quotation_request:
-        subject: "New Quotation Request - %{serial}%"
+        subject: "New Quotation Request – %{serial}%"
 
   status:
     archived: "Archived"
