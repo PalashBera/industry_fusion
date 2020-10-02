@@ -30,7 +30,6 @@ class QuotationRequest < ApplicationRecord
   def create_quotation_request_vendors(vendors)
     vendors.each do |vendor|
       quotation_request_vendors.create(vendorship: vendor)
-      notify_vendor(vendor.vendor_id)
     end
   end
 
@@ -42,9 +41,5 @@ class QuotationRequest < ApplicationRecord
     last_quotation_request_serial = current_fy_quotation_requests.last&.serial || 0
     self.serial = last_quotation_request_serial + 1
     self.serial_number = "QR/#{start_date.strftime("%y")}-#{end_date.strftime("%y")}/#{warehouse&.short_name}/#{serial.to_s.rjust(4, "0")}"
-  end
-
-  def notify_vendor(vendor_id)
-    VendorMailer.quotation_request_notification(vendor_id, id).deliver_later
   end
 end
