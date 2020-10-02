@@ -19,7 +19,8 @@ class VendorMailer < ApplicationMailer
 
   def quotation_request_notification(vendorship_id, quotation_request_id)
     @quotation_request = QuotationRequest.find(quotation_request_id)
-    @vendor = Vendor.find(Vendorship.find(vendorship_id).vendor_id)
+    vendorship = Vendorship.find(vendorship_id)
+    @vendor = Vendor.find(vendorship.vendor_id)
     mail to: @vendor.email, subject: I18n.t("mail.vendor.quotation_request.subject", serial: @quotation_request.serial_number)
   end
 end
