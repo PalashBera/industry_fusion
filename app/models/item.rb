@@ -18,8 +18,6 @@ class Item < ApplicationRecord
   has_many :reorder_levels
   has_many :item_images, dependent: :destroy
 
-  accepts_nested_attributes_for :makes, reject_if: :all_blank, allow_destroy: true
-
   delegate :name,       to: :item_group,    prefix: true
   delegate :short_name, to: :uom,           prefix: true
   delegate :short_name, to: :secondary_uom, prefix: true, allow_nil: true
