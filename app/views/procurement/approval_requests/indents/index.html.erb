@@ -3,29 +3,19 @@
 
 <%= render "shared/page_help" %>
 
-<div class="card">
-  <div class="card-body">
-    <%= render partial: "procurement/approval_requests/shared/status_tab", locals: { current_tab: "indents" } %>
+<%= render partial: "procurement/approval_requests/shared/status_tab", locals: { current_tab: "indents" } %>
 
-    <section class="mb-4 d-flex justify-content-between">
-      <h3 class="text-muted">Total Count: <%= @total_count %></h3>
-    </section>
-
-    <% if @indent_items.present? %>
-      <%= render "index_table" %>
+<% if @indent_items.present? %>
+  <%= render "index_table" %>
+<% else %>
+  <div class="well">
+    <% if params[:q].present? %>
+      No record has been found. Please search with proper keywords.
     <% else %>
-      <div class="card">
-        <div class="card-body text-center">
-          <% if params[:q].present? %>
-            No record has been found. Please search with proper keywords.
-          <% else %>
-            No record is pending for approval.
-          <% end %>
-        </div>
-      </div>
+      No record is pending for approval.
     <% end %>
   </div>
-</div>
+<% end %>
 
 <div id="auto_next_link">
   <%= render "shared/auto_incremental_pagy" %>

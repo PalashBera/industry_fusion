@@ -16,14 +16,12 @@
 <% if @indent_items.present? %>
   <%= render "index_table" %>
 <% else %>
-  <div class="card">
-    <div class="card-body text-center">
-      <% if params[:q].present? %>
-        No record has been found. Please search with proper keywords.
-      <% else %>
-        No indent has been added yet. <%= new_link(controller_name) %>
-      <% end %>
-    </div>
+  <div class="well">
+    <% if params[:q].present? %>
+      No record has been found. Please search with proper keywords.
+    <% else %>
+      No indent has been added yet. <%= new_link(controller_name) %>
+    <% end %>
   </div>
 <% end %>
 

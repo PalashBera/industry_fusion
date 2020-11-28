@@ -16,7 +16,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["data-method"].value).to eq("put")
       expect(link.attributes["data-confirm"].value).to eq("Are you sure you want to approve?")
       expect(link.attributes["title"].value).to eq("Approve")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
+      expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe ActionLinksHelper, type: :helper do
       expect(link.attributes["data-method"].value).to eq("put")
       expect(link.attributes["data-confirm"].value).to eq("Are you sure you want to reject?")
       expect(link.attributes["title"].value).to eq("Reject")
-      expect(link.attributes["class"].value).to eq("dropdown-item")
+      expect(link.attributes["class"].value).to eq("btn btn-sm btn-secondary")
     end
   end
 end
