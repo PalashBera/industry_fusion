@@ -10,10 +10,21 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require bootstrap/index
- *= require vendors/materialdesignicons
- *= require vendors/simplebar
+ *= require_tree .
+ *= require_self
  */
 
-@import "font-awesome-sprockets";
-@import "font-awesome";
+body {
+  font-family: 'Work Sans', sans-serif;
+  background-color: #f0f7f7;
+}
+
+a {
+  color: #006666;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: #148585;
+  }
+}

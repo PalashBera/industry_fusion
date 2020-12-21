@@ -1,6 +1,6 @@
 <% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type(message_type) %> alert-dismissible fade show" role="alert">
-    <%= flash_message_prefix(message_type(message_type)) %> <%= message %>
-    <%= image_tag "cancel.svg", class: "close", "data-dismiss": "alert" %>
+  <div class="alert alert-<%= message_type(message_type) %> alert-dismissible fade show flash-message" role="alert">
+    <p><%= flash_message_prefix(message_type(message_type)) %> <%= message %></p>
+    <%= image_tag "cancel.svg", class: "close" %>
   </div>
 <% end %>

@@ -1,13 +1,13 @@
 <% provide(:title, "Unlock Instructions") %>
 
 <div class="row justify-content-center">
-  <div class="col-sm-12 mb-4">
-    <h3 class="text-center">Resend Unlock Instructions</h3>
-  </div>
-
-  <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4">
-    <div class="card">
+  <div class="col-sm-12 col-md-9 col-lg-7 col-xl-5">
+    <div class="card auth-card">
       <div class="card-body">
+        <h4 class="custom-card-header">Unlock your account</h4>
+
+        <%= render "layouts/flash_messages" %>
+
         <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
           <%= render "shared/error_messages", resource: resource %>
 
@@ -16,7 +16,7 @@
             <%= f.email_field :email, class: "form-control", autofocus: true, required: true, placeholder: "Email Address", autocomplete: "email", maxlength: 255 %>
           </div>
 
-          <%= f.submit "Send Instructions", class: "btn btn-primary", data: { disable_with: "Sending..." } %>
+          <%= f.submit "Send", class: "btn btn-primary form-btn", data: { disable_with: "Sending..." } %>
         <% end %>
 
         <hr>

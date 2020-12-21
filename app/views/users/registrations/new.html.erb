@@ -1,26 +1,24 @@
-<% provide(:title, "Sign Up") %>
+<% provide(:title, "Signup") %>
 
 <div class="row justify-content-center">
-  <div class="col-sm-12 mb-4">
-    <h3 class="text-center">Sign Up</h3>
-  </div>
-
-  <div class="col-sm-12 col-md-7 col-lg-5 col-xl-4">
-    <div class="card">
+  <div class="col-sm-12 col-md-9 col-lg-7 col-xl-5">
+    <div class="card auth-card">
       <div class="card-body">
+        <h4 class="custom-card-header">Create new account</h4>
+
+        <%= render "layouts/flash_messages" %>
+
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "shared/error_messages", resource: resource %>
 
-          <div class="form-row">
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :first_name, "First Name" %>
-              <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true, placeholder: "First Name", maxlength: 255 %>
-            </div>
+          <div class="form-group">
+            <%= f.label :first_name, "First Name" %>
+            <%= f.text_field :first_name, class: "form-control", autofocus: true, required: true, placeholder: "First Name", maxlength: 255 %>
+          </div>
 
-            <div class="form-group col-sm-12 col-md-6">
-              <%= f.label :last_name, "Last Name" %>
-              <%= f.text_field :last_name, class: "form-control", required: true, placeholder: "Last Name", maxlength: 255 %>
-            </div>
+          <div class="form-group">
+            <%= f.label :last_name, "Last Name" %>
+            <%= f.text_field :last_name, class: "form-control", required: true, placeholder: "Last Name", maxlength: 255 %>
           </div>
 
           <div class="form-group">
@@ -54,7 +52,7 @@
             <%= f.password_field :password_confirmation, class: "form-control", required: true, placeholder: "Password Confirmation", minlength: 6, maxlength: 128 %>
           </div>
 
-          <%= f.submit "Sign up", class: "btn btn-primary", data: { disable_with: "Signing up..." } %>
+          <%= f.submit "Signup", class: "btn btn-primary form-btn", data: { disable_with: "Signing up..." } %>
         <% end %>
 
         <hr>

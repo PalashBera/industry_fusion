@@ -8,9 +8,6 @@ require('turbolinks').start()
 require('@rails/activestorage').start()
 require('channels')
 require('indents')
-require('plugins/theme')
-require('plugins/simplebar.min')
-require('indents')
 require('home')
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -19,12 +16,6 @@ require('home')
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
-
-document.addEventListener('turbolinks:load', function() {
-  $('.flash-alert').delay(4000).slideUp(200, function() {
-    $(this).alert('close');
-  });
-});
 
 $(document).on('click', '.remove_fields', function (event) {
   event.preventDefault();

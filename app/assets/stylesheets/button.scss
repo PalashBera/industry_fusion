@@ -1,0 +1,24 @@
+.btn {
+  padding: 8px 30px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #006666;
+  border-color: #006666;
+
+  &:hover, &:focus, &:active, &:disabled {
+    background-color: #148585;
+    border-color: #148585;
+    box-shadow: none;
+  }
+}
+
+.form-btn {
+  margin-top: 20px;
+  padding: 8px 35px;
+}

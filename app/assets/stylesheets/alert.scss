@@ -1,0 +1,22 @@
+.flash-message {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 0;
+
+  p {
+    margin-bottom: 0;
+    margin-right: 15px
+  }
+
+  img {
+    height: 12px;
+    width: 12px;
+    cursor: pointer;
+  }
+}
+
+.alert-danger {
+  border-left: 4px solid #ff051b;
+}

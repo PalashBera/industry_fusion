@@ -1,0 +1,38 @@
+.form-group {
+  margin-bottom: 15px;
+
+  label {
+    font-size: 12px;
+    text-transform: uppercase;
+    user-select: none;
+    margin-bottom: 3px;
+  }
+
+  .form-control {
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+
+    &:focus {
+      box-shadow: none;
+      border-color: #006666;
+    }
+
+    &:hover {
+      border-color: #006666;
+    }
+  }
+}
+
+.custom-form-group {
+  display: flex;
+  align-items: center;
+
+  .custom-label {
+    margin-bottom: 0;
+    font-size: 14px;
+  }
+
+  .custom-checkbox {
+    margin-right: 10px;
+  }
+}
