@@ -1,8 +1,22 @@
 .page-wrapper {
   margin-left: 350px;
   margin-right: 50px;
+  margin-bottom: 70px;
 
   .page-title {
     margin-bottom: 40px;
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    height: 50px;
+    background-color: #f0f7f7;
+    display: flex;
+    align-items: center;
+
+    p {
+      margin-bottom: 0;
+    }
   }
 }
