@@ -1,31 +1,26 @@
-<header class="main-header" id="header">
-  <nav class="navbar navbar-expand-lg navbar-light" id="navbar">
-    <%= image_tag "hamburger-icon.png", alt: "hamburger icon", id: "sidebar-toggler", class: "sidebar-toggle" %>
-    <h6 class="page-title"><%= current_organization.name %></h6>
+<section class="page-header">
+  <div class="left-section">
+    <%= image_tag "hamburger.png", alt: "hamburger icon", class: "hamburger-icon" %>
+    <h6 class="title"><%= current_organization.name %></h6>
+  </div>
 
-    <div class="navbar-right">
-      <ul class="nav navbar-nav">
-        <li class="dropdown user-menu">
-          <div class="dropdown-toggle nav-link" data-toggle="dropdown">
-            <span class="user-image"><%= current_user.initial %></span>
-            <span class="d-none d-sm-inline-block"><%= current_user.full_name %></span>
-          </div>
-
-          <ul class="dropdown-menu dropdown-menu-right">
-            <li>
-              <%= link_to edit_user_registration_path do %>
-                <span class="nav-text">Setting</span>
-              <% end %>
-            </li>
-
-            <li class="dropdown-footer">
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <span class="nav-text">Log Out</span>
-              <% end %>
-            </li>
-          </ul>
-        </li>
-      </ul>
+  <div class="dropdown">
+    <div class="dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="user-image"><%= current_user.initial %></span>
     </div>
-  </nav>
-</header>
+
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <li>
+        <%= link_to edit_user_registration_path, class: "dropdown-item" do %>
+          <span class="dropdown-item-text">Setting</span>
+        <% end %>
+      </li>
+
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+          <span class="dropdown-item-text">Log Out</span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</section>
