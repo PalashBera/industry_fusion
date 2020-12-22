@@ -1,190 +1,187 @@
-<aside class="left-sidebar" id="left-sidebar">
-  <div id="sidebar" class="sidebar">
-    <div class="app-brand">
-      <%= link_to dashboard_path do %>
-        <%= image_tag "logo.png", alt: "Industry Fusion" %>
-        <span class="brand-name">Industry Fusion</span>
-      <% end %>
-    </div>
+<aside class="sidebar">
+  <div class="app-brand">
+    <%= link_to dashboard_path do %>
+      <span class="brand-name">Industry Fusion</span>
+    <% end %>
+  </div>
 
-    <div class="sidebar-left" data-simplebar style="height: 100%;">
-      <ul class="nav sidebar-inner" id="sidebar-menu">
-        <li>
-          <%= link_to dashboard_path, class: "sidenav-item-link" do %>
-            <%= image_tag "platform-icon.svg", alt: "dashboard icon" %>
-            <span class="nav-text">Dashboard</span>
-          <% end %>
-        </li>
-
-        <li class="has-sub <%= active_sidebar_menu("procurement") %>">
-          <a class="sidenav-item-link">
-            <%= image_tag "platform-icon.svg", alt: "dashboard icon" %>
-            <span class="nav-text">Procurement</span>
-          </a>
-
-          <ul class="sidenav-item-list hide">
-            <li class="<%= active_sidebar_sub_menu("indents") %>">
-              <span class="indicator"></span>
-              <%= link_to procurement_indents_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Indents</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("quotation_requests") %>">
-              <span class="indicator"></span>
-              <%= link_to procurement_quotation_requests_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Quotation Requests</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("approval_requests") %>">
-              <span class="indicator"></span>
-              <%= link_to procurement_approval_requests_indents_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Approval Requests</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("reports") %>">
-              <span class="indicator"></span>
-              <%= link_to procurement_reports_indents_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Reports</span>
-              <% end %>
-            </li>
-          </ul>
-        </li>
-
-        <li class="has-sub <%= active_sidebar_menu("master") %>">
-          <a class="sidenav-item-link">
-            <%= image_tag "safe-reopen-icon.svg", alt: "dashboard icon" %>
-            <span class="nav-text">Master</span>
-          </a>
-
-          <ul class="sidenav-item-list hide">
-            <li class="<%= active_sidebar_sub_menu("brands") %>">
-              <span class="indicator"></span>
-              <%= link_to master_brands_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Brands</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("cost_centers") %>">
-              <span class="indicator"></span>
-              <%= link_to master_cost_centers_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Cost Centers</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("item_groups") %>">
-              <span class="indicator"></span>
-              <%= link_to master_item_groups_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Item Groups</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("uoms") %>">
-              <span class="indicator"></span>
-              <%= link_to master_uoms_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Units of Measurement</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("vendors") %>">
-              <span class="indicator"></span>
-              <%= link_to master_vendors_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Vendors</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("items") %>">
-              <span class="indicator"></span>
-              <%= link_to master_items_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Items</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("makes") %>">
-              <span class="indicator"></span>
-              <%= link_to master_makes_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Makes</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("indentors") %>">
-              <span class="indicator"></span>
-              <%= link_to master_indentors_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Indentors</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("warehouse_locations") %>">
-              <span class="indicator"></span>
-              <%= link_to master_warehouse_locations_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Warehouse Locations</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("reorder_levels") %>">
-              <span class="indicator"></span>
-              <%= link_to master_reorder_levels_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Reorder Levels</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("payment_terms") %>">
-              <span class="indicator"></span>
-              <%= link_to master_payment_terms_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">Payment Terms</span>
-              <% end %>
-            </li>
-
-            <li class="<%= active_sidebar_sub_menu("additional_terms") %>">
-              <span class="indicator"></span>
-              <%= link_to master_additional_terms_path, class: "sidenav-item-link" do %>
-                <span class="nav-text">PO Additional Terms</span>
-              <% end %>
-            </li>
-          </ul>
-        </li>
-
-        <% if current_user.admin? %>
-          <li class="has-sub <%= active_sidebar_menu("admin") %>">
-            <a class="sidenav-item-link">
-              <%= image_tag "integration-icon.svg", alt: "dashboard icon" %>
-              <span class="nav-text">Admin</span>
-            </a>
-
-            <ul class="sidenav-item-list hide">
-              <li class="<%= active_sidebar_sub_menu("users") %>">
-                <span class="indicator"></span>
-                <%= link_to admin_users_path, class: "sidenav-item-link" do %>
-                  <span class="nav-text">Users</span>
-                <% end %>
-              </li>
-
-              <li class="<%= active_sidebar_sub_menu("companies") %>">
-                <span class="indicator"></span>
-                <%= link_to admin_companies_path, class: "sidenav-item-link" do %>
-                  <span class="nav-text">Companies</span>
-                <% end %>
-              </li>
-
-              <li class="<%= active_sidebar_sub_menu("warehouses") %>">
-                <span class="indicator"></span>
-                <%= link_to admin_warehouses_path, class: "sidenav-item-link" do %>
-                  <span class="nav-text">Warehouses</span>
-                <% end %>
-              </li>
-
-              <li class="<%= active_sidebar_sub_menu("approval_levels") %>">
-                <span class="indicator"></span>
-                <%= link_to admin_approval_levels_indents_path, class: "sidenav-item-link" do %>
-                  <span class="nav-text">Approval Levels</span>
-                <% end %>
-              </li>
-            </ul>
-          </li>
+  <div class="sidebar-inner" style="height: 100%;">
+    <ul class="sidebar-menu-list">
+      <li>
+        <%= link_to dashboard_path, class: "sidebar-menu-link" do %>
+          <%= image_tag "dashboard.png", alt: "dashboard icon" %>
+          <span class="nav-text">Dashboard</span>
         <% end %>
-      </ul>
-    </div>
+      </li>
+
+      <li class="has-sub <%= active_sidebar_menu("procurement") %>">
+        <a class="sidebar-menu-link">
+          <%= image_tag "procurement.png", alt: "procurement icon" %>
+          <span class="nav-text">Procurement</span>
+        </a>
+
+        <ul class="sidebar-submenu-list hide">
+          <li class="<%= active_sidebar_sub_menu("indents") %>">
+            <%= link_to procurement_indents_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Indents</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("quotation_requests") %>">
+            <%= link_to procurement_quotation_requests_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Quotation Requests</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("approval_requests") %>">
+            <%= link_to procurement_approval_requests_indents_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Approval Requests</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("reports") %>">
+            <%= link_to procurement_reports_indents_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Reports</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+
+      <li class="has-sub <%= active_sidebar_menu("master") %>">
+        <a class="sidebar-menu-link">
+          <%= image_tag "master.png", alt: "master icon" %>
+          <span class="nav-text">Master</span>
+        </a>
+
+        <ul class="sidebar-submenu-list hide">
+          <li class="<%= active_sidebar_sub_menu("brands") %>">
+            <%= link_to master_brands_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Brands</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("cost_centers") %>">
+            <%= link_to master_cost_centers_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Cost Centers</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("item_groups") %>">
+            <%= link_to master_item_groups_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Item Groups</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("uoms") %>">
+            <%= link_to master_uoms_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Units of Measurement</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("vendors") %>">
+            <%= link_to master_vendors_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Vendors</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("items") %>">
+            <%= link_to master_items_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Items</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("makes") %>">
+            <%= link_to master_makes_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Makes</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("indentors") %>">
+            <%= link_to master_indentors_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Indentors</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("warehouse_locations") %>">
+            <%= link_to master_warehouse_locations_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Warehouse Locations</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("reorder_levels") %>">
+            <%= link_to master_reorder_levels_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Reorder Levels</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("payment_terms") %>">
+            <%= link_to master_payment_terms_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">Payment Terms</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+
+          <li class="<%= active_sidebar_sub_menu("additional_terms") %>">
+            <%= link_to master_additional_terms_path, class: "sidebar-submenu-link" do %>
+              <span class="nav-text">PO Additional Terms</span>
+              <span class="indicator"></span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+
+      <% if current_user.admin? %>
+        <li class="has-sub <%= active_sidebar_menu("admin") %>">
+          <a class="sidebar-menu-link">
+            <%= image_tag "admin.png", alt: "admin icon" %>
+            <span class="nav-text">Admin</span>
+          </a>
+
+          <ul class="sidebar-submenu-list hide">
+            <li class="<%= active_sidebar_sub_menu("users") %>">
+              <%= link_to admin_users_path, class: "sidebar-submenu-link" do %>
+                <span class="nav-text">Users</span>
+                <span class="indicator"></span>
+              <% end %>
+            </li>
+
+            <li class="<%= active_sidebar_sub_menu("companies") %>">
+              <%= link_to admin_companies_path, class: "sidebar-submenu-link" do %>
+                <span class="nav-text">Companies</span>
+                <span class="indicator"></span>
+              <% end %>
+            </li>
+
+            <li class="<%= active_sidebar_sub_menu("warehouses") %>">
+              <%= link_to admin_warehouses_path, class: "sidebar-submenu-link" do %>
+                <span class="nav-text">Warehouses</span>
+                <span class="indicator"></span>
+              <% end %>
+            </li>
+
+            <li class="<%= active_sidebar_sub_menu("approval_levels") %>">
+              <%= link_to admin_approval_levels_indents_path, class: "sidebar-submenu-link" do %>
+                <span class="nav-text">Approval Levels</span>
+                <span class="indicator"></span>
+              <% end %>
+            </li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
   </div>
 </aside>

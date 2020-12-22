@@ -26,13 +26,10 @@
 
       <div class="page-wrapper">
         <%= render "layouts/application/navbar" %>
+        <%= render "layouts/flash_messages" %>
 
-        <div class="content-wrapper">
-          <%= render "layouts/flash_messages" %>
-
-          <div class="content">
-            <%= yield %>
-          </div>
+        <div class="content">
+          <%= yield %>
         </div>
 
         <%= render "layouts/application/footer" %>

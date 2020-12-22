@@ -28,3 +28,11 @@ a {
     color: #148585;
   }
 }
+
+.hide {
+  display: none;
+}
+
+.active .hide {
+  display: block;
+}
